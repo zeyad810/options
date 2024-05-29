@@ -621,3 +621,33 @@
     border-width: 0 0.5rem 0.5rem;
     border-bottom-color: #fff;
 }
+
+
+
+header{
+    position: absolute;
+    right: 0;
+    left: 0;
+    background: transparent;
+}
+.search-header-bar {
+    height: 60px;
+}
+.sticky .search-header.header-theme-bg-primary {
+    backdrop-filter: blur(1px);
+    background-color: #00000026 !important;
+}
+.header-theme-bg-primary{
+    background: transparent !important;
+
+}
+.app-content-padded {
+    padding-top: 0px;
+} 
+i.fa-solid{
+    font-size: 20px;
+    color: var(--primary-color) ;
+}
+.account-lang-currency{
+    z-index: 1111;
+}
