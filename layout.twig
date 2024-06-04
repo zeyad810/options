@@ -20,6 +20,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
@@ -59,6 +60,10 @@
             --main-slider-height: 471.43px;
             --main-slider-sm-height: 115px;
         }
+      body, html {
+    
+    overflow-x: hidden !important;
+}
 
         
     </style>
@@ -90,6 +95,8 @@
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_fixed_bannar.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_sliderbannar.css') }}" />
+
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
    
@@ -194,7 +201,6 @@
         }
     }
 </script>
-dgsgsgdsgdgsd
 <style>
       :root{
           --title-bg: url({{settings.titlebg_image}});

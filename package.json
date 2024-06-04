@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "sal.js": "^0.8.5"
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
   }
 }

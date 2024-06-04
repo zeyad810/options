@@ -1,0 +1,138 @@
+
+<section  id="slider_bannar_g" class="slider-bannars pt-96">
+<div class='slider-bannars_items' >
+    {% for item in settings.bannars %}
+      
+      <section class="slider-bannars-moving">
+        <div class="photo_one">
+          <img loading="lazy" width='100%' src='{{item.F_image}}' alt="img"> 
+        </div>
+
+        <div class=" content"> 
+          <h2 class="">{{ item.bannar_title }}  </h2>
+          <p class="">{{item.bannar_desc}}</p>
+          <a href="{{item.bannar_url}}">
+            <button  class="" >تسوق الان</button>
+          </a>
+        </div>
+
+        <div class="photo ">
+          <img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
+        </div> 
+      </section>
+    {% endfor %}
+</div>
+</section>
+
+
+<script>
+ let sections = document.querySelectorAll('.slider-bannars-moving');
+  let arrBannars = '{{settings.bannars | json_encode | raw }}';
+
+  function onResize() {
+    sections.forEach((section, index) => {
+      if (window.innerWidth <= 600) section.style.backgroundImage = `url('${JSON.parse(arrBannars)[index].bannar_M_image}')`;
+      else section.style.backgroundImage = `url('${JSON.parse(arrBannars)[index].bannar_D_image}')`;
+    })
+  }
+
+  onResize();
+  window.onresize = onResize;
+
+ document.addEventListener("DOMContentLoaded", function(){
+        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
+        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
+
+        var screenWidth = window.screen.width;
+
+        var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+
+            $('.slider-bannars_items').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: false,
+                autoplay: false,
+                arrows: true,
+                dots: {% if (settings.hide_dots or (settings.testimonials | length <= 3)) %}false{% else %}true{% endif %},
+                rtl: !(window.appDirection === 'ltr'),
+                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
+                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',
+            });
+        }
+    );
+
+</script>
+
+{% schema %}
+
+{
+    "name":{
+        "ar":"بانر متحرك - جلامور",
+        "en":"sliderbannar - glamour"
+    },
+    "icon": "fal fa-user",
+    "display":"true",
+    "settings":{
+        "bannars": {
+            "type": "list",
+            "label": {
+                "ar": "الخلفيات",
+                "en": "bannars"
+            },
+            "settings": {
+                "bannar_D_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "خلفيه الكمبيوتر",
+                        "en": "desktop image"
+                    }
+                },
+                "bannar_M_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "خلفيه الهاتف",
+                        "en": "mobile image"
+                    }
+                },
+                "F_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "الصوره الاولي",
+                        "en": "first image"
+                    }
+                },
+                "S_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "الصوره الثانيه",
+                        "en": "second image"
+                    }
+                },
+                "bannar_title": {
+                    "type": "text",
+                    "label": {
+                        "ar": " عنوان البانر",
+                        "en": "bannar title"
+                    }
+                },
+                "bannar_desc": {
+                    "type": "text",
+                    "label": {
+                        "ar": " وصف البانر",
+                        "en": "bannar description"
+                    }
+                },
+                "bannar_url": {
+                    "type": "url",
+                    "label": {
+                        "ar": "الرابط",
+                        "en": "link"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+{% endschema %}

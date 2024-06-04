@@ -1,0 +1,129 @@
+/* Section */
+.slider-bannars {
+    padding-top: 0; /* Remove default padding */
+  }
+  
+
+  
+  /* Individual Loop Item */
+  .slider-bannars-moving {
+    background-size: 100% 100%;
+    width: 100vw;
+    background-repeat: no-repeat;
+    padding: 50px 25px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  }
+
+
+/* Responsive: Flex Row on Larger Screens */
+@media (min-width: 640px) {
+  .slider-bannars-moving {
+    flex-direction: row;
+  }
+}
+@media (max-width:641px) {
+  .photo_one {
+    display: none;
+  }
+}
+/* First Image */
+
+
+/* Responsive: Show First Image on Larger Screens */
+
+
+.photo {
+  width: 250px;
+}
+
+/* Responsive: Adjust Width on Medium Screens */
+@media (min-width: 768px) {
+  .photo_one {
+    width: 350px;
+  }
+}
+
+/* Content Area */
+.content {
+  text-align: center;
+  font-family: Cairo, sans-serif;
+}
+
+/* Title */
+.content h2 {
+  color: black;
+  font-size: 38px;
+  line-height: 50px;
+  font-weight: 600;
+}
+
+/* Responsive: Increase Font Size on Medium Screens */
+@media (min-width: 768px) {
+  .content h2 {
+    font-size: 42px;
+  }
+}
+
+/* Description */
+.content p {
+  color: var(--text-dark); /* Assuming this is a custom color variable in Zid */
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+/* Responsive: Increase Font Size on Medium Screens */
+@media (min-width: 768px) {
+  .content p {
+    font-size: 18px;
+  }
+}
+
+/* Button */
+.content a button{
+  width: 200px;
+  margin-top: 32px;
+  height: 56px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: #CE5A67; /* Assuming this is a custom color variable in Zid */
+  color: white;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.content a:hover {
+  opacity: 0.75;
+}
+
+/* Second Image */
+.photo img{
+  width: 70%;
+  margin: auto;
+}
+.photo{
+  width: 200px;
+  align-self: center;
+}
+/* Responsive: Adjust Width on Medium Screens */
+@media (min-width: 768px) {
+  .photo {
+    width: 350px;
+  }
+  .photo img{
+    width: 80%;
+  }
+}
+
+/* Responsive: Move Image Down on Smaller Screens */
+@media (min-width: 640px) {
+  .photo{
+    align-self: flex-end;
+    transform: translateY(50px);
+  }
+}
