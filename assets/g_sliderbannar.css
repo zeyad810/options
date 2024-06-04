@@ -11,69 +11,119 @@
     width: 100vw;
     background-repeat: no-repeat;
     padding: 50px 25px;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
   }
-  
-  /* Photo (hidden on small screens) */
-  .photo.hidden {
+
+
+/* Responsive: Flex Row on Larger Screens */
+@media (min-width: 640px) {
+  .slider-bannars-moving {
+    flex-direction: row;
+  }
+}
+@media (max-width:641px) {
+  .photo_one {
     display: none;
   }
-  
-  /* Photo (visible on small screens and up) */
-  .photo.sm\:block {
-    display: block;
-    width: 250px;
-  }
-  
-  .photo.md\:width-350px {
+}
+/* First Image */
+
+
+/* Responsive: Show First Image on Larger Screens */
+
+
+.photo {
+  width: 250px;
+}
+
+/* Responsive: Adjust Width on Medium Screens */
+@media (min-width: 768px) {
+  .photo_one {
     width: 350px;
   }
-  
-  /* Text Content Container */
-  .content.text-center.text.font-Cairo {
-    text-align: center;
+}
+
+/* Content Area */
+.content {
+  text-align: center;
+  font-family: Cairo, sans-serif;
+}
+
+/* Title */
+.content h2 {
+  color: black;
+  font-size: 38px;
+  line-height: 50px;
+  font-weight: 600;
+}
+
+/* Responsive: Increase Font Size on Medium Screens */
+@media (min-width: 768px) {
+  .content h2 {
+    font-size: 42px;
   }
-  
-  /* Banner Title */
-  .text-black.text-large.md:text-x-large.font-semibold.leading-extra-large {
-    color: black;
-    font-size: 1.25rem; /* Assuming large = 1.25rem */
-    line-height: 1.5rem; /* Assuming extra-large = 1.5rem */
-    font-weight: semibold;
+}
+
+/* Description */
+.content p {
+  color: var(--text-dark); /* Assuming this is a custom color variable in Zid */
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+/* Responsive: Increase Font Size on Medium Screens */
+@media (min-width: 768px) {
+  .content p {
+    font-size: 18px;
   }
-  
-  .md\:text-x-large {
-    font-size: 1.5rem; /* Assuming x-large = 1.5rem */
+}
+
+/* Button */
+.content a button{
+  width: 200px;
+  margin-top: 32px;
+  height: 56px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  background-color: #CE5A67; /* Assuming this is a custom color variable in Zid */
+  color: white;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.content a:hover {
+  opacity: 0.75;
+}
+
+/* Second Image */
+.photo img{
+  width: 70%;
+  margin: auto;
+}
+.photo{
+  width: 200px;
+  align-self: center;
+}
+/* Responsive: Adjust Width on Medium Screens */
+@media (min-width: 768px) {
+  .photo {
+    width: 350px;
   }
-  
-  /* Banner Description */
-  .text-dark.margin-top-large.text-medium.md:text-large.font-normal.leading-large {
-    color: #333 (assuming dark = #333);
-    margin-top: 1rem; /* Assuming large = 1rem */
-    font-size: 1em; /* Assuming medium = 1em */
-    line-height: 1.25rem; /* Assuming large = 1.25rem */
-    font-weight: normal;
+  .photo img{
+    width: 80%;
   }
-  
-  .md\:text-large {
-    font-size: 1.125rem; /* Assuming large = 1.125rem */
+}
+
+/* Responsive: Move Image Down on Smaller Screens */
+@media (min-width: 640px) {
+  .photo{
+    align-self: flex-end;
+    transform: translateY(50px);
   }
-  
-  /* Button */
-  .button.button-primary.width-full.margin-top-large.height-large.text-medium.font-bold.rounded-lg.hover:opacity-75.duration-300.text-white {
-    width: 100%;
-    margin-top: 1rem; /* Assuming large = 1rem */
-    padding: .5rem 1rem; /* Assuming medium = .5rem, 1rem */
-    border-radius: .25rem;
-    background-color: var(--f-color); /* Assuming `var(--f-color)` is defined */
-    color: white;
-    transition: opacity .3s ease-in-out;
-  }
-  
-  .button:hover {
-    opacity: .75; /* Override default hover opacity */
-  }
+}
