@@ -18,6 +18,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
@@ -57,6 +58,10 @@
             --main-slider-height: 471.43px;
             --main-slider-sm-height: 115px;
         }
+      body, html {
+    
+    overflow-x: hidden !important;
+}
 
         
     </style>
@@ -193,7 +198,6 @@
         }
     }
 </script>
-dgsgsgdsgdgsd
 <style>
       :root{
           --title-bg: url({{settings.titlebg_image}});
