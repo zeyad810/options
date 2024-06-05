@@ -16,7 +16,11 @@ max-width: 100%;
 .box-1-1{
     overflow: hidden;
 }
-
+.category{
+    color: var(--primary-color);
+    font-size: 13px;
+    font-weight: 500;
+}
    div.desk{
     z-index: 111111;
     position: relative;

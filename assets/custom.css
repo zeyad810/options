@@ -124,6 +124,7 @@
 
 
 .sm-search-div {
+    display: none;
     position: absolute;
     left: 0;
     padding: 20px 15px 20px 15px;

@@ -1,4 +1,6 @@
+
 {% if product %}
+{{product|json_encode}}
 <div class="product-item {% if product.is_infinite == false and product.quantity <= 0 %}product-item-out-of-stock{% endif %}">
     <a href="/products/{{ product.slug }}" class="d-flex flex-column justify-content-start">
 
@@ -31,7 +33,10 @@
         </div>
         </div>
 
-        <div class="product-title" style="margin-top: 15px"><span>{{ product.name }}</span></div>
+        <div class="product-title" style="margin-top: 15px">
+        <span><a class="category" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}">{{ product.categories[0].name }}</a></span>
+        <span>{{ product.name }}</span>
+        </div>
         {% if store.is_product_reviews_enabled %}
             <div class="product-card-rating-wrapper" style="height: 18px">
                 {% if product.rating %}

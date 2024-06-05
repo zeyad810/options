@@ -1,8 +1,8 @@
   <section section-id="{{ sectionId }}" class="g_features ">
-    <div class="container flex flex-col mx-auto">
+    <div class="container flex flex-col ">
       <div class="grid items-center justify-around grid-cols-3 text-center products">
       {% for item in settings.features %}
-        <div class="products-item " data-sal="slide-up" data-sal-delay="{{loop.index}}00" data-sal-duration='400' data-sal-easing="ease-out-back">
+        <div class="products-item " >
             <img class="" src="{{item.icon_image}}" />
           <h3 class="mt-4">{{item.title}}</h3>
         </div>
