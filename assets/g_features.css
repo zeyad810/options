@@ -1,0 +1,27 @@
+.g_features{
+    margin: 40px 0;
+}
+.g_features .products-item img {
+    transition: ease all 0.5s;
+    margin: auto;
+    width: 50px;
+}
+
+.g_features .products-item h3 {
+    font-weight: bold;
+    font-size: 22px;
+    color: #000;
+    line-height: 30px;
+}
+.g_features .products-item:hover img {
+    transform: scale(1.3);
+}
+@media (max-width: 767px) {
+    .g_features .products-item img {
+        width: 35px;
+   }
+    .g_features .products-item h3 {
+        font-size: 14px;
+        line-height: 18px;
+   }
+}
