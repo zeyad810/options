@@ -1,12 +1,12 @@
 <section id="g_cat_{{sectionId}}" class="g_cat" dir="ltr">
     <div class="container d-flex flex-column align-items-center justify-content-center ">
         <div class="mb-4" style="margin-bottom: 55px;">
-            {% include 'title.twig' with { 'component_title': settings } %}
+            {% include 'title.twig' with { 'component_title': settings.section_title } %}
         </div>
     
         <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
             {% for item in settings.categorys %}
-                <div class="d-flex flex-column align-items-center products-item"  data-aos-delay="{{loop.index}}00" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
+                <div class="d-flex flex-column align-items-center products-item"   style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
                     <div class="overflow-hidden rounded image-parent">
                         <a href="{{item.url}}">
                             <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">

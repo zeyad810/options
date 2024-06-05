@@ -124,8 +124,6 @@
 
 
 .sm-search-div {
-    display: none;
-    visibility: hidden;
     position: absolute;
     left: 0;
     padding: 20px 15px 20px 15px;
@@ -137,6 +135,7 @@
 }
 
 .sm-search-div.show {
+    display: block;
     visibility: visible;
     transform: translateY(0%);
     -webkit-transform:translate3d(0,0,0);
@@ -865,6 +864,12 @@ i.fa-solid{
 
 
 
+
+
+
+
+
+  
   /*!*******************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/assets/styles/app.scss ***!
   \*******************************************************************************************************************************************************************************************/
@@ -977,13 +982,7 @@ body.mm-ocd-opened{overflow-y:hidden;overscroll-behavior:none}
 .mm-spn.mm-spn--vertical ul.mm-spn--open{display:block}
 .mm-spn.mm-spn--vertical li.mm-spn--open:before{transform:rotate(135deg) translate(-50%,0)}
 .mm-spn.mm-spn--vertical ul ul li:last-child:after{content:none;display:none}
-/*
- ! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
-*/
-/*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
-*/
+
 *,
 ::before,
 ::after {
@@ -996,15 +995,7 @@ body.mm-ocd-opened{overflow-y:hidden;overscroll-behavior:none}
 ::after {
   --tw-content: '';
 }
-/*
-1. Use a consistent sensible line-height in all browsers.
-2. Prevent adjustments of font size after orientation changes in iOS.
-3. Use a more readable tab size.
-4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
-6. Use the user's configured `sans` font-variation-settings by default.
-7. Disable tap highlights on iOS
-*/
+
 html,
 :host {
   line-height: 1.5; /* 1 */
@@ -1018,10 +1009,7 @@ html,
   font-variation-settings: normal; /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
 }
-/*
-1. Remove the margin in all browsers.
-2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
-*/
+
 body {
   margin: 0; /* 1 */
   line-height: inherit; /* 2 */

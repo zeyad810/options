@@ -10,7 +10,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
   <link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
@@ -20,9 +19,16 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
-      <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
+    .sm-search-div.show{
+      display:  block !important;
+    }
+    ul.main-nav{
+      justify-content: center !important;
+      align-items: center;
+      gap: 10px;
+    }
         :root {
             --primary-color: {{store.colors.primary}};
             --text-color-primary-bg: {{store.colors.text_of_primary_bg}};
@@ -61,9 +67,8 @@
             --main-slider-sm-height: 115px;
         }
       body, html {
-    
-    overflow-x: hidden !important;
-}
+            overflow-x: hidden !important;
+        }
 
         
     </style>
@@ -89,15 +94,15 @@
     <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'slide-menu-style.css?v=1.16' }}" />
 
     <link rel="stylesheet" href="{{ asset_url ~ 'main.css?v=1.219' }}" />
-
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_cat.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_fixed_bannar.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ assetUrl('g_sliderbannar.css') }}" />
-
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'custom.css' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_cat.css' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_square_image.css' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_fixed_bannar.css' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'product.css' }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'g_sliderbannar.css' }}" />
+
 
    
     {% if session.lang.code == 'ar' %}
@@ -109,6 +114,7 @@
   {% if user_custom_css %}
     <link rel="stylesheet" href="{{ user_custom_css }}">
   {% endif %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 </head>
 
@@ -150,7 +156,7 @@
   }
 </style>
 {% block top_body %}{% endblock %}
-<div class="app d-flex flex-column visible">
+<div class="visible app d-flex flex-column">
     <div class="header">
 
         {% block header %}{% endblock %}

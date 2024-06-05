@@ -1,18 +1,6 @@
 <div class="account-lang-currency upper-bar header-theme-bg-primary header-theme-text-for-primary-bg">
     <div class="container d-flex justify-content-between">
-        <div class="account-area">
-            {% if customer %}
-                <button type="button" onclick="window.location.href='/account-profile'" class="btn btn-dark account-btn">
-                    <i class="fa-solid fa-user header-theme-icon-primary" style="position: relative; top: 1px"></i>
-                    <span style="position: relative; bottom: 2px">{{ locals.hello }}&nbsp;{{ customer.name }}&nbsp;</span>
-                </button>
-            {% else %}
-                <button type="button" onclick="window.location.href='/auth/login'" class="btn btn-dark account-btn">
-                    <i class="fa-solid fa-user header-theme-icon-primary" style="position: relative; top: 1px"></i>
-                    <span style="position: relative; bottom: 2px">&nbsp;{{ locals.login }}&nbsp;</span>
-                </button>
-            {% endif %}
-        </div>
+       
 
         {% if not ('hide_country' in header_settings.header_options) or not ('hide_language' in header_settings.header_options)%}
         <div class="language-currency d-flex justify-content-between" data-toggle="modal" data-target="#langCurrecyModal">

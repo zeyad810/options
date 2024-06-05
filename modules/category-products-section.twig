@@ -4,9 +4,9 @@
      data-sm-scroll-offset="94"
      class="home-products-section section-padding-space">
     <div class="container slider-container">
-        <h1 class="section-title theme-title-primary" >{{ settings.category.name }}</h1>
-        <div class="d-flex flex-column">
+                    {% include 'title.twig' with { 'component_title': settings.category.name } %}
 
+        <div class="d-flex flex-column">
             <div class="products-slider-wrapper" style="position: relative">
 
 
@@ -20,7 +20,7 @@
 
 
                 {% if settings.display_more %}
-                    <div class="text-center mt-5 category-products-display-more-section">
+                    <div class="mt-5 text-center category-products-display-more-section">
                         <a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}"
                            class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
                     </div>

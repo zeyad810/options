@@ -7,3 +7,33 @@ min-width: 100%;
 max-width: 100%;
 }
 
+
+.product-item a.btn.btn-primary.btn-product-card-select-variant {
+    width: 100%;
+    height: 50px;
+
+}
+.box-1-1{
+    overflow: hidden;
+}
+
+   div.desk{
+    z-index: 111111;
+    position: relative;
+    bottom: -50px;
+    transition: all 0.3s;
+   }
+   div.mob{
+    display: none;
+   }
+
+
+@media screen and(max-width: 768px) {
+    div.desk{
+     display: none;
+    }
+    div.mob{
+        display: block;
+       }
+ }
+

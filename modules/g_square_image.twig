@@ -1,8 +1,8 @@
-<section id="g_square_image_{{sectionId}}" class="ads container">
+<section id="g_square_image_{{sectionId}}" class="container ads">
     <div class="imgs">
         {% for item in settings.images %}
             {% if loop.index <= 3 %}
-               <div class="img "  data-aos-delay="{{loop.index}}00" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" >
+               <div class="img "   >
 					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
 					<div class="over">
 						<div class="text">
@@ -10,7 +10,7 @@
 								{{item.square_title}}
 							</p>
 							<a href="{{item.square_url}}">
-								<button type="button" class="hover:opacity-95 duration-300">
+								<button type="button" class="duration-300 hover:opacity-95">
 										تسوق الان
 								</button>
 							</a>
@@ -18,11 +18,11 @@
 					</div>
 				</div>
 				{% elseif loop.index == 4 %}
-			<div class="img f_img" data-aos-delay="{{loop.index}}00" data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+			<div class="img f_img" >
 					<div class="card h-100">
 						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top">
 						<div class="over">
-							<div class="text bg-opacity-50 p-2">
+							<div class="p-2 bg-opacity-50 text">
 								<p class="mb-2 text-white">
 									{{ item.square_title}}
 								</p>
