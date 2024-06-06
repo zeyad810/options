@@ -1,0 +1,84 @@
+<section class='common_questions mb-[53px] lg:mb-[111px]' id="g_ccommon_{{sectionId}}" > 
+<div class="container flex justify-center items-center flex-col">
+     {% include 'title.twig' with { 'component_title': settings.section_title } %} 
+
+  <div class="accordion-common container w-[100%] flex items-center justify-center flex-wrap gap-[8px] md:gap-[24px]">
+    {% for question in settings.questions %}
+      <div class="accordion-item-common duration-300 border-b-[#0000001c] border-b rounded-sm rtl:pl-[26px] ltr:pr-[26px] shadow-common w-[calc(100%_-_4px)] md:w-[calc(50%_-_12px)]">
+        <h2 class='flex items-center cursor-pointer justify-between py-[30px]' id="accordion-button-1" aria-expanded="false">
+          <span class="accordion-title-common text-[#303A42] text-[14px] md:text-[19px] font-bold">{{ question.ques }}</span>
+          <i class="fa-solid fa-plus icon-add duration-300 text-[#303A42]"></i> 
+        </h2>
+        <div class="min-h-0 overflow-hidden bg-transparent opacity-0 accordion-content-common max-h-0">
+          <p class='mb-[25px] text-[14px] text-[#303A42]'>{{ question.ans }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+</section>
+<script>
+        
+        const items = document.querySelectorAll(".common_questions .accordion-item-common h2");
+        function toggleAccordion() {
+          console.log('im here')
+            const itemToggle = this.getAttribute('aria-expanded');
+            
+            for (let i = 0; i < items.length; i++) {
+              items[i].setAttribute('aria-expanded', 'false');
+            }
+            
+            if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+          }
+        }
+      
+        items.forEach(item => item.addEventListener('click', toggleAccordion));
+    
+    
+</script>
+
+{% schema %}
+
+{
+    "name": {
+        "ar": "الاسئله الشائعه - جلامور",
+        "en": "glamour - common questions"
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "section_title": {
+            "type": "text",
+            "label": {
+                "ar": "عنوان السكشن ؟",
+                "en": "عنوان السكشن ؟"
+            }
+        },
+        "questions": {
+            "type": "list",
+            "label": {
+                "ar": "الاسئله",
+                "en": "questions"
+            },
+            "settings": {
+                "ques": {
+                    "type": "text",
+                    "label": {
+                        "ar": " السؤال",
+                        "en": "the question "
+                    }
+                },
+                "ans": {
+                    "type": "text",
+                    "label": {
+                        "ar": " الجواب",
+                        "en": " the answer"
+                    }
+                }
+            }
+        }
+    }
+}
+
+{% endschema %}

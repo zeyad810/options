@@ -800,8 +800,8 @@ i.fa-solid{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
+    background-color: rgba(0, 0, 0, 0) !important;
+    opacity: 1 !important;
     transition: opacity 0.3s ease;
   }
   
@@ -1554,7 +1554,7 @@ select{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/
 .w-6{width:1.5rem}
 .w-7{width:1.75rem}
 .w-8{width:2rem}
-.w-\[\!33\%\]{width:!33%}
+.w-\[\!33\%\]{width:33%}
 .w-\[100\%\]{width:100%}
 .w-\[12\.31px\]{width:12.31px}
 .w-\[16px\]{width:16px}
@@ -2036,7 +2036,7 @@ section.sticky-product-bar.s-form-control.p-5.rounded-md.rounded-b-none {
 }
 .s-form-group{margin-top:0.75rem;margin-bottom:0.75rem}
 .s-checkbox{cursor:pointer;--tw-border-opacity:1;border-color:rgba(209, 213, 219, 1);border-color:rgba(209, 213, 219, var(--tw-border-opacity));-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#fff;margin:0;width:18px;height:18px;border-width:1px;border-radius:4px;display:grid;align-content:center;justify-content:center;place-content:center}
-.s-checkbox:before{content:;width:10px;height:10px;clip-path:polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);transform:scale(0);transform-origin:bottom left;transition:120ms transform ease-in-out;box-shadow:inset 1em 1em #444;background-color:#444}
+.s-checkbox:before{content:'';width:10px;height:10px;clip-path:polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);transform:scale(0);transform-origin:bottom left;transition:120ms transform ease-in-out;box-shadow:inset 1em 1em #444;background-color:#444}
 .s-checkbox:checked:before{transform:scale(1)}
 .s-checkbox * {
   pointer-events: none;
@@ -7802,6 +7802,9 @@ section.sticky-product-bar.bg-white.p-5.brands-nav__item.rounded-b-none {
   bottom: 72px;
   z-index: 111;
 }
+.brands{
+  position: relative;
+}
 section.sticky-product-bar.brands-nav__item.p-5.rounded-md.rounded-b-none {
   bottom: 72px;
   z-index: 111;
@@ -8331,9 +8334,9 @@ input[type=radio].sr-only:checked ~ div.ads .img .over {
 #video-banner {
   height: -moz-fit-content;
   height: fit-content;
-}
-#video-banner::before {
-  content: "";
+  }
+  #video-banner::before {
+    content: "";
   position:absolute;
   bottom:-22px;
   right:4px;
@@ -8357,6 +8360,8 @@ input[type=radio].sr-only:checked ~ div#video-banner::before {
 #video-banner .video-parent {
   position: relative;
   overflow: hidden;
+  display: flex !important;
+  justify-content: center !important;
 }
 #video-banner .video-parent video{position:absolute;bottom:-1%;z-index:10;min-height:100%;width:100%;min-width:420px;cursor:pointer;opacity:0;transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:300ms}
 #video-banner .video-parent video * {
@@ -9613,7 +9618,6 @@ lite-youtube.lyt-activated > .lty-playbtn {
   font-size: 44px;
   font-size: var(--swiper-navigation-size);
   letter-spacing: 0;
-  font-feature-settings: ;
   font-variant: normal;
   font-variant: initial;
   line-height: 1;
@@ -10814,10 +10818,11 @@ section.sticky-product-bar.s-infinite-scroll-wrapper > button.p-5.rounded-md.rou
   padding-bottom: 11px !important;
 }
 .common_questions .accordion-common h2[aria-expanded=true] .accordion-title-common {
-  color: var(--f-color);
+  color: #333;
 }
-.common_questions .accordion-common h2[aria-expanded=true] i.icon-add {
-  color: var(--f-color);
+.common_questions .accordion-common h2[aria-expanded=true] i.icon-add ,
+i.fa-solid {
+  color: #333 !important;
 }
 .common_questions .accordion-common h2[aria-expanded=true] + .accordion-content-common{max-height:5000px;min-height:-moz-fit-content;min-height:fit-content;opacity:1;
   transition: 1s ease-in-out;

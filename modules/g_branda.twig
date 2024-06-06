@@ -1,0 +1,78 @@
+<section class="overflow-hidden brands mb-[80px] md:mb-[54px]">
+    <div class="over" style='background-image:url("{{ settings.background_image }}");'></div>
+        <div class="flex flex-col items-center justify-center p-0 m-0 overflow-hidden all"> 
+            <div class="overflow-x-hidden Marquees">
+                <div class="Marquee Row">
+                    {% for brand in settings.brands %}
+                        <div class="marquee Item flex items-center justify-center m-[10px]" >
+                                <a href="{{ brand.url }}" >
+                                    <img loading="lazy" src="{{ brand.logo }}" alt="{{ brand.name }}" />
+                                </a>
+                            </div>
+                    {% endfor %}
+                    {% for brand in settings.brands %}
+                        <div class="marquee Item flex items-center justify-center m-[10px]" >
+                            <a href="{{ brand.url }}" >
+                                <img loading="lazy" src="{{ brand.logo }}" alt="{{ brand.name }}" />
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+</section>  
+
+
+{% schema %}
+
+{
+    "name": {
+        "ar": " الماركات التجاريه - جلامور",
+        "en": "glamour - brands "
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "background_image" :{
+            "type":"image",
+            "label":{
+                "ar":"خلفيه السكشن",
+                "en":"background"
+            }
+        },
+        "brands": {
+            "type": "list",
+            "label": {
+                "ar": "الماركات",
+                "en": "brands"
+            },
+            "settings": {
+                "logo": {
+                    "type": "image",
+                    "label": {
+                    "ar": " صوره الماركه",
+                    "en": "brand image"
+                    }
+                },
+                "name": {
+                    "type": "text",
+                    "label": {
+                        "ar": " اسم الماركه",
+                        "en": " brand name"
+                    }
+                },
+                "url": {
+                    "type": "url",
+                    "label": {
+                        "ar": "  لينك الماركه",
+                        "en": " brand url"
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+{% endschema %}

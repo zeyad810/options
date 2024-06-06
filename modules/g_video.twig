@@ -1,0 +1,87 @@
+<section
+    id="video-banner"
+    class="relative mb-[53px] lg:mb-[111px] h-[400px] md:h-[500px] mx-[10px] sm:mx-4 md:mx-0"
+  >
+  <div  class="video-parent h-full w-full rounded-lg sm:rounded-none">
+    <img loading="lazy" class="bg-image" src="{{settings.video_image}}" alt="ban-bg">
+    <video id="videoPlayer"></video>
+    <div class="containt flex flex-row gap-4 md:gap-8 items-center text-white z-[3] absolute top-[50%] right-[5%] md:right-[10%] lg:right-[15%] xl:right-[20%] 2xl:right-[25%] translate-y-[-50%]">
+      <div class='flex flex-col gap-2'>
+        <h4  class='text-white text-center text-[14px] md:text-[40px] font-semibold leading-[1.5]' >{{ settings.video_title }}</h4>
+        <p class='max-w-[215px] md:max-w-[430px] leading-[1.5] text-center text-[9px] md:text-[18px] font-normal'>{{ settings.video_des }}</p>
+      </div>
+      <img loading="lazy"  width='50' class='md:w-[100px]' class="play-btn" src="{{settings.icone_image}}" alt="play">
+    </div>
+  </div>
+  </section>
+
+
+<script>
+ let playVideo = (video) => {
+			video.classList.toggle('is_play');
+			if (video.paused || video.src) video.play();
+			else video.paused;
+		}
+
+        
+const videoTag = document.querySelector('#videoPlayer');
+document.querySelector('#video-banner').addEventListener('click', (e) => {
+    if(!videoTag.src) {
+    videoTag.src = '{{ settings.video_url }}';
+    }
+    playVideo(e.target); // in home
+})
+window.playVideo = playVideo;
+
+
+</script>
+
+{% schema %}
+
+{
+            "name": {
+                    "ar": "بنر فيديو",
+                    "en": "video bannar"
+            },
+            "icon": "fal fa-user",
+            "display": true,
+            "settings": {
+            "video_title":{
+                    "type": "text",
+                    "label": {
+                        "ar": "العنوان",
+                        "en": "text"
+                            }
+                },
+                "video_des":{
+                    "type": "text",
+                    "label": {
+                        "ar": "وصف للبنر",
+                        "en": "text"
+                    }
+                },
+                "video_image":{
+                        "type": "image",
+                        "label": {
+                        "ar": "خلفيه البنر",
+                        "en": "text"
+                    }
+                },
+                "icone_image":{
+                        "type": "image",
+                        "label": {
+                        "ar": " الايقون",
+                        "en": "text"
+                    }
+                },
+                "video_url":{
+                    "type": "url",
+                    "label": {
+                        "ar": " لينك الفيديو",
+                        "en": "video link"
+                    }
+                }
+            }
+}
+
+{% endschema %}
