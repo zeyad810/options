@@ -1,6 +1,8 @@
 {
   "home_title": "الصفحة الرئيسية",
   "products": "المنتجات",
+  "show_all":"عرض الكل",
+  "rest":"الوقت المتبقي",
   "categories": "التصنيفات",
   "login": "تسجيل الدخول",
   "logout": "تسجيل خروج",
@@ -12,7 +14,10 @@
   "header_delivery_and_payment_options":"خيارات الدفع والتوصيل",
   "customer_reviews": "آراء العملاء",
   "shop_now": " تسوق الآن",
-
+  "day":"يوم",
+  "min":"دقيقه",
+  "hour":"ساعه",
+  "sec":"ثانيه",
   "search_placeholder": "ابحث",
 
   "store_language" : "اللغة",

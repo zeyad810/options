@@ -1,0 +1,215 @@
+<section class="flex flex-col items-center dead_line ">    
+ {% include 'title.twig' with { 'component_title': settings.title } %} 
+        <div class="container flex justify-end gap-4 my-8">
+            <a href="{{settings.url}}" class="font-semibold show_all ">
+                <span>{{locals.show_all}}</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            </a>
+        </div>
+    <div class="container products">
+        {% if settings.products.products is empty %}
+            <h2>No products found!</h2>
+        {% else %}
+        {% for product in settings.products.products %}
+            
+            <div class="product_deadline" >   
+                <div class="img">
+                    <a href="{{product.url}}">
+                        <img loading="lazy" src="{{product.images[0]['image']['medium']}}" alt="{{product.images.alt_text}}" class="main_img">
+                    </a>
+                </div>
+                <div class="data">
+                        <a class="title" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}">{{ product.categories[0].name }}</a>                    <div class="flex justify-between">
+                        <a href="{{product.html_url}}">
+                            <h2> {{ product.name}}</h2>
+                        </a>
+                        <div>
+                            <div class="product-card-rating-wrapper" style="height: 18px">
+                                {% if product.rating %}
+                                    {% include 'rating-stars.twig' with {'rating' : product.rating.average } %}
+                                    <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
+                                {% endif %}
+                            </div>                    
+                        </div>
+                    </div>
+                    <div class="price_component">
+                        <p class="price">
+                        {{ product.sale_price ? product.sale_price : product.price}} {{ product.currency }}</p>
+                        <del class="last_price">{{ product.sale_price ? product.price : '' }} {{ product.sale_price ? product.currency: '' }}</del>
+                    </div>
+                    <div class="flex justify-center sm:justify-start">
+                        <div class="te">
+                        <div class="countdown">
+                            <h3>{{locals.rest}} :</h3>
+                            <ul>
+                                 <li class="countdown__seconds js-seconds">
+                                <span></span>
+                                {{locals.sec}}
+                                </li>:
+                                <li class="countdown__minutes js-minutes">
+                                <span></span>
+                                {{locals.min}}
+                                </li>:
+                                <li class="countdown__hours js-hours">
+                                <span></span>
+                                {{locals.hour}}</li>:
+                                <li class="countdown__days js-days">
+                                <span></span>
+                                {{locals.day}}
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="flex flex-col justify-around">
+                            <div class="flex flex-col mb-2 text-center">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center last_buttons">
+                    <div style=" text-align: center" class="addBtn">
+                        {% if product.is_infinite == false and product.quantity <= 0 %}
+                        <a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
+                        {% elseif ( product.has_options or product.has_fields ) %}
+                        <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+                        {% else %}
+                        <a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
+                            <img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20" height="20"/>
+                            {{ locals.add_to_cart }}
+                        </a>
+                        {% endif %}
+                    </div>
+                    
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</section>
+
+<script>
+
+
+function convertToDate(textDate) {
+ 
+  if (!textDate || !textDate.trim()) {
+    return null; 
+  }
+
+  const parts = textDate.split('-');
+  if (parts.length !== 3) {
+    return null; 
+  }
+
+  const year = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1; 
+  const day = parseInt(parts[2], 10);
+
+  return new Date(year, month, day);
+}
+const realDAte = convertToDate('{{ settings.dateTime_choose }}');
+console.log(realDAte);
+const countDownDate = new Date(realDAte).getTime();
+const allCOunt = document.querySelectorAll('.countdown');
+allCOunt.forEach( (el) =>{
+    
+    if (el) {
+    const dayscontainer = el.querySelector('.js-days span');
+    const hourscontainer = el.querySelector('.js-hours span');
+    const minutescontainer = el.querySelector('.js-minutes span');
+    const secondscontainer = el.querySelector('.js-seconds span');
+
+    const startCountdown = () => {
+    const timer = setInterval(function() {
+
+    let now = new Date().getTime();
+
+    let distance = countDownDate - now;
+        console.log(distance)
+    if (distance < 0) {
+        el.remove();
+        document.querySelectorAll('.te').forEach(e => {
+            e.innerHTML = `
+            <h1 class="offer_end">
+                انتهي العرض
+            </h1>
+            `
+        })
+        clearInterval(timer);
+    }
+
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+    dayscontainer.innerHTML = days;
+    hourscontainer.innerHTML = hours;
+    minutescontainer.innerHTML = minutes;
+    secondscontainer.innerHTML = seconds;
+
+
+
+    }, 1000);
+    }
+
+
+    startCountdown();
+    }
+})
+</script>
+
+{% schema %}
+
+{
+    "name": {
+        "ar": "  عروض تنتهي قريبا - جلامور",
+        "en": "glamour - offers "
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "title" :{
+            "type":"text",
+            "label":{
+                "ar":" العنوان",
+                "en":"title"
+            }
+        }, 
+        "all" :{
+            "type":"url",
+            "label":{
+                "ar":" عرض الكل",
+                "en":"show all"
+            }
+        },
+        "products": {
+            "type": "products",
+            "label": {
+                "ar": "اختر قائمة المنتجات ",
+                "en": "Select category products"
+            }   
+        },
+        "dateTime": {
+                "type": "fieldset",
+                "label": {
+                    "ar": "ادخل تاريخ الانتهاء",
+                    "en": "date for emd offer"
+                },
+                "expandable": true,
+                "settings": {
+                    "choose":{
+                    "type":"text",
+                    "info":{
+                        "ar":"YYYY-MM-DD",
+                        "en":"YYYY-MM-DD"
+                    }
+                    }
+                }
+            }
+    }
+}
+
+{% endschema %}

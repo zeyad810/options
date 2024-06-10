@@ -2071,3 +2071,52 @@ hr {
 .product-card-bundle-offer.bundle-offer-product-tag {
     display: inline-block;
 }
+.addBtn {
+    width: 100%;
+}
+.addBtn .product-card-add-to-cart{
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 5% 0;
+    font-size: 16px;
+}
+.te{
+    width: 100%;
+}
+.countdown {
+    text-transform: upperacse;
+    width: 100%;
+    ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      padding: 0;
+      margin: 0;
+      width: 80%;
+    }
+    li {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      span {
+        font-size: 2rem;
+      }
+    }
+  }
+  .countdown h3{
+    margin: 1% 0;
+    font-weight: 400;
+  }
+  .offer_end{
+    text-align: center;
+    color: #ad0000;
+    font-weight: 500;
+  }
+  .show_all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+    gap: 7px;
+  }

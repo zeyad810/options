@@ -8398,7 +8398,7 @@ input[type=radio].sr-only:checked ~ div.video-parent .bg-image {
   border-color: var(--color-main);
 }
 }
-.dead_line{margin-top:var(--main-margin);margin-bottom:var(--main-margin)}
+.dead_line{margin-top:var(--main-margin);margin-bottom:var(--main-margin);margin:40px 0}
 .dead_line .products{display:grid;justify-items:center;grid-gap:25px;gap:25px;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr))}
 @media (max-width: 520px) {

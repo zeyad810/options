@@ -1,10 +1,12 @@
 {
     "home_title": "Home",
     "products": "Products",
+    "show_all":"show all",
     "categories": "Categories",
     "login": "Login",
     "logout": "Logout",
     "hello": "Hello",
+  "rest":"time",
     "product_is_not_taxable": "Tax free",
     "product_has_options": "Available in several options",
     "products_title": "All products",
@@ -17,8 +19,10 @@
     "store_language" : "Language",
     "store_currency_country" : "Country",
     "customer_reviews": "Customer reviews ",
-
-
+  "day":"day",
+  "min":"minute",
+  "hour":"hour",
+    "sec":"second",
     "or":"Or",
     "and":"And",
     "ok":"Ok",
