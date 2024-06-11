@@ -74,6 +74,11 @@
                     </div>
                 </div>
 
+                <div class="product_shap w-24 pr-4 gap-[10px] flex items-center justify-around relative">
+                    <i class="fa-solid fa-table-cells border border-[#EEE] border-solid rounded-[4px] vr_hr_active p-[5px] cursor-pointer" data-display="vertical"></i>
+                    <i class="fa-solid fa-bars border border-[#EEE] border-solid rounded-[4px]  p-[5px] cursor-pointer" data-display="horizontal"></i>
+				</div>
+
 
 
         </div>
@@ -113,4 +118,26 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded' , ()=>{
+        const productShapes = document.querySelectorAll('.product_shap i');
+        const productList = document.querySelector('.products #products-list'); 
 
+        console.log(productList);
+        productShapes.forEach(productShape => {
+        productShape.addEventListener('click', function(event) {
+
+            const clickedIcon = event.target;
+            const displayValue = clickedIcon.dataset.display; 
+
+            productList?.classList.remove('vertical', 'horizontal');
+            productList?.classList.add(displayValue);
+
+            productShapes.forEach(icon => icon.classList.remove('vr_hr_active')); 
+            event.target.classList.toggle('vr_hr_active');
+        });
+        });
+})
+
+            
+</script>

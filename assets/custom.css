@@ -8553,7 +8553,7 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
 .brand-item {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.brands .over{height:100%;width:100vw;background-size:100% 100%}
+.brands .over{height:100%;width:100vw;background-size:auto;background-position: bottom;}
 .brands .all{height:206px;width:100vw}
 .brands .Marquee{display:flex;width:200vw;align-items:center;justify-content:center}
 .brands .marquee{width:50vw;background-color:transparent}
@@ -9036,10 +9036,10 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: var(--f-color);
 }
 .vr_hr_active {
-  background-color: var(--f-color);
-  color: aliceblue;
+  background-color: var(--primary-color);
+  color: aliceblue !important;
   background-size: 100% 100%;
-  border-color: var(--f-color);
+  border-color: var(--primary-color);
 }
 .s-filters-footer {
   padding: 20px 40px;
@@ -11282,3 +11282,12 @@ section.sticky-product-bar.bg-white.p-5.target\:btn:target.rounded-b-none {
 .rtl\:2xl\:right-\[25\%\]:where([dir="rtl"], [dir="rtl"] *){right:25%}}
 @media (min-width: 480px){
 .rtl\:xs\:left-5:where([dir="rtl"], [dir="rtl"] *){left:1.25rem}}
+
+
+
+.horizontal .desk{
+  display:none;
+}
+.horizontal .mob{
+  display:block;
+}

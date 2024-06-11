@@ -36,6 +36,11 @@
                         <p class="price">
                         {{ product.sale_price ? product.sale_price : product.price}} {{ product.currency }}</p>
                         <del class="last_price">{{ product.sale_price ? product.price : '' }} {{ product.sale_price ? product.currency: '' }}</del>
+                        {% if product.sale_price %}
+                            <span style="color:#f25f5f;">
+                            &nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
+                            </span>
+                        {% endif %}
                     </div>
                     <div class="flex justify-center sm:justify-start">
                         <div class="te">

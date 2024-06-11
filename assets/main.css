@@ -2120,3 +2120,12 @@ hr {
     margin-bottom: 2%;
     gap: 7px;
   }
+  .product_shap{
+    margin-right: 10px !important;
+  }
+  .product_shap i.fa-solid{
+      margin-top: 5px !important;
+  }
+  .product_shap i.fa-solid.vr_hr_active {
+    color: #fff !important;
+  }

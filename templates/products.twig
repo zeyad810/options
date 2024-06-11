@@ -21,20 +21,20 @@
                 </div>
             </div>
         {% endif %}
-        <div class="products-container flex-grow-1 pt-4">
+        <div class="products-container products flex-grow-1 pt-4">
         {% if  products.filters|length <= 0 %}
             <div>
                 {% include 'products-filter.twig' with { 'count' : products.total, 'has_products_filtration': ( products.filters|length > 0) } %}
             </div>
         {% endif %}
-            <div id="products-list" class="row products-list">
+            <div id="products-list" class="row products-list vertical">
                 {% for product in products.data %}
 
                     <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
                         {% include 'product-card.twig' with {'product' : product, 'index': key} %}
                     </div>
 
-                {% endfor %}
+                {% endfor %}4
             </div>
         </div>
     </div>
