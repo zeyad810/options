@@ -1,0 +1,131 @@
+.section_c_r salla-slider {
+        width: 100%;
+}
+
+.section_c_r .swiper-pagination {
+        bottom: -23px !important;
+}
+
+.section_c_r .swiper-pagination-bullet {
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        padding: 2px;
+        border: solid #fff 2px;
+        outline: solid #c4c4c4 0.5px;
+        transition: all 0.3s;
+}
+
+.section_c_r .swiper-pagination-bullet-active {
+        transition: all 0.3s;
+        outline: solid var(--s-color) 0.5px;
+}
+
+
+.section_c_r .swiper {
+        overflow: visible;
+        padding-left: unset;
+} 
+
+.section_c_r .s-slider-block__title {
+        position: relative;
+}
+
+.section_c_r.container {
+        overflow: hidden;
+        padding-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+        .section_c_r .swiper-pagination {
+                display: none;
+        }
+
+        .section_c_r.container {
+                overflow: hidden;
+                padding-bottom: 0;
+        }
+}
+
+.section_c_r {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 105px;
+        margin: 0 auto;
+}
+
+.section_c_r .swiper-wrapper {
+        gap: 10px;
+}
+
+.section_c_r .content_tistimonial {
+        max-width: 385px;
+        margin: auto;
+        background-color: #fff;
+        border-width: 1px;
+        box-shadow: 0px 10px 20px 0px rgba(78, 78, 78, 0.07);
+        border-style: solid;
+        border-image: linear-gradient(to bottom, #f0f0f0, #fff) 1;
+}
+
+.section_c_r .content_tistimonial .imag_raduse {
+        display: flex;
+        justify-content: center;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50px;
+        max-width: 108px;
+        aspect-ratio: 1;
+}
+
+.section_c_r .content_tistimonial .cover_content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 78px 22px 35px;
+}
+
+.section_c_r .content_tistimonial .cover_content .desc_contant {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 25px;
+        color: #666;
+        text-align: center;
+}
+
+.section_c_r .content_tistimonial .cover_content .rating_name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+}
+
+.section_c_r .content_tistimonial .cover_content .rating_name .name {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 150%;
+        color: #121212;
+        text-align: center;
+}
+
+.section_c_r .content_tistimonial .cover_content .rating_name .job {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 180%;
+        color: #3E3E3E;
+        text-align: center;
+}
+
+@media (max-width: 767px) {
+        .section_c_r .title-heade {
+                font-size: 20px;
+        }
+}
+
+.space {
+        margin-block: 40px;
+}
