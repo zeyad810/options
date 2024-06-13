@@ -1,5 +1,5 @@
 <div class="w-full section_c_r space" section-id="{{ sectionId }}">
-	<div class="container flex items-center justify-center gap-[60px] container_review">
+	<div class="container flex items-center justify-center container_review">
 		{% for item in settings.customer_reviews %}
 			<div class="relative rounded-lg content_tistimonial">
 				<div class="absolute top-0 overflow-hidden imag_raduse">
@@ -23,6 +23,9 @@
 </div>
 
     <style>
+    .container_review {
+        gap: 24px;
+}
 .stars_rating {
   --percent: calc(var(--rating) / 5 * 100%);
   display: inline-block;
@@ -36,23 +39,28 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.section_c_r .slick-track {
-        display: flex;
-        gap: 16px;
-}
 .section_c_r .slick-list {
         overflow: visible !important;
+}
+.slick-track {
+    width:100% !important;
 }
 </style>
 <script>
  document.addEventListener("DOMContentLoaded", function(){
         var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
         var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-        var screenWidth = window.screen.width;
         var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+        var screenWidth = window.screen.width;
+        if(screenWidth >= 678) {
+            let bolwidth = true ;
+        }else {
+            bolwidth = false;
+        }
             $('.container_review').slick({
                 slidesToShow: 3,
                 slidesToScroll: 1,
+                centerMode: bolwidth,
                 infinite: false,
                 autoplay: false,
                 arrows: true,
