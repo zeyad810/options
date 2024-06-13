@@ -22,25 +22,6 @@
 	</div>
 </div>
 
-<script>
- document.addEventListener("DOMContentLoaded", function(){
-        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
-        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-        var screenWidth = window.screen.width;
-            $('.container_review').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: false,
-                autoplay: false,
-                arrows: true,
-                rtl: !(window.appDirection === 'ltr'),
-                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
-                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',
-            });
-        }
-    );
-</script>
-
     <style>
 .stars_rating {
   --percent: calc(var(--rating) / 5 * 100%);
@@ -63,6 +44,26 @@
         overflow: visible !important;
 }
 </style>
+<script>
+ document.addEventListener("DOMContentLoaded", function(){
+        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
+        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
+        var screenWidth = window.screen.width;
+        var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+            $('.container_review').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: false,
+                autoplay: false,
+                arrows: true,
+                dots: {% if (settings.hide_dots or (settings.testimonials | length <= 3)) %}false{% else %}true{% endif %},
+                rtl: !(window.appDirection === 'ltr'),
+                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
+                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',
+            });
+        }
+    );
+</script>
 {% schema %}
 {
     "name": {
