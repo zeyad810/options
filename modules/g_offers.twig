@@ -114,7 +114,6 @@ function convertToDate(textDate) {
   return new Date(year, month, day);
 }
 const realDAte = convertToDate('{{ settings.dateTime_choose }}');
-console.log(realDAte);
 const countDownDate = new Date(realDAte).getTime();
 const allCOunt = document.querySelectorAll('.countdown');
 allCOunt.forEach( (el) =>{
@@ -131,7 +130,6 @@ allCOunt.forEach( (el) =>{
     let now = new Date().getTime();
 
     let distance = countDownDate - now;
-        console.log(distance)
     if (distance < 0) {
         el.remove();
         document.querySelectorAll('.te').forEach(e => {

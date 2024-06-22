@@ -11291,3 +11291,17 @@ section.sticky-product-bar.bg-white.p-5.target\:btn:target.rounded-b-none {
 .horizontal .mob{
   display:block;
 }
+.horizontal .product-item{
+  position: relative;
+  height:300px;
+} 
+.horizontal .box-1-1{
+  height: 100%;
+}
+.horizontal .product-all-content{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+
+}

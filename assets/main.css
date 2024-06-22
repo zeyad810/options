@@ -2074,6 +2074,9 @@ hr {
 .addBtn {
     width: 100%;
 }
+.addBtn .btn:disabled{
+    background-color: gray;
+}
 .addBtn .product-card-add-to-cart{
     width: 100%;
     background-color: var(--primary-color);
@@ -2128,4 +2131,8 @@ hr {
   }
   .product_shap i.fa-solid.vr_hr_active {
     color: #fff !important;
+  }
+  .product_deadline{
+    width: 100%;
+
   }
