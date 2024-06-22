@@ -2126,6 +2126,11 @@ hr {
   .product_shap{
     margin-right: 10px !important;
   }
+  @media (max-width:626px) {
+    .product_shap.w-24.pr-4.gap-\[10px\].flex.items-center.justify-around.relative{
+        display: none;
+    }
+  }
   .product_shap i.fa-solid{
       margin-top: 5px !important;
   }
