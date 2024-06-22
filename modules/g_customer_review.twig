@@ -1,7 +1,8 @@
 <div class="w-full section_c_r space" section-id="{{ sectionId }}">
-	<div class="container flex items-center justify-center container_review">
+<div class="swiper">
+	<div class="container  container_review swiper-wrapper">
 		{% for item in settings.customer_reviews %}
-			<div class="relative rounded-lg content_tistimonial">
+			<div class="relative rounded-lg content_tistimonial swiper-slide">
 				<div class="absolute top-0 overflow-hidden imag_raduse">
 					<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
 				</div>
@@ -21,7 +22,7 @@
 		{% endfor %}
 	</div>
 </div>
-
+</div>
     <style>
     .container_review {
         gap: 24px;
@@ -45,7 +46,37 @@
 .slick-track {
     width:100% !important;
 }
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 </style>
+<script>
+    var swiper = new Swiper(".container_review", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  </script>
 {% schema %}
 {
     "name": {
