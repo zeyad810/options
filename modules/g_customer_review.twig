@@ -1,8 +1,7 @@
 <div class="w-full section_c_r space" section-id="{{ sectionId }}">
-<div class="swiper">
-	<div class="container  container_review swiper-wrapper">
+	<div class="container container_review">
 		{% for item in settings.customer_reviews %}
-			<div class="relative rounded-lg content_tistimonial swiper-slide">
+			<div class="relative rounded-lg content_tistimonial">
 				<div class="absolute top-0 overflow-hidden imag_raduse">
 					<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
 				</div>
@@ -21,7 +20,6 @@
 			</div>
 		{% endfor %}
 	</div>
-</div>
 </div>
     <style>
     .container_review {
@@ -51,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
         var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
         var screenWidth = window.screen.width;
         var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-            $('[section-id={{ sectionId }}] .swiper-wrapper').slick({
+            $('[section-id={{ sectionId }}] .container_review').slick({
                 slidesToShow: 2,
                 slidesToScroll: 1,
                 infinite: false,

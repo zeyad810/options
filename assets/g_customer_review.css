@@ -15,7 +15,7 @@
         }
 }
 
-.section_c_r {
+.section_c_r .container_review{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -25,7 +25,7 @@
 }
 .section_c_r .content_tistimonial {
         max-width: 385px;
-        margin: auto;
+        margin-left: 24px;
         background-color: #fff;
         border-width: 1px;
         box-shadow: 0px 10px 20px 0px rgba(78, 78, 78, 0.07);
@@ -92,7 +92,4 @@
 
 .space {
         margin-block: 40px;
-}
-.content_tistimonial {
-        margin-left: 24px;
 }
