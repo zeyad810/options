@@ -597,6 +597,9 @@ button.more-button , a.more-button {
 /*
     footer
 */
+.footer{
+    margin-top: 5%;
+}
 
 .store-section {
     background-color: #DEDEDE;
@@ -672,15 +675,22 @@ button.more-button , a.more-button {
 .footer-store-section-bars {
     min-height: 80px;
     border-bottom: 0.5px solid #cccccc;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .footer .logistics-pay-icons {
     margin-right: -8px;
     margin-left: -8px;
 }
-
+.footer-copyrights-vat-certificate{
+    background: #FBEAEF;
+}
 .footer .icons a, .footer .logistics-pay-icons a {
     padding: 5px 8px;
+}
+.footer .logistics-pay-icons a img{
+    width: 70%;
 }
 
 .footer .icons div {
