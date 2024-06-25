@@ -6,12 +6,14 @@
     <div class="container slider-container">
         <h1 class="section-title theme-text-primary">{{ settings.title }}</h1>
         <div class="d-flex flex-column">
-            <div class="categories-slider-wrapper swiper" style="position: relative">
-                <div class="categories-slider s-slider swiper-wrapper">
+            <div class="categories-slider-wrapper" style="position: relative">
+
+                <div class="categories-slider s-slider">
                     {% for categoryItem in settings.categories %}
-                        <div class="cat-col swiper-slide">
+                        <div class="cat-col">
                             <div class="category-item">
                                 <a href="/categories/{{ categoryItem.category.id }}/{{ categoryItem.category.slug }}">
+
                                     <img
                                             {% if categoryItem.category.image %}
                                                 src="{{ imageUrl(categoryItem.category.image_full_size, { w: 400, q: 85, f:'auto' }) }}"
@@ -26,7 +28,9 @@
                         </div>
                     {% endfor %}
                 </div>
+
             </div>
+
             {% if settings.display_more %}
                 <div class="text-center mt-5 category-display-more-section">
                     <a href="/categories" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
@@ -35,37 +39,44 @@
         </div>
     </div>
 </div>
-<style>
-    .swiper {
-      width: 100%;
-      height: 100%;
-    }
 
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-</style>
 <script>
-var swiper = new Swiper("[section-id={{ sectionId }}] .categories-slider", {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
+
+    document.addEventListener("DOMContentLoaded", function(){
+        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
+        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
+
+        var screenWidth = window.screen.width;
+
+        var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
+
+        if(screenWidth >= 768 || editingMode) {
+
+            $('[section-id={{ sectionId }}] .categories-slider').slick({
+                slidesToShow: 5,
+                slidesToScroll: 5,
+                infinite: false,
+                autoplay: false,
+                arrows: true,
+                dots: false,
+                rtl: !(window.appDirection === 'ltr'),
+                nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="' + arrowNextClass + '"></span></button>',
+                prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="' + arrowPrevClass + '"></span></button>',
+                responsive: [
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 5,
+                            slidesToScroll: 5
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: "unslick"
+                    }
+                ]
+            });
+        }
     });
 </script>
 
