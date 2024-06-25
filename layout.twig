@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
     <link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
 
     <style>
         .sm-search-div.show{
@@ -70,6 +73,8 @@
         }
       body, html {
             overflow-x: hidden !important;
+            font-family: "Cairo", sans-serif !important;
+
         }
 
         
@@ -232,6 +237,9 @@
 
 <script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}" ></script>
 <script src="{{ assetUrl('slick.min.js') }}" ></script>
+
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+
 
 <script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}" ></script>
 
@@ -578,8 +586,21 @@
         }
       }
     }
+  },
+  "newsletter":{
+    "name":{
+      "ar":"النشره البريديه",
+      "en":"newsletter"
+    },
+    "settings": {
+      "url": {
+        "type": "url",
+        "label": {
+          "ar": "لينك النشره البريديه",
+          "en": "link for newsletter"
+        }
+      }
+    }
   }
-
-
 }
 {% endschema %}

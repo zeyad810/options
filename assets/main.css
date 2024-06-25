@@ -597,6 +597,9 @@ button.more-button , a.more-button {
 /*
     footer
 */
+.footer{
+    margin-top: 5%;
+}
 
 .store-section {
     background-color: #DEDEDE;
@@ -672,15 +675,22 @@ button.more-button , a.more-button {
 .footer-store-section-bars {
     min-height: 80px;
     border-bottom: 0.5px solid #cccccc;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .footer .logistics-pay-icons {
     margin-right: -8px;
     margin-left: -8px;
 }
-
+.footer-copyrights-vat-certificate{
+    background: #FBEAEF;
+}
 .footer .icons a, .footer .logistics-pay-icons a {
     padding: 5px 8px;
+}
+.footer .logistics-pay-icons a img{
+    width: 70%;
 }
 
 .footer .icons div {
@@ -1067,10 +1077,32 @@ button.more-button , a.more-button {
     margin-left: -5px;
     margin-right: -5px;
 }
-.store-section .social-icons a {
-    margin: 0px 2.5px 5px 2.5px;
+.links_social i:hover {
+    color: var(--primary-color) !important;
 }
-
+.links_social i{
+    transition: all 0.2s ease-in-out;
+}
+.store-section .social-icons a {
+    border: 1px solid #919191;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+.store-section .social-icons a:hover{
+    border-color: var(--primary-color);
+}
+.store-section .social-icons a:hover i{
+    color: var(--primary-color);
+}
+.store-section .social-icons a i {
+    color:#919191;
+    transition: all 0.2s ease-in-out;
+}
 
 /*
     Cart Sidebar
@@ -2074,6 +2106,10 @@ hr {
 .addBtn {
     width: 100%;
 }
+.addBtn .btn{
+    width: 100%;
+    padding: 10px;
+}
 .addBtn .btn:disabled{
     background-color: gray;
 }
@@ -2126,6 +2162,11 @@ hr {
   .product_shap{
     margin-right: 10px !important;
   }
+  @media (max-width:626px) {
+    .product_shap.w-24.pr-4.gap-\[10px\].flex.items-center.justify-around.relative{
+        display: none;
+    }
+  }
   .product_shap i.fa-solid{
       margin-top: 5px !important;
   }
@@ -2135,4 +2176,38 @@ hr {
   .product_deadline{
     width: 100%;
 
+  }
+
+  .contact{
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-store-section h1{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 5%;
+}
+.footer-store-section p a{
+    color:#666
+}
+.footer-store-section p{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 25px;
+    color: #666;
+}
+  .links_social{
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    gap: 8%;
+    align-items: center;
+  }
+  .media{
+    justify-content: center;
+    gap: 5%;
+    flex-direction: column;
+    margin-bottom: 5%;
   }

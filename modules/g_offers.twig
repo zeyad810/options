@@ -1,4 +1,4 @@
-<section class="flex flex-col items-center dead_line ">    
+<section class="flex flex-col items-center dead_line " section-id="{{ sectionId }}">    
  {% include 'title.twig' with { 'component_title': settings.title } %} 
         <div class="container flex justify-end gap-4 my-8">
             <a href="{{settings.url}}" class="font-semibold show_all ">
@@ -47,7 +47,7 @@
                         <div class="countdown">
                             <h3>{{locals.rest}} :</h3>
                             <ul>
-                                 <li class="countdown__seconds js-seconds">
+                                <li class="countdown__seconds js-seconds">
                                 <span></span>
                                 {{locals.sec}}
                                 </li>:

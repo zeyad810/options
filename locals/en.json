@@ -15,6 +15,7 @@
     "shop_now": "Shop Now",
 
     "search_placeholder": "Search",
+    "phones_apps": "mobile applications",
 
     "store_language" : "Language",
     "store_currency_country" : "Country",
@@ -26,6 +27,15 @@
     "or":"Or",
     "and":"And",
     "ok":"Ok",
+    "contact_us":"contact us",
+
+    "sub_newsletter":"Subscribe to the newsletter",
+    "join_desc":"Join now and get 10% off your next purchase!",
+    "un_sub":"You can unsubscribe at any moment",
+    "sub":"subscription",
+    "email":"Enter your email",
+    "follow":"Follow us on",
+    "nomail":"please insert your email",
 
     "sorry":"Sorry",
     "search":"Search",
