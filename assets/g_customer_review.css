@@ -13,6 +13,12 @@
         .container_review {
                 gap: 16px;
         }
+        .section_c_r .title-heade {
+                font-size: 20px;
+        }
+        .section_c_r .container_review {
+                margin-block: 44px;
+        }
 }
 
 .section_c_r .container_review{
@@ -21,7 +27,7 @@
         align-items: center;
         justify-content: center;
         gap: 105px;
-        margin: 0 auto;
+        margin: 86px auto;
 }
 .section_c_r .content_tistimonial {
         max-width: 385px;
@@ -82,14 +88,4 @@
         line-height: 180%;
         color: #3E3E3E;
         text-align: center;
-}
-
-@media (max-width: 767px) {
-        .section_c_r .title-heade {
-                font-size: 20px;
-        }
-}
-
-.space {
-        margin-block: 40px;
 }
