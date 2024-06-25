@@ -13,19 +13,25 @@
         .container_review {
                 gap: 16px;
         }
+        .section_c_r .title-heade {
+                font-size: 20px;
+        }
+        .section_c_r .container_review {
+                margin-block: 44px;
+        }
 }
 
-.section_c_r {
+.section_c_r .container_review{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 105px;
-        margin: 0 auto;
+        margin: 86px auto;
 }
 .section_c_r .content_tistimonial {
         max-width: 385px;
-        margin: auto;
+        margin-left: 24px;
         background-color: #fff;
         border-width: 1px;
         box-shadow: 0px 10px 20px 0px rgba(78, 78, 78, 0.07);
@@ -82,14 +88,4 @@
         line-height: 180%;
         color: #3E3E3E;
         text-align: center;
-}
-
-@media (max-width: 767px) {
-        .section_c_r .title-heade {
-                font-size: 20px;
-        }
-}
-
-.space {
-        margin-block: 40px;
 }
