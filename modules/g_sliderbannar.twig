@@ -1,67 +1,79 @@
+<section id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
+	<div class='slider-bannars_items'>
+		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
+			{% for item in settings.bannars %}
+				<swiper-slide class="swiper-slide slider-bannars-moving">
+					<div class="photo_one">
+						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
+					</div>
 
-<section  id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
-<div class='slider-bannars_items' >
-    {% for item in settings.bannars %}
-      
-      <section class="slider-bannars-moving">
-        <div class="photo_one">
-          <img loading="lazy" width='100%' src='{{item.F_image}}' alt="img"> 
-        </div>
+					<div class=" content">
+						<h2 class="">{{ item.bannar_title }}
+						</h2>
+						<p class="">{{item.bannar_desc}}</p>
+						<a style="margin:0 auto" href="{{item.bannar_url}}">
+							<button class="">
+								{{locals.shop_now}}</button>
+						</a>
+					</div>
 
-        <div class=" content"> 
-          <h2 class="">{{ item.bannar_title }}  </h2>
-          <p class="">{{item.bannar_desc}}</p>
-          <a style="margin:0 auto" href="{{item.bannar_url}}">
-            <button  class="" > {{locals.shop_now}}</button>
-          </a>
-        </div>
+					<div class="photo ">
+						<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
+					</div>
+				</swiper-slide>
+			{% endfor %}
+		</swiper-container>
 
-        <div class="photo ">
-          <img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
-        </div> 
-      </section>
-    {% endfor %}
-</div>
+	</div>
 </section>
 
 
+<style>
+	swiper-container {
+		width: 100%;
+		height: 100%;
+	}
+
+	swiper-slide {
+		text-align: center;
+		font-size: 18px;
+		background: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	swiper-slide img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+</style>
+
+
 <script>
- let sections = document.querySelectorAll('.slider-bannars-moving');
-  let arrBannars = '{{settings.bannars | json_encode | raw }}';
+	document.addEventListener('DOMContentLoaded', function () {
+const swiper = new Swiper('.swiper', {
+direction: 'vertical',
+loop: true,
 
-  function onResize() {
-    sections.forEach((section, index) => {
-      if (window.innerWidth <= 600) section.style.backgroundImage = `url('${JSON.parse(arrBannars)[index].bannar_M_image}')`;
-      else section.style.backgroundImage = `url('${JSON.parse(arrBannars)[index].bannar_D_image}')`;
-    })
-  }
+pagination: {
+el: '.swiper-pagination'
+},
 
-  onResize();
-  window.onresize = onResize; 
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev'
+},
 
- document.addEventListener("DOMContentLoaded", function(){
-        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
-        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-
-        var screenWidth = window.screen.width;
-
-        var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-
-            $('.slider-bannars_items').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: false,
-                autoplay: false,
-                arrows: true,
-                dots: {% if (settings.hide_dots or (settings.testimonials | length <= 3)) %}false{% else %}true{% endif %},
-                rtl: !(window.appDirection === 'ltr'),
-                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
-                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',
-            });
-        }
-    );
-
+scrollbar: {
+el: '.swiper-scrollbar'
+}
+});
+});
 </script>
+
 
 {% schema %}
 

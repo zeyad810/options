@@ -1,8 +1,8 @@
 <section id="g_square_image_{{sectionId}}" class="container ads">
-    <div class="imgs">
-        {% for item in settings.images %}
-            {% if loop.index <= 3 %}
-               <div class="img "   >
+	<div class="imgs">
+		{% for item in settings.images %}
+			{% if loop.index <= 3 %}
+				<div class="img ">
 					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
 					<div class="over">
 						<div class="text">
@@ -11,14 +11,14 @@
 							</p>
 							<a href="{{item.square_url.url}}">
 								<button type="button" class="duration-300 hover:opacity-95">
-										{{locals.shop_now}}
+									{{locals.shop_now}}
 								</button>
 							</a>
 						</div>
 					</div>
 				</div>
-				{% elseif loop.index == 4 %}
-			<div class="img f_img" >
+			{% elseif loop.index == 4 %}
+				<div class="img f_img">
 					<div class="card h-100">
 						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top">
 						<div class="over">
@@ -35,11 +35,25 @@
 						</div>
 					</div>
 				</div>
-            {% endif %}
-        {% endfor %}
-    </div>
-   
+			{% endif %}
+		{% endfor %}
+	</div>
+
 </section>
+
+
+<style>
+	.ads .img .over:hover .text{
+		opacity: 1;
+	}
+
+	.ads .img .over .text {
+		opacity: 0;
+		transition: .3s;
+	}
+</style>
+
+
 {% schema %}
 {
     "name": {

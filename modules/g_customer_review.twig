@@ -1,74 +1,131 @@
-<div class="w-full section_c_r my-32" section-id="{{ sectionId }}">
+<div class="container w-full section_c_r my-32" section-id="{{ sectionId }}">
 	<div class="container container_review">
-		{% for item in settings.customer_reviews %}
-			<div class="relative rounded-lg content_tistimonial">
-				<div class="absolute top-0 overflow-hidden imag_raduse">
-					<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
-				</div>
-				<div class="cover_content">
-					<div class="desc_contant">
-						{{item.customer_review}}
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for item in settings.customer_reviews %}
+					<div class="swiper-slide relative rounded-lg content_tistimonial">
+						<div class="absolute top-0 overflow-hidden imag_raduse">
+							<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
+						</div>
+						<div class="cover_content">
+							<div class="desc_contant">
+								{{item.customer_review}}
+							</div>
+							<div class="rating_name">
+								<h2 class="name">{{item.customer_name}}</h2>
+								<div class="stars_rating" style="--rating: {{item.customer_rate}};" aria-label="Rating of this product is 2.3 out of 5."></div>
+								<h2 class="job">
+									{{item.customer_job}}
+								</h2>
+							</div>
+						</div>
 					</div>
-					<div class="rating_name">
-						<h2 class="name">{{item.customer_name}}</h2>
-						<div class="stars_rating" style="--rating: {{item.customer_rate}};" aria-label="Rating of this product is 2.3 out of 5."></div>
-						<h2 class="job">
-							{{item.customer_job}}
-						</h2>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
-		{% endfor %}
+
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+		</div>
 	</div>
 </div>
-    <style>
-    .container_review {
-        gap: 24px;
+
+<style>
+
+	.section_c_r {
+		min-height: 470px;
+	}
+
+.swiper-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
-.stars_rating {
-  --percent: calc(var(--rating) / 5 * 100%);
-  display: inline-block;
-  font-size: 30px;
-  line-height: 1;
+.swiper-button-next,
+.swiper-button-prev {
+	color: var(--primary-color) !important;
+  position: absolute;
+  top: 50%;
+  height: 44px;
+  margin-top: -22px;
+  z-index: 10;
+  cursor: pointer;
 }
-.stars_rating::before {
-  content: "★★★★★";
-  letter-spacing: 3px;
-  background: linear-gradient(90deg, #fc0 var(--percent), #c5c5c5 var(--percent));
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+	font-size: 24px !important;
 }
-.section_c_r .slick-list {
-        overflow: visible !important;
+
+.swiper-button-next {
+  right: 10px;
 }
-.section_c_r .slick-slide {
-    padding:10px;
-    text-align:center;
-    margin-right:15px;
-    margin-left:15px;
+.swiper-button-prev {
+  left: 10px;
 }
+
+	.container_review {
+		gap: 24px;
+	}
+	.stars_rating {
+		--percent: calc(var(--rating) / 5 * 100%);
+		display: inline-block;
+		font-size: 30px;
+		line-height: 1;
+	}
+	.stars_rating::before {
+		content: "★★★★★";
+		letter-spacing: 3px;
+		background: linear-gradient(90deg, #fc0 var(--percent), #c5c5c5 var(--percent));
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.section_c_r .slick-list {
+		overflow: visible !important;
+	}
+	.section_c_r .slick-slide {
+		padding: 10px;
+		text-align: center;
+		margin-right: 15px;
+		margin-left: 15px;
+	}
 </style>
+
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-        var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
-        var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-        var screenWidth = window.screen.width;
-        var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-            $('[section-id={{ sectionId }}] .container_review')?.slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: false,
-                autoplay: false,
-                arrows: true,
-                dots: {% if (settings.hide_dots or (settings.testimonials | length <= 3)) %}false{% else %}true{% endif %},
-                rtl: !(window.appDirection === 'ltr'),
-                nextArrow:'<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="'+arrowNextClass+'"></span></button>',
-                prevArrow:'<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="'+arrowPrevClass+'"></span></button>',
-            });
-        }
-    );
+  document.addEventListener('DOMContentLoaded', function () {
+  var swiper = new Swiper('.swiper-container', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 5,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 0,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+    }
+  });
+});
 
 </script>
+
+
+
 {% schema %}
 {
     "name": {
