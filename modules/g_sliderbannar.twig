@@ -2,7 +2,7 @@
 	<div class='slider-bannars_items'>
 		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
 			{% for item in settings.bannars %}
-				<swiper-slide class="swiper-slide slider-bannars-moving">
+				<swiper-slide style="background-size: 100% 100% !important; width: 100vw !important; background: url({{ settings.bannar_D_image }})"  class="swiper-slide slider-bannars-moving">
 					<div class="photo_one">
 						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
 					</div>
@@ -53,6 +53,7 @@
 
 
 <script>
+// swiper
 	document.addEventListener('DOMContentLoaded', function () {
 const swiper = new Swiper('.slider-bannars_items .swiper', {
 direction: 'vertical',
@@ -72,19 +73,26 @@ el: '.swiper-scrollbar'
 }
 });
 });
+
 </script>
 
 
 {% schema %}
-
 {
-    "name":{
-        "ar":"بانر متحرك - جلامور",
-        "en":"sliderbannar - glamour"
+    "name": {
+        "ar": "بانر متحرك - جلامور",
+        "en": "sliderbannar - glamour"
     },
     "icon": "fal fa-user",
-    "display":"true",
-    "settings":{
+    "display": "true",
+    "settings": {
+        "bannar_D_image": {
+            "type": "image",
+            "label": {
+                "ar": "خلفيه الكمبيوتر",
+                "en": "desktop image"
+            }
+        },
         "bannars": {
             "type": "list",
             "label": {
@@ -92,20 +100,6 @@ el: '.swiper-scrollbar'
                 "en": "bannars"
             },
             "settings": {
-                "bannar_D_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "خلفيه الكمبيوتر",
-                        "en": "desktop image"
-                    }
-                },
-                "bannar_M_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "خلفيه الهاتف",
-                        "en": "mobile image"
-                    }
-                },
                 "F_image": {
                     "type": "image",
                     "label": {
@@ -145,6 +139,4 @@ el: '.swiper-scrollbar'
         }
     }
 }
-
-
 {% endschema %}
