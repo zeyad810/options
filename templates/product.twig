@@ -14,17 +14,13 @@
 	<link rel="stylesheet" type="text/css" href="{{ assetUrl('product-details.css') }}"/>
 
 	<style>
-
-
-	{# Swiper #}
-
-.swiper-container {
+.slider-inspire .swiper-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
-.swiper-button-next,
-.swiper-button-prev {
+.slider-inspire .swiper-button-next,
+.slider-inspire .swiper-button-prev {
 	color: var(--primary-color) !important;
   position: absolute;
   top: 50%;
@@ -34,17 +30,47 @@
   cursor: pointer;
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
+.slider-inspire .swiper-button-next::after,
+.slider-inspire .swiper-button-prev::after {
 	font-size: 24px !important;
 }
 
-.swiper-button-next {
+.slider-inspire .swiper-button-next {
   right: 10px;
 }
-.swiper-button-prev {
+.slider-inspire .swiper-button-prev {
   left: 10px;
 }
+
+		{# Swiper #}
+
+		.swiper-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+		.swiper-button-next,
+		.swiper-button-prev {
+			color: var(--primary-color) !important;
+			position: absolute;
+			top: 50%;
+			height: 44px;
+			margin-top: -22px;
+			z-index: 10;
+			cursor: pointer;
+		}
+
+		.swiper-button-next::after,
+		.swiper-button-prev::after {
+			font-size: 24px !important;
+		}
+
+		.swiper-button-next {
+			right: 10px;
+		}
+		.swiper-button-prev {
+			left: 10px;
+		}
 
 		.pswp__button,
 		.pswp__button--arrow--left:before,
@@ -104,7 +130,7 @@
 		class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
 		<!-- Background of PhotoSwipe.
-								             It's a separate element, as animating opacity is faster than rgba(). -->
+																																             It's a separate element, as animating opacity is faster than rgba(). -->
 		<div class="pswp__bg"></div>
 
 		<!-- Slides wrapper with overflow:hidden. -->
@@ -176,60 +202,41 @@
 				<div>
 					<div class="row">
 
-						<div
-							class="col-lg-6">
+						<div class="slide-product col-lg-6">
 
-							<!--GALLERY-->
-							<div id="wrap">
-								<div class="row">
-									<div
-										class="col-12 col-product-image-wrapper">
-
-										<!-- Carousel -->
-										<div class="box-1-1 product-images-carousel product-images-carousel-init {% if product.selected_product.images | length <= 0 %}d-none{% endif %}">
-											<div class="content">
-												<div id="product-images" class="product-images slide gallery">
-													<div id="product-images-slick">
-														{% for key, image in product.selected_product.images %}
-															<div>
-																<div class="box-1-1">
-																	<div class="content">
-																		<a class="image-link" style="display:block; width: 100%; height: 100%;">
-																			<img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ product.name }}" loading="lazy">
-																		</a>
-																	</div>
-																</div>
-															</div>
-														{% endfor %}
-													</div>
+							<!-- Carousel -->
+							<!-- Swiper -->
+							<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2"> <div class="swiper-wrapper">
+									{% for key, image in product.selected_product.images %}
+										<div class='swiper-slide'>
+											<div class="box-1-1">
+												<div class="content">
+													<a class="image-link" style="display:block; width: 100%; height: 100%;">
+														<img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ product.name }}" loading="lazy">
+													</a>
 												</div>
 											</div>
 										</div>
+									{% endfor %}
+								</div>
 
-										<div class="row lg-thumbs d-lg-flex product-images-carousel-thumbs {% if product.selected_product.images | length <= 1 %}d-none-important{% endif %}">
-											{% for key, image in product.selected_product.images %}
-												<div class="col-3">
-													<div class="box-1-1">
-														<div class="content">
-															<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ key }}" style="width: 100%; height: 100%;">
-																<img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
-															</a>
-														</div>
-													</div>
-												</div>
-											{% endfor %}
-										</div>
+								<div class="swiper-button-next"></div>
+								<div class="swiper-button-prev"></div>
+							</div>
 
-										<!-- No image -->
-										<div class="box-1-1 product-images-empty {% if product.selected_product.images | length > 0 %}d-none{% endif %}">
-											<div class="content">
-												<div class="d-flex" style="width: 100%; height: 100%;">
-													<img src="{{ asset_url ~ 'product-img.svg' }}" width="100%" height="auto"/>
+							<div thumbsslider="" class="swiper mySwiper">
+								<div class="swiper-wrapper">
+									{% for key, image in product.selected_product.images %}
+										<div class="swiper-slide col-3">
+											<div class="box-1-1">
+												<div class="content">
+													<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ key }}" style="width: 100%; height: 100%;">
+														<img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
+													</a>
 												</div>
 											</div>
 										</div>
-
-									</div>
+									{% endfor %}
 								</div>
 							</div>
 
@@ -450,6 +457,40 @@
 				</section>
 			{% endif %}
 			<style>
+
+
+				.slide-product .swiper-slide {
+					background-size: cover;
+					background-position: center;
+				}
+
+				.slide-product .mySwiper2 {
+					height: 80%;
+					width: 100%;
+				}
+
+				.slide-product .mySwiper {
+					height: 20%;
+					box-sizing: border-box;
+					padding: 2px 0;
+				}
+
+				.slide-product .mySwiper .swiper-slide {
+					width: 25%;
+					height: 100%;
+					opacity: 0.4;
+				}
+
+				.slide-product .mySwiper .swiper-slide-thumb-active {
+					opacity: 1;
+				}
+
+				.slide-product .swiper-slide img {
+					display: block;
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
 
 				#abas {
 					margin: 0;
@@ -741,7 +782,7 @@ conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
 					</div>
 
 
-					<div class="container overflow-hidden description-paragrah">
+					<div class="slider-inspire container overflow-hidden description-paragrah">
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
 								{% for key,rProduct in product.related_products %}
@@ -953,7 +994,7 @@ var prImage = productImages[z];
 $('#product-images-slick').append('' + '<div>\n' + '                                                                    <div class="box-1-1">\n' + '                                                                        <div class="content">\n' + '                                                                            <a class="image-link"\n' + '                                                                               style="display:block; width: 100%; height: 100%;">\n' + '                                                                                <img src="' + prImage.image.full_size + '" class="carousel-img" loading="lazy" alt="' + selected_product.name + '">\n' + '                                                                            </a>\n' + '                                                                        </div>\n' + '                                                                    </div>\n' + '                                                                </div>');
 
 
-$('.product-images-carousel-thumbs').append('<div class="col-3">\n' + '                                                         <div class="box-1-1">\n' + '                                                                <div class="content">\n' + '                                                                    <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="    {{ key }}"\n' + '                                                                       style="width: 100%; height: 100%;" >\n' + '                                                                        <img src="' + prImage.image.medium + '" loading="lazy" data-index="' + z + '">\n' + '                                                                    </a>\n' + '                                                                </div>\n' + '                                                            </div>\n' + '                                                        </div>');
+$('.product-images-carousel-thumbs').append('<div class="col-3">\n' + '                                                         <div class="box-1-1">\n' + '                                                                <div class="content">\n' + '                                                                    <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="                {{ key }}"\n' + '                                                                       style="width: 100%; height: 100%;" >\n' + '                                                                        <img src="' + prImage.image.medium + '" loading="lazy" data-index="' + z + '">\n' + '                                                                    </a>\n' + '                                                                </div>\n' + '                                                            </div>\n' + '                                                        </div>');
 
 }
 
@@ -1127,7 +1168,7 @@ slidesToScroll: 1
 
 // Swiper
   document.addEventListener('DOMContentLoaded', function () {
-  var swiper = new Swiper('.swiper-container', {
+  var swiper = new Swiper('.slider-inspire .swiper-container', {
     loop: true,
     slidesPerView: 1,
     spaceBetween: 5,
@@ -1155,6 +1196,25 @@ slidesToScroll: 1
       },
     }
   });
+});
+
+
+// Swiper
+var swiper = new Swiper(".slide-product .mySwiper", {
+spaceBetween: 10,
+slidesPerView: 4,
+freeMode: true,
+watchSlidesProgress: true
+});
+var swiper2 = new Swiper(".slide-product .mySwiper2", {
+spaceBetween: 4,
+navigation: {
+nextEl: ".swiper-button-next",
+prevEl: ".swiper-button-prev"
+},
+thumbs: {
+swiper: swiper
+}
 });
 
 

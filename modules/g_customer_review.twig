@@ -1,4 +1,4 @@
-<div class="container w-full section_c_r my-32" section-id="{{ sectionId }}">
+<div class="slide-review container w-full section_c_r my-32" section-id="{{ sectionId }}">
 	<div class="container container_review">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
@@ -35,13 +35,13 @@
 		min-height: 470px;
 	}
 
-.swiper-container {
+.slide-review .swiper-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
-.swiper-button-next,
-.swiper-button-prev {
+.slide-review .swiper-button-next,
+.slide-review .swiper-button-prev {
 	color: var(--primary-color) !important;
   position: absolute;
   top: 50%;
@@ -51,15 +51,15 @@
   cursor: pointer;
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
+.slide-review .swiper-button-next::after,
+.slide-review .swiper-button-prev::after {
 	font-size: 24px !important;
 }
 
-.swiper-button-next {
+.slide-review .swiper-button-next {
   right: 10px;
 }
-.swiper-button-prev {
+.slide-review .swiper-button-prev {
   left: 10px;
 }
 
@@ -92,7 +92,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-  var swiper = new Swiper('.swiper-container', {
+  var swiper = new Swiper('.slide-review .swiper-container', {
     loop: true,
     slidesPerView: 1,
     spaceBetween: 5,
