@@ -1,3 +1,5 @@
+{% include 'schema.twig' %}
+
 <!doctype html>
 <html class="no-js" lang="{{ session.lang.code }}" dir="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}">
 
@@ -239,6 +241,10 @@ onCompleted();
 					}
 				</style>
 
+				<script>
+					console.log('{{ schema }}');
+					console.log('MMMM');
+				</script>
 				<script src="{{ assetUrl('jquery-3.6.0.min.js?v=1.0.0') }}"></script>
 
 				<script src="{{ assetUrl('jquery-ui.min.js') }}"></script>
