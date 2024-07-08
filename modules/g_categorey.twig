@@ -8,11 +8,11 @@
             {% for item in settings.categorys %}
                 <div class="d-flex flex-column align-items-center products-item"   style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
                     <div class="overflow-hidden rounded image-parent">
-                        <a href="{{item.url}}">
+                        <a href="{{item.cat_url}}">
                             <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">
                         </a>
                     </div>
-                    <a href="{{item.url}}">
+                    <a href="{{item.cat_url}}">
                         <h3 class="mt-3 text-center font-weight-medium text-dark" style="font-size: 1.25rem;">{{item.category_name}}</h3>
                     </a>
                 </div>
@@ -62,8 +62,8 @@
                         "en": "category name"
                     }
                 },
-                "url": {
-                    "type": "category_products",
+                "cat_url": {
+                    "type": "url",
                     "label": {
                         "ar": "الرابط",
                         "en": "link"
