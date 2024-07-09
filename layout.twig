@@ -13,17 +13,9 @@
 
 		<link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		{#<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">#}
 		<!--jquery UI -->
-		<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://cdnjs.cloudflare.com/">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-
+		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
 			.sm-search-div.show {
 				display: block !important;
@@ -75,7 +67,6 @@
 			body,
 			html {
 				overflow-x: hidden !important;
-				font-family: "Cairo", sans-serif !important;
 
 			}
 		</style>
@@ -133,7 +124,6 @@
 		{% if store.editing_mode %}
 			<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 		{% endif %}
-
 		<style>
 			body,
 			html {
@@ -145,39 +135,28 @@
 
 			:root {
 				{% if settings.colors_header_background_color %}
-					--header-primary-color: {{settings.colors_header_background_color}}
-					;
+					--header-primary-color: {{settings.colors_header_background_color}};
 				{% endif %}
-
 				{% if settings.colors_header_menu_background_color %}
-					--menu-header-primary-color: {{settings.colors_header_menu_background_color}}
-					;
+					--menu-header-primary-color: {{settings.colors_header_menu_background_color}};
 					--header-primary-brightness: brightness(100%);
 				{% elseif settings.colors_header_background_color %}
-					--menu-header-primary-color: {{settings.colors_header_background_color}}
-					;
+					--menu-header-primary-color: {{settings.colors_header_background_color}};
 					--header-primary-brightness: brightness(80%);
 				{% endif %}
-
 				{% if settings.colors_header_menu_text_color %}
-					--menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}}
-					;
+					--menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
 				{% elseif settings.colors_header_text_color %}
-					--menu-header-text-color-primary-bg: {{settings.colors_header_text_color}}
-					;
+					--menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
 				{% endif %}
-
 				{% if settings.colors_header_text_color %}
-					--header-text-color-primary-bg: {{settings.colors_header_text_color}}
-					;
+					--header-text-color-primary-bg: {{settings.colors_header_text_color}};
 				{% endif %}
 				{% if settings.colors_footer_background_color %}
-					--footer-primary-color: {{settings.colors_footer_background_color}}
-					;
+					--footer-primary-color: {{settings.colors_footer_background_color}};
 				{% endif %}
 				{% if settings.colors_footer_text_color %}
-					--footer-text-color-primary-bg: {{settings.colors_footer_text_color}}
-					;
+					--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};
 				{% endif %}
 			}
 		</style>
@@ -258,18 +237,12 @@ onCompleted();
 
 				{# Local storage #}
 				<script>
-<<<<<<< HEAD
-					localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");
-localStorage.setItem("android", "{{ settings.android_store_url }}");
-localStorage.setItem("mac", "{{ settings.mac_store_url }}");
-=======
 					localStorage.setItem("newsletter", "{{settings.newsletter_url }}");						
 					localStorage.setItem("android", "{{settings.android_store_url }}");						
 					localStorage.setItem("mac", "{{settings.mac_store_url }}");
 					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
 					document.querySelector('a.android-store')?.setAttribute('href', "{{settings.android_store_url }}");
 					document.querySelector('a.mac-store')?.setAttribute('href', "{{settings.mac_store_url }}");
->>>>>>> 1d0d32cbdacd4cfd67a609018bcd3dfde2a356ba
 				</script>
 
 				<!-- Initialize Swiper -->

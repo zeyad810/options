@@ -18,7 +18,6 @@
     font-size: 24px;
     display: grid;
     gap: 25px;
-    font-family: "Cairo", sans-serif;
     font-optical-sizing: auto;
     grid-template-columns: repeat(1, 1fr);
 }

@@ -7476,7 +7476,6 @@ model-viewer[style*=width]:before{display:none}
 .outof-stock {
   color: var(--f-color);
   text-align: center;
-  font-family: "Cairo-Bold", sans-serif;
   line-height: 24px;
   font-weight: 700;
 }
@@ -8135,7 +8134,6 @@ section.sticky-product-bar.landing-page--quick-buy.p-5.rounded-md.rounded-b-none
   display: hidden;
 }
 .ads{display:grid;grid-gap:25px;gap:25px;font-size:24px;font-weight:600;
-  font-family: "Cairo", sans-serif;
   font-optical-sizing: auto;
   grid-template-columns: repeat(1, 1fr);
   margin-bottom: 111px;
