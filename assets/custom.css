@@ -7804,6 +7804,10 @@ section.sticky-product-bar.bg-white.p-5.brands-nav__item.rounded-b-none {
 }
 .brands{
   position: relative;
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
 }
 section.sticky-product-bar.brands-nav__item.p-5.rounded-md.rounded-b-none {
   bottom: 72px;
@@ -8133,7 +8137,12 @@ section.sticky-product-bar.landing-page--quick-buy.p-5.rounded-md.rounded-b-none
 .ads{display:grid;grid-gap:25px;gap:25px;font-size:24px;font-weight:600;
   font-family: "Cairo", sans-serif;
   font-optical-sizing: auto;
-  grid-template-columns: repeat(1, 1fr)}
+  grid-template-columns: repeat(1, 1fr);
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
+}
 .ads .imgs{display:grid;grid-gap:25px;gap:25px;
   grid-template-columns: repeat(3, minmax(300px, 1fr))}
 .ads .img{position:relative;border-radius:5px}
@@ -8237,7 +8246,10 @@ input[type=radio].sr-only:checked ~ div.ads .img .over {
   }
 }
 .g_cat {
-  margin-bottom: var(--main-margin);
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
 }
 .g_cat .products-item .image-parent img {
   transition: ease all 0.5s;
@@ -8334,6 +8346,10 @@ input[type=radio].sr-only:checked ~ div.ads .img .over {
 #video-banner {
   height: -moz-fit-content;
   height: fit-content;
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
   }
   #video-banner::before {
     content: "";
@@ -8398,7 +8414,12 @@ input[type=radio].sr-only:checked ~ div.video-parent .bg-image {
   border-color: var(--color-main);
 }
 }
-.dead_line{margin-top:var(--main-margin);margin-bottom:var(--main-margin);margin:40px 0}
+.dead_line{
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
+}
 .dead_line .products{display:grid;justify-items:center;grid-gap:25px;gap:25px;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr))}
 @media (max-width: 520px) {
@@ -8658,7 +8679,13 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
 .section_c_r .s-slider-block__title {
   position: relative;
 }
-.section_c_r.container{overflow:hidden;padding-bottom:20px}
+.section_c_r.container{
+  overflow:hidden;
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
+}
 @media (max-width: 767px) {
   .section_c_r .swiper-pagination {
     display: none;
@@ -9023,15 +9050,12 @@ salla-slider.details-slider .s-slider-container {
   text-wrap: nowrap;
 }
 .slider-bannars {
-  padding-top: var(--main-margin);
-  padding-bottom: var(--main-margin);
-}
-@media (max-width: 767px) {
-  .slider-bannars {
-    padding-top: var(--main-margin);
-    padding-bottom: var(--main-margin);
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
   }
 }
+
 span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: var(--f-color);
 }
@@ -10808,6 +10832,14 @@ section.sticky-product-bar.s-infinite-scroll-wrapper > button.p-5.rounded-md.rou
   align-items: center;
   gap: 3px;
 }
+
+.common_questions {
+  margin-bottom: 111px;
+  @media (max-width: 765px) {
+      margin-bottom: 56px;
+  }
+}
+
 .common_questions .accordion-common h2[aria-expanded=true] i {
   rotate: 135deg;
 }

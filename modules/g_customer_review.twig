@@ -1,4 +1,4 @@
-<div class="slide-review container w-full section_c_r my-32" section-id="{{ sectionId }}">
+<section class="slide-review container w-full section_c_r" section-id="{{ sectionId }}">
 	<div class="container container_review">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
@@ -27,7 +27,7 @@
 			<div class="swiper-button-prev"></div>
 		</div>
 	</div>
-</div>
+</section>
 
 <style>
 
@@ -135,50 +135,57 @@
     "icon": "fal fa-user",
     "display": "true",
     "settings": {
-        "customer_reviews": {
-            "type": "list",
-            "label": {
-                "ar": "الخلفيات",
-                "en": "banners"
-            },
-            "settings": {
-                "customer_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "صوره العميل",
-                        "en": "customer image"
-                    }
-                },
-                "customer_job": {
-                    "type": "text",
-                    "label": {
-                        "ar": "اكتب وظيفه العميل",
-                        "en": "customer job"
-                    }
-                },
-                "customer_name": {
-                    "type": "text",
-                    "label": {
-                        "ar": "اكتب اسم العميل",
-                        "en": "customer name"
-                    }
-                },
-                "customer_review": {
-                    "type": "text",
-                    "label": {
-                        "ar": "اكتب تعليق العميل",
-                        "en": "customer review"
-                    }
-                },
-                "customer_rate": {
-                    "type": "text",
-                    "label": {
-                        "ar": "اكتب عدد النجوم",
-                        "en": "customer rate"
-                    }
-                }
-            }
-        }
+      "title" :{
+          "type":"text",
+          "label":{
+              "ar":" العنوان",
+              "en":"title"
+          }
+      }, 
+      "customer_reviews": {
+          "type": "list",
+          "label": {
+              "ar": "الخلفيات",
+              "en": "banners"
+          },
+          "settings": {
+              "customer_image": {
+                  "type": "image",
+                  "label": {
+                      "ar": "صوره العميل",
+                      "en": "customer image"
+                  }
+              },
+              "customer_job": {
+                  "type": "text",
+                  "label": {
+                      "ar": "اكتب وظيفه العميل",
+                      "en": "customer job"
+                  }
+              },
+              "customer_name": {
+                  "type": "text",
+                  "label": {
+                      "ar": "اكتب اسم العميل",
+                      "en": "customer name"
+                  }
+              },
+              "customer_review": {
+                  "type": "text",
+                  "label": {
+                      "ar": "اكتب تعليق العميل",
+                      "en": "customer review"
+                  }
+              },
+              "customer_rate": {
+                  "type": "text",
+                  "label": {
+                      "ar": "اكتب عدد النجوم",
+                      "en": "customer rate"
+                  }
+              }
+          }
+      }
     }
 }
 {% endschema %}

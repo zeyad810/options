@@ -80,8 +80,10 @@ button.more-button , a.more-button {
 
 
 .section-padding-space {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    margin-bottom: 111px;
+    @media (max-width: 765px) {
+        margin-bottom: 56px;
+    }
 }
 
 .section-slider-padding-space{

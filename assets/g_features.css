@@ -1,5 +1,8 @@
 .g_features{
-    margin: 40px 0;
+    margin-bottom: 111px;
+    @media (max-width: 765px) {
+        margin-bottom: 56px;
+    }
 }
 .g_features .products-item img {
     transition: ease all 0.5s;

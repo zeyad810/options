@@ -1,30 +1,17 @@
-<div section-id="{{ sectionId }}" data-lg-scroll-offset="130" data-md-scroll-offset="130" data-sm-scroll-offset="94" class="home-categories-section section-padding-space">
-	<div class="container slider-container">
+<section section-id="{{ sectionId }}" data-lg-scroll-offset="130" data-md-scroll-offset="130" data-sm-scroll-offset="94" class="home-categories-section section-padding-space">
+	<div class="container all">
 		<h1 class="section-title theme-text-primary">{{ settings.title }}</h1>
-		<div class="d-flex flex-column">
-			<div class="categories-slider-wrapper" style="position: relative">
-				<div class="categories-slider s-slider">
-					<div class="swiper-container mySwiper">
-						<div class="swiper-wrapper">
-							{% for categoryItem in settings.categories %}
-								<div class="swiper-slide cat-col">
-									<div class="category-item">
-										<a href="/categories/{{ categoryItem.category.id }}/{{ categoryItem.category.slug }}">
-											<img {% if categoryItem.category.image %} src="{{ imageUrl(categoryItem.category.image_full_size, { w: 400, q: 85, f:'auto' }) }}" {% else %} src="{{ imageUrl(asset_url ~ 'product-img.svg',{ w: 235, q: 85, f:'auto' }) }}" {% endif %} loading="lazy" alt="{{ categoryItem.category.name }}">
-											<h3>{{ categoryItem.category.name }}</h3>
-										</a>
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-						<!-- Add Pagination -->
-						<div class="swiper-pagination"></div>
-						<!-- Add Navigation -->
-						<div class="swiper-button-next"></div>
-						<div class="swiper-button-prev"></div>
+		<div class="cats-container">
+			{% for categoryItem in settings.categories %}
+				<div class="">
+					<div class="category-item">
+						<a href="/categories/{{ categoryItem.category.id }}/{{ categoryItem.category.slug }}">
+							<img {% if categoryItem.category.image %} src="{{ imageUrl(categoryItem.category.image_full_size, { w: 400, q: 85, f:'auto' }) }}" {% else %} src="{{ imageUrl(asset_url ~ 'product-img.svg',{ w: 235, q: 85, f:'auto' }) }}" {% endif %} loading="lazy" alt="{{ categoryItem.category.name }}">
+							<h3>{{ categoryItem.category.name }}</h3>
+						</a>
 					</div>
 				</div>
-			</div>
+			{% endfor %}
 		</div>
 		{% if settings.display_more %}
 			<div class="text-center mt-5 category-display-more-section">
@@ -32,25 +19,25 @@
 			</div>
 		{% endif %}
 	</div>
-</div>
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-const swiper = new Swiper('.mySwiper', {
-slidesPerView: 4,
-spaceBetween: 10,
-centeredSlides: true,
-loop: true,
-pagination: {
-el: '.swiper-pagination',
-clickable: true
-},
-navigation: {
-nextEl: '.swiper-button-next',
-prevEl: '.swiper-button-prev'
-}
-});
-});
-</script>
+</section>
+
+
+<style>
+  section[section-id="{{ sectionId }}"] .all {
+    width: fit-content;
+  }
+
+  section[section-id="{{ sectionId }}"] .cats-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  section[section-id="{{ sectionId }}"] .section-title {
+    margin-bottom: 30px
+  }
+</style>
+
+
 {% schema %}
 {
   "name": {
