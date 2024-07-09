@@ -1,47 +1,42 @@
 <header section-id="{{ sectionId }}" class='d-flex flex-column'>
 
-    {% include 'template_for_store_messages' %}
-    {% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
-    {% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
+	{% include 'template_for_store_messages' %}
+	{% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
+	{% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 
 
+	<div
+		id="fixed-header" style="z-index: 3">
+		<!-- input search for mobile view -->
+		<div style="z-index: 3">
+			{% include 'header-search-header.twig' with { 'header_settings' : settings } %}
+		</div>
+		<div style="position: relative; z-index: -1" class="container">
+			<div class="sm-search-div">
+				<div class="autocomplete" style="position: relative">
+					<input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
+					<div class="autocomplete-items"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	{% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
+	{% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
 
-  <div id="fixed-header" style="z-index: 3">
-    <!-- input search for mobile view -->
-    <div style="z-index: 3">
-        {% include 'header-search-header.twig' with { 'header_settings' : settings } %}
-    </div>
-    <div style="position: relative; z-index: -1">
-        <div class="sm-search-div">
-          <div class="autocomplete" style="position: relative">
-            <input type="text"
-                   data-cat-id="{{ category.id }}"
-                   class="form-control search-input-input"
-                   placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}"
-            >
-            <div class="autocomplete-items"></div>
-          </div>
-        </div>
-    </div>
-  </div>
+	{% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
+		<div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body" style="padding: 10px">
 
-    {% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
-    {% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
+						{% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
 
-    {% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
-  <div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body" style="padding: 10px">
-
-          {% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
-        
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 </header>
 {% schema %}
 {
