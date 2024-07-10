@@ -1,97 +1,100 @@
-<section class="flex flex-col items-center dead_line " section-id="{{ sectionId }}">    
- {% include 'title.twig' with { 'component_title': settings.title } %} 
-        <div class="container flex justify-end gap-4 my-8">
-            <a href="{{settings.url}}" class="font-semibold show_all ">
-                <span>{{locals.show_all}}</span>
-            <i class="fa-solid fa-chevron-left"></i>
-            </a>
-        </div>
-    <div class="container products">
-        {% if settings.products.products is empty %}
-            <h2>No products found!</h2>
-        {% else %}
-        {% for product in settings.products.products %}
-            
-            <div class="product_deadline" >   
-                <div class="img">
-                    <a href="{{product.url}}">
-                        <img loading="lazy" src="{{product.images[0]['image']['medium']}}" alt="{{product.images.alt_text}}" class="main_img">
-                    </a>
-                </div>
-                <div class="data">
-                        <a class="title" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}">{{ product.categories[0].name }}</a>                    <div class="flex justify-between">
-                        <a href="{{product.html_url}}">
-                            <h2> {{ product.name}}</h2>
+{% if settings.products.products %}
+    <section class="flex flex-col items-center dead_line " section-id="{{ sectionId }}">    
+    {% include 'title.twig' with { 'component_title': settings.title } %} 
+            <div class="container flex justify-end gap-4 my-8">
+                <a href="{{settings.url}}" class="font-semibold show_all ">
+                    <span>{{locals.show_all}}</span>
+                <i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </div>
+        <div class="container products">
+            {% if settings.products.products is empty %}
+                <h2>No products found!</h2>
+            {% else %}
+            {% for product in settings.products.products %}
+                
+                <div class="product_deadline" >   
+                    <div class="img">
+                        <a href="{{product.url}}">
+                            <img loading="lazy" src="{{product.images[0]['image']['medium']}}" alt="{{product.images.alt_text}}" class="main_img">
                         </a>
-                        <div>
-                            <div class="product-card-rating-wrapper" style="height: 18px">
-                                {% if product.rating %}
-                                    {% include 'rating-stars.twig' with {'rating' : product.rating.average } %}
-                                    <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
-                                {% endif %}
-                            </div>                    
-                        </div>
                     </div>
-                    <div class="price_component">
-                        <p class="price">
-                        {{ product.sale_price ? product.sale_price : product.price}} {{ product.currency }}</p>
-                        <del class="last_price">{{ product.sale_price ? product.price : '' }} {{ product.sale_price ? product.currency: '' }}</del>
-                        {% if product.sale_price %}
-                            <span style="color:#f25f5f;">
-                            &nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
-                            </span>
-                        {% endif %}
-                    </div>
-                    <div class="flex justify-center sm:justify-start">
-                        <div class="te">
-                        <div class="countdown">
-                            <h3>{{locals.rest}} :</h3>
-                            <ul>
-                                <li class="countdown__seconds js-seconds">
-                                <span></span>
-                                {{locals.sec}}
-                                </li>:
-                                <li class="countdown__minutes js-minutes">
-                                <span></span>
-                                {{locals.min}}
-                                </li>:
-                                <li class="countdown__hours js-hours">
-                                <span></span>
-                                {{locals.hour}}</li>:
-                                <li class="countdown__days js-days">
-                                <span></span>
-                                {{locals.day}}
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <div class="flex flex-col justify-around">
-                            <div class="flex flex-col mb-2 text-center">
-                                
+                    <div class="data">
+                            <a class="title" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}">{{ product.categories[0].name }}</a>                    <div class="flex justify-between">
+                            <a href="{{product.html_url}}">
+                                <h2> {{ product.name}}</h2>
+                            </a>
+                            <div>
+                                <div class="product-card-rating-wrapper" style="height: 18px">
+                                    {% if product.rating %}
+                                        {% include 'rating-stars.twig' with {'rating' : product.rating.average } %}
+                                        <span class="product-card-rating-count">({{ product.rating.total_count }})</span>
+                                    {% endif %}
+                                </div>                    
                             </div>
                         </div>
-                    </div>
-                    <div class="flex items-center last_buttons">
-                    <div style=" text-align: center" class="addBtn">
-                        {% if product.is_infinite == false and product.quantity <= 0 %}
-                        <a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
-                        {% elseif ( product.has_options or product.has_fields ) %}
-                        <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
-                        {% else %}
-                        <a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
-                            <img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20" height="20"/>
-                            {{ locals.add_to_cart }}
-                        </a>
-                        {% endif %}
-                    </div>
-                    
+                        <div class="price_component">
+                            <p class="price">
+                            {{ product.sale_price ? product.sale_price : product.price}} {{ product.currency }}</p>
+                            <del class="last_price">{{ product.sale_price ? product.price : '' }} {{ product.sale_price ? product.currency: '' }}</del>
+                            {% if product.sale_price %}
+                                <span style="color:#f25f5f;">
+                                &nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="flex justify-center sm:justify-start">
+                            <div class="te">
+                            <div class="countdown">
+                                <h3>{{locals.rest}} :</h3>
+                                <ul>
+                                    <li class="countdown__seconds js-seconds">
+                                    <span></span>
+                                    {{locals.sec}}
+                                    </li>:
+                                    <li class="countdown__minutes js-minutes">
+                                    <span></span>
+                                    {{locals.min}}
+                                    </li>:
+                                    <li class="countdown__hours js-hours">
+                                    <span></span>
+                                    {{locals.hour}}</li>:
+                                    <li class="countdown__days js-days">
+                                    <span></span>
+                                    {{locals.day}}
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>
+                            <div class="flex flex-col justify-around">
+                                <div class="flex flex-col mb-2 text-center">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center last_buttons">
+                        <div style=" text-align: center" class="addBtn">
+                            {% if product.is_infinite == false and product.quantity <= 0 %}
+                            <a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
+                            {% elseif ( product.has_options or product.has_fields ) %}
+                            <a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+                            {% else %}
+                            <a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
+                                <img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20" height="20"/>
+                                {{ locals.add_to_cart }}
+                            </a>
+                            {% endif %}
+                        </div>
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-        {% endif %}
-    </div>
-</section>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+    
+{% endif %}
 
 <script>
 

@@ -2181,7 +2181,7 @@ hr {
   .contact{
     margin-bottom: 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
   .footer-store-section h1{
     font-size: 18px;
