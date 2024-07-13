@@ -14,35 +14,37 @@
 	<link rel="stylesheet" type="text/css" href="{{ assetUrl('product-details.css') }}"/>
 
 	<style>
-.slider-inspire .swiper-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.slider-inspire .swiper-button-next,
-.slider-inspire .swiper-button-prev {
-	color: var(--primary-color) !important;
-  position: absolute;
-  top: 50%;
-  height: 44px;
-  margin-top: -22px;
-  z-index: 10;
-  cursor: pointer;
-}
+		.slider-inspire .swiper-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+		.slider-inspire .swiper-button-next,
+		.slider-inspire .swiper-button-prev {
+			color: var(--primary-color) !important;
+			position: absolute;
+			top: 50%;
+			height: 44px;
+			margin-top: -22px;
+			z-index: 10;
+			cursor: pointer;
+		}
 
-.slider-inspire .swiper-button-next::after,
-.slider-inspire .swiper-button-prev::after {
-	font-size: 24px !important;
-}
+		.slider-inspire .swiper-button-next::after,
+		.slider-inspire .swiper-button-prev::after {
+			font-size: 24px !important;
+		}
 
-.slider-inspire .swiper-button-next {
-  right: 10px;
-}
-.slider-inspire .swiper-button-prev {
-  left: 10px;
-}
+		.slider-inspire .swiper-button-next {
+			right: 10px;
+		}
+		.slider-inspire .swiper-button-prev {
+			left: 10px;
+		}
 
-		{# Swiper #}
+		{
+			# Swiper #
+		}
 
 		.swiper-container {
 			position: relative;
@@ -126,17 +128,9 @@
 
 {% block top_body %}
 	<!-- Root element of PhotoSwipe. Must have class pswp. -->
-	<div
-		class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-		<!-- Background of PhotoSwipe.
-																																             It's a separate element, as animating opacity is faster than rgba(). -->
-		<div class="pswp__bg"></div>
-
-		<!-- Slides wrapper with overflow:hidden. -->
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 		<div
 			class="pswp__scroll-wrap">
-
 			<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
 			<div
 				class="pswp__container">
@@ -201,12 +195,10 @@
 			<section class="mb-5 products-details">
 				<div>
 					<div class="row">
-
 						<div class="slide-product col-lg-6">
-
 							<!-- Carousel -->
 							<!-- Swiper -->
-							<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2"> <div class="swiper-wrapper">
+								<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2"> <div id="slider_wapper" class="swiper-wrapper product-images-carousel-init {% if product.selected_product.images | length <= 0 %}d-none{% endif %}">
 									{% for key, image in product.selected_product.images %}
 										<div class='swiper-slide'>
 											<div class="box-1-1">
@@ -219,32 +211,24 @@
 										</div>
 									{% endfor %}
 								</div>
-
 								<div class="swiper-button-next"></div>
 								<div class="swiper-button-prev"></div>
 							</div>
-
-							<div thumbsslider="" class="swiper mySwiper">
-								<div class="swiper-wrapper">
-									{% for key, image in product.selected_product.images %}
-										<div class="swiper-slide col-3">
-											<div class="box-1-1">
-												<div class="content">
-													<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ key }}" style="width: 100%; height: 100%;">
-														<img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
-													</a>
-												</div>
+							<div thumbsslider="" class="swiper mySwiper row lg-thumbs d-lg-flex product-images-carousel-thumbs {% if product.selected_product.images | length <= 1 %}d-none-important{% endif %}">
+								{% for key, image in product.selected_product.images %}
+									<div class="swiper-slide col-3">
+										<div class="box-1-1">
+											<div class="content">
+												<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ key }}" style="width: 100%; height: 100%;">
+													<img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
+												</a>
 											</div>
 										</div>
-									{% endfor %}
-								</div>
+									</div>
+								{% endfor %}
 							</div>
-
 						</div>
-
 						<div class="col-lg-6  col-product-info {% if product.selected_product.images | length <= 1 %}col-product-info-single-image{% endif %}">
-
-
 							<section>
 								<h1>{{ product.name }}</h1>
 								<div class="d-flex flex-column flex-lg-row product-features">
@@ -254,32 +238,25 @@
 											<span class="product-card-rating-count">({{ product.rating.total_count }})</span>
 										</div>
 									{% endif %}
-
 									{% if product.sold_products_count %}
 										<div class="product-count d-flex align-items-center">
 											<span class="icon-military_tech" style="color: #FFCF57; font-size: 16px"></span>&nbsp;
 											<span class="lang">{{ locals.product_sold_more_than_x_times | format(product.sold_products_count) }}</span>
 										</div>
 									{% endif %}
-
-
 									{% if product.low_stock_quantity %}
 										<div class="low-quantity-section d-inline-block">
 											<span class="icon-flag_black" style="color: #EC5550; font-size: 16px"></span>&nbsp;
 											<span class="low-quantity">{{ locals.product_cart_quantity_low_stock | format(product.low_stock_quantity) }}</span>
 										</div>
 									{% endif %}
-
 									{% if product.bundle_offer %}
 										<div class="bundle-offer-section">
 											<span class="icon-gift" style="color: red; font-size: 14px"></span>&nbsp;
 											<span class="bundle-offer-title">{{ product.bundle_offer.name }}</span>
 										</div>
 									{% endif %}
-
-
 								</div>
-
 								{% if product.short_description is not empty %}
 									<p>
 										{{ product.short_description | raw }}
@@ -862,7 +839,6 @@ $('.add-to-cart-progress').removeClass('d-none');
 
 zid.store.cart.addProduct({formId: 'product-form'}).then(function (response) {
 if (response.status === 'success') {
-
 if (response.data) 
 setCartTotalAndBadge(response.data.cart);
 
@@ -873,18 +849,17 @@ setTimeout(function () {
 $('.added-notification').removeClass("show");
 }, 5000);
 
-var image = $('#product-images-slick .slick-slide.slick-active img');
+var image = $('#slider_wapper .swiper-slide.swiper-slide-active img');
 var cart = $('.a-shopping-cart');
 
 if (image.length && cart.length) {
 addToCartAnimation(cart, image);
 }
-
 } else {
 toastr.error(response.data.message, '{{ locals.sorry }}')
 }
 $('.add-to-cart-progress').addClass('d-none');
-})
+});
 }
 
 function productOptionsChanged(selected_product) {
@@ -892,12 +867,11 @@ if (selected_product) {
 $('#product-id').val(selected_product.id)
 $('.send-notify-product-id').val(selected_product.id)
 
-if (! selected_product.unavailable) { // Selected a valid variant that is available.
+if (! selected_product.unavailable) {
 if (selected_product.formatted_sale_price) {
 $('.product-formatted-price').html(selected_product.formatted_sale_price)
 $('.product-formatted-price-old').html(selected_product.formatted_price)
 $('.product-formatted-price-discount').html('{{ locals.product_discount }}' + ' ' + selected_product.discount_percentage + '%')
-
 } else {
 $('.product-formatted-price').html(selected_product.formatted_price)
 $('.product-formatted-price-old').html('')
@@ -922,55 +896,47 @@ $('.div-product-sku').addClass('d-none');
 var store_low_stock_limit = {{ store.low_stock_quantity_limit }};
 var low_stock_message = '{{ locals.product_cart_quantity_low_stock }}';
 
-if (! selected_product.is_infinite && selected_product.quantity<store_low_stock_limit){
-                        $('.low-quantity-section').addClass('d-inline-block');
-                        $('.low-quantity-section .low-quantity').html(low_stock_message.replace('%s', selected_product.quantity))
-                    }else{
-                        $('.low-quantity-section').addClass('none');
-                    }
-                    {% endif %}
+if (! selected_product.is_infinite && selected_product.quantity<store_low_stock_limit) {
+        $('.low-quantity-section').addClass('d-inline-block');
+        $('.low-quantity-section .low-quantity').html(low_stock_message.replace('%s', selected_product.quantity));
+      } else {
+        $('.low-quantity-section').addClass('d-none');
+      }
+      {% endif %}
 
-                    var selectQuantity = ''
+      var selectQuantity = '';
 
-                    if(selected_product.is_infinite)
-                        selected_product.quantity = 100;
+      if (selected_product.is_infinite)
+        selected_product.quantity = 100;
 
-                    if(selected_product.quantity> 0) {
-$('.select-quantity-div').removeClass('d-none')
+      if (selected_product.quantity> 0) {
+$('.select-quantity-div').removeClass('d-none');
 var quantityMax = (selected_product.quantity > 100) ? 100 : selected_product.quantity;
-selectQuantity = '<option value="1"selected>1</option>'
+selectQuantity = '<option value="1" selected>1</option>';
 for (var i = 2; i <= quantityMax; i++) {
 selectQuantity += '<option value="' + i + '">' + i + '</option>';
 }
 } else {
-$('.select-quantity-div').addClass('d-none')
+$('.select-quantity-div').addClass('d-none');
 }
 
 $('.select-quantity').html(selectQuantity);
-
 $('.product-buttons').removeClass('d-none');
 $('.section-out-of-stock-notify-me').addClass('d-none');
-
 $('.btn-add-to-cart span').html('{{ locals.add_to_cart }}');
-
 updateProductImages(selected_product);
-} else { // Variant is sold out.
-$('.select-quantity-div').addClass('d-none')
+} else {
+$('.select-quantity-div').addClass('d-none');
 $('.product-buttons').addClass('d-none');
 $('.section-out-of-stock-notify-me').removeClass('d-none');
-
 $('.btn-add-to-cart span').html('{{ locals.error_item_unavailable }}');
-
 updateProductImages(selected_product);
 }
-
-} else { // variant doesn't exist.
-$('.select-quantity-div').addClass('d-none')
+} else {
+$('.select-quantity-div').addClass('d-none');
 $('.product-buttons').addClass('d-none');
 $('.section-out-of-stock-notify-me').removeClass('d-none');
-
 $('.btn-add-to-cart span').html('{{ locals.error_item_unavailable }}');
-
 updateProductImages(selected_product);
 }
 }
@@ -980,25 +946,19 @@ if (selected_product.images && selected_product.images.length > 0) {
 $('.product-images-carousel').removeClass('d-none');
 $('.product-images-carousel-thumbs').removeClass('d-none-important');
 $('.product-images-empty').addClass('d-none');
-$('#product-images-slick').slick('unslick');
 $('.product-images-carousel').addClass('product-images-carousel-init');
 
 productImages = selected_product.images;
 
-$('#product-images-slick').html('');
+$('#slider_wapper').html('');
 $('.product-images-carousel-thumbs').html('');
 
 for (var z = 0; z < productImages.length; z++) {
 var prImage = productImages[z];
-$('#product-images-slick').append('' + '<div>\n' + '                                                                    <div class="box-1-1">\n' + '                                                                        <div class="content">\n' + '                                                                            <a class="image-link"\n' + '                                                                               style="display:block; width: 100%; height: 100%;">\n' + '                                                                                <img src="' + prImage.image.full_size + '" class="carousel-img" loading="lazy" alt="' + selected_product.name + '">\n' + '                                                                            </a>\n' + '                                                                        </div>\n' + '                                                                    </div>\n' + '                                                                </div>');
-
-
-$('.product-images-carousel-thumbs').append('<div class="col-3">\n' + '                                                         <div class="box-1-1">\n' + '                                                                <div class="content">\n' + '                                                                    <a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="                {{ key }}"\n' + '                                                                       style="width: 100%; height: 100%;" >\n' + '                                                                        <img src="' + prImage.image.medium + '" loading="lazy" data-index="' + z + '">\n' + '                                                                    </a>\n' + '                                                                </div>\n' + '                                                            </div>\n' + '                                                        </div>');
-
+$('#slider_wapper').append('' + '<div>' + '<div class="box-1-1">' + '<div class="content">' + '<a class="image-link" style="display:block; width: 100%; height: 100%;">' + '<img src="' + prImage.image.full_size + '" class="carousel-img" loading="lazy" alt="' + selected_product.name + '">' + '</a>' + '</div>' + '</div>' + '</div>');
+$('.product-images-carousel-thumbs').append('<div class="col-3">' + '<div class="box-1-1">' + '<div class="content">' + '<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="       {{ key }}" style="width: 100%; height: 100%;">' + '<img src="' + prImage.image.medium + '" loading="lazy" data-index="' + z + '">' + '</a>' + '</div>' + '</div>' + '</div>');
 }
-
 initSlick(productImages);
-
 } else {
 $('.product-images-carousel').addClass('d-none');
 $('.product-images-carousel-thumbs').addClass('d-none-important');
@@ -1015,16 +975,15 @@ return;
 $('.send-notify-progress').removeClass('d-none');
 zid.store.product.setAvailabilityNotificationEmail($('.send-notify-product-id').val(), $('.send-notify-email').val()).then(function (response) {
 if (response.status === 'success') {
-toastr.success('{{ locals.sent_successfully }}', null)
+toastr.success('{{ locals.sent_successfully }}', null);
 } else {
-toastr.error('{{ locals.notify_me_failed }}', '{{ locals.sorry }}')
+toastr.error('{{ locals.notify_me_failed }}', '{{ locals.sorry }}');
 }
 $('.send-notify-progress').addClass('d-none');
-})
+});
 }
 
-
-$('#product-description-a ').click(function () {
+$('#product-description-a').click(function (event) {
 event.preventDefault();
 
 $('html, body').animate({
@@ -1032,7 +991,6 @@ scrollTop: $($.attr(this, 'href')).offset().top -(
 (window.matchMedia('(max-width: 768px)').matches) ? 15 : 150
 )
 }, 500);
-
 });
 
 $(document).ready(function () {
@@ -1042,18 +1000,16 @@ initSlick(productImages);
 $(document).on('click', '.thumb-image-a', function (event) {
 var tarr = event.target;
 
-$('#product-images-slick').slick('slickGoTo', $(tarr).attr('data-index'), true);
+$('#slider_wapper').slick('slickGoTo', $(tarr).attr('data-index'), true);
 });
 
-
-$(document).on('click', '#product-images-slick .image-link', function (event) {
+$(document).on('click', '#slider_wapper .image-link', function (event) {
 $('.pswp').removeClass('d-hide');
 $('.app').addClass('d-hide');
 
 openPhotoSwipe(productImages.map(function (image) {
-return image.image.full_size
-}), $('#product-images-slick .slick-active').attr('data-slick-index'));
-
+return image.image.full_size;
+}), $('#slider_wapper .swiper-slide-active').attr('data-slick-index'));
 });
 
 $(document).on('click', '.variant-image-wrapper a', function (event) {
@@ -1064,34 +1020,14 @@ var varId = $(elm).attr('data-link-var-id');
 
 var images = [];
 
-$("div[data-var-id='" + varId + "']  img").each(function (iElm) {
-images.push($(this).attr('data-image-url'))
+$("div[data-var-id='" + varId + "'] img").each(function (iElm) {
+images.push($(this).attr('data-image-url'));
 });
 
 openPhotoSwipe(images, $(elm).attr('data-index'));
-
 });
 
-
-var initSlick = function (productImages) {
-var arrowNextClass = (window.appDirection === 'ltr') ? 'fa-arrow-right' : 'fa-arrow-left';
-var arrowPrevClass = (window.appDirection === 'ltr') ? 'fa-arrow-left' : 'fa-arrow-right';
-
-$('#product-images-slick').slick({
-
-slidesToShow: 4,
-slidesToScroll: 1,
-infinite: false,
-autoplay: true,
-arrows: (productImages.length > 1),
-dots: (productImages.length > 1),
-rtl: !(window.appDirection === 'ltr'),
-nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><i class="fa-solid ' + arrowNextClass + '"></i></button>',
-prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><i class="fa-solid ' + arrowPrevClass + '"></i></button>'
-});
-}
-
-$('#product-images-slick').on('init', function (event, slick) {
+$('#slider_wapper').on('init', function (event) {
 $('.product-images-carousel').removeClass('product-images-carousel-init');
 });
 
@@ -1100,17 +1036,15 @@ var pswpElement = document.querySelectorAll('.pswp')[0];
 
 // build items array
 var items = productImages.map(function (image) {
-return {src: image, w: 1200, h: 900}
-})
+return {src: image, w: 1200, h: 900};
+});
 
 var options = {
 history: false,
 focus: false,
-
 showAnimationDuration: 0,
 hideAnimationDuration: 0,
 index: parseInt('' + index)
-
 };
 
 var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
@@ -1119,86 +1053,41 @@ gallery.listen('close', function () {
 $('.pswp').addClass('d-hide');
 $('.app').removeClass('d-hide');
 });
-
 gallery.init();
 };
 
-var showRelatedProducts = function () {
-var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
-var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
-
-var screenWidth = window.screen.width;
-
-var editingMode = {% if store.editing_mode %}
-true
-{% else %}
-false
-{% endif %};
-
-if (screenWidth >= 768 || editingMode) {
-$('#related-products.products-slider').slick({
-slidesToShow: 4,
-slidesToScroll: 1,
-infinite: false,
-autoplay: true,
-arrows: true,
-dots: false,
-rtl: !(window.appDirection === 'ltr'),
-nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style=""><span class="' + arrowNextClass + '"></span></button>',
-prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style=""><span class="' + arrowPrevClass + '"></span></button>',
-responsive: [
-{
-breakpoint: 992,
-settings: {
-slidesToShow: 4,
-slidesToScroll: 1
-}
-}, {
-breakpoint: 768,
-settings: {
-slidesToShow: 2,
-slidesToScroll: 1
-}
-}
-]
-});
-}
-}
-
 // Swiper
-  document.addEventListener('DOMContentLoaded', function () {
-  var swiper = new Swiper('.slider-inspire .swiper-container', {
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 5,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-      dynamicBullets: true,
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 24,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 30,
-      },
-    }
-  });
+document.addEventListener('DOMContentLoaded', function () {
+var swiper = new Swiper('.slider-inspire .swiper-container', {
+loop: true,
+slidesPerView: 1,
+spaceBetween: 5,
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev'
+},
+pagination: {
+el: '.swiper-pagination',
+clickable: true,
+dynamicBullets: true
+},
+breakpoints: {
+640: {
+slidesPerView: 2,
+spaceBetween: 10
+},
+768: {
+slidesPerView: 3,
+spaceBetween: 24
+},
+1024: {
+slidesPerView: 4,
+spaceBetween: 30
+}
+}
+});
 });
 
-
-// Swiper
 var swiper = new Swiper(".slide-product .mySwiper", {
 spaceBetween: 10,
 slidesPerView: 4,
@@ -1215,8 +1104,5 @@ thumbs: {
 swiper: swiper
 }
 });
-
-
 </script>
-
-		{% endblock %}
+{% endblock %}

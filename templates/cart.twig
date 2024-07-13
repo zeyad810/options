@@ -80,11 +80,9 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <div>{{ template_for_cart_payments_widget }}</div>
 
-
-                    <div class="coupon-form mt-5">
+                    <div class="coupon-form mt-5 has_hidden_coupon">
                         <form>
                             <div class="form-group">
                                 <h4>{{ locals.coupon_discount }}</h4>
@@ -97,8 +95,6 @@
                                 </div>
                             </div>
                         </form>
-
-
                         {% if cart.coupon.message %}
                             <div class="message-coupon alert alert-primary" role="alert">
                                 <span>{{ cart.coupon.message }}</span>&nbsp;
