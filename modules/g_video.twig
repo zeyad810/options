@@ -5,7 +5,7 @@
   <div  class="video-parent h-full w-full rounded-lg sm:rounded-none">
     <img loading="lazy" class="bg-image" src="{{settings.video_image}}" alt="ban-bg">
     <video id="videoPlayer"></video>
-    <div class="containt flex flex-row gap-4 md:gap-8 items-center text-white z-[3] absolute top-[50%] right-[5%] md:right-[10%] lg:right-[15%] xl:right-[20%] 2xl:right-[25%] translate-y-[-50%]">
+    <div class="text-box containt flex gap-4 md:gap-8 items-center text-white z-[3] absolute top-[50%] right-[5%] md:right-[10%] lg:right-[15%] xl:right-[20%] 2xl:right-[25%] translate-y-[-50%]">
       <div class='flex flex-col gap-2'>
         <h4  class='text-white text-center text-[14px] md:text-[40px] font-semibold leading-[1.5]' >{{ settings.video_title }}</h4>
         <p class='max-w-[215px] md:max-w-[430px] leading-[1.5] text-center text-[9px] md:text-[18px] font-normal'>{{ settings.video_des }}</p>
@@ -16,6 +16,10 @@
   </section>
 
 <style>
+    .text-box {
+        flex-direction: column-reverse !important;
+    }
+
     #video-banner {
         margin-bottom: 111px
     }
