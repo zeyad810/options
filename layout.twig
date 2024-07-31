@@ -118,7 +118,9 @@
 	</head>
 
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
-
+		<div class="popup-product-details">
+			<i class="fa-solid fa-xmark"></i>
+		</div>
 		{% if store.editing_mode %}
 			<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 		{% endif %}
