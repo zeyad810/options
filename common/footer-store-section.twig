@@ -175,11 +175,8 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div class="footer-copyrights-vat-certificate">
 		<div class="container">
-
 			<div class="d-flex   flex-wrap align-items-center  footer-store-section-bars" style="border-bottom: 0px;">
 				<div class="footer-icons">
 					<div class="d-flex flex-row {% if store.apps.ios_app_id or store.apps.android_package_name%}justify-content-between{% else %}justify-content-center{% endif %} align-items-center flex-wrap icons-wrapper footer-store-section-bars">
@@ -218,7 +215,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="vat-crn-sections py-4 d-flex flex-row flex-wrap justify-content-end align-items-center">
+				<div class="vat-crn-sections d-flex flex-row flex-wrap justify-content-end align-items-center">
 					{% if store.vat_settings.is_certificate_visible %}
 						<div class="vat-icon">
 							<a {% if store.vat_settings.tax_registration_certificate %} href="{{ store.vat_settings.tax_registration_certificate }}" target="_blank" {% endif %}>
