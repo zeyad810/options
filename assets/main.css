@@ -664,10 +664,6 @@ button.more-button , a.more-button {
     width: 70px;
 }
 
-.footer-icons {
-
-}
-
 .footer-store-section {
     padding-top: 35px;
     padding-bottom: 35px;
@@ -675,7 +671,6 @@ button.more-button , a.more-button {
 
 .footer-store-section-bars {
     min-height: 80px;
-    border-bottom: 0.5px solid #cccccc;
     flex-direction: row-reverse;
     justify-content: space-between;
 }
@@ -686,6 +681,7 @@ button.more-button , a.more-button {
     padding: 10px;
     text-align: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .footer-copyrights-vat-certificate{

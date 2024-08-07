@@ -285,7 +285,12 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 				{# Local storage #}
 				<script>	
-					localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");						
+					if ('{{ settings.newsletter_hide }}' !== '1') {
+						localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");
+					} else {
+						localStorage.removeItem("newsletter");
+					}
+
 					localStorage.setItem("android", "{{settings.android_store_url }}");						
 					localStorage.setItem("mac", "{{settings.mac_store_url }}");
 					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
@@ -678,8 +683,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			"hide": {
           "type": "checkbox",
           "label": {
-            "ar": " ",
-            "en": " "
+            "ar": "",
+            "en": ""
           },
           "option": {
             "ar": "إخفاء",
