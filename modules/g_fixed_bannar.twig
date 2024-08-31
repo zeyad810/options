@@ -1,12 +1,26 @@
- <section  section-id="{{ sectionId }}" style="background-image: url('{{ settings.bannar_bg }}');" class="landing-page-fixed-bannar-{{sectionId}} g_fixed_bannar">
+{# <section section-id="{{ sectionId }}"  class="  ">
+    <div class="swiper-container baner_swiber">
+            <div class="swiper-wrapper">
+                {% for item in settings.slider %}
+
+                    <div class="swiper-slide" >
+                        <img src="{{ item.slider_bannar_bg }}">
+                        
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+</section> #}
+
+<section  section-id="{{ sectionId }}" style="background-image: url('{{ settings.bannar_bg }}');" class="landing-page-fixed-bannar-{{sectionId}} g_fixed_bannar">
 	<div style='text-align:{{ settings.text_place }};' class="container relative txt">
 		<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ settings.bannar_title }}</h1>
 		<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ settings.bannar_des }}</p>
 		<a href='{{settings.bannar_url}}'>
-			<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">تسوق الان</button>
+			<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{settings.bannar_btn_text}}</button>
 		</a>
 	</div>
-</section>
+</section> 
 
 <style>
     @media (max-width: 576px) {
@@ -14,62 +28,191 @@
         background-image: url('{{ settings.bannar_bg_mobile }}') !important;
       }
     } 
+
+    .swiper-container {
+  width: 100vw;
+  height: 100vh;
+/*     background: #fd5; */
+}
+.swiper-slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
   </style>
+
+  <script>
+    const baner_swiber = new Swiper(".baner_swiber", {
+                direction: 'horizontal',
+                loop: true,
+                speed: 300,
+                mousewheel: true,
+                coverflowEffect: {
+                    rotate: 30,
+                    slideShadows: true
+                },
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                }
+            }
+        );
+  </script>
 
 {% schema %}
 
 {
-            "name": {
-                    "ar": "بنر ثابت",
-                    "en": "Test"
+    "name": {
+        "ar": "بنر ثابت",
+        "en": "Test"
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "bannar_slide_op": {
+            "type": "checkbox",
+            "label": {
+            "ar": "تفعيل وضع slider",
+            "en": "Activate slider mode"
             },
-            "icon": "fal fa-user",
-            "display": true,
+            "option": {
+            "ar": "تفعيل وضع slider",
+            "en": "Activate slider mode"
+            }
+        },
+        "bannar_title":{
+            "type": "text",
+            "label": {
+                "ar": "العنوان",
+                "en": "text"
+                },
+            "condition": {
+                "field": "bannar_slide_op",
+                "value": true
+            }
+        },
+        "bannar_des":{
+            "type": "text",
+            "label": {
+                "ar": "وصف للبنر",
+                "en": "text"
+            }
+        },
+        "bannar_bg":{
+            "type": "image",
+            "label": {
+            "ar": "خلفيه البنر",
+            "en": "text"
+            },
+            "info": {
+            "ar": "نص توضيحي",
+            "en": "info text"
+            }
+        },
+        "bannar_bg_mobile":{
+            "type": "image",
+            "label": {
+                "ar": "خلفيه البنر",
+                "en": "text"
+            },
+            "info": {
+                "ar": "نص توضيحي",
+                "en": "info text"
+            }
+        },
+        "bannar_url":{
+            "type": "url",
+            "label": {
+                "ar": "رابط البنر",
+                "en": "text"
+            }
+        },
+        "bannar_btn_text":{
+            "type": "text",
+            "label": {
+                "ar": "عنوان الزر",
+                "en": "button title"
+            }
+        },
+        "text_place":{
+            "type": "select",
+            "label": {
+                "ar": "موضع النص",
+                "en": "text"
+            },
+            "options": [
+                {
+                    "value": "left",
+                    "label": {
+                    "ar": "اليسار",
+                    "en": "all pages"
+                    }
+                },
+                {
+                    "value": "right",
+                    "label": {
+                    "ar": "اليمن",
+                    "en": "all pages"
+                    }
+                },
+                {
+                    "value": "center",
+                    "label": {
+                    "ar": "المركز",
+                    "en": "all pages"
+                    }
+                }
+            ]
+        },
+        "slider":{
+            "type": "list",
+            "label": {
+                "ar": "اضف الصور",
+                "en": "ُenter Images"
+            },
             "settings": {
-               "bannar_title":{
+                "slider_bannar_title":{
                     "type": "text",
                     "label": {
                         "ar": "العنوان",
                         "en": "text"
-                            }
+                    }
                 },
-                "bannar_des":{
+                "slider_bannar_des":{
                     "type": "text",
                     "label": {
                         "ar": "وصف للبنر",
                         "en": "text"
                     }
                 },
-                "bannar_bg":{
-                        "type": "image",
-                        "label": {
-                        "ar": "خلفيه البنر",
-                        "en": "text"
-                        },
-                        "info": {
-                        "ar": "نص توضيحي",
-                        "en": "info text"
-                        }
-                },
-                "bannar_bg_mobile":{
+                "slider_bannar_bg":{
                     "type": "image",
                     "label": {
                         "ar": "خلفيه البنر",
                         "en": "text"
-                    },
-                    "info": {
-                        "ar": "نص توضيحي",
-                        "en": "info text"
                     }
                 },
-                "bannar_url":{
-                    "type": "text",
+                "slider_bannar_bg_mobile":{
+                    "type": "image",
+                    "label": {
+                        "ar": "خلفيه البنر",
+                        "en": "text"
+                    }
+                },
+                "slider_bannar_url":{
+                    "type": "url",
                     "label": {
                         "ar": "رابط البنر",
                         "en": "text"
                     }
                 },
-                "text_place":{
+                "slider_bannar_btn_text":{
+                    "type": "text",
+                    "label": {
+                        "ar": "عنوان الزر",
+                        "en": "button title"
+                    }
+                },
+                "slider_text_place":{
                     "type": "select",
                     "label": {
                         "ar": "موضع النص",
@@ -100,6 +243,8 @@
                     ]
                 }
             }
+        }
+    }
 }
 
 {% endschema %}
