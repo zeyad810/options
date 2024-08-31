@@ -1,30 +1,69 @@
-<section id="g_cat_{{sectionId}}" class="g_cat" dir="ltr">
-    <div class="container d-flex flex-column align-items-center justify-content-center">
-        <div class="mb-4" style="margin-bottom: 55px;">
-            {% include 'title.twig' with { 'component_title': settings.section_title } %}
-        </div>
+<head>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <section id="g_cat_{{ sectionId }}" class="g_cat bg-white" dir="ltr">
+        <div class="container d-flex flex-column align-items-center justify-content-center">
+            <div class="mb-4" style="margin-bottom: 55px;">
+                {% include 'title.twig' with { 'component_title': settings.section_title } %}
+            </div>
     
-        <div class="row {{ settings.categorys|length > 3 ? 'row-cols-md-4' : '' }} {{ settings.categorys|length == 5 ? 'row-cols-lg-5' : '' }} {{ settings.categorys|length > 5 ? 'row-cols-lg-6' : '' }} g-3 align-items-center justify-content-center">
-            {% for item in settings.categorys %}
-                <div class="d-flex flex-column align-items-center products-item"   style="max-width: 150px; {{ loop|length > 3  ? 'max-width: 200px;' : '' }}">
-                    <div class="overflow-hidden rounded image-parent">
-                        <a href="{{item.url}}">
-                            <img loading="lazy" class="img-fluid" src="{{item.category_image}}" alt="img-1">
-                        </a>
-                    </div>
-                    <a href="{{item.url}}">
-                        <h3 class="mt-3 text-center font-weight-medium text-dark" style="font-size: 1.25rem;">{{item.category_name}}</h3>
-                    </a>
+            <div class="swiper-container relative  {% if settings.slider_toggle == 'true' %} slider bg-white {% else %} grid grid-cols-4 gap-3 {% endif %}">
+                <div class="swiper-wrapper">
+                    {% for item in settings.categorys %}
+                        <div class="swiper-slide category d-flex flex-column align-items-center products-item" 
+                             style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
+                            <div class="overflow-hidden rounded image-parent">
+                                <a href="{{ item.cat_url }}">
+                                    <img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
+                                </a>
+                            </div>
+                            <a href="{{ item.cat_url }}">
+                                <h3 class="mt-3 text-center font-weight-medium text-dark" style="font-size: 1.25rem;">
+                                    {{ item.category_name }}
+                                </h3>
+                            </a>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+                 <!-- أزرار التنقل -->
+            <div class="swiper-buttons-container absolute top-0 left-10 flex items-center justify-center ">
+                <div class="swiper-button-next bg-gray-300 text-gray-600 rounded-lg p-3 border border-gray-400 hover:bg-pink-500 hover:text-white transition-all duration-300">
+                </div>
+                <div class="swiper-button-prev bg-gray-300 text-gray-600 rounded-lg p-3 border border-gray-400 hover:bg-pink-500 hover:text-white transition-all duration-300">
+                </div>
+        
+            </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var swiperElement = document.querySelector('.swiper-container.slider');
 
-
+    if (swiperElement) {
+        var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        freeMode: true,
+        loop: false,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        });
+    
+    }
+});
+</script>
+</body>
 
 {% schema %}
-
 {
     "name": {
         "ar": "تصنيفات - جلامور",
@@ -37,7 +76,7 @@
             "type": "text",
             "label": {
                 "ar": "عنوان السكشن ؟",
-                "en": "عنوان السكشن ؟"
+                "en": "Section Title"
             }
         },
         "slider_toggle": {
@@ -46,40 +85,58 @@
                 "ar": "عرض التصنيفات في صورة سلايدر",
                 "en": "Display categories as slider"
             },
-            "default": false
+            "options": [
+                {
+                    "value": "true",
+                    "label": {
+                        "ar": "نعم",
+                        "en": "Yes"
+                    }
+                },
+                {
+                    "value": "false",
+                    "label": {
+                        "ar": "لا",
+                        "en": "No"
+                    }
+                }
+            ],
+            "default": "false",
+            "info": {
+                "ar": "اختر نعم لعرض الأقسام كـ Slider",
+                "en": "Choose Yes to display categories as a slider"
+            }
         },
         "categorys": {
             "type": "list",
             "label": {
                 "ar": "الاقسام",
-                "en": "الاقسام"
+                "en": "Categories"
             },
             "settings": {
                 "category_image": {
                     "type": "image",
                     "label": {
                         "ar": "صوره التصنيف",
-                        "en": "category image"
+                        "en": "Category Image"
                     }
-
                 },
                 "category_name": {
                     "type": "text",
                     "label": {
                         "ar": "اسم التصنيف",
-                        "en": "category name"
+                        "en": "Category Name"
                     }
                 },
                 "cat_url": {
                     "type": "url",
                     "label": {
                         "ar": "الرابط",
-                        "en": "link"
+                        "en": "Link"
                     }
                 }
             }
         }
     }
 }
-
 {% endschema %}
