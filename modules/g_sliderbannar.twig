@@ -1,142 +1,85 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <section id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
 	<div class='slider-bannars_items'>
 		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
 			{% for item in settings.bannars %}
-				<swiper-slide style="background-size: 100% 100% !important; width: 100vw !important; background: url({{ settings.bannar_D_image }})"  class="swiper-slide slider-bannars-moving">
-					<div class="photo_one">
+				<swiper-slide 
+                    style="background-size: cover; background: url({{ settings.bannar_D_image }}); width: 100vw;" 
+                    class="swiper-slide slider-bannars-moving">
+					
+                    <div class="photo_one">
 						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
 					</div>
 
-					<div class=" content">
-						<h2 class="">{{ item.bannar_title }}
-						</h2>
-						<p class="">{{item.bannar_desc}}</p>
-						<a style="margin:0 auto" href="{{item.bannar_url}}">
-							<button class="">
-								{{locals.shop_now}}</button>
+					<div class="content text-center">
+						<h2>{{ item.bannar_title }}</h2>
+						<p>{{item.bannar_desc}}</p>
+						<a href="{{item.bannar_url}}">
+							<button>{{locals.shop_now}}</button>
 						</a>
 					</div>
 
-					<div class="photo ">
+					<div class="photo">
 						<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
 					</div>
 				</swiper-slide>
 			{% endfor %}
 		</swiper-container>
 
+		<!-- Pagination -->
+		<div class="swiper-pagination"></div>
 	</div>
 </section>
-
 
 <style>
 	swiper-container {
 		width: 100%;
-		height: 100%;
+		height: auto;
 	}
 
 	swiper-slide {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		text-align: center;
 		font-size: 18px;
 		background: #fff;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 
 	swiper-slide img {
-		display: block;
 		width: 100%;
-		height: 100%;
 		object-fit: cover;
+	}
+
+	.swiper-pagination-bullet {
+		background-color: #FFC0CB;
+	}
+
+	.swiper-pagination-bullet-active {
+		background-color: #A52A2A;
 	}
 </style>
 
-
 <script>
 // swiper
-	document.addEventListener('DOMContentLoaded', function () {
-const swiper = new Swiper('.slider-bannars_items .swiper', {
-direction: 'vertical',
-loop: true,
-
-pagination: {
-el: '.swiper-pagination'
-},
-
-navigation: {
-nextEl: '.swiper-button-next',
-prevEl: '.swiper-button-prev'
-},
-
-scrollbar: {
-el: '.swiper-scrollbar'
-}
+document.addEventListener('DOMContentLoaded', function () {
+	const swiper = new Swiper('.slider-bannars_items .mySwiper', {
+		direction: 'horizontal',
+		loop: true,
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+			dynamicBullets: true
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
+		},
+		scrollbar: {
+			el: '.swiper-scrollbar'
+		}
+	});
 });
-});
-
 </script>
-
-
-{% schema %}
-{
-    "name": {
-        "ar": "بانر متحرك - جلامور",
-        "en": "sliderbannar - glamour"
-    },
-    "icon": "fal fa-user",
-    "display": "true",
-    "settings": {
-        "bannar_D_image": {
-            "type": "image",
-            "label": {
-                "ar": "خلفيه الكمبيوتر",
-                "en": "desktop image"
-            }
-        },
-        "bannars": {
-            "type": "list",
-            "label": {
-                "ar": "الخلفيات",
-                "en": "bannars"
-            },
-            "settings": {
-                "F_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "الصوره الاولي",
-                        "en": "first image"
-                    }
-                },
-                "S_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "الصوره الثانيه",
-                        "en": "second image"
-                    }
-                },
-                "bannar_title": {
-                    "type": "text",
-                    "label": {
-                        "ar": " عنوان البانر",
-                        "en": "bannar title"
-                    }
-                },
-                "bannar_desc": {
-                    "type": "text",
-                    "label": {
-                        "ar": " وصف البانر",
-                        "en": "bannar description"
-                    }
-                },
-                "bannar_url": {
-                    "type": "url",
-                    "label": {
-                        "ar": "الرابط",
-                        "en": "link"
-                    }
-                }
-            }
-        }
-    }
-}
-{% endschema %}
