@@ -31,44 +31,54 @@
         .swiper-button-prev:focus::after {
             color: #CE5A67 !important;
         }
+        @media(max-width:762px){
+            .content_btns{
+                left: 10%;
+            }
+        }
+        @media(max-width:425px){
+            .content_btns{
+                left: 5%;
+            }
+        }
     </style>
 </head>
 <body>
     <section id="g_cat_{{ sectionId }}" class="g_cat" style="background-color: #fff; padding:70px 0px;" dir="ltr">
-        <div class="container flex flex-col items-center justify-center">
             <div style="padding-bottom: 50px;">
                 {% include 'title.twig' with { 'component_title': settings.section_title } %}
             </div>
-    
-            <div class="{% if settings.slider_toggle == "true" %}swiper-container slider bg-white relative{% endif %}">
-                <div class="{% if settings.slider_toggle == "true" %} swiper-wrapper {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
-                    {% for item in settings.categorys %}
-                        <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
-                             style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
-                            <div class="overflow-hidden rounded image-parent">
-                                <a href="{{ item.cat_url }}">
-                                    <img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
-                                </a>
-                            </div>
-                            <a href="{{ item.cat_url }}">
-                                <h3 class="mt-3 text-center font-medium text-dark text-xl">
-                                    {{ item.category_name }}
-                                </h3>
-                            </a>    
-                        </div>
-                    {% endfor %}
+            <!-- أزرار التنقل -->
+            <div class="content_btns absolute" style="left: 15%; margin-top:20px;">
+                <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
                 </div>
-    
-                <!-- أزرار التنقل -->
-                <div class="flex">
-                    <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-                    </div>
-                    <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-                    </div>
+                <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
                 </div>
-                
             </div>
-        </div>
+            <div class="container overflow-x-hidden">
+                <div class=" {% if settings.slider_toggle == "true" %}swiper-container slider bg-white{% endif %}">
+                    <div class=" {% if settings.slider_toggle == "true" %} swiper-wrapper {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
+                        {% for item in settings.categorys %}
+                            <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
+                                 style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
+                                <div class="overflow-hidden rounded image-parent">
+                                    <a href="{{ item.cat_url }}">
+                                        <img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
+                                    </a>
+                                </div>
+                                <a href="{{ item.cat_url }}">
+                                    <h3 class="mt-3 text-center font-medium text-dark text-xl">
+                                        {{ item.category_name }}
+                                    </h3>
+                                </a>    
+                            </div>
+                        {% endfor %}
+                    </div>
+        
+                   
+                    
+                </div>
+            </div>
     </section>
     
 <script>
@@ -76,16 +86,28 @@ document.addEventListener('DOMContentLoaded', function () {
     var swiperElement = document.querySelector('.swiper-container.slider');
 
     if (swiperElement) {
-        var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 'auto',
-        spaceBetween: 8,
-        freeMode: true,
-        loop: false,
+      var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 2,
+        spaceBetween: 10,
+        breakpoints: {
+            480: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            },
+            762: {
+              slidesPerView: 4,
+              spaceBetween: 30
+            },
+            991: {
+              slidesPerView: 5,
+              spaceBetween: 30
+            },
+        },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        });
+    });
     
     }
 });
