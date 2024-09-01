@@ -11,22 +11,39 @@
         .swiper-button-prev{
             top: -66px !important;
         }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover{
+            border: 1px solid #E7ADB3 !important;
+        }
         .swiper-button-next{
-            left: 100px !important;
+            left: 70px !important;
+        }
+        .swiper-button-next:after,
+        .swiper-rtl .swiper-button-prev:after {
+            font-size:19px !important;
+            color: #C0C0C0;
+        }
+        .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+            font-size: 19px !important;
+            color: #C0C0C0;
+        }
+        .swiper-button-next:focus::after,
+        .swiper-button-prev:focus::after {
+            color: #CE5A67 !important;
         }
     </style>
 </head>
 <body>
     <section id="g_cat_{{ sectionId }}" class="g_cat" style="background-color: #fff; padding:70px 0px;" dir="ltr">
         <div class="container flex flex-col items-center justify-center">
-            <div class="mb-14">
+            <div style="padding-bottom: 50px;">
                 {% include 'title.twig' with { 'component_title': settings.section_title } %}
             </div>
     
-            <div class="swiper-container  {% if settings.slider_toggle == 'true' %} slider bg-white {% else %} grid grid-cols-4 gap-3 {% endif %}">
-                <div class="swiper-wrapper">
+            <div class="{% if settings.slider_toggle == "true" %}swiper-container slider bg-white relative{% endif %}">
+                <div class="{% if settings.slider_toggle == "true" %} swiper-wrapper {% else %} flex flex-wrap gap-6 justify-center {% endif %}">
                     {% for item in settings.categorys %}
-                        <div class="swiper-slide category flex flex-col items-center products-item" 
+                        <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
                              style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
                             <div class="overflow-hidden rounded image-parent">
                                 <a href="{{ item.cat_url }}">
@@ -44,17 +61,9 @@
     
                 <!-- أزرار التنقل -->
                 <div class="flex">
-                    <div class="swiper-button-prev text-black p-4 rounded-1 shadow-md bg-white transition">
-                        <!-- أيقونة سهم اليسار -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
+                    <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
                     </div>
-                    <div class="swiper-button-next text-black p-4 rounded-1 shadow-md bg-white transition">
-                        <!-- أيقونة سهم اليمين -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
+                    <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
                     </div>
                 </div>
                 
