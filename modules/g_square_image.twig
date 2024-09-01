@@ -20,7 +20,7 @@
 			{% elseif loop.index == 4 %}
 				<div class="img f_img">
 					<div class="card h-100">
-						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top">
+						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top" data-lasturl={{settings.last_image_mobile}}>
 						<div class="over">
 							<div class="p-2 bg-opacity-50 text">
 								<p class="mb-2 text-black">
@@ -51,7 +51,21 @@
 		opacity: 0;
 		transition: .3s;
 	}
+
+	@media (max-width: 768px) {
+		.ads .img .over .text{
+		opacity: 1;
+	}
+	}
 </style>
+
+<script>
+	let last_image = document.querySelector('.card-img-top');
+        let imageUrlMobile = last_image?.dataset.lasturl;
+        if (window.innerWidth <= 767) {
+            last_image.src = imageUrlMobile;
+        }
+</script>
 
 
 {% schema %}
@@ -63,6 +77,13 @@
     "icon": "fal fa-user",
     "display": true,
     "settings": {
+		"last_image_mobile":{
+			"type":"image",
+			"label": {
+                "ar": "الصوره رقم 4 في الموبيل",
+                "en": "Picture No. 4 is on the mobile phone"
+            }
+		},
         "images": {
             "type": "list",
             "label": {
