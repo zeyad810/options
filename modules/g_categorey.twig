@@ -41,7 +41,7 @@
             </div>
     
             <div class="{% if settings.slider_toggle == "true" %}swiper-container slider bg-white relative{% endif %}">
-                <div class="{% if settings.slider_toggle == "true" %} swiper-wrapper {% else %} flex flex-wrap gap-6 justify-center {% endif %}">
+                <div class="{% if settings.slider_toggle == "true" %} swiper-wrapper {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
                     {% for item in settings.categorys %}
                         <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
                              style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
