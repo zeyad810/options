@@ -12,11 +12,12 @@ max-width: 100%;
 }
 
 
-.product-item a.btn.btn-primary.btn-product-card-select-variant {
+.product-item a.btn.btn-primary.btn-product-card-select-variant, a.product-card-add-to-cart {
     width: 90%; 
     height: 50px;
 
 }
+
 .pro-details{
     display: flex !important;
     justify-content: space-between;
