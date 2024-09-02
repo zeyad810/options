@@ -1,5 +1,16 @@
 <section class="slide-review container w-full section_c_r" section-id="{{ sectionId }}">
-	<div class="container container_review">
+  {# start section #}
+  <div class="container container_review">
+   <div class="image-title" style="margin-bottom: 100px;" >
+    <h1> {{settings.title}} </h1>
+   </div> 
+   <!-- أزرار التنقل -->
+    <div class="content_btns absolute" style="left: 8%;">
+      <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+      </div>
+      <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+      </div>
+    </div>
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
 				{% for item in settings.customer_reviews %}
@@ -22,47 +33,104 @@
 					</div>
 				{% endfor %}
 			</div>
-
-			<div class="swiper-button-next"></div>
-			<div class="swiper-button-prev"></div>
+      <div class="balls"></div>
 		</div>
 	</div>
 </section>
-
 <style>
-
-	.section_c_r {
-		min-height: 470px;
-	}
-
-.slide-review .swiper-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.slide-review .swiper-button-next,
-.slide-review .swiper-button-prev {
-	color: var(--primary-color) !important;
-  position: absolute;
-  top: 50%;
-  height: 44px;
-  margin-top: -22px;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.slide-review .swiper-button-next::after,
-.slide-review .swiper-button-prev::after {
-	font-size: 24px !important;
-}
-
-.slide-review .swiper-button-next {
-  left: -22px !important;
-}
-.slide-review .swiper-button-prev {
-  right: -22px !important;
-}
-
+  /* paganition bulltes */
+  .balls{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  .balls span.swiper-pagination-bullet{
+    width: 16px !important;
+    height: 16px !important;
+    background: none !important;
+    border: 1px solid #C4C4C4 !important;
+  }
+  .balls span.swiper-pagination-bullet-active{
+    background-color: #CE5A67 !important;
+    border-color: #FFCBCB !important;
+    box-shadow:inset 0px 0px 0px 2px #fff;
+  }
+  /* btns arrows in sweaper */
+        .swiper-button-next,
+        .swiper-button-prev{
+            top: -100px !important;
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover{
+            border: 1px solid #E7ADB3 !important;
+        }
+        .swiper-button-next{
+            right:-85px !important; 
+        }
+        .swiper-button-next:after,
+        .swiper-rtl .swiper-button-prev:after {
+            font-size:19px !important;
+            color: #C0C0C0;
+        }
+        .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+            font-size: 19px !important;
+            color: #C0C0C0;
+        }
+        .swiper-button-next:focus::after,
+        .swiper-button-prev:focus::after {
+            color: #CE5A67 !important;
+        }
+        .swiper-button-lock {        
+            display: flex !important;
+        }
+        @media(max-width:991px){
+            .content_btns{
+              margin: 25px !important;
+            }
+        }
+        @media(max-width:762px){
+            .content_btns{
+              margin: 30px !important;
+            }
+        }
+        @media(max-width:425px){
+            .content_btns{
+              margin-top: 25px !important;
+            }
+        }
+        /*  */
+        .section_c_r {
+        	min-height: 470px;
+          }
+  .slide-review .swiper-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .slide-review .swiper-button-next,
+  .slide-review .swiper-button-prev {
+  	color: var(--primary-color) !important;
+    position: absolute;
+    top: 50%;
+    height: 44px;
+    margin-top: -22px;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+  .slide-review .swiper-button-next::after,
+  .slide-review .swiper-button-prev::after {
+  	font-size: 24px !important;
+  }
+  
+  .slide-review .swiper-button-next {
+    left: -22px !important;
+  }
+  .slide-review .swiper-button-prev {
+    right: -22px !important;
+  }
 	.container_review {
 		gap: 24px;
 	}
@@ -80,7 +148,6 @@
 		-webkit-text-fill-color: transparent;
 	}
 </style>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
   var swiper = new Swiper('.slide-review .swiper-container', {
@@ -92,9 +159,8 @@
       prevEl: '.swiper-button-prev',
     },
     pagination: {
-      el: '.swiper-pagination',
+      el: '.balls',
       clickable: true,
-      dynamicBullets: true,
     },
     breakpoints: {
       640: {
