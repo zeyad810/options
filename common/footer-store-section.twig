@@ -36,9 +36,9 @@
 		</div>
 
 
-		<div class="flex flex-col">
+		<div class="flex flex-col " style="position: relative;">
 			<p style='margin-bottom: 14px;'>{{ locals.phones_apps }}</p>
-			<div class="flex flex-wrap gap-4">
+			<div class="flex flex-wrap gap-4" style="position: relative; bottom: 7px">
 				<a class='android-store'>
 					<img src="https://cdn.salla.network/images/googleplay.png" alt="android">
 				</a>
@@ -48,37 +48,37 @@
 			</div>
 		</div>
 
-		
-	</div>
 
+	</div>
 	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-lg-5">
 					<div class="footer-about-us-links-div footer-about-us-div">
-						<h1 class="pb-2">{{ about_settings.about_us_title }}</h1>
+						<h1 class="pb-2" style="font-weight: bold;">{{ about_settings.about_us_title }}</h1>
 						<p>{{ about_settings.about_us_des | raw }}</p>
 					</div>
 
-							<div class="apps-if-newsletter-undifined hidden flex flex-col">
-			<p class='apps-paragraph'>{{ locals.phones_apps }}</p>
-			<div class="flex flex-wrap gap-4">
-				<a class='android-store'>
-					<img src="https://cdn.salla.network/images/googleplay.png" alt="android">
-				</a>
-				<a class='mac-store'>
-					<img src="https://cdn.salla.network/images/appstore.png" alt="mac">
-				</a>
-			</div>
-		</div>
-
+					<div class="apps-if-newsletter-undifined hidden flex flex-col">
+						<p class='apps-paragraph'>{{ locals.phones_apps }}</p>
+						<div class="flex flex-wrap gap-4">
+							<a class='android-store'>
+								<img src="https://cdn.salla.network/images/googleplay.png" alt="android">
+							</a>
+							<a class='mac-store'>
+								<img src="https://cdn.salla.network/images/appstore.png" alt="mac">
+							</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-lg-7">
+
+
+				<div class="col-12 col-lg-7 container	">
 					<div class="row">
-						<div class="col-12 col-lg-4">
+						<div class="col-12 col-lg-3">
 							{% if not (about_settings.links_1_hide) %}
 								<div class="footer-about-us-links-div">
-									<h1 class="pb-2">{{ about_settings.links_1_title }}</h1>
+									<h1 class="pb-2" style="font-weight: bold;">{{ about_settings.links_1_title }}</h1>
 									{% for link in about_settings.links_1_links %}
 										<p>
 											<a href="{{ link.url }}">{{ link.title }}</a>
@@ -87,10 +87,11 @@
 								</div>
 							{% endif %}
 						</div>
-						<div class="col-12 col-lg-4">
+
+						<div class="col-12 col-lg-3">
 							{% if not (about_settings.links_2_hide) %}
 								<div class="footer-about-us-links-div">
-									<h1 class="pb-2">{{ about_settings.links_2_title }}</h1>
+									<h1 class="pb-2" style="font-weight: bold;">{{ about_settings.links_2_title }}</h1>
 									{% for link in about_settings.links_2_links %}
 										<p>
 											<a href="{{ link.url }}">{{ link.title }}</a>
@@ -99,37 +100,38 @@
 								</div>
 							{% endif %}
 						</div>
-						<div class="col-12 col-lg-4">
-							{% if store.business_location.show_location %}
-								<div class="footer-about-us-links-div">
-									<h1 class="pb-2">
-										{% if about_settings.business_location_title %}
-											{{ about_settings.business_location_title }}
-										{% else %}
-											{{ locals.business_location }}
-										{% endif %}
-									</h1>
-									<p>
-										<a {% if store.business_location.lat %} target="_blank" href="https://maps.google.com/?q={{ store.business_location.lat }},{{ store.business_location.lng }}" {% endif %}>
-											{{ store.business_location.street }}<br/>
-											<i class="icon-map-marker-alt"></i>
-											{{ store.business_location.country.name }},
-											{{ store.business_location.city.name }},
-											{{ store.business_location.district }},
-											{{ store.business_location.street }}
-										</a>
-									</p>
-								</div>
-							{% endif %}
-							<div class="media">
-								<h1>{{locals.contact_us}}</h1>
+
+						<div
+							class="col-12 col-lg-3">
+							{# {% if store.business_location.show_location %}
+																		<div class="footer-about-us-links-div">
+																			<h1 class="pb-2" style="font-weight: bold;">
+																				{% if about_settings.business_location_title %}
+																					{{ about_settings.business_location_title }}
+																				{% else %}
+																					{{ locals.business_location }}
+																				{% endif %}
+																			</h1>
+																			<p>
+																				<a {% if store.business_location.lat %} target="_blank" href="https://maps.google.com/?q={{ store.business_location.lat }},{{ store.business_location.lng }}" {% endif %}>
+																					{{ store.business_location.street }}<br/>
+																					<i class="icon-map-marker-alt"></i>
+																					{{ store.business_location.country.name }},
+																					{{ store.business_location.city.name }},
+																					{{ store.business_location.district }},
+																					{{ store.business_location.street }}
+																				</a>
+																			</p>
+																		</div>
+																	{% endif %} #}
+							<div class="media ">
+								<h1 style="font-weight: bold;">{{locals.contact_us}}</h1>
 								<div class="links_social">
 									{% if store.social_media.items.phone %}
 										<a href="tel:{{ store.social_media.items.phone }}" target="_blank">
 											<i class="fa-solid fa-phone  d-flex align-items-center justify-content-center"></i>
 										</a>
 									{% endif %}
-
 									{% if store.social_media.items.email %}
 										<a href="mailto:{{ store.social_media.items.email }}" target="_blank">
 											<i class="fa-solid fa-envelope  d-flex align-items-center justify-content-center"></i>
@@ -142,17 +144,18 @@
 										</a>
 									{% endif %}
 								</div>
-
 							</div>
-							<div class="footer-about-us-links-div {% if store.business_location.show_location %}mt-5{% endif %}">
-								<h1 class="pb-2">
+						</div>
+						<div class="col-12 col-lg-3">
+							<div class="footer-about-us-links-div {% if store.business_location.show_location %}{% endif %}">
+								<h1 class="pb-2" style="font-weight: bold;">
 									{% if about_settings.social_media_title %}
 										{{ about_settings.social_media_title }}
 									{% else %}
 										{{ locals.social_media }}
 									{% endif %}
 								</h1>
-								<div class="social-icons  flex-wrap">
+								<div class="social-icons  flex- nowrap">
 									<div class="contact">
 										{% if store.social_media.items.facebook %}
 											<a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
@@ -183,12 +186,11 @@
 												<i class="fa-brands fa-tiktok  d-flex align-items-center justify-content-center"></i>
 											</a>
 										{% endif %}
-
 									</div>
-
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -274,28 +276,28 @@
 		</div>
 	</div>
 
-{% block styles %}
-	<style>
-		.apps-if-newsletter-undifined {
-			margin-top: 25px;
-		}
+	{% block styles %}
+		<style>
+			.apps-if-newsletter-undifined {
+				margin-top: 25px;
+			}
 
-		.apps-if-newsletter-undifined .apps-paragraph {
-			margin-bottom: 10px;
-			font-size: 18px;
-		}
-	</style>
-{% endblock %}
+			.apps-if-newsletter-undifined .apps-paragraph {
+				margin-bottom: 10px;
+				font-size: 18px;
+			}
+		</style>
+	{% endblock %}
 
-{% block scripts %}
-	<script>
-		const newslettersEle = document.querySelector('.newsletters');
-		const apps = document.querySelector('.apps-if-newsletter-undifined');
-		const newslettersStorage = localStorage.getItem('newsletter');
-		if (newslettersStorage) {
-			newslettersEle.classList.remove('hidden');
-		} else {
-			apps.classList.remove('hidden');
-		}
-	</script>
-{% endblock %}
+	{% block scripts %}
+		<script>
+			const newslettersEle = document.querySelector('.newsletters');
+const apps = document.querySelector('.apps-if-newsletter-undifined');
+const newslettersStorage = localStorage.getItem('newsletter');
+if (newslettersStorage) {
+newslettersEle.classList.remove('hidden');
+} else {
+apps.classList.remove('hidden');
+}
+		</script>
+	{% endblock %}

@@ -1446,7 +1446,7 @@ ul.main-nav > li ul.sub-menu-lists > li > a {
     color:var(--secondary-color-alt3)
 }
 .btn-filter{
-    background-color: var(--white-color);
+    /* background-color: var(--white-color); */
     border: 0.5px solid var(--secondary-color-alt4);
     border-radius: 5px;
     padding: 10px 40px;

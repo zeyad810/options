@@ -1,116 +1,94 @@
 <div class="d-flex align-items-center justify-content-between products-filter">
     <div class="d-flex filter-buttons-container">
-            <div class="d-inline-block" >
-
-                    <div><label class="filter-result">{{ locals.products_list_filter }}</label></div>
-                    <button id="products-list-filter"
-                            type="button"
-                            class="btn btn-filter filter-block-width d-lg-none products-list-filter-sm"
-                            data-toggle="collapse"
-                            data-target="#filters-form-collapse-sm"
-
-                    >
-                        <span>{{ locals.products_list_filter }}</span>
-                        &nbsp;
-                        <i class="icon-add filter-icons filters_expanded"></i>
-                        <i class="icon-remove filter-icons filters_not_expanded d-none"></i>
-                    </button>
-
-                    <button id="products-list-filter"
-                            type="button"
-                            class="btn btn-filter filter-block-width d-none d-lg-block"
-                            data-toggle="modal"
-                            data-target="#filterModal"
-                    >
-                        <span>{{ locals.products_list_filter }}</span>
-                        &nbsp;
-                        <i class="icon-filter-secondary" aria-hidden="true"></i>
-                    </button>
-                    &nbsp;&nbsp;
-
+        <!-- Filter Label and Buttons -->
+        <div class="d-inline-block">
+            <div>
+                <label class="filter-result">{{ locals.products_list_filter }}</label>
             </div>
 
-                <div class="d-inline-block filter-block-width sort-block-width">
-                    <div class="dropdown d-inline-block">
-                        <div><label class="filter-order">{{ locals.products_list_sort }}</label></div>
-                        <button id="products-list-sort"
-                                type="button"
-                                class="btn btn-filter"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                        >
-                            <span>
-                                {% if requestGet('sort_by') == 'popularity_order' %}
-                                    {{ locals.products_list_filter_popularity }}
-                                {% elseif requestGet('sort_by') == 'price' and  requestGet('order') == 'asc'%}
-                                    {{ locals.products_list_filter_price_low }}
-                                {% elseif requestGet('sort_by') == 'price' and  requestGet('order') == 'desc'%}
-                                    {{ locals.products_list_filter_price_high }}
-                                {% else%}
-                                    {{ locals.products_list_filter_latest }}
-                                {% endif %}
-                            </span>
-                            &nbsp;
-                            <i class="icon-swap_vert text hide-ie"></i>
+            <!-- Small screen filter button -->
+            <button id="products-list-filter" type="button" class="btn btn-filter filter-block-width d-lg-none products-list-filter-sm" data-toggle="collapse" data-target="#filters-form-collapse-sm">
+                <span>{{ locals.products_list_filter }}</span>&nbsp;
+                <i class="icon-add filter-icons filters_expanded"></i>
+                <i class="icon-remove filter-icons filters_not_expanded d-none"></i>
+            </button>
 
-                        </button>
-                        <div class="dropdown-menu select-dropdown">
+            <!-- Large screen filter button -->
+            <button id="products-list-filter" type="button" class="btn btn-filter filter-block-width d-none d-lg-block" data-toggle="modal" data-target="#filterModal">
+                <span>{{ locals.products_list_filter }}</span>&nbsp;
+                <i class="icon-filter-secondary" aria-hidden="true"></i>
+            </button>
+        </div>
 
-                                <a class="dropdown-item" href="{{ requestAdd({sort_by: 'created_at', order: 'desc'}) }}">
-                                    {{ locals.products_list_filter_latest }}
-                                </a>
-                                <a class="dropdown-item" href="{{ requestAdd({sort_by: 'popularity_order', order: 'asc'}) }}">
-                                    {{ locals.products_list_filter_popularity }}
-                                </a>
-                                <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'asc'}) }}">
-                                    {{ locals.products_list_filter_price_low }}
-                                </a>
-                                <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'desc'}) }}">
-                                    {{ locals.products_list_filter_price_high }}
-                                </a>
-
-                        </div>
+        <!-- Sort and Display Options -->
+        <div class="product_shap w-24 pr-4 gap-[10px] flex items-center justify-around relative" style="border: 1px #B6B6B6 solid; width: 400px; height: 56px; border-radius: 8px;">
+            <div style="display: flex; column-gap: 8px;">
+                <i class="fa-solid fa-table-cells border border-[#EEE] border-solid rounded-[4px] vr_hr_active p-[5px] cursor-pointer" data-display="vertical"></i>
+                <i class="fa-solid fa-bars border border-[#EEE] border-solid rounded-[4px] p-[5px] cursor-pointer" data-display="horizontal"></i>
+            </div>
+            <div class="d-inline-block filter-block-width sort-block-width">
+                <div style="display: flex;" class="dropdown">
+                    <div>
+                        <label class="filter-order" style="margin-bottom: auto; color: #a5a5a5;">{{ locals.products_list_sort }}</label>
+                    </div>
+                    <button id="products-list-sort" type="button" class="btn btn-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;">
+                        <span style="font-size: 14px;">
+                            {% if requestGet('sort_by') == 'popularity_order' %}
+                                {{ locals.products_list_filter_popularity }}
+                            {% elseif requestGet('sort_by') == 'price' and requestGet('order') == 'asc' %}
+                                {{ locals.products_list_filter_price_low }}
+                            {% elseif requestGet('sort_by') == 'price' and requestGet('order') == 'desc' %}
+                                {{ locals.products_list_filter_price_high }}
+                            {% else %}
+                                {{ locals.products_list_filter_latest }}
+                            {% endif %}
+                        </span>&nbsp;
+                        <i class="icon-swap_vert text hide-ie"></i>
+                    </button>
+                    <div class="dropdown-menu select-dropdown">
+                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'created_at', order: 'desc'}) }}">
+                            {{ locals.products_list_filter_latest }}
+                        </a>
+                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'popularity_order', order: 'asc'}) }}">
+                            {{ locals.products_list_filter_popularity }}
+                        </a>
+                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'asc'}) }}">
+                            {{ locals.products_list_filter_price_low }}
+                        </a>
+                        <a class="dropdown-item" href="{{ requestAdd({sort_by: 'price', order: 'desc'}) }}">
+                            {{ locals.products_list_filter_price_high }}
+                        </a>
                     </div>
                 </div>
-
-                <div class="product_shap w-24 pr-4 gap-[10px] flex items-center justify-around relative">
-                    <i class="fa-solid fa-table-cells border border-[#EEE] border-solid rounded-[4px] vr_hr_active p-[5px] cursor-pointer" data-display="vertical"></i>
-                    <i class="fa-solid fa-bars border border-[#EEE] border-solid rounded-[4px]  p-[5px] cursor-pointer" data-display="horizontal"></i>
-				</div>
-
-
-
+            </div>
         </div>
+    </div>
 
-
-
-        <div class="d-none d-lg-inline-block text-color-primary">
-            {% if count > 0 %}
-                <span class="text-line-height d-inline-block">{{ locals.products_list_result }}&nbsp;</span>
-                <span class="text text-line-height d-inline-block" style="font-weight: bold">{{count}}&nbsp;</span>
-                <span class="text-line-height d-inline-block">
-                            {{ locals.products_list_result_products }}
-                         </span>
-            {% else %}
-                <span class="text text-line-height d-inline-block"
-                      style="font-weight: bold">{{  locals.products_list_empty }}&nbsp;
-                     </span>
-            {% endif %}
-        </div>
-
+    <!-- Products Count Display -->
+    <div class="d-none d-lg-inline-block text-color-primary">
+        {% if count > 0 %}
+            <span class="text-line-height d-inline-block">{{ locals.products_list_result }}&nbsp;</span>
+            <span class="text text-line-height d-inline-block" style="font-weight: bold">{{count}}&nbsp;</span>
+            <span class="text-line-height d-inline-block">
+                {{ locals.products_list_result_products }}
+            </span>
+        {% else %}
+            <span class="text text-line-height d-inline-block" style="font-weight: bold">{{ locals.products_list_empty }}&nbsp;</span>
+        {% endif %}
+    </div>
 </div>
 
+<!-- Collapsible Filter Form for Small Screens -->
 <div id="filters-form-collapse-sm" class="collapse mt-3">
     {% include 'products-filter-form.twig' %}
 </div>
+
+<!-- Filter Modal for Large Screens -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body" style="position: relative">
-                <button id="products-list-filter-form-close"
-                        type="button"
-                        class="close btn" data-dismiss="modal" aria-label="Close">
+                <button id="products-list-filter-form-close" type="button" class="close btn" data-dismiss="modal" aria-label="Close">
                     <span class="icon-times2"></span>
                 </button>
                 {% include 'products-filter-form.twig' %}
@@ -118,25 +96,24 @@
         </div>
     </div>
 </div>
+
+<!-- Script for Handling Display Mode Switch -->
 <script>
-document.addEventListener('DOMContentLoaded' , ()=>{
+    document.addEventListener('DOMContentLoaded', () => {
         const productShapes = document.querySelectorAll('.product_shap i');
-        const productList = document.querySelector('.products #products-list'); 
+        const productList = document.querySelector('.products #products-list');
 
         productShapes.forEach(productShape => {
-        productShape.addEventListener('click', function(event) {
+            productShape.addEventListener('click', function (event) {
+                const clickedIcon = event.target;
+                const displayValue = clickedIcon.dataset.display;
 
-            const clickedIcon = event.target;
-            const displayValue = clickedIcon.dataset.display; 
+                productList?.classList.remove('vertical', 'horizontal');
+                productList?.classList.add(displayValue);
 
-            productList?.classList.remove('vertical', 'horizontal');
-            productList?.classList.add(displayValue);
-
-            productShapes.forEach(icon => icon.classList.remove('vr_hr_active')); 
-            event.target.classList.toggle('vr_hr_active');
+                productShapes.forEach(icon => icon.classList.remove('vr_hr_active'));
+                event.target.classList.toggle('vr_hr_active');
+            });
         });
-        });
-})
-
-            
+    });
 </script>

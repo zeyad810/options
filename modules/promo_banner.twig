@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Banner</title>
+<style>
+/* Base styles */
+.promo-banner {
+    padding: 50px 338px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.promo-content {
+    text-align: right;
+    flex-basis: 50%; /* Allow to take 50% of width */
+    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+}
+
+.promo-title {
+    color: #333;
+    margin-bottom: 60px;
+    font-weight: bold;
+    font-size: 38px;
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.5;
+    width: 100%; /* Make full width */
+}
+
+.shop-now-btn {
+    background-color: #ce5a67;
+    color: #fff;
+    padding: 24px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    height: 76px;
+    display: block;
+    width: 235px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.shop-now-btn:hover {
+    background-color: #c5006e;
+}
+
+.products-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Enable wrapping for smaller screens */
+    justify-content: space-between; /* Distribute items evenly */
+}
+
+.product-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Full width on small screens */
+    max-width: 277px; /* Max width for larger screens */
+    text-align: center;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.product-price {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.current-price {
+    font-weight: bold;
+    color: #e6007e;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 10px;
+}
+
+.add-to-cart-btn {
+    display: block;
+    background-color: #ce5a67;
+    color: #fff;
+    padding: 10px 0px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 245px;
+    margin: 11px 16px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #c5006e;
+}
+
+/* Responsive styles */
+
+/* For tablets and smaller devices */
+@media (max-width: 992px) {
+    .promo-banner {
+        padding: 30px 100px;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .promo-content {
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    .promo-title {
+        font-size: 32px;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .products-grid {
+        justify-content: center; /* Center the products */
+    }
+
+    .product-card {
+        width: 100%; /* Full width for better layout */
+        max-width: 277px;
+    }
+
+    .shop-now-btn {
+        width: 100%; /* Full width for button */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 576px) {
+    .promo-banner {
+        padding: 20px;
+    }
+
+    .promo-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .shop-now-btn {
+        font-size: 16px;
+        /* padding: 15px 20px; */
+        width: fit-content;
+        margin: auto;
+    }
+
+    .product-image {
+        height: 200px;
+    }
+
+    .product-title {
+        font-size: 16px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+<body>
+    <section class="promo-banner" style="background-image: url('{{ settings.background_image }}');">
+        <div class="promo-content">
+            <h2 class="promo-title">{{ settings.section_title }}</h2>
+            <a href="{{ settings.button_link }}" class="shop-now-btn">{{ settings.button_text }}</a>
+        </div>
+
+        <div class="products-grid">
+            {% for product in settings.products.products %}
+            <div class="product-card">
+                <img src="{{ imageUrl(product.images[0]['image']['medium'], { w: 260, q: 100, f: 'auto' }) }}" alt="{{ product.title }}" class="product-image">
+				<div class=" include_info " style=" text-align: start; padding: 16px;" >
+					<span><i class="fas fa-heart" style="float: left;" ></i></span>
+					<h5 class="product-categories">{{ product.name }}</h5>
+					<h3 class="product-title">{{ product.name }}</h3>
+					<div class="product-price">
+						<span class="current-price clo">{{ product.price }}{{product.currency_symbol }}</span>
+						{% if product.formatted_price %}
+						<span class="original-price">{{ product.formatted_price }}</span>
+						{% endif %}
+					</div>
+				</div>
+                {% if product.is_infinite == false and product.quantity <= 0 %}
+                <a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
+                {% elseif ( product.has_options or product.has_fields ) %}
+                <a class="add-to-cart-btn" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+                {% else %}
+                <a href="javascript:void(0)" class="add-to-cart-btn" onclick="productCartAddToCart(this,'{{ product.id }}')">
+                    <img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
+                    {{ locals.add_to_cart }}
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>
+{% schema %}
+{
+  "name": {
+    "ar": "شريط الترويج",
+    "en": "Promo Banner"
+  },
+  "icon": "fal fa-tag",
+  "display": true,
+  "settings": {
+    "background_image": {
+      "type": "image",
+      "label": {
+        "ar": "صورة الخلفية",
+        "en": "Background Image"
+      }
+    },
+    "section_title": {
+      "type": "text",
+      "label": {
+        "ar": "عنوان القسم",
+        "en": "Section Title"
+      }
+    },
+    "button_link": {
+      "type": "url",
+      "label": {
+        "ar": "رابط الزر",
+        "en": "Button Link"
+      }
+    },
+    "button_text": {
+      "type": "text",
+      "label": {
+        "ar": "نص الزر",
+        "en": "Button Text"
+      }
+    },
+    "products": {
+      "type": "list",
+      "noLabel": true,
+      "maxItems": 12,
+      "info": {
+        "ar": "",
+        "en": ""
+      },
+      "settings_label": {
+        "ar": "منتج",
+        "en": "Product"
+      },
+      "settings": {
+        "id": {
+          "type": "text",
+          "label": {
+            "ar": "رقم المنتج",
+            "en": "Product ID"
+          }
+        },
+        "name": {
+          "type": "text",
+          "label": {
+            "ar": "اسم المنتج",
+            "en": "Product Name"
+          }
+        },
+        "price": {
+          "type": "text",
+          "label": {
+            "ar": "السعر",
+            "en": "Price"
+          }
+        },
+        "currency_symbol": {
+          "type": "text",
+          "label": {
+            "ar": "رمز العملة",
+            "en": "Currency Symbol"
+          }
+        },
+        "formatted_price": {
+          "type": "text",
+          "label": {
+            "ar": "السعر الأصلي",
+            "en": "Original Price"
+          }
+        },
+        "quantity": {
+          "type": "number",
+          "label": {
+            "ar": "الكمية",
+            "en": "Quantity"
+          }
+        },
+        "is_infinite": {
+          "type": "checkbox",
+          "label": {
+            "ar": "غير محدود",
+            "en": "Infinite Stock"
+          }
+        },
+        "has_options": {
+          "type": "checkbox",
+          "label": {
+            "ar": "خيارات",
+            "en": "Has Options"
+          }
+        },
+        "has_fields": {
+          "type": "checkbox",
+          "label": {
+            "ar": "حقول",
+            "en": "Has Fields"
+          }
+        },
+        "slug": {
+          "type": "text",
+          "label": {
+            "ar": "رابط المنتج",
+            "en": "Product Slug"
+          }
+        },
+        "images": {
+          "type": "list",
+          "settings_label": {
+            "ar": "صورة",
+            "en": "Image"
+          },
+          "settings": {
+            "image": {
+              "type": "image",
+              "label": {
+                "ar": "صورة المنتج",
+                "en": "Product Image"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{% endschema %}

@@ -271,9 +271,9 @@
     margin-right: -15px;
     margin-left: -15px;
 }
-
+/* hussein-width  */
 .products-list .prod-col, .bundle-offer-products .prod-col{
-    width: 25%;
+    /* width: 25%; */
     padding: 15px;
 }
 
