@@ -1,227 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo Banner</title>
-<style>
-/* Base styles */
-.promo-banner {
-    padding: 50px 338px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* Allow wrapping */
-}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Promo Banner</title>
+		<style>
+			/* Base styles */
+			.promo-banner {
+				padding: 50px 338px;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				height: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap; /* Allow wrapping */
+			}
 
-.promo-content {
-    text-align: right;
-    flex-basis: 50%; /* Allow to take 50% of width */
-    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
-}
+			.promo-content {
+				text-align: right;
+				flex-basis: 50%; /* Allow to take 50% of width */
+				margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+			}
 
-.promo-title {
-    color: #333;
-    margin-bottom: 60px;
-    font-weight: bold;
-    font-size: 38px;
-    font-family: 'Cairo', sans-serif;
-    line-height: 1.5;
-    width: 100%; /* Make full width */
-}
+			.promo-title {
+				color: #333;
+				margin-bottom: 60px;
+				font-weight: bold;
+				font-size: 38px;
+				font-family: 'Cairo', sans-serif;
+				line-height: 1.5;
+				width: 100%; /* Make full width */
+			}
 
-.shop-now-btn {
-    background-color: #ce5a67;
-    color: #fff;
-    padding: 24px 30px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-    height: 76px;
-    display: block;
-    width: 235px;
-    text-align: center;
-    margin-top: 20px;
-}
+			.shop-now-btn {
+				background-color: #ce5a67;
+				color: #fff;
+				padding: 24px 30px;
+				border-radius: 5px;
+				text-decoration: none;
+				font-size: 18px;
+				transition: background-color 0.3s ease;
+				height: 76px;
+				display: block;
+				width: 235px;
+				text-align: center;
+				margin-top: 20px;
+			}
 
-.shop-now-btn:hover {
-    background-color: #c5006e;
-}
+			.shop-now-btn:hover {
+				background-color: #c5006e;
+			}
 
-.products-grid {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap; /* Enable wrapping for smaller screens */
-    justify-content: space-between; /* Distribute items evenly */
-}
+			.products-grid {
+				display: flex;
+				gap: 20px;
+				flex-wrap: wrap; /* Enable wrapping for smaller screens */
+				justify-content: space-between; /* Distribute items evenly */
+			}
 
-.product-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Full width on small screens */
-    max-width: 277px; /* Max width for larger screens */
-    text-align: center;
-    overflow: hidden;
-}
+			.product-card {
+				background-color: #fff;
+				border-radius: 8px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				width: 100%; /* Full width on small screens */
+				max-width: 277px; /* Max width for larger screens */
+				text-align: center;
+				overflow: hidden;
+			}
 
-.product-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
+			.product-image {
+				width: 100%;
+				height: 300px;
+				object-fit: cover;
+				border-radius: 8px;
+				margin-bottom: 10px;
+			}
 
-.product-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #555;
-}
+			.product-title {
+				font-size: 18px;
+				margin-bottom: 10px;
+				color: #555;
+			}
 
-.product-price {
-    font-size: 16px;
-    margin-bottom: 15px;
-}
+			.product-price {
+				font-size: 16px;
+				margin-bottom: 15px;
+			}
 
-.current-price {
-    font-weight: bold;
-    color: #e6007e;
-}
+			.current-price {
+				font-weight: bold;
+				color: #e6007e;
+			}
 
-.original-price {
-    text-decoration: line-through;
-    color: #888;
-    margin-left: 10px;
-}
+			.original-price {
+				text-decoration: line-through;
+				color: #888;
+				margin-left: 10px;
+			}
 
-.add-to-cart-btn {
-    display: block;
-    background-color: #ce5a67;
-    color: #fff;
-    padding: 10px 0px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    width: 245px;
-    margin: 11px 16px;
-}
+			.add-to-cart-btn {
+				display: block;
+				background-color: #ce5a67;
+				color: #fff;
+				padding: 10px 0;
+				border-radius: 5px;
+				text-decoration: none;
+				font-size: 16px;
+				transition: background-color 0.3s ease;
+				width: 245px;
+				margin: 11px 16px;
+			}
 
-.add-to-cart-btn:hover {
-    background-color: #c5006e;
-}
+			.add-to-cart-btn:hover {
+				background-color: #c5006e;
+			}
 
-/* Responsive styles */
+			/* Responsive styles */
 
-/* For tablets and smaller devices */
-@media (max-width: 992px) {
-    .promo-banner {
-        padding: 30px 100px;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
+			/* For tablets and smaller devices */
+			@media(max-width: 992px) {
+				.promo-banner {
+					/* padding: 30px 100px;
+					flex-direction: column;
+					align-items: flex-start;
+					text-align: left; */
+				padding: 50px 338px;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				height: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap; 
+				}
 
-    .promo-content {
-        flex-basis: 100%;
-        text-align: center;
-    }
+				.promo-content {
+					flex-basis: 100%;
+					text-align: center;
+				}
 
-    .promo-title {
-        font-size: 32px;
-        width: 100%;
-        margin-bottom: 40px;
-    }
+				.promo-title {
+					font-size: 32px;
+					width: 100%;
+					margin-bottom: 40px;
+				}
 
-    .products-grid {
-        justify-content: center; /* Center the products */
-    }
+				.products-grid {
+					justify-content: center; /* Center the products */
+				}
 
-    .product-card {
-        width: 100%; /* Full width for better layout */
-        max-width: 277px;
-    }
+				.product-card {
+					width: 100%; /* Full width for better layout */
+					max-width: 277px;
+				}
 
-    .shop-now-btn {
-        width: 100%; /* Full width for button */
-    }
-}
+				.shop-now-btn {
+					width: 100%; /* Full width for button */
+				}
+			}
 
-/* For mobile devices */
-@media (max-width: 576px) {
-    .promo-banner {
-        padding: 20px;
-    }
+			/* For mobile devices */
+			@media(max-width: 576px) {
+				.promo-banner {
+					padding: 20px;
+				}
 
-    .promo-title {
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
+				.promo-title {
+					font-size: 28px;
+					margin-bottom: 20px;
+				}
 
-    .shop-now-btn {
-        font-size: 16px;
-        /* padding: 15px 20px; */
-        width: fit-content;
-        margin: auto;
-    }
+				.shop-now-btn {
+					font-size: 16px;
+					/* padding: 15px 20px; */
+					width: fit-content;
+					margin: auto;
+				}
 
-    .product-image {
-        height: 200px;
-    }
+				.product-image {
+					height: 200px;
+				}
 
-    .product-title {
-        font-size: 16px;
-    }
+				.product-title {
+					font-size: 16px;
+				}
 
-    .add-to-cart-btn {
-        font-size: 14px;
-    }
-}
-</style>
-</head>
-<body>
-    <section class="promo-banner" style="background-image: url('{{ settings.background_image }}');">
-        <div class="promo-content">
-            <h2 class="promo-title">{{ settings.section_title }}</h2>
-            <a href="{{ settings.button_link }}" class="shop-now-btn">{{ settings.button_text }}</a>
-        </div>
+				.add-to-cart-btn {
+					font-size: 14px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<section class="promo-banner" style="background-image: url('{{ settings.background_image }}');">
+			<div class="promo-content">
+				<h2 class="promo-title">{{ settings.section_title }}</h2>
+				<a href="{{ settings.button_link }}" class="shop-now-btn">{{ settings.button_text }}</a>
+			</div>
 
-        <div class="products-grid">
-            {% for product in settings.products.products %}
-            <div class="product-card">
-                <img src="{{ imageUrl(product.images[0]['image']['medium'], { w: 260, q: 100, f: 'auto' }) }}" alt="{{ product.title }}" class="product-image">
-				<div class=" include_info " style=" text-align: start; padding: 16px;" >
-					<span><i class="fas fa-heart" style="float: left;" ></i></span>
-					<h5 class="product-categories">{{ product.name }}</h5>
-					<h3 class="product-title">{{ product.name }}</h3>
-					<div class="product-price">
-						<span class="current-price clo">{{ product.price }}{{product.currency_symbol }}</span>
-						{% if product.formatted_price %}
-						<span class="original-price">{{ product.formatted_price }}</span>
+			<div class="products-grid">
+				{% for product in settings.products.products %}
+					<div class="product-card">
+						<img src="{{ imageUrl(product.images[0]['image']['medium'], { w: 260, q: 100, f: 'auto' }) }}" alt="{{ product.title }}" class="product-image">
+						<div class=" include_info " style=" text-align: start; padding: 16px;">
+							<span>
+								<i class="fas fa-heart" style="float: left;"></i>
+							</span>
+							<h5 class="product-categories">{{ product.name }}</h5>
+							<h3 class="product-title">{{ product.name }}</h3>
+							<div class="product-price">
+								<span class="current-price clo">{{ product.price }}{{product.currency_symbol }}</span>
+								{% if product.formatted_price %}
+									<span class="original-price">{{ product.formatted_price }}</span>
+								{% endif %}
+							</div>
+						</div>
+						{% if product.is_infinite == false and product.quantity <= 0 %}
+							<a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
+						{% elseif ( product.has_options or product.has_fields ) %}
+							<a class="add-to-cart-btn" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+						{% else %}
+							<a href="javascript:void(0)" class="add-to-cart-btn" onclick="productCartAddToCart(this,'{{ product.id }}')">
+								<img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
+								{{ locals.add_to_cart }}
+							</a>
 						{% endif %}
 					</div>
-				</div>
-                {% if product.is_infinite == false and product.quantity <= 0 %}
-                <a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
-                {% elseif ( product.has_options or product.has_fields ) %}
-                <a class="add-to-cart-btn" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
-                {% else %}
-                <a href="javascript:void(0)" class="add-to-cart-btn" onclick="productCartAddToCart(this,'{{ product.id }}')">
-                    <img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
-                    {{ locals.add_to_cart }}
-                </a>
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-</body>
+				{% endfor %}
+			</div>
+		</section>
+	</body>
 </html>
 {% schema %}
 {
@@ -261,6 +272,18 @@
       }
     },
     "products": {
+      "type": "products",
+      "label": {
+        "ar": "اختر قائمة المنتجات",
+        "en": "Select category products"
+      }
+    }
+  }
+}
+
+{% endschema %}
+
+{# "products": {
       "type": "list",
       "noLabel": true,
       "maxItems": 12,
@@ -360,7 +383,198 @@
           }
         }
       }
-    }
-  }
-}
-{% endschema %}
+    } #}
+{# <div style='background-color: #FAC2C3;' class="relative">
+
+	<div style='padding-top: 15px; padding-bottom: 15px' class="newsletters  m-auto flex justify-start max-w-[1300px] items-center flex-wrap gap-4 px-4">
+		<div class="flex items-center justify-between gap-4 w-full max-w-[600px]">
+			<div class="flex items-center justify-center p-2 bg-white rounded-full w-12 h-12 sm:w-14 sm:h-14">
+				<i class="fa-regular fa-envelope"></i>
+			</div>
+			<div class="flex flex-col gap-2">
+				<h2 class="text-lg sm:text-xl font-semibold">{{ locals.sub_newsletter }}</h2>
+				<p class="text-sm text-[#636363]">{{ locals.join_desc}}</p>
+			</div>
+		</div>
+		<div id="mc_embed_shell" class="flex-1 flex-col w-full gap-5 flex max-w-[600px]">
+			<link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+
+			<h2 class="text-sm sm:text-base font-medium mb-3">{{ locals.un_sub }}</h2>
+			<form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-newsletter flex items-center gap-2 flex-wrap">
+				<div class="flex-grow flex-1 w-full gap-2 flex">
+					<input type="email" name="EMAIL" id="mce-EMAIL" required placeholder="{{ locals.email }}" class="email_button required email p-2 rounded-lg w-full max-w-[600px] border-none outline-none"/>
+				</div>
+				<div class="optionalParent w-full sm:w-auto">
+					<input style='background-color: var(--primary-color); padding: 8px 16px;' type="submit" name="subscribe" id="mc-embedded-subscribe" class="button text-white rounded-lg max-w-[120px]" value="{{ locals.sub }}">
+				</div>
+			</form>
+		</div>
+		<div class="flex flex-col mt-5 sm:mt-0 sm:ml-auto">
+			<p class='mb-3'>{{ locals.phones_apps }}</p>
+			<div class="flex gap-4">
+				<a class='android-store'>
+					<img src="https://cdn.salla.network/images/googleplay.png" alt="android" class="w-28 h-auto">
+				</a>
+				<a class='mac-store'>
+					<img src="https://cdn.salla.network/images/appstore.png" alt="mac" class="w-28 h-auto">
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-5">
+					<div class="footer-about-us-links-div footer-about-us-div">
+						<h1 class="pb-2 font-bold">{{ about_settings.about_us_title }}</h1>
+						<p>{{ about_settings.about_us_des | raw }}</p>
+					</div>
+
+					<div class="apps-if-newsletter-undifined hidden flex flex-col mt-5">
+						<p class='apps-paragraph mb-3 text-lg'>{{ locals.phones_apps }}</p>
+						<div class="flex gap-4">
+							<a class='android-store'>
+								<img src="https://cdn.salla.network/images/googleplay.png" alt="android" class="w-28 h-auto">
+							</a>
+							<a class='mac-store'>
+								<img src="https://cdn.salla.network/images/appstore.png" alt="mac" class="w-28 h-auto">
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-7 container">
+					<div class="row">
+						<div class="col-6 col-lg-3">
+							{% if not (about_settings.links_1_hide) %}
+								<div class="footer-about-us-links-div">
+									<h1 class="pb-2 font-bold">{{ about_settings.links_1_title }}</h1>
+									{% for link in about_settings.links_1_links %}
+										<p>
+											<a href="{{ link.url }}">{{ link.title }}</a>
+										</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div class="col-6 col-lg-3">
+							{% if not (about_settings.links_2_hide) %}
+								<div class="footer-about-us-links-div">
+									<h1 class="pb-2 font-bold">{{ about_settings.links_2_title }}</h1>
+									{% for link in about_settings.links_2_links %}
+										<p>
+											<a href="{{ link.url }}">{{ link.title }}</a>
+										</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div class="col-12 col-lg-3">
+							<div class="media">
+								<h1 class="font-bold">{{ locals.contact_us }}</h1>
+								<div class="links_social">
+									{% if store.social_media.items.phone %}
+										<a href="tel:{{ store.social_media.items.phone }}" target="_blank">
+											<i class="fa-solid fa-phone"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.email %}
+										<a href="mailto:{{ store.social_media.items.email }}" target="_blank">
+											<i class="fa-solid fa-envelope"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.website %}
+										<a href="{{ store.social_media.items.website }}" target="_blank">
+											<i class="icon-globe-secondary"></i>
+										</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-lg-3">
+							<div class="footer-about-us-links-div">
+								<h1 class="pb-2 font-bold">{{ locals.social_media }}</h1>
+								<div class="social-icons flex gap-3">
+									{% if store.social_media.items.facebook %}
+										<a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
+											<i class="fa-brands fa-facebook-f"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.instagram %}
+										<a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
+											<i class="fa-brands fa-instagram"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.twitter %}
+										<a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
+											<i class="fa-brands fa-x-twitter"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.snapchat %}
+										<a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
+											<i class="fa-brands fa-snapchat"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.tiktok %}
+										<a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
+											<i class="fa-brands fa-tiktok"></i>
+										</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-copyrights-vat-certificate">
+		<div class="container">
+			<div class="d-flex flex-wrap align-items-center justify-between footer-store-section-bars py-4">
+				<div class="footer-icons">
+					<div class="d-flex flex-wrap justify-center items-center gap-4">
+						{% if store.apps.ios_app_id or store.apps.android_package_name %}
+							<div class="icons social-apps-icons">
+								{% if store.apps.ios_app_id %}
+									<a href="https://apps.apple.com/app/id{{ store.apps.ios_app_id }}" target="_blank">
+										<img src="{{ asset_url ~ 'app-store.svg' }}" loading="lazy" alt="App Store" class="w-28">
+									</a>
+								{% endif %}
+								{% if store.apps.android_package_name %}
+									<a href="https://play.google.com/store/apps/details?id={{ store.apps.android_package_name }}" target="_blank">
+										<img src="{{ asset_url ~ 'google-play.svg' }}" loading="lazy" alt="Google Play" class="w-28">
+									</a>
+								{% endif %}
+							</div>
+						{% endif %}
+						<div class="icons w-full">
+							<div class="logistics-pay-icons flex-wrap gap-2">
+								{% for vat in store.social_media.items %}
+									<a href="{{ vat.url }}">
+										<img src="{{ vat.image }}" alt="{{ vat.name }}" class="w-16 h-auto">
+									</a>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer-copyright">
+    <p class="text-center">
+        &copy; <span id="current-year"></span> {{ store.name }}. All rights reserved.
+    </p>
+</div>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+			</div>
+		</div>
+	</div>
+</div>
+ #}

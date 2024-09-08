@@ -1,6 +1,6 @@
 <div style='background-color: #FAC2C3;' class="relative">
 
-	<div style='padding-top: 15px; padding-bottom: 15px' class="newsletters hidden m-auto flex justify-start max-w-[1300px] items-center flex-wrap max-lg:justify-start gap-9 md:gap-6 px-5">
+	<div style='padding: 15px !important;' class="newsletters  m-auto flex justify-start max-w-[1300px] items-center flex-wrap max-lg:justify-start gap-9 md:gap-6 px-5">
 		<div class="flex items-center justify-between gap-4">
 			<div class="flex items-center justify-center p-2 bg-white rounded-full w-14 h-14">
 				<i class="fa-regular fa-envelope"></i>
@@ -47,38 +47,39 @@
 				</a>
 			</div>
 		</div>
-
-
 	</div>
-	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg">
+
+	{# 121222 #}
+
+
+	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg" style=" padding: 15px !important;">
 		<div class="container">
 			<div class="row">
-				<div class="col-12 col-lg-5">
+				<div class="col-12 col-lg-5" style="padding-right: 10px;padding-left: 10px;">
 					<div class="footer-about-us-links-div footer-about-us-div">
-						<h1 class="pb-2" style="font-weight: bold;">{{ about_settings.about_us_title }}</h1>
+						<h1 class="pb-2 font-bold">{{ about_settings.about_us_title }}</h1>
 						<p>{{ about_settings.about_us_des | raw }}</p>
 					</div>
 
-					<div class="apps-if-newsletter-undifined hidden flex flex-col">
-						<p class='apps-paragraph'>{{ locals.phones_apps }}</p>
-						<div class="flex flex-wrap gap-4">
+					<div class="apps-if-newsletter-undifined hidden flex flex-col mt-5">
+						<p class='apps-paragraph mb-3 text-lg'>{{ locals.phones_apps }}</p>
+						<div class="flex gap-4">
 							<a class='android-store'>
-								<img src="https://cdn.salla.network/images/googleplay.png" alt="android">
+								<img src="https://cdn.salla.network/images/googleplay.png" alt="android" class="w-28 h-auto">
 							</a>
 							<a class='mac-store'>
-								<img src="https://cdn.salla.network/images/appstore.png" alt="mac">
+								<img src="https://cdn.salla.network/images/appstore.png" alt="mac" class="w-28 h-auto">
 							</a>
 						</div>
 					</div>
 				</div>
 
-
-				<div class="col-12 col-lg-7 container	">
+				<div class="col-12 col-lg-7 container">
 					<div class="row">
-						<div class="col-12 col-lg-3">
+						<div class="col-6 col-lg-3">
 							{% if not (about_settings.links_1_hide) %}
 								<div class="footer-about-us-links-div">
-									<h1 class="pb-2" style="font-weight: bold;">{{ about_settings.links_1_title }}</h1>
+									<h1 class="pb-2 font-bold">{{ about_settings.links_1_title }}</h1>
 									{% for link in about_settings.links_1_links %}
 										<p>
 											<a href="{{ link.url }}">{{ link.title }}</a>
@@ -88,10 +89,10 @@
 							{% endif %}
 						</div>
 
-						<div class="col-12 col-lg-3">
+						<div class="col-6 col-lg-3">
 							{% if not (about_settings.links_2_hide) %}
 								<div class="footer-about-us-links-div">
-									<h1 class="pb-2" style="font-weight: bold;">{{ about_settings.links_2_title }}</h1>
+									<h1 class="pb-2 font-bold">{{ about_settings.links_2_title }}</h1>
 									{% for link in about_settings.links_2_links %}
 										<p>
 											<a href="{{ link.url }}">{{ link.title }}</a>
@@ -101,203 +102,110 @@
 							{% endif %}
 						</div>
 
-						<div
-							class="col-12 col-lg-3">
-							{# {% if store.business_location.show_location %}
-																		<div class="footer-about-us-links-div">
-																			<h1 class="pb-2" style="font-weight: bold;">
-																				{% if about_settings.business_location_title %}
-																					{{ about_settings.business_location_title }}
-																				{% else %}
-																					{{ locals.business_location }}
-																				{% endif %}
-																			</h1>
-																			<p>
-																				<a {% if store.business_location.lat %} target="_blank" href="https://maps.google.com/?q={{ store.business_location.lat }},{{ store.business_location.lng }}" {% endif %}>
-																					{{ store.business_location.street }}<br/>
-																					<i class="icon-map-marker-alt"></i>
-																					{{ store.business_location.country.name }},
-																					{{ store.business_location.city.name }},
-																					{{ store.business_location.district }},
-																					{{ store.business_location.street }}
-																				</a>
-																			</p>
-																		</div>
-																	{% endif %} #}
-							<div class="media ">
-								<h1 style="font-weight: bold;">{{locals.contact_us}}</h1>
+						<div class="col-12 col-lg-3">
+							<div class="media">
+								<h1 class="font-bold">{{ locals.contact_us }}</h1>
 								<div class="links_social">
 									{% if store.social_media.items.phone %}
 										<a href="tel:{{ store.social_media.items.phone }}" target="_blank">
-											<i class="fa-solid fa-phone  d-flex align-items-center justify-content-center"></i>
+											<i class="fa-solid fa-phone"></i>
 										</a>
 									{% endif %}
 									{% if store.social_media.items.email %}
 										<a href="mailto:{{ store.social_media.items.email }}" target="_blank">
-											<i class="fa-solid fa-envelope  d-flex align-items-center justify-content-center"></i>
+											<i class="fa-solid fa-envelope"></i>
 										</a>
 									{% endif %}
-
 									{% if store.social_media.items.website %}
 										<a href="{{ store.social_media.items.website }}" target="_blank">
-											<span class="icon-globe-secondary d-flex align-items-center justify-content-center"></span>
+											<i class="icon-globe-secondary"></i>
 										</a>
 									{% endif %}
 								</div>
 							</div>
 						</div>
+
 						<div class="col-12 col-lg-3">
-							<div class="footer-about-us-links-div {% if store.business_location.show_location %}{% endif %}">
-								<h1 class="pb-2" style="font-weight: bold;">
-									{% if about_settings.social_media_title %}
-										{{ about_settings.social_media_title }}
-									{% else %}
-										{{ locals.social_media }}
+							<div class="footer-about-us-links-div">
+								<h1 class="pb-2 font-bold">{{ locals.social_media }}</h1>
+								<div class="social-icons flex gap-3">
+									{% if store.social_media.items.facebook %}
+										<a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
+											<i class="fa-brands fa-facebook-f"></i>
+										</a>
 									{% endif %}
-								</h1>
-								<div class="social-icons  flex- nowrap">
-									<div class="contact">
-										{% if store.social_media.items.facebook %}
-											<a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
-												<i class="fa-brands fa-facebook-f d-flex align-items-center justify-content-center"></i>
-											</a>
-										{% endif %}
-
-										{% if store.social_media.items.instagram %}
-											<a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
-												<i class="fa-brands fa-instagram d-flex align-items-center justify-content-center"></i>
-											</a>
-										{% endif %}
-
-										{% if store.social_media.items.twitter %}
-											<a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
-												<i class="fa-brands fa-x-twitter d-flex align-items-center justify-content-center"></i>
-											</a>
-										{% endif %}
-
-										{% if store.social_media.items.snapchat %}
-											<a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
-												<i class="fa-brands fa-snapchat  d-flex align-items-center justify-content-center"></i>
-											</a>
-										{% endif %}
-
-										{% if store.social_media.items.tiktok %}
-											<a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
-												<i class="fa-brands fa-tiktok  d-flex align-items-center justify-content-center"></i>
-											</a>
-										{% endif %}
-									</div>
+									{% if store.social_media.items.instagram %}
+										<a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
+											<i class="fa-brands fa-instagram"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.twitter %}
+										<a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
+											<i class="fa-brands fa-x-twitter"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.snapchat %}
+										<a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
+											<i class="fa-brands fa-snapchat"></i>
+										</a>
+									{% endif %}
+									{% if store.social_media.items.tiktok %}
+										<a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
+											<i class="fa-brands fa-tiktok"></i>
+										</a>
+									{% endif %}
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div class="footer-copyrights-vat-certificate">
 		<div class="container">
-			<div class="d-flex   flex-wrap align-items-center  footer-store-section-bars" style="border-bottom: 0px;">
+			<div class="d-flex flex-wrap align-items-center justify-between footer-store-section-bars py-4">
 				<div class="footer-icons">
-					<div class="d-flex flex-row {% if store.apps.ios_app_id or store.apps.android_package_name%}justify-content-between{% else %}justify-content-center{% endif %} align-items-center flex-wrap icons-wrapper footer-store-section-bars">
-						{% if store.apps.ios_app_id or store.apps.android_package_name%}
-							<div class="icons social-apps-icons d-flex flex-wrap align-items-center">
-								<div class="google-app-stores apps-social-icons d-flex justify-content-center">
-									{% if store.apps.ios_app_id %}
-										<a href="https://apps.apple.com/app/id{{ store.apps.ios_app_id }}" target="_blank">
-											<img src="{{ asset_url ~ 'app-store.svg' }}" loading="lazy" alt="" width="115px" height="35px">
-										</a>
-									{% endif %}
-									{% if store.apps.android_package_name %}
-										<a href="https://play.google.com/store/apps/details?id={{ store.apps.android_package_name }}" target="_blank">
-											<img src="{{ asset_url ~ 'google-play.svg' }}" loading="lazy" alt="" width="115px" height="35px">
-										</a>
-									{% endif %}
-								</div>
+					<div class="d-flex flex-wrap justify-center items-center gap-4">
+						{% if store.apps.ios_app_id or store.apps.android_package_name %}
+							<div class="icons social-apps-icons">
+								{% if store.apps.ios_app_id %}
+									<a href="https://apps.apple.com/app/id{{ store.apps.ios_app_id }}" target="_blank">
+										<img src="{{ asset_url ~ 'app-store.svg' }}" loading="lazy" alt="App Store" class="w-28">
+									</a>
+								{% endif %}
+								{% if store.apps.android_package_name %}
+									<a href="https://play.google.com/store/apps/details?id={{ store.apps.android_package_name }}" target="_blank">
+										<img src="{{ asset_url ~ 'google-play.svg' }}" loading="lazy" alt="Google Play" class="w-28">
+									</a>
+								{% endif %}
 							</div>
 						{% endif %}
 						<div class="icons w-full">
-							<div class="logistics-pay-icons">
-								{% for shipping_method in store.shipping_methods %}
-									<a href="/shipping-and-payment">
-										<img src="{{ imageUrl(shipping_method.icon,{ h: 80, q: 85 }) }}" loading="lazy" alt="" height="21">
+							<div class="logistics-pay-icons flex-wrap gap-2">
+								{% for vat in store.social_media.items %}
+									<a href="{{ vat.url }}">
+										<img src="{{ vat.image }}" alt="{{ vat.name }}" class="w-16 h-auto">
 									</a>
 								{% endfor %}
-
-
-								{% for payment_method in store.payment_methods %}
-									<a href="/shipping-and-payment">
-										<img src="{{ imageUrl(payment_method.icon,{ h: 80, q: 85 }) }}" loading="lazy" alt="" height="21">
-									</a>
-								{% endfor %}
-
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="vat-crn-sections d-flex flex-row flex-wrap justify-content-end align-items-center">
-					{% if store.vat_settings.is_certificate_visible %}
-						<div class="vat-icon">
-							<a {% if store.vat_settings.tax_registration_certificate %} href="{{ store.vat_settings.tax_registration_certificate }}" target="_blank" {% endif %}>
-								<img src="{{ asset_url ~ 'vat-certificate.png' }}" loading="lazy" alt="" width="auto" height="40px">
-							</a>
-						</div>
-					{% endif %}
-
-					{% if store.social_media.items.business_center %}
-						<div class="maroof-icon">
-							<a href="[https://maroof.sa/{{ 'https://maroof.sa/%7B%7B'~ store.social_media.items.business_center }}" target="_blank">
-								<img src="{{ asset_url ~ 'maroof.png' }}" loading="lazy" alt="" width="auto" height="30px">
-							</a>
-						</div>
-					{% endif %}
-
-					{% if store.vat_settings.vat_number %}
-						<div class="vat-number">
-							<span>{{ locals.footer_vat_number }}</span>
-							<span>{{ store.vat_settings.vat_number }}</span>
-						</div>
-					{% endif %}
-
-					{% if store.commercial_registration_number %}
-						<div class="maroof-icon">
-							<span>{{ locals.footer_commercial_registration_number }}</span>
-							<span>{{ store.commercial_registration_number }}</span>
-						</div>
-					{% endif %}
+				<div class="footer-copyright">
+					<p class="text-center">
+						&copy;
+						<span id="current-year"></span>
+						{{ store.name }}. All rights reserved.
+					</p>
 				</div>
 
-				<div class="d-flex justify-content-center align-items-center">
-					<span class="text-center footer-copyrights">{{ store.copyrights | raw}}</span>
-				</div>
+				<script>
+					document.getElementById('current-year').textContent = new Date().getFullYear();
+				</script>
 
 			</div>
 		</div>
 	</div>
-
-	{% block styles %}
-		<style>
-			.apps-if-newsletter-undifined {
-				margin-top: 25px;
-			}
-
-			.apps-if-newsletter-undifined .apps-paragraph {
-				margin-bottom: 10px;
-				font-size: 18px;
-			}
-		</style>
-	{% endblock %}
-
-	{% block scripts %}
-		<script>
-			const newslettersEle = document.querySelector('.newsletters');
-const apps = document.querySelector('.apps-if-newsletter-undifined');
-const newslettersStorage = localStorage.getItem('newsletter');
-if (newslettersStorage) {
-newslettersEle.classList.remove('hidden');
-} else {
-apps.classList.remove('hidden');
-}
-		</script>
-	{% endblock %}
+</div>
