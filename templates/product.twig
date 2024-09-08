@@ -248,7 +248,7 @@
 									</p>
 								{% endif %}
 								<div class="d-flex">
-									<div>
+									<div class="d-flex items-baseline gap-[12px] mt-[16px]">
 										<h1 class="product-formatted-price text-[24px] font-bold leading-[147%]">
 											{% if product.selected_product.formatted_sale_price %}
 												{{ product.selected_product.formatted_sale_price }}
@@ -482,6 +482,10 @@
 					display: block;
 					text-decoration: none;
 					color: #000000;
+					background:#FFD1DA;
+					font-size:16px;
+					font-weight:bold;
+					line-height:auto;
 				}
 				#abas li.selecionada {
 					background-color: #FFFFFF;
@@ -493,6 +497,9 @@
 					padding-top: 11px;
 					background: var(--primary-color);
 					color: #fff;
+					font-size:16px;
+					font-weight:bold;
+					line-height:auto;
 				}
 				.conteudo {
 					display: block;
@@ -502,25 +509,29 @@
 				.conteudo.visivel {
 					display: block;
 				}
+				.cont-table{
+					border-top:1px solid #CE5A67;
+				}
+				
 			</style>
-			<ul id="abas" class="teste">
+			<ul id="abas" class="teste ">
 				{% if product.description and product.description| striptags | trim | length > 0 %}
 					<li class="selecionada ">
-						<a id="aba_1">تفاصيل المنتج</a>
+						<a id="aba_1" class="rounded-lg">تفاصيل المنتج</a>
 					</li>
 				{% endif %}
 				{% if product.has_variants %}
 					<li>
-						<a id="aba_2">مميزات المنتج</a>
+						<a id="aba_2" class="rounded-lg">مميزات المنتج</a>
 					</li>
 				{% endif %}
 				{% if store.is_product_reviews_enabled %}
 					<li>
-						<a id="aba_3">تقييمات المنتج</a>
+						<a id="aba_3" class="rounded-lg">تقييمات المنتج</a>
 					</li>
 				{% endif %}
 			</ul>
-			<div id="conteudos">
+			<div id="conteudos" class="cont-table">
 				<div id="conteudo_1" class="conteudo visivel">
 					{% if product.description and product.description| striptags | trim | length > 0 %}
 						<section id="product-description" class="mt-5">
@@ -530,12 +541,12 @@
 						</section>
 					{% endif %}
 				</div>
-				<div id="conteudo_2" class="conteudo">
+				<div id="conteudo_2" class="conteudo pt-0">
 					{% if product.has_variants %}
-						<section class="mt-5 product-selection">
-							<div>
-								<div class="card-table d-none d-lg-block">
-									<div class="card">
+						<section class=" product-selection mt-0">
+							<div class=" p-0">
+								<div class="card-table d-none d-lg-block my-0">
+									<div class="card border-0">
 										<div class="card-body card-table-header">
 											<div class="row">
 												{% for option in product.options %}
@@ -547,10 +558,11 @@
 										</div>
 									</div>
 								</div>
+								<div class="table-row-background">
 								{% for variant in product.variants %}
 									{% if not variant.unavailable %}
-										<div class="card-table options-table">
-											<div class="card">
+										<div class=" card-table options-table my-0">
+											<div class="card border-0">
 												<div class="card-body">
 													<div class="row flex-column flex-lg-row align-items-start align-items-lg-center">
 
@@ -602,6 +614,7 @@
 									{% endif %}
 								{% endfor %}
 
+							</div>
 							</div>
 						</section>
 					{% endif %}
@@ -1108,7 +1121,10 @@ swiper: swiper
 }
 });
 
-
+const row = document.querySelectorAll('.table-row-background');
+if (row % 2 === 0) { // الصفوف الفردية (بما أن الفهرس يبدأ من 0، فإن 0 يعني العنصر الأول، 2 يعني الثالث، وهكذا)
+        row.style.backgroundColor = 'red'; // اللون الذي تريده للصفوف الفردية
+      }
 </script>
 
 		{% endblock %} 
