@@ -1,47 +1,45 @@
-<div section-id="{{ sectionId }}"
-     data-lg-scroll-offset="130"
-     data-md-scroll-offset="130"
-     data-sm-scroll-offset="94"
-     class="home-products-section section-padding-space">
-    <div class="container slider-container">
-         <div class="mb-4" style="margin-bottom: 55px;">
-            {% include 'title.twig' with { 'component_title': settings.title } %}
-        </div>
-        <div class="d-flex flex-column">
+<div section-id="{{ sectionId }}" data-lg-scroll-offset="130" data-md-scroll-offset="130" data-sm-scroll-offset="94" class="home-products-section section-padding-space">
+	<div class="container slider-container">
+		<div class="mb-4" style="margin-bottom: 55px;">
+			{% include 'title.twig' with { 'component_title': settings.title } %}
+		</div>
+		<div class="d-flex flex-column">
 
-            <div class="products-slider-wrapper" style="position: relative">
+			<div class="products-slider-wrapper" style="position: relative">
 
-                    <div class="products-slider s-slider">
-                        {% for product in settings.products.products %}
-                            <div class="prod-col">
-                                {% include 'product-card.twig' with {'product' : product, 'index': key} %}
-                            </div>
-                        {% endfor %}
-                    </div>
+				<div class="products-slider s-slider">
+					{% for product in settings.products.products %}
+						<div class="prod-col">
+							{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+						</div>
+					{% endfor %}
+				</div>
 
 
-                {% if settings.more_text %}
-                    <div class="mt-5 text-center category-products-display-more-section">
-                        <a href="{{ settings.products.url }}"
-                           class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+				{% if settings.more_text %}
+					<div class="mt-5 text-center category-products-display-more-section">
+						<a style="width: auto;" href="{{ settings.products.url }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.more_text }}</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </div>
 
-    <script>
+<script>
 
-        document.addEventListener("DOMContentLoaded", function(){
-            var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right': 'icon-keyboard_arrow_left';
-            var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
+	document.addEventListener("DOMContentLoaded", function () {
+var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
+var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left' : 'icon-keyboard_arrow_right';
 
-            var screenWidth = window.screen.width;
+var screenWidth = window.screen.width;
 
-            var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-        });
-    </script>
+var editingMode = {% if store.editing_mode %}
+true
+{% else %}
+false{% endif %};
+});
+</script>
 
 
 {% schema %}

@@ -1,143 +1,80 @@
-<!DOCTYPE html>
-<html lang="ar">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Swiper Slider</title>
+<section id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
+	<div class='slider-bannars_items'>
+		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
+			{% for item in settings.bannars %}
+				<swiper-slide style="background-size: 100% 100% !important; width: 100vw !important; background: url({{ settings.bannar_D_image }})" class="swiper-slide slider-bannars-moving">
+					<div class="photo_one">
+						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
+					</div>
 
-		<!-- إضافة مكتبات Swiper CSS -->
-		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+					<div class=" content">
+						<h2 class="">{{ item.bannar_title }}
+						</h2>
+						<p class="">{{item.bannar_desc}}</p>
+						<a style="margin:0 auto" href="{{item.bannar_url}}">
+							<button class="">
+								{{locals.shop_now}}</button>
+						</a>
+					</div>
 
-		<style>
-			swiper-container {
-				width: 100%;
-				height: 100%;
-			}
+					<div class="photo ">
+						<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
+					</div>
+				</swiper-slide>
+			{% endfor %}
+		</swiper-container>
 
-			swiper-slide {
-				text-align: center;
-				font-size: 18px;
-				background: #fff;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				padding: 20px;
-			}
+	</div>
+</section>
 
-			.photo_one img,
-			.photo img {
-				width: 100%;
-				object-fit: cover;
-			}
 
-			.content {
-				text-align: center;
-				align-items: center;
-			}
+<style>
 
-			@media(max-width: 400px) {
-				.swiper-slide {
-					padding: 10px;
-					font-size: 16px;
-					font-weight: 650;
-				}
+	swiper-container {
+		width: 100%;
+		height: 100%;
+	}
 
-				.photo_one img,
-				.photo img {
-					width: 80%;
-					margin: 0 auto;
-				}
+	swiper-slide {
+		text-align: center;
+		font-size: 18px;
+		background: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-				.content h2 {
-					font-size: 39px;
-				}
+	swiper-slide img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+</style>
 
-				.content p {
-					font-size: 16px;
-				}
 
-				.content button {
-					font-size: 14px;
-					padding: 8px 16px;
-				}
-			}
-
-			/* تعديل حجم ولون النقاط */
-			.swiper-pagination-bullet {
-				width: 10px !important;
-				height: 10px !important;
-				background-color: #f5979d !important; /* لون النقاط */
-				opacity: 1 !important;
-				border-radius: 50% !important; /* جعل النقاط دائرية */
-				margin: 0 3px !important;
-				transition: width 0.3s ease, background-color 0.3s ease !important;
-			}
-
-			/* النقطة النشطة */
-			.swiper-pagination-bullet-active {
-				background-color: #d64d54 !important; /* لون النقطة النشطة */
-				width: 20px !important; /* تغيير العرض لجعل النقطة النشطة مستطيلة */
-				border-radius: 10px !important; /* تغيير الحدود لتكون مستطيلة بأطراف دائرية */
-			}
-		</style>
-	</head>
-	<body>
-
-		<section id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
-			<div class='slider-bannars_items'>
-				<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
-					{% for item in settings.bannars %}
-						<swiper-slide style="background-size: 100% 100% !important; background: url({{ settings.bannar_D_image }}) no-repeat center center/cover;" class="swiper-slide slider-bannars-moving">
-							<div class="photo_one">
-								<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
-							</div>
-
-							<div class="content">
-								<h2 class="">{{ item.bannar_title }}</h2>
-								<p class="">{{item.bannar_desc}}</p>
-								<a style="margin:0 auto" href="{{item.bannar_url}}">
-									<button class="">{{locals.shop_now}}</button>
-								</a>
-							</div>
-
-							<div class="photo">
-								<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
-							</div>
-						</swiper-slide>
-					{% endfor %}
-					<div class="swiper-pagination"></div>
-				</swiper-container>
-			</div>
-		</section>
-
-		<!-- إضافة مكتبات Swiper JS -->
-		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-		<script>
-			document.addEventListener('DOMContentLoaded', function () {
+<script>
+	// swiper
+document.addEventListener('DOMContentLoaded', function () {
 const swiper = new Swiper('.slider-bannars_items .swiper', {
-direction: 'horizontal', /* يمكنك تغييره إلى vertical حسب التصميم */
+direction: 'vertical',
 loop: true,
+
 pagination: {
-el: '.swiper-pagination',
-clickable: true, /* تفعيل النقاط القابلة للنقر */
-dynamicBullets: true /* النقاط الديناميكية */
+el: '.swiper-pagination'
 },
+
 navigation: {
 nextEl: '.swiper-button-next',
 prevEl: '.swiper-button-prev'
 },
+
 scrollbar: {
-el: '.swiper-scrollbar',
-draggable: true
+el: '.swiper-scrollbar'
 }
 });
 });
-		</script>
-
-	</body>
-</html>
+</script>
 
 
 {% schema %}
