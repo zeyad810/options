@@ -9,11 +9,13 @@
 							<p>
 								{{item.square_title}}
 							</p>
-							<a href="{{item.square_url.url}}">
-								<button type="button" class="duration-300">
-									{{locals.shop_now}}
-								</button>
-							</a>
+							{% if settings.button_title %}
+								<a href="{{item.square_url.url}}">
+									<button type="button" class="duration-300 ">
+										{{settings.button_title}}
+									</button>
+								</a>
+							{% endif %}
 						</div>
 					</div>
 				</div>
@@ -26,11 +28,13 @@
 								<p class="mb-2 text-black">
 									{{ item.square_title}}
 								</p>
-								<a href="{{item.square_url.url}}">
-									<button type="button" class="btn-light btn-block">
-										{{locals.shop_now}}
-									</button>
-								</a>
+								{% if settings.button_title %}
+									<a href="{{item.square_url.url}}">
+										<button type="button" class="btn-light btn-block">
+											{{settings.button_title}}
+										</button>
+									</a>
+								{% endif %}
 							</div>
 						</div>
 					</div>
@@ -84,6 +88,13 @@
                 "en": "Picture No. 4 is on the mobile phone"
             }
 		},
+		"button_title":{
+            "type": "text",
+            "label": {
+                "ar": "عنوان للزر",
+                "en": "button Title"
+            }
+        },
         "images": {
             "type": "list",
             "label": {
