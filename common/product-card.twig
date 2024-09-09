@@ -1,38 +1,19 @@
 {% if product %}
 	<div class="product-item {% if product.is_infinite == false and product.quantity <= 0 %}product-item-out-of-stock{% endif %} ">
-		<a class="d-flex flex-column justify-content-start">
+		<a class="d-flex flex-column justify-content-start" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}">
 			<div class="box-1-1">
 				<div class="content">
 					<div class="d-flex justify-content-center" style="width: 100%; height: 100%;">
-						<img id="product-card-img-{{ product.id }}" {% if product.images %} src="{{ imageUrl(product.images[0]['image']['medium'],{ w: 400, q: 85, f:'auto' }) }}" {% else %} src="{{ imageUrl(asset_url ~ 'product-img.svg',{ w: 235, q: 85, f:'auto' }) }}" {% endif %} alt="{{ product.name }}" loading="lazy">
+						<img style="    border-radius: 5.96px;" id="product-card-img-{{ product.id }}" {% if product.images %} src="{{ imageUrl(product.images[0]['image']['medium'],{ w: 400, q: 85, f:'auto' }) }}" {% else %} src="{{ imageUrl(asset_url ~ 'product-img.svg',{ w: 235, q: 85, f:'auto' }) }}" {% endif %} alt="{{ product.name }}" loading="lazy">
 						<span class="product-card-bundle-offer" data-bundle-offer-product-id="{{ product.id }}"></span>
 					</div>
 				</div>
+				<!-- عرض التفاصيل -->
 				<div style=" text-align: center" class="desk">
-					<button type="button"
-						style="margin-bottom: 4px; transition: .3s;"
-						id="open-product-details-{{ product.id }}"
-						class="open-product-details"
-						data-product-id="{{ product.selected_product.id }}"
-						data-product-name="{{ product.name }}"
-						data-product-image="{{ imageUrl(product.images[0]['image']['medium'], { w: 400, q: 85, f: 'auto' }) }}"
-						data-real-price="{{ product.formatted_sale_price ? product.formatted_sale_price : product.formatted_price  }}"
-						data-product-price="{{ product.formatted_price }}"
-						data-discount="{{ product.discount_percentage }}"
-						data-category="{{ product.categories[0].name }}"
-						data-description="{{ product.short_description }}"
-
-						data-id="{{ product.id }}"
-						data-isinfinite="{{ product.is_infinite }}"
-						data-quantity="{{ product.quantity }}"
-						data-has-options="{{ product.has_options }}"
-						data-has-fields="{{ product.has_options }}"
-						data-slug="{{ product.slug }}"
-						data-asset-url="{{ asset_url }}"
-					>
-				<i class="fa-regular fa-eye"></i>
-				<span>عرض التفاصيل</span>
-		</button>
+					<button type="button" style="margin-bottom: 4px; transition: .3s;" id="open-product-details-{{ product.id }}" class="open-product-details" data-product-id="{{ product.selected_product.id }}" data-product-name="{{ product.name }}" data-product-image="{{ imageUrl(product.images[0]['image']['medium'], { w: 400, q: 85, f: 'auto' }) }}" data-real-price="{{ product.formatted_sale_price ? product.formatted_sale_price : product.formatted_price }}" data-product-price="{{ product.formatted_price }}" data-discount="{{ product.discount_percentage }}" data-category="{{ product.categories[0].name }}" data-description="{{ product.short_description }}" data-id="{{ product.id }}" data-isinfinite="{{ product.is_infinite }}" data-quantity="{{ product.quantity }}" data-has-options="{{ product.has_options }}" data-has-fields="{{ product.has_options }}" data-slug="{{ product.slug }}" data-asset-url="{{ asset_url }}">
+						<i class="fa-regular fa-eye"></i>
+						<span>عرض التفاصيل</span>
+					</button>
 
 					{% if product.is_infinite == false and product.quantity <= 0 %}
 						<a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
@@ -46,21 +27,23 @@
 					{% endif %}
 				</div>
 			</div>
+
+			<!-- تفاصيل المنتج -->
 			<div class="product-all-content">
 				<div class="w-[90%]">
 					<div class="product-title" style="margin-top: 15px">
 						<span class="pro-details">
 							<a class="category" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}">{{ product.categories[0].name }}</a>
 							{% if product.is_infinite or product.quantity > 0 %}
-	
+
 								{% if (product.has_options or product.has_fields) %}
 									<small style="font-size: 1.1rem">{{ locals.product_has_options }}</small>
 								{% endif %}
-	
+
 								{% if not product.is_taxable %}
 									<small style="font-size: 1.1rem">{{ locals.product_is_not_taxable }}</small>
 								{% endif %}
-	
+
 							{% endif %}
 						</span>
 						<a style='display: blog; color: #000; font-size: 16px; font-weight: 400;' href="/products/{{ product.slug }}">{{ product.name }}</a>
@@ -75,7 +58,7 @@
 					{% endif %}
 					<div class="product-crd-spec">
 						{% if product.formatted_sale_price is not null %}
-							<div class="section-product-price">
+							<div style="display: flex;gap: 8px; " class="section-product-price">
 								<div class="product-price theme-title-primary">
 									<span>{{ product.formatted_sale_price }}</span>
 								</div>
@@ -91,20 +74,19 @@
 								<span>{{ product.formatted_price }}</span>
 							</div>
 						{% endif %}
-	
-	
-	
+
+
 						{% if product.is_infinite == false and product.quantity <= 0 %}
 							<small style="font-size: 1.1rem">{{ locals.lbl_error_product_out_of_stock }}</small>
 						{% endif %}
 					</div>
 				</div>
-
+				<!-- عرض التفاصيل في الهواتف المحمولة -->
 				<div style=" text-align: center" class="mob">
 					{% if product.is_infinite == false and product.quantity <= 0 %}
 						<a class="btn btn-primary btn-product-card-out-of-stock" disabled>{{ locals.lbl_error_product_out_of_stock }}</a>
 					{% elseif ( product.has_options or product.has_fields ) %}
-						<a class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
+						<a style="width: 100%;" class="btn btn-primary btn-product-card-select-variant" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
 					{% else %}
 						<a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
 							<img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
@@ -118,115 +100,144 @@
 {% endif %}
 
 <style>
-/* إعدادات الـpopup */
-.popup-product-details {
-    display: none; /* مخفي افتراضياً */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* تعتيم الخلفية */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
+	/* إعدادات المكونات */
+	/* .product-item {
+		padding: 15px;
+		margin-bottom: 20px;
+		border: 1px solid #eee;
+		border-radius: 10px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	} */
 
-.popup-content {
-    display: flex;
+	.product-item img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+
+	.text-center button,
+	.text-center a {
+		width: auto;
+		margin-top: 10px;
+		padding: 10px 15px;
+		background-color: #d9534f;
+		color: white;
+		border-radius: 5px;
+		font-size: 14px;
+	}
+
+	.text-center a[disabled] {
+		background-color: #ccc;
+	}
+	/* إعدادات الـpopup */
+	.popup-product-details {
+		display: none; /* مخفي افتراضياً */
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.8); /* تعتيم الخلفية */
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+	}
+
+	.popup-content {
+		display: flex;
 		align-items: center;
 		gap: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    position: relative;
-}
+		background: white;
+		padding: 20px;
+		border-radius: 10px;
+		position: relative;
+	}
 
-.popup-image {
-    max-width: 200px; /* عرض الصورة */
-    margin-right: 20px; /* تباعد بين الصورة والنص */
-}
+	.popup-image {
+		max-width: 200px; /* عرض الصورة */
+		margin-right: 20px; /* تباعد بين الصورة والنص */
+	}
 
-.photo-product {
-	min-width: 200px;
-}
+	.photo-product {
+		min-width: 200px;
+	}
 
-.popup-text {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	max-width: 300px;
-}
+	.popup-text {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		max-width: 300px;
+	}
 
-.popup-text .name {
-	font-size: 19px;
-	font-weight: 700;
-}
+	.popup-text .name {
+		font-size: 19px;
+		font-weight: 700;
+	}
 
-.price-product-discound {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
+	.price-product-discound {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
 
-#close-popup {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    font-size: 24px;
-    color: white;
-}
-
+	#close-popup {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		cursor: pointer;
+		font-size: 24px;
+		color: white;
+	}
 </style>
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		const popupContainer = document.querySelector('div.popup-product-details');
-
-		document.querySelectorAll('.open-product-details').forEach(button => {
-			button.addEventListener('click', function() {
-				const productId = this.getAttribute('data-product-id');
-				const productName = this.getAttribute('data-product-name');
-				const productDescription = this.getAttribute('data-description');
-				const productImage = this.getAttribute('data-product-image');
-				const productRealPrice = this.getAttribute('data-real-price');
-				const productPrice = this.getAttribute('data-product-price');
-				const productDiscount = this.getAttribute('data-discount');
-				const productCategory = this.getAttribute('data-category');
-				const dataId = this.getAttribute('data-id');
-				const prodcutSlug = this.getAttribute('data-slug');
-
-				popupContainer.innerHTML = `
-					<div class="popup-content">	
-						<i class="fa-solid fa-xmark" id="close-popup"></i>
-						<div class='photo-product'>
-							<img src="${productImage}" alt="Product Image" class="popup-image" />
+			const popupContainer = document.querySelector('div.popup-product-details');
+	
+			document.querySelectorAll('.open-product-details').forEach(button => {
+				button.addEventListener('click', function() {
+					const productId = this.getAttribute('data-product-id');
+					const productName = this.getAttribute('data-product-name');
+					const productDescription = this.getAttribute('data-description');
+					const productImage = this.getAttribute('data-product-image');
+					const productRealPrice = this.getAttribute('data-real-price');
+	
+					const productPrice = this.getAttribute('data-product-price');
+					const productDiscount = this.getAttribute('data-discount');
+					const productCategory = this.getAttribute('data-category');
+					const dataId = this.getAttribute('data-id');
+					const prodcutSlug = this.getAttribute('data-slug');
+	
+					popupContainer.innerHTML = `
+						<div class="popup-content">	
+							<i class="fa-solid fa-xmark" id="close-popup"></i>
+							<div class='photo-product'>
+								<img src="${productImage}" alt="Product Image" class="popup-image" />
+							</div>
+	
+							<div class="popup-text">
+								<div class='category'>${productCategory}</div>
+								<div class='name'>${productName}</div>
+								<div class='description'>${productDescription}</div>
+								<div class='product-formatted-price theme-text-primary'>${productRealPrice}</div>
+								${ productDiscount ? 
+									`<div class='price-product-discound'>
+										<del class='price product-formatted-price-old'>${productPrice}</del>
+										<span class="product-formatted-price-discount" style="color:#f25f5f;">{{ locals.product_discount }} ${productDiscount}%</span>
+									</div>`
+								: '' }
+	
+								<a class="btn btn-primary btn-product-card-select-variant" href="/products/${ prodcutSlug }">{{ locals.read_more }}</a>
+	
+							</div>
 						</div>
-
-						<div class="popup-text">
-							<div class='category'>${productCategory}</div>
-							<div class='name'>${productName}</div>
-							<div class='description'>${productDescription}</div>
-							<div class='product-formatted-price theme-text-primary'>${productRealPrice}</div>
-							${ productDiscount ? 
-								`<div class='price-product-discound'>
-									<del class='price product-formatted-price-old'>${productPrice}</del>
-									<span class="product-formatted-price-discount" style="color:#f25f5f;">{{ locals.product_discount }} ${productDiscount}%</span>
-								</div>`
-							: '' }
-
-							<a class="btn btn-primary btn-product-card-select-variant" href="/products/${ prodcutSlug }">{{ locals.read_more }}</a>
-
-						</div>
-					</div>
-				`;
-				popupContainer.style.display = 'flex';
-
-				document.getElementById('close-popup').addEventListener('click', function() {
-					popupContainer.style.display = 'none';
+					`;
+					popupContainer.style.display = 'flex';
+	
+					document.getElementById('close-popup').addEventListener('click', function() {
+						popupContainer.style.display = 'none';
+					});
 				});
 			});
 		});
-	});
-</script>
+	</script>
