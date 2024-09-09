@@ -1378,7 +1378,7 @@ ul.main-nav > li ul.sub-menu-lists > li > a {
 }
 /* breadCrumb-twig */
 .breadcrumb-section{
-    background-color: var( --secondary-color);
+    background-color: transparent;
 }
 
 .breadcrumb-item a{
@@ -1394,7 +1394,7 @@ ul.main-nav > li ul.sub-menu-lists > li > a {
 /* breadCrumb-subTitle-detail-twig */
 .subTitle-detail{
     margin-top: -15px;
-    background-color: var(--secondary-color-alt5);
+    background-color: transparent;
     padding: 30px 30px;
 }
 .bread-title{

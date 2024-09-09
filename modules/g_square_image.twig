@@ -9,9 +9,8 @@
 							<p>
 								{{item.square_title}}
 							</p>
-
 							{% if settings.button_title %}
-								<a href="{{settings.square_url}}">
+								<a href="{{item.square_url.url}}">
 									<button type="button" class="duration-300 ">
 										{{settings.button_title}}
 									</button>
@@ -30,7 +29,7 @@
 									{{ item.square_title}}
 								</p>
 								{% if settings.button_title %}
-									<a href="{{settings.square_url}}">
+									<a href="{{item.square_url.url}}">
 										<button type="button" class="btn-light btn-block">
 											{{settings.button_title}}
 										</button>
@@ -118,7 +117,7 @@
                         }
                     },
                     "square_url": {
-                        "type": "url",
+                        "type": "category",
                         "label": {
                             "ar": "الرابط",
                             "en": "link"
@@ -129,4 +128,6 @@
         }
     }
 }
+
+
 {% endschema %}
