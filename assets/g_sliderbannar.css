@@ -116,7 +116,7 @@
 /* Responsive: Move Image Down on Smaller Screens */
 @media (min-width: 640px) {
   .photo{
-    align-self: flex-end;
-    transform: translateY(50px);
+    /* align-self: flex-end;
+    transform: translateY(50px); */
   }
 }

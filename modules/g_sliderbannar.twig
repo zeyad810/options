@@ -47,9 +47,11 @@
 		text-align: center;
 		font-size: 18px;
 		background: #fff;
-		display: flex;
+		/* display: flex; */
 		justify-content: center;
 		align-items: center;
+        display: flex !important;
+        flex-direction: row !important;
 	}
 
 	swiper-slide img {
@@ -59,12 +61,30 @@
 		object-fit: cover;
 	}
 
+
+@media (max-width: 767px) {
+		.photo_one {
+			display: none; /* إخفاء الصورة الأولى في الشاشات الصغيرة */
+		}
+
+		swiper-slide {
+			flex-direction: column !important; /* تغيير الاتجاه ليصبح عمودي */
+			align-items: center !important;
+		}
+        .content {
+			margin-bottom: 20px; /* إضافة مسافة أسفل النص */
+            justify-content: center !important;
+            align-items: center !important;
+		}
+}
+
   .content .percent {
 font-size:48px;
 color:#9A3B3B;
 font-weight:bold
   }
  
+
 </style>
 
 
