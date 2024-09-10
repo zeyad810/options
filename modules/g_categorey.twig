@@ -1,149 +1,48 @@
 <head>
-	<!-- Swiper CSS -->
-	<link
-	rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-	<!-- Font Awesome -->
-	<link
-	rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<!-- Swiper JS -->
-	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-	{# styling #}
-	<style>
-		.swiper-button-next,
-		.swiper-button-prev {
-			/* top: -66px !important; */
-            position: absolute;
-            top: 50% ;
-            transform: translateY(-50%);
-            background-color: #fff;
-            border: 1px solid #C0C0C0;
-            border-radius: 4px;
-            padding: 20.49px 21px;
-            z-index: 10;
-		}
-		.swiper-button-next:hover,
-		.swiper-button-prev:hover {
-			border: 1px solid #E7ADB3 !important;
-		}
-		.swiper-button-next {
-			left: 70px !important;
-		}
-		.swiper-button-next:after,
-		.swiper-rtl .swiper-button-prev:after {
-			font-size: 19px !important;
-			color: #C0C0C0;
-		}
-		.swiper-button-prev:after,
-		.swiper-rtl .swiper-button-next:after {
-			font-size: 19px !important;
-			color: #C0C0C0;
-		}
-		.swiper-button-next:focus::after,
-		.swiper-button-prev:focus::after {
-			color: #CE5A67 !important;
-		}
-        /*  */
-		.container {
-			overflow-x: hidden; /* إخفاء شريط التمرير الأفقي */
-			overflow-y: hidden; /* إخفاء شريط التمرير الرأسي */
-		}
-
-		.swiper-container {
-			max-width: 100%; /* تأكد من أن المحتوى لن يتجاوز العرض الكامل */
-			overflow: hidden; /* إخفاء أي محتوى زائد */
-		}
-
-		.swiper-wrapper {
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
-		}
-
-		.swiper-slide {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-		}
-/*  */
-		@media(max-width:762px) {
-			.content_btns {
-				left: 10%;
-			}
-		}
-		@media(max-width:425px) {
-			.content_btns {
-				left: 5%;
-			}
-		}
-	</style>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    {# styling #}
+    <style>
+        .swiper-button-next,
+        .swiper-button-prev{
+            top: -66px !important;
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover{
+            border: 1px solid #E7ADB3 !important;
+        }
+        .swiper-button-next{
+            left: 70px !important;
+        }
+        .swiper-button-next:after,
+        .swiper-rtl .swiper-button-prev:after {
+            font-size:19px !important;
+            color: #C0C0C0;
+        }
+        .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
+            font-size: 19px !important;
+            color: #C0C0C0;
+        }
+        .swiper-button-next:focus::after,
+        .swiper-button-prev:focus::after {
+            color: #CE5A67 !important;
+        }
+        @media(max-width:762px){
+            .content_btns{
+                left: 10%;
+            }
+        }
+        @media(max-width:425px){
+            .content_btns{
+                left: 5%;
+            }
+        }
+    </style>
 </head>
-
-<body>
-	<section id="g_cat_{{ sectionId }}" class="g_cat" style="background-color: #fff; padding:70px 0px;" dir="ltr">
-		<div style="padding-bottom: 50px;">
-			{% include 'title.twig' with { 'component_title': settings.section_title } %}
-		</div>
-		<!-- أزرار التنقل -->
-		<div class="content_btns absolute {% if settings.slider_toggle == " false" %} d-none {% endif %}" style="left: 8%; margin-top:20px;">
-			<div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;"></div>
-			<div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;"></div>
-		</div>
-		<div class="container overflow-x-hidden">
-			<div class=" {% if settings.slider_toggle == " true" %}swiper-container slider bg-white{% endif %}">
-				<div class=" {% if settings.slider_toggle == " true" %} swiper-wrapper {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
-					{% for item in settings.categorys %}
-						<div class="{% if settings.slider_toggle == "true" %} swiper-slide category flex flex-col items-center products-item {% endif %}" style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
-							<div class="overflow-hidden rounded image-parent">
-								<a href="{{ item.cat_url }}">
-									<img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
-								</a>
-							</div>
-							<a href="{{ item.cat_url }}">
-								<h3 class="mt-3 text-center font-medium text-dark text-xl">
-									{{ item.category_name }}
-								</h3>
-							</a>
-						</div>
-					{% endfor %}
-				</div>
-
-
-			</div>
-		</div>
-	</section>
-
-	<script>
-// 		document.addEventListener('DOMContentLoaded', function () {
-// var swiperElement = document.querySelector('.swiper-container.slider');
-
-// if (swiperElement) {
-// var swiper = new Swiper('.swiper-container', {
-// slidesPerView: 2,
-// spaceBetween: 10,
-// breakpoints: {
-// 480: {
-// slidesPerView: 3,
-// spaceBetween: 30
-// },
-// 762: {
-// slidesPerView: 4,
-// spaceBetween: 30
-// },
-// 991: {
-// slidesPerView: 5,
-// spaceBetween: 30
-// }
-// },
-// navigation: {
-// nextEl: '.swiper-button-next',
-// prevEl: '.swiper-button-prev'
-// }
-// });
-
-// }
-// });
-
 <body> 
     <section id="g_cat_{{ sectionId }}" class="g_cat" style="background-color: #fff; padding:70px 0px;" dir="ltr">
             <div  style="padding-bottom: 50px; margin-bottom: 50px;">
@@ -159,8 +58,8 @@
                 </div>
             </div>
             <div class="container overflow-x-hidden">
-                <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider bg-white{% endif %}">
-                    <div class=" {% if settings.slider_toggle == "true" %} swiper-wrapper {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
+                <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider bg-white{% endif %} h-auto">
+                    <div class=" {% if settings.slider_toggle == "true" %} swiper-wrapper h-auto {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
                         {% for item in settings.categorys %}
                             <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
                                  style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }}">
@@ -183,7 +82,6 @@
     </section>
     
 <script>
-
 document.addEventListener('DOMContentLoaded', function () {
     var swiperElement = document.querySelector('.swiper-container.slider');
 
@@ -209,16 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        scrollbar: {
-            el: '.swiper-scrollbar',
-            hide: true,  // لإخفاء شريط التمرير الرأسي
-        },
     });
     
     }
 });
-
-	</script>
+</script>
 </body>
 
 {% schema %}
