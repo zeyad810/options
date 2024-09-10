@@ -9640,6 +9640,7 @@ lite-youtube.lyt-activated > .lty-playbtn {
 }
 .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
   content: "prev";
+  display: none;
 }
 .swiper-button-next, .swiper-rtl .swiper-button-prev {
   right: 10px;
@@ -9647,6 +9648,7 @@ lite-youtube.lyt-activated > .lty-playbtn {
 }
 .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
   content: "next";
+  display: none;
 }
 .swiper-button-lock {
   display: none;

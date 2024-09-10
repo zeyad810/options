@@ -136,7 +136,9 @@
 }
 
 .products-details-page h4 {
-    font-size: 1.3rem;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
 }
 
 
@@ -305,10 +307,11 @@
 }
 
 .card-table-header{
-    background-color: var(--primary-color);
-    color:#fff;
-    font-size: 1.167rem;
-    font-weight: var(--font-weight-sizeOne);
+    background-color: #fff;
+    color:#000;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 25px;
 }
 .card-text-color{
     color:var(--secondary-color-alt3);
@@ -604,6 +607,9 @@
 
 .description-text-clear *{
     max-width: 100% !important;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: auto;
 }
 
 .bundle-offer-details-products {

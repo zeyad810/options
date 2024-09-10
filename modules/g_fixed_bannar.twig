@@ -15,16 +15,24 @@
             }
         }
 
+
         .swiper-container {
             width: 100vw;
             height: 100vh;
         }
+
+    .baner_swiber.swiper-container {
+        width: 100vw;
+        height: 100vh;
+    }
+
 
         .baner_swiber .swiper-pagination {
             bottom: 20px;
             display: flex;
             justify-content: center;
         }
+
 
         .baner_swiber .swiper-pagination-bullet {
             width: 15px;
@@ -35,6 +43,14 @@
             opacity: 0.7;
             transition: all 0.3s ease;
         }
+
+    @media (max-width: 700px) {
+        .baner_swiber.swiper-container {
+            height: auto;
+        }
+    }
+</style>
+
 
         .baner_swiber .swiper-pagination-bullet.swiper-pagination-bullet-active {
             width: 25px;

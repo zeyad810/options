@@ -221,7 +221,7 @@
 
 				</div>
 			</div>
-				<div class="main flex-grow-1 app-content" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
+				<div class="main flex-grow-1 app-content" style="background-color:#fff;" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
 					</div>
 					<div class="footer"> {% block footer %}{% endblock %}
 						</div>
@@ -299,6 +299,12 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				</script>
 
 				<!-- Initialize Swiper -->
+				<link
+				rel="stylesheet"
+				href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+				/>
+
+				
 				<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 				
 				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
