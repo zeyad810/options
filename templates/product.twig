@@ -359,7 +359,7 @@
 									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
 									<span>{{ locals.add_to_cart }}</span>
 								</button>
-								<button id="product-view-add-to-cart" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
+								<button id="" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
 									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
 									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
 									<span>{{ locals.add_to_cart }}</span>
@@ -773,7 +773,7 @@ conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
 
 					<div class="slider-inspire container overflow-hidden description-paragrah">
 						<div class="swiper-container">
-							<div class="swiper-wrapper">
+							<div class="swiper-wrapper justify-center">
 								{% for key,rProduct in product.related_products %}
 									<div class="swiper-slide prod-col">
 										{% include 'product-card.twig' with {'product' : rProduct, 'index': key} %}
