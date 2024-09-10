@@ -1,0 +1,211 @@
+{# start section banner component #}
+<section id="g_banner">
+    <div class="container g_banner_content">
+        {# cards #}
+        {% for card in settings.collection %}
+        <div id="card-{{ loop.index }}" 
+            style="background: url({{card.collection_image}}) center no-repeat;
+            {% if loop.index == 2 and card.collection_position == "start" %} align-items:start;
+            {% elseif loop.index == 3 and card.collection_position == "end" %} align-items:end;
+            {% elseif card.collection_position == "middle" %} align-items:center; {% endif %}">
+            <p style="color: {{ card.collection_color }};"> {{ card.collection_name }} </p>
+            <div class="content-btn">
+                <a href="{{ card.collection_url }}" id="a-{{loop.index}}"> {{ card.collection_text_btn }} </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{# styling #}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+    .g_banner_content{
+        display: grid;
+        grid-template-columns: repeat(2 , 1fr);
+        grid-template-rows: repeat(2 , 1fr);
+        gap: 10px;
+        grid-template-areas: 
+        "one two" 
+        "one three";
+    }
+    .g_banner_content #card-1{
+        grid-area: one;
+        aspect-ratio: 1.99 / 1.7;
+        display: flex;
+        align-items: flex-end;
+    }
+    .g_banner_content #card-1 p{
+        font-weight: 700;        
+        font-size: 50px;
+        text-align: center;
+        font-family: "Cairo", sans-serif;
+        line-height: 60px;
+        padding: 0px 20px 20px 20px;
+    }
+    .g_banner_content #card-2{
+        grid-area: two;
+        aspect-ratio: 867 / 360;
+        padding: 0px 20px;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .g_banner_content #card-2 p{
+        font-weight: 700;        
+        font-size: 30px;
+        font-family: "Cairo", sans-serif;
+    }
+    .g_banner_content #card-3{
+        grid-area: three;
+        aspect-ratio: 867 / 361;
+        padding: 0px 20px;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .g_banner_content #card-3 p{
+        font-weight: 700;        
+        font-size: 30px;
+        font-family: "Cairo", sans-serif;
+    }   
+    .g_banner_content .content-btn #a-2{
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 9px 30px;
+        margin-right:10px;
+    }
+    .g_banner_content .content-btn #a-3{
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 9px 30px;
+        margin-left:10px;
+    }
+    /* media */
+    @media (max-width: 768px ){
+        .g_banner_content{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .g_banner_content #card-1,
+        .g_banner_content #card-2,
+        .g_banner_content #card-3{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: 425px ){
+        .g_banner_content{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .g_banner_content #card-1,
+        .g_banner_content #card-2,
+        .g_banner_content #card-3{
+            width: 100%;
+            height: 100%;
+        }
+    }
+</style>
+
+{# start schema #}
+{% schema %}
+{
+    "name":{
+        "ar" : "بانر-دعائي",
+        "en" : "Advertising-banner"
+    },
+    "icon": "fal fa-user",
+    "display": true,
+    "settings": {
+        "collection": {
+            "type": "list",
+            "label": {
+                "ar": "بنر",
+                "en": "banner"
+            },
+            "info": {
+                "ar": "يجب ان تكون صورة البنر الاول ضعف طول باقى الصور",
+                "en": "the first image must be doubled than other images"
+            },
+            "settings": {
+                "collection_image": {
+                    "type": "image",
+                    "label": {
+                        "ar": "صوره البنر",
+                        "en": "banner Image"
+                    }
+                },
+                "collection_name": {
+                    "type": "text",
+                    "label": {
+                        "ar": "النص الدعائى",
+                        "en": "Advertising-text"
+                    }
+                },
+                "collection_color": {
+                    "type": "color",
+                    "label": {
+                      "ar": "لون النص",
+                      "en": "text-color"
+                    }
+                },
+                "collection_url": {
+                    "type": "url",
+                    "label": {
+                        "ar": "الرابط",
+                        "en": "Link"
+                    }
+                },
+                "collection_text_btn": {
+                    "type": "text",
+                    "label": {
+                        "ar": "نص الزر",
+                        "en": "text-btn"
+                    }
+                },
+                "collection_color_btn": {
+                    "type": "color",
+                    "label": {
+                        "ar": "لون نص الزر",
+                        "en": "color-btn"
+                    }
+                },
+                "collection_position": {
+                    "type": "radios",
+                    "label": {
+                      "ar": "مكان النص",
+                      "en": "text-position"
+                    },
+                    "options": [
+                      {
+                        "value": "start",
+                        "label": {
+                          "ar": "في البداية",
+                          "en": "in the start"
+                        }
+                      },
+                      {
+                        "value": "middle",
+                        "label": {
+                          "ar": "في المنتصف",
+                          "en": "in the middle"
+                        }
+                      },
+                      {
+                        "value": "end",
+                        "label": {
+                          "ar": "في النهاية",
+                          "en": "in the end"
+                        }
+                      }
+                    ]
+                }
+            }
+        }
+    }
+}
+{% endschema %}

@@ -1,112 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swiper Slider</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Swiper Slider</title>
 
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+		<!-- Swiper CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-    <style>
-        @media (max-width: 576px) {
-            .landing-page-fixed-bannar-{{sectionId}} {
-                background-image: url('{{ settings.bannar_bg_mobile }}') !important;
-            }
-        }
+		<style>
+			@media(max-width: 576px) {
+				.landing-page-fixed-bannar-{{sectionId}}{
+					background-image: url('{{ settings.bannar_bg_mobile }}') !important;
+				}
+			}
 
 
-        .swiper-container {
-            width: 100vw;
-            height: 100vh;
-        }
+			.swiper-container {
+				width: 100vw;
+				height: 100vh;
+			}
 
-    .baner_swiber.swiper-container {
-        width: 100vw;
-        height: 100vh;
+			.baner_swiber.swiper-container {
+				width: 100vw;
+				height: 100vh;
+			}
+
+
+			.baner_swiber .swiper-pagination {
+				bottom: 20px;
+				display: flex;
+				justify-content: center;
+			}
+
+
+			.baner_swiber .swiper-pagination-bullet {
+				width: 15px;
+				height: 15px;
+				margin: 0 5px;
+				border-radius: 10px;
+				background: #d68d9c;
+				opacity: 0.7;
+				transition: all 0.3s ease;
+			}
+
+			@media(max-width: 700px) {
+				.baner_swiber.swiper-container {
+					height: auto;
+				}
+			}
+
+
+			.baner_swiber .swiper-pagination-bullet.swiper-pagination-bullet-active {
+				width: 25px;
+				background: #b54459;
+				opacity: 1;
+			}
+			.swiper-pagination-bullet-active {
+				background: #b54459;
+			}
+		</style>
+	</head>
+	<body>
+
+		<section section-id="{{ sectionId }}">
+
+			<swiper-container pagination="true">
+				{% for item in settings.slider %}
+					<swiper-slide>
+						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar">
+							<div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
+								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
+								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
+								<a href='{{item.slider_bannar_url}}'>
+									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
+								</a>
+							</div>
+						</div>
+					</swiper-slide>
+				{% endfor %}
+			</swiper-container>
+			<!-- Add Pagination -->
+
+		</section>
+
+		<!-- Swiper JS -->
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+let swiperFixBaner = new Swiper('.baner_swiber', {
+slidesPerView: 1,
+pagination: {
+el: '.swiper-pagination',
+clickable: true
+},
+loop: true, // تعطيل الانتقال المستمر لضمان تطابق عدد النقاط
+autoplay: {
+delay: 5000, // تغيير الشريحة كل 5 ثوانٍ
+disableOnInteraction: false, // استمرار التبديل التلقائي بعد التفاعل
+},
+observer: true, // مراقبة التغييرات في DOM
+observeParents: true, // مراقبة التغييرات في عناصر الوالدين
+});
+});
+//
+// الشكل
+document.addEventListener('DOMContentLoaded', function () {
+  const swiperElement = document.querySelector('swiper-container');
+  const shadowRoot = swiperElement.shadowRoot;
+
+  // استهداف جميع النقاط (bullets)
+  const bullets = shadowRoot.querySelectorAll('.swiper-pagination-bullet');
+
+  // تغيير شكل النقاط بناءً على حالة الاكتف
+  bullets.forEach(bullet => {
+    if (!bullet.classList.contains('swiper-pagination-bullet-active')) {
+      // النقاط غير النشطة تكون دائرية
+      bullet.style.backgroundColor = 'rgba(206, 90, 103, 1)'; // اللون الوردي الفاتح
+      bullet.style.width = '10px';
+      bullet.style.height = '10px';
+    //   bullet.style.borderRadius = '50%'; // لجعل النقاط غير النشطة دائرية
+    } else {
+      // النقطة النشطة تكون بيضاوية
+      bullet.style.backgroundColor = 'rgba(206, 90, 103, 1)'; // اللون الأحمر الغامق
+      bullet.style.width = '10px';
+      bullet.style.height = '10px';
+    //   bullet.style.borderRadius = '20px'; // لجعل النقطة النشطة بيضاوية
     }
+  });
+});
 
 
-        .baner_swiber .swiper-pagination {
-            bottom: 20px;
-            display: flex;
-            justify-content: center;
-        }
+// حسين
+// document.addEventListener('DOMContentLoaded', function () {
+// const swiperElement = document.querySelector('swiper-container');
+// const shadowRoot = swiperElement.shadowRoot;
 
 
-        .baner_swiber .swiper-pagination-bullet {
-            width: 15px;
-            height: 15px;
-            margin: 0 5px;
-            border-radius: 10px;
-            background: #d68d9c;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-    @media (max-width: 700px) {
-        .baner_swiber.swiper-container {
-            height: auto;
-        }
-    }
-</style>
+// const bullets = shadowRoot.querySelectorAll('.swiper-pagination-bullet');
 
 
-        .baner_swiber .swiper-pagination-bullet.swiper-pagination-bullet-active {
-            width: 25px;
-            background: #b54459;
-            opacity: 1;
-        }
-        .swiper-pagination-bullet-active {
-            background: #b54459;
-        }
-    </style>
-</head>
-<body>
+// bullets.forEach(bullet => {
+// if (!bullet.classList.contains('swiper-pagination-bullet-active')) {
+// bullet.style.backgroundColor = 'rgba(206, 90, 103, 1)'; 
+// }
+// });
+// });
+// علي
+// document.addEventListener('DOMContentLoaded', function () {
+// const swiperElement = document.querySelector('swiper-container');
+// const shadowRoot = swiperElement.shadowRoot;
+// const activeBullet = shadowRoot.querySelector('.swiper-pagination-bullet-active');
 
-<section section-id="{{ sectionId }}">
+// if (activeBullet) {
+// activeBullet.style.backgroundColor = 'rgba(206, 90, 103, 1)';
+// }
+// });
+		</script>
 
-        <swiper-container  pagination="true">
-            {% for item in settings.slider %}
-                <swiper-slide>
-                    <div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar">
-                        <div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
-                            <h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
-                            <p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
-                            <a href='{{item.slider_bannar_url}}'>
-                                <button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
-                            </a>
-                        </div>
-                    </div>
-                </swiper-slide>
-            {% endfor %}
-        </swiper-container>
-        <!-- Add Pagination -->
-    
-</section>
-
-<!-- Swiper JS -->
- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let swiperFixBaner = new Swiper('.baner_swiber', {
-            slidesPerView: 1,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            loop: true, // تعطيل الانتقال المستمر لضمان تطابق عدد النقاط
-            autoplay: {
-                delay: 5000, // تغيير الشريحة كل 5 ثوانٍ
-                disableOnInteraction: false, // استمرار التبديل التلقائي بعد التفاعل
-            },
-            observer: true, // مراقبة التغييرات في DOM
-            observeParents: true, // مراقبة التغييرات في عناصر الوالدين
-        });
-    });
-</script>
-
-</body>
+	</body>
 </html>
 
 
