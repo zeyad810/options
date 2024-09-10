@@ -89,17 +89,18 @@ document.addEventListener('DOMContentLoaded', function () {
       var swiper = new Swiper('.swiper-container.category-slider', {
         slidesPerView: 2,
         spaceBetween: 10,
+        loop:true,
         breakpoints: {
             480: {
                 slidesPerView: 3,
-                spaceBetween: 30
+                spaceBetween: 25
             },
             762: {
               slidesPerView: 4,
-              spaceBetween: 30
+              spaceBetween: 25
             },
             991: {
-              slidesPerView: 5,
+              slidesPerView: 8,
               spaceBetween: 25
             },
         },

@@ -1,41 +1,20 @@
-<div section-id="{{ sectionId }}"
-     data-lg-scroll-offset="130"
-     data-md-scroll-offset="130"
-     data-sm-scroll-offset="94"
-     class="home-products-section section-padding-space g_products_section slide-review">
-
-    <!-- أزرار التنقل -->
-    <div class="content_btn absolute" style="left: 8%; margin-top:20px;">
-      <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-      </div>
-      <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-      </div>
-    </div>
-    
-  <div class="container slider-container">
-         <div class="mb-4" style="margin-bottom: 55px;">
-          <div class="container container_review">
-            <div class="image-title" style="margin: 70px;" >
-             <h1> {{settings.title}} </h1>
-            </div> 
-        </div>
-        <div class="d-flex flex-column">
+<div section-id="{{ sectionId }}" data-lg-scroll-offset="130" data-md-scroll-offset="130" data-sm-scroll-offset="94" class="home-products-section section-padding-space">
+	<div class="container slider-container">
+		<div class="mb-4" style="margin-bottom: 55px;">
+			{% include 'title.twig' with { 'component_title': settings.title } %}
+		</div>
+		<div class="d-flex flex-column">
 
 			<div class="products-slider-wrapper" style="position: relative">
 
-                <div class="products-slider swiper-container">
-                    <div class="swiper-wrapper">
-                        {% for product in settings.products.products %}
-                            <div class="swiper-slide prod-col">
-                                {% include 'product-card.twig' with {'product' : product, 'index': key} %}
-                            </div>
-                        {% endfor %}
-                    </div>
+				<div class="products-slider s-slider">
+					{% for product in settings.products.products %}
+						<div class="prod-col">
+							{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+						</div>
+					{% endfor %}
+				</div>
 
-                    <!-- أزرار التنقل -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
 
 				{% if settings.more_text %}
 					<div class="mt-5 text-center category-products-display-more-section">
@@ -46,47 +25,8 @@
 		</div>
 	</div>
 </div>
-{# style #}
-<style>
-  
-   .g_products_section .swiper-button-next,
-   .g_products_section .swiper-button-prev{
-            top: 45px ;
-    }
-    .g_products_section .swiper-button-next:hover,
-    .g_products_section .swiper-button-prev:hover{
-            border: 1px solid #E7ADB3 ;
-    }
-    .g_products_section .swiper-button-next{
-            left: 70px ;
-    }
-    .g_products_section .swiper-button-next:after,
-    .g_products_section .swiper-rtl .swiper-button-prev:after {
-            font-size:19px ;
-            color: #C0C0C0;
-    }
-    .g_products_section .swiper-button-prev:after,
-    .g_products_section .swiper-rtl .swiper-button-next:after {
-            font-size: 19px ;
-            color: #C0C0C0;
-    }
-    .g_products_section .swiper-button-next:focus::after,
-    .g_products_section .swiper-button-prev:focus::after {
-            color: #CE5A67 ;
-    }
-      @media(max-width:762px){
-        .g_products_section .content_btn{
-                left: 10%;
-            }
-        }
-        @media(max-width:425px){
-          .g_products_section .content_btn{
-                left: 5%;
-            }
-        }
-</style>
-{# script #}
-    <script>
+
+<script>
 
 	document.addEventListener("DOMContentLoaded", function () {
 var arrowNextClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_right' : 'icon-keyboard_arrow_left';
@@ -94,30 +34,12 @@ var arrowPrevClass = (window.appDirection === 'ltr') ? 'icon-keyboard_arrow_left
 
 var screenWidth = window.screen.width;
 
-            var editingMode = {% if store.editing_mode %}true{% else %}false{% endif %};
-
-        // تهيئة Swiper
-        var swiper = new Swiper('.slide-review', {
-            loop: true,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                },
-                600: {
-                    slidesPerView: 2,
-                },
-                1000: {
-                    slidesPerView: 3,
-                }
-            }
-        });
-    });
-    </script>
+var editingMode = {% if store.editing_mode %}
+true
+{% else %}
+false{% endif %};
+});
+</script>
 
 
 {% schema %}
