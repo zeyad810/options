@@ -90,13 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isAutoplay) {
     videoTag.style.display = 'block'; 
-    videoTag.style.opacity = '1'; 
+    videoTag.style.opacity = 1; 
     bgImage.style.display = 'none'; 
     textBox.style.display = 'none'; 
     playButton.style.display = 'none';
     videoTag.play(); 
   } else {
     videoTag.style.display = 'none';
+    videoTag.style.opacity = 0;
     playButton.style.display = 'block'; 
     textBox.style.display = 'flex'; 
     bgImage.style.display = 'block';

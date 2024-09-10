@@ -9446,6 +9446,7 @@ lite-youtube.lyt-activated > .lty-playbtn {
 }
 :root {
   --swiper-theme-color:#007aff;
+  --swiper-theme-btn-color:#CE5A67;
 }
 .swiper {
   margin-left: auto;
@@ -9606,8 +9607,8 @@ lite-youtube.lyt-activated > .lty-playbtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #007aff;
-  color: var(--swiper-navigation-color, var(--swiper-theme-color));
+  color:  var(--primary-color) !important;
+  font-size: 22px;
 }
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
   opacity: 0.35;
