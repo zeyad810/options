@@ -1,11 +1,9 @@
 <section id="slider_bannar_g" section-id="{{ sectionId }}" class="slider-bannars pt-96">
 	<div class='slider-bannars_items'>
-    <div class="content_btns absolute" style="left: 8%; display: none;">
-      <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-      </div>
-        <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-      </div>
-    </div>
+		<div class="content_btns absolute" style="left: 8%; display: none;">
+			<div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;"></div>
+			<div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;"></div>
+		</div>
 		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
 
 			{% for item in settings.bannars %}
@@ -16,88 +14,87 @@
 					</div>
 
 					<div class=" content">
-						<h2>{{ item.bannar_title}} <span class="percent">{{item.bannar_percentage}}</h2> 
-						<p style = "color:{{item.bannar_color}}">{{item.bannar_desc}}</p>
-						<a style="margin:0 auto" href="{{item.bannar_url}}">
-							<button style = "color:{{item.btn_text}}">
-								{{locals.Discover_more}}</button>
-						</a>
-					</div>
+						<h2>{{ item.bannar_title}}
+							<span class="percent">{{item.bannar_percentage}}</h2>
+							<p style="color:{{item.bannar_color}}">{{item.bannar_desc}}</p>
+							<a style="margin:0 auto" href="{{item.bannar_url}}">
+								<button style="color:{{item.btn_text}}">
+									{{locals.Discover_more}}</button>
+							</a>
+						</div>
 
-					<div class="photo ">
-						<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
-					</div>
-				</swiper-slide>
-			{% endfor %}
-		</swiper-container>
-     <div class= "navigate "></div>
-	</div>
-</section>
-
-
-<style>
+						<div class="photo">
+							<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
+						</div>
+					</swiper-slide>
+				{% endfor %}
+			</swiper-container>
+			<div class="navigate "></div>
+		</div>
+	</section>
 
 
-	swiper-container {
-		width: 100%;
-		height: 100%;
-	}
-
-	swiper-slide {
-		text-align: center;
-		font-size: 18px;
-		background: #fff;
-		/* display: flex; */
-		justify-content: center;
-		align-items: center;
-        display: flex !important;
-        flex-direction: row !important;
-	}
-
-	swiper-slide img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+	<style>
 
 
-@media (max-width: 767px) {
-		.photo_one {
-			display: none; /* إخفاء الصورة الأولى في الشاشات الصغيرة */
+		swiper-container {
+			width: 100%;
+			height: 100%;
 		}
 
 		swiper-slide {
-			flex-direction: column !important; /* تغيير الاتجاه ليصبح عمودي */
-			align-items: center !important;
+			text-align: center;
+			font-size: 18px;
+			background: #fff;
+			/* display: flex; */
+			justify-content: center;
+			align-items: center;
+			display: flex !important;
+			flex-direction: row !important;
 		}
-        .content {
-			margin-bottom: 20px; /* إضافة مسافة أسفل النص */
-            justify-content: center !important;
-            align-items: center !important;
+
+		swiper-slide img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
-}
-
-  .content .percent {
-font-size:48px;
-color:#9A3B3B;
-font-weight:bold
-  }
- 
-
-</style>
 
 
-<script>
+		@media(max-width: 767px) {
+			.photo_one {
+				display: none; /* إخفاء الصورة الأولى في الشاشات الصغيرة */
+			}
 
-	// swiper
+			swiper-slide {
+				flex-direction: column !important; /* تغيير الاتجاه ليصبح عمودي */
+				align-items: center !important;
+			}
+			.content {
+				margin-bottom: 20px; /* إضافة مسافة أسفل النص */
+				justify-content: center !important;
+				align-items: center !important;
+			}
+		}
+
+		.content .percent {
+			font-size: 48px;
+			color: #9A3B3B;
+			font-weight: bold
+		}
+	</style>
+
+
+	<script>
+
+		// swiper
 document.addEventListener('DOMContentLoaded', function () {
 const swiper = new Swiper('.slider-bannars_items .swiper', {
 
 direction: 'vertical',
 loop: true,
 pagination: {
-el:".navigate",
+el: ".navigate",
 clickable: true,
 dynamicBullets: true
 },
@@ -114,90 +111,90 @@ el: '.swiper-scrollbar'
 
 });
 });
-</script>
+	</script>
 
 
-{% schema %}
-{
-    "name": {
-        "ar": "بانر متحرك - جلامور",
-        "en": "sliderbannar - glamour"
-    },
-    "icon": "fal fa-user",
-    "display": "true",
-    "settings": {
-        "bannar_D_image": {
-            "type": "image",
-            "label": {
-                "ar": "خلفيه الكمبيوتر",
-                "en": "desktop image"
-            }
-        },
-        "bannars": {
-            "type": "list",
-            "label": {
-                "ar": "الخلفيات",
-                "en": "bannars"
-            },
-            "settings": {
-                "F_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "الصوره الاولي",
-                        "en": "first image"
-                    }
-                },
-                "S_image": {
-                    "type": "image",
-                    "label": {
-                        "ar": "الصوره الثانيه",
-                        "en": "second image"
-                    }
-                },
-                "bannar_title": {
-                    "type":"text",
-                    "label": {
-                        "ar": " عنوان البانر",
-                        "en": "bannar title"
-                    }
-                },
-                "bannar_percentage": {
-                    "type":"text", 
-                    "label": {
-                        "ar": " النسبة المئوية ",
-                        "en": "Percentage"
-                    }
-                },
-                "bannar_desc": {
-                    "type": "text",
-                    "label": {
-                        "ar": " وصف البانر",
-                        "en": "bannar description"
-                    }
-                },
-                "bannar_color":{
-                    "type":"color",
-                    "label":{
-                        "ar":"لون النص",
-                        "en":"text color"
-                    }
-                },
-                "btn_text":{
-                    "type" : "color",
-                    "label":{
-                        "ar":"لون نص الزر",
-                        "en":"Button text color"
-                    }
-                },
-                "bannar_url": {
-                    "type": "url",
-                    "label": {
-                        "ar": "الرابط",
-                        "en": "link"
-                    }
-                }
-            }
-        }
-    }
-}
-{% endschema %}
+	{% schema %}
+	{
+	    "name": {
+	        "ar": "بانر متحرك - جلامور",
+	        "en": "sliderbannar - glamour"
+	    },
+	    "icon": "fal fa-user",
+	    "display": "true",
+	    "settings": {
+	        "bannar_D_image": {
+	            "type": "image",
+	            "label": {
+	                "ar": "خلفيه الكمبيوتر",
+	                "en": "desktop image"
+	            }
+	        },
+	        "bannars": {
+	            "type": "list",
+	            "label": {
+	                "ar": "الخلفيات",
+	                "en": "bannars"
+	            },
+	            "settings": {
+	                "F_image": {
+	                    "type": "image",
+	                    "label": {
+	                        "ar": "الصوره الاولي",
+	                        "en": "first image"
+	                    }
+	                },
+	                "S_image": {
+	                    "type": "image",
+	                    "label": {
+	                        "ar": "الصوره الثانيه",
+	                        "en": "second image"
+	                    }
+	                },
+	                "bannar_title": {
+	                    "type":"text",
+	                    "label": {
+	                        "ar": " عنوان البانر",
+	                        "en": "bannar title"
+	                    }
+	                },
+	                "bannar_percentage": {
+	                    "type":"text", 
+	                    "label": {
+	                        "ar": " النسبة المئوية ",
+	                        "en": "Percentage"
+	                    }
+	                },
+	                "bannar_desc": {
+	                    "type": "text",
+	                    "label": {
+	                        "ar": " وصف البانر",
+	                        "en": "bannar description"
+	                    }
+	                },
+	                "bannar_color":{
+	                    "type":"color",
+	                    "label":{
+	                        "ar":"لون النص",
+	                        "en":"text color"
+	                    }
+	                },
+	                "btn_text":{
+	                    "type" : "color",
+	                    "label":{
+	                        "ar":"لون نص الزر",
+	                        "en":"Button text color"
+	                    }
+	                },
+	                "bannar_url": {
+	                    "type": "url",
+	                    "label": {
+	                        "ar": "الرابط",
+	                        "en": "link"
+	                    }
+	                }
+	            }
+	        }
+	    }
+	}
+	{% endschema %}
