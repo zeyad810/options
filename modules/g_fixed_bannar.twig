@@ -51,14 +51,6 @@
 			}
 
 
-			.baner_swiber .swiper-pagination-bullet.swiper-pagination-bullet-active {
-				width: 25px;
-				background: #b54459;
-				opacity: 1;
-			}
-			.swiper-pagination-bullet-active {
-				background: #b54459;
-			}
 		</style>
 	</head>
 	<body>
@@ -84,10 +76,10 @@
 
 		</section>
 
-		<!-- Swiper JS -->
-		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-		<script>
-			document.addEventListener('DOMContentLoaded', function () {
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
 let swiperFixBaner = new Swiper('.baner_swiber', {
 slidesPerView: 1,
 pagination: {
@@ -130,34 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-
-// حسين
-// document.addEventListener('DOMContentLoaded', function () {
-// const swiperElement = document.querySelector('swiper-container');
-// const shadowRoot = swiperElement.shadowRoot;
-
-
-// const bullets = shadowRoot.querySelectorAll('.swiper-pagination-bullet');
-
-
-// bullets.forEach(bullet => {
-// if (!bullet.classList.contains('swiper-pagination-bullet-active')) {
-// bullet.style.backgroundColor = 'rgba(206, 90, 103, 1)'; 
-// }
-// });
-// });
-// علي
-// document.addEventListener('DOMContentLoaded', function () {
-// const swiperElement = document.querySelector('swiper-container');
-// const shadowRoot = swiperElement.shadowRoot;
-// const activeBullet = shadowRoot.querySelector('.swiper-pagination-bullet-active');
-
-// if (activeBullet) {
-// activeBullet.style.backgroundColor = 'rgba(206, 90, 103, 1)';
-// }
-// });
 		</script>
-
 	</body>
 </html>
 
