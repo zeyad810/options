@@ -1,4 +1,4 @@
-{# <section class=" offer-deadline" section-id="{{ sectionId }}">
+<section class=" offer-deadline" section-id="{{ sectionId }}">
 
   <!-- Wrapper for all products -->
   <swiper-container  pagination="true"  class="productgroup">
@@ -188,7 +188,89 @@
 .swiper-pagination-bullet-active {
     background-color: #CB657A; 
 }
+@media (max-width: 450px) {
+    .product-end {
+        flex-direction: column-reverse !important; /* Stack vertically */
+        height: auto; /* Adjust height */
+    }
 
+    .productdata {
+        width: 100%;
+        height: 50%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .productdata .pro_cont {
+        position: relative;
+        right: 0;
+        text-align: center;
+    }
+
+    .productdata h2 {
+        font-size: 24px;
+        position: static;
+        padding-right: 0;
+        margin-bottom: 10px;
+        position: absolute;
+    }
+
+    .productdata p {
+        font-size: 14px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        top: 30px;
+        right: -40px;
+    }
+
+    .productdata button {
+        width: 140px;
+        height: 50px;
+        font-size: 14px;
+        position: static;
+        margin-top: 30px;
+        text-align: center;
+    }
+    .productdata a {
+    padding-right: 0px; }
+    .countDown {
+        font-size: 14px; /* Adjust font size of the countdown */
+    }
+
+    .countDown ul {
+        margin-top: 10px; /* Adjust margin */
+    }
+
+    .countDown li {
+        padding: 30px;
+        font-size: 14px;
+        height: 60px;
+        width: 60px;
+    }
+
+    .productimage {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+    }
+    .productdata .counttimer{
+      padding-right: 0px;
+      margin-top: 23%;
+    }
+    .productimage img {
+        width: 100%; /* Full width */
+        height: auto; /* Adjust height */
+    }
+    .counttimer .countDown ul li span {
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+}
 </style>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <script>
@@ -335,303 +417,3 @@ total.forEach( (el) =>{
 {% endschema %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- #}
