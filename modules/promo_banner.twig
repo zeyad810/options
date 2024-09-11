@@ -15,6 +15,7 @@
 				display: flex;
 				justify-content: space-evenly;
 				align-items: center;
+			    margin-bottom: 119px;
 			}
 
 			.promo-content {
@@ -49,7 +50,7 @@
 			}
 
 			.shop-now-btn:hover {
-				background-color: #c5006e;
+				background-color: #b06269;
 			}
 
 			.products-grid {
@@ -66,6 +67,7 @@
 				max-width: 277px; /* Max width for larger screens */
 				text-align: center;
 				overflow: hidden;
+				cursor: pointer; /* Add pointer to indicate clickable card */
 			}
 
 			.product-image {
@@ -112,7 +114,7 @@
 			}
 
 			.add-to-cart-btn:hover {
-				background-color: #c5006e;
+				background-color: #b76d75;
 			}
 
 			/* Responsive styles */
@@ -199,13 +201,13 @@
 
 			<div class="products-grid">
 				{% for product in settings.products.products %}
-					<div class="product-card">
+					<div class="product-card" onclick="window.location.href='/products/{{ product.slug }}'">
 						<img src="{{ imageUrl(product.images[0]['image']['medium'], { w: 260, q: 100, f: 'auto' }) }}" alt="{{ product.title }}" class="product-image">
 						<div class=" include_info " style=" text-align: start; padding: 16px;">
 							<span>
-								<i class="fas fa-heart" style="float: left;"></i>
+								{# <i class="fas fa-heart" style="float: left;"></i> #}
 							</span>
-							<h5 class="product-categories">{{ product.name }}</h5>
+							{# <h5 class="product-categories">{{ product.name }}</h5> #}
 							<h3 class="product-title">{{ product.name }}</h3>
 							<div class="product-price">
 								<span class="current-price clo">{{ product.price }}{{product.currency_symbol }}</span>
@@ -230,6 +232,7 @@
 		</section>
 	</body>
 </html>
+
 {% schema %}
 {
   "name": {
@@ -278,299 +281,3 @@
 }
 
 {% endschema %}
-
-{# "products": {
-      "type": "list",
-      "noLabel": true,
-      "maxItems": 12,
-      "info": {
-        "ar": "",
-        "en": ""
-      },
-      "settings_label": {
-        "ar": "منتج",
-        "en": "Product"
-      },
-      "settings": {
-        "id": {
-          "type": "text",
-          "label": {
-            "ar": "رقم المنتج",
-            "en": "Product ID"
-          }
-        },
-        "name": {
-          "type": "text",
-          "label": {
-            "ar": "اسم المنتج",
-            "en": "Product Name"
-          }
-        },
-        "price": {
-          "type": "text",
-          "label": {
-            "ar": "السعر",
-            "en": "Price"
-          }
-        },
-        "currency_symbol": {
-          "type": "text",
-          "label": {
-            "ar": "رمز العملة",
-            "en": "Currency Symbol"
-          }
-        },
-        "formatted_price": {
-          "type": "text",
-          "label": {
-            "ar": "السعر الأصلي",
-            "en": "Original Price"
-          }
-        },
-        "quantity": {
-          "type": "number",
-          "label": {
-            "ar": "الكمية",
-            "en": "Quantity"
-          }
-        },
-        "is_infinite": {
-          "type": "checkbox",
-          "label": {
-            "ar": "غير محدود",
-            "en": "Infinite Stock"
-          }
-        },
-        "has_options": {
-          "type": "checkbox",
-          "label": {
-            "ar": "خيارات",
-            "en": "Has Options"
-          }
-        },
-        "has_fields": {
-          "type": "checkbox",
-          "label": {
-            "ar": "حقول",
-            "en": "Has Fields"
-          }
-        },
-        "slug": {
-          "type": "text",
-          "label": {
-            "ar": "رابط المنتج",
-            "en": "Product Slug"
-          }
-        },
-        "images": {
-          "type": "list",
-          "settings_label": {
-            "ar": "صورة",
-            "en": "Image"
-          },
-          "settings": {
-            "image": {
-              "type": "image",
-              "label": {
-                "ar": "صورة المنتج",
-                "en": "Product Image"
-              }
-            }
-          }
-        }
-      }
-    } #}
-{# <div style='background-color: #FAC2C3;' class="relative">
-
-	<div style='padding-top: 15px; padding-bottom: 15px' class="newsletters  m-auto flex justify-start max-w-[1300px] items-center flex-wrap gap-4 px-4">
-		<div class="flex items-center justify-between gap-4 w-full max-w-[600px]">
-			<div class="flex items-center justify-center p-2 bg-white rounded-full w-12 h-12 sm:w-14 sm:h-14">
-				<i class="fa-regular fa-envelope"></i>
-			</div>
-			<div class="flex flex-col gap-2">
-				<h2 class="text-lg sm:text-xl font-semibold">{{ locals.sub_newsletter }}</h2>
-				<p class="text-sm text-[#636363]">{{ locals.join_desc}}</p>
-			</div>
-		</div>
-		<div id="mc_embed_shell" class="flex-1 flex-col w-full gap-5 flex max-w-[600px]">
-			<link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-
-			<h2 class="text-sm sm:text-base font-medium mb-3">{{ locals.un_sub }}</h2>
-			<form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-newsletter flex items-center gap-2 flex-wrap">
-				<div class="flex-grow flex-1 w-full gap-2 flex">
-					<input type="email" name="EMAIL" id="mce-EMAIL" required placeholder="{{ locals.email }}" class="email_button required email p-2 rounded-lg w-full max-w-[600px] border-none outline-none"/>
-				</div>
-				<div class="optionalParent w-full sm:w-auto">
-					<input style='background-color: var(--primary-color); padding: 8px 16px;' type="submit" name="subscribe" id="mc-embedded-subscribe" class="button text-white rounded-lg max-w-[120px]" value="{{ locals.sub }}">
-				</div>
-			</form>
-		</div>
-		<div class="flex flex-col mt-5 sm:mt-0 sm:ml-auto">
-			<p class='mb-3'>{{ locals.phones_apps }}</p>
-			<div class="flex gap-4">
-				<a class='android-store'>
-					<img src="https://cdn.salla.network/images/googleplay.png" alt="android" class="w-28 h-auto">
-				</a>
-				<a class='mac-store'>
-					<img src="https://cdn.salla.network/images/appstore.png" alt="mac" class="w-28 h-auto">
-				</a>
-			</div>
-		</div>
-	</div>
-
-	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-lg-5">
-					<div class="footer-about-us-links-div footer-about-us-div">
-						<h1 class="pb-2 font-bold">{{ about_settings.about_us_title }}</h1>
-						<p>{{ about_settings.about_us_des | raw }}</p>
-					</div>
-
-					<div class="apps-if-newsletter-undifined hidden flex flex-col mt-5">
-						<p class='apps-paragraph mb-3 text-lg'>{{ locals.phones_apps }}</p>
-						<div class="flex gap-4">
-							<a class='android-store'>
-								<img src="https://cdn.salla.network/images/googleplay.png" alt="android" class="w-28 h-auto">
-							</a>
-							<a class='mac-store'>
-								<img src="https://cdn.salla.network/images/appstore.png" alt="mac" class="w-28 h-auto">
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-12 col-lg-7 container">
-					<div class="row">
-						<div class="col-6 col-lg-3">
-							{% if not (about_settings.links_1_hide) %}
-								<div class="footer-about-us-links-div">
-									<h1 class="pb-2 font-bold">{{ about_settings.links_1_title }}</h1>
-									{% for link in about_settings.links_1_links %}
-										<p>
-											<a href="{{ link.url }}">{{ link.title }}</a>
-										</p>
-									{% endfor %}
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="col-6 col-lg-3">
-							{% if not (about_settings.links_2_hide) %}
-								<div class="footer-about-us-links-div">
-									<h1 class="pb-2 font-bold">{{ about_settings.links_2_title }}</h1>
-									{% for link in about_settings.links_2_links %}
-										<p>
-											<a href="{{ link.url }}">{{ link.title }}</a>
-										</p>
-									{% endfor %}
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="col-12 col-lg-3">
-							<div class="media">
-								<h1 class="font-bold">{{ locals.contact_us }}</h1>
-								<div class="links_social">
-									{% if store.social_media.items.phone %}
-										<a href="tel:{{ store.social_media.items.phone }}" target="_blank">
-											<i class="fa-solid fa-phone"></i>
-										</a>
-									{% endif %}
-									{% if store.social_media.items.email %}
-										<a href="mailto:{{ store.social_media.items.email }}" target="_blank">
-											<i class="fa-solid fa-envelope"></i>
-										</a>
-									{% endif %}
-									{% if store.social_media.items.website %}
-										<a href="{{ store.social_media.items.website }}" target="_blank">
-											<i class="icon-globe-secondary"></i>
-										</a>
-									{% endif %}
-								</div>
-							</div>
-						</div>
-
-						<div class="col-12 col-lg-3">
-							<div class="footer-about-us-links-div">
-								<h1 class="pb-2 font-bold">{{ locals.social_media }}</h1>
-								<div class="social-icons flex gap-3">
-									{% if store.social_media.items.facebook %}
-										<a href="https://www.facebook.com/{{ store.social_media.items.facebook }}" target="_blank">
-											<i class="fa-brands fa-facebook-f"></i>
-										</a>
-									{% endif %}
-									{% if store.social_media.items.instagram %}
-										<a href="https://www.instagram.com/{{ store.social_media.items.instagram }}" target="_blank">
-											<i class="fa-brands fa-instagram"></i>
-										</a>
-									{% endif %}
-									{% if store.social_media.items.twitter %}
-										<a href="https://twitter.com/{{ store.social_media.items.twitter }}" target="_blank">
-											<i class="fa-brands fa-x-twitter"></i>
-										</a>
-									{% endif %}
-									{% if store.social_media.items.snapchat %}
-										<a href="https://www.snapchat.com/add/{{ store.social_media.items.snapchat }}" target="_blank">
-											<i class="fa-brands fa-snapchat"></i>
-										</a>
-									{% endif %}
-									{% if store.social_media.items.tiktok %}
-										<a href="https://www.tiktok.com/@{{ store.social_media.items.tiktok }}" target="_blank">
-											<i class="fa-brands fa-tiktok"></i>
-										</a>
-									{% endif %}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="footer-copyrights-vat-certificate">
-		<div class="container">
-			<div class="d-flex flex-wrap align-items-center justify-between footer-store-section-bars py-4">
-				<div class="footer-icons">
-					<div class="d-flex flex-wrap justify-center items-center gap-4">
-						{% if store.apps.ios_app_id or store.apps.android_package_name %}
-							<div class="icons social-apps-icons">
-								{% if store.apps.ios_app_id %}
-									<a href="https://apps.apple.com/app/id{{ store.apps.ios_app_id }}" target="_blank">
-										<img src="{{ asset_url ~ 'app-store.svg' }}" loading="lazy" alt="App Store" class="w-28">
-									</a>
-								{% endif %}
-								{% if store.apps.android_package_name %}
-									<a href="https://play.google.com/store/apps/details?id={{ store.apps.android_package_name }}" target="_blank">
-										<img src="{{ asset_url ~ 'google-play.svg' }}" loading="lazy" alt="Google Play" class="w-28">
-									</a>
-								{% endif %}
-							</div>
-						{% endif %}
-						<div class="icons w-full">
-							<div class="logistics-pay-icons flex-wrap gap-2">
-								{% for vat in store.social_media.items %}
-									<a href="{{ vat.url }}">
-										<img src="{{ vat.image }}" alt="{{ vat.name }}" class="w-16 h-auto">
-									</a>
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="footer-copyright">
-    <p class="text-center">
-        &copy; <span id="current-year"></span> {{ store.name }}. All rights reserved.
-    </p>
-</div>
-
-<script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
-
-			</div>
-		</div>
-	</div>
-</div>
- #}

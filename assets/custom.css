@@ -8241,7 +8241,7 @@ input[type=radio].sr-only:checked ~ div.ads .img .over {
   }
 }
 .g_cat {
-  margin-bottom: 111px;
+  margin-bottom: 37px;
   @media (max-width: 765px) {
       margin-bottom: 56px;
   }
