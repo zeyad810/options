@@ -7,15 +7,14 @@
 		<style>
 			/* Base styles */
 			.promo-banner {
-				padding: 50px 338px;
+				padding: 50px;
 				background-size: cover;
 				background-repeat: no-repeat;
 				background-position: center;
 				height: auto;
 				display: flex;
-				justify-content: space-between;
+				justify-content: space-evenly;
 				align-items: center;
-				flex-wrap: wrap; /* Allow wrapping */
 			}
 
 			.promo-content {
@@ -56,7 +55,6 @@
 			.products-grid {
 				display: flex;
 				gap: 20px;
-				flex-wrap: wrap; /* Enable wrapping for smaller screens */
 				justify-content: space-between; /* Distribute items evenly */
 			}
 
@@ -120,45 +118,40 @@
 			/* Responsive styles */
 
 			/* For tablets and smaller devices */
-			@media(max-width: 992px) {
+			@media(max-width: 768px) {
 				.promo-banner {
-					/* padding: 30px 100px;
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-position: center;
+					height: auto;
+					display: flex;
+					justify-content: space-evenly;
+					align-items: center;
 					flex-direction: column;
-					align-items: flex-start;
-					text-align: left; */
-				padding: 50px 338px;
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center;
-				height: auto;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				flex-wrap: wrap; 
+					padding: 50px 40px;
 				}
-
 				.promo-content {
+					display: flex;
+					align-items: center;
+					flex-direction: column;
 					flex-basis: 100%;
 					text-align: center;
 				}
-
 				.promo-title {
-					font-size: 32px;
-					width: 100%;
+					font-size: 30px;
+					width: fit-content;
 					margin-bottom: 40px;
 				}
-
 				.products-grid {
 					justify-content: center; /* Center the products */
 				}
 
 				.product-card {
 					width: 100%; /* Full width for better layout */
-					max-width: 277px;
+					/* max-width: 277px; */
 				}
-
 				.shop-now-btn {
-					width: 100%; /* Full width for button */
+					width: fit-content; /* Full width for button */
 				}
 			}
 
@@ -167,12 +160,15 @@
 				.promo-banner {
 					padding: 20px;
 				}
-
 				.promo-title {
-					font-size: 28px;
+					font-size: 20px;
 					margin-bottom: 20px;
 				}
-
+				.products-grid {
+					display: flex;
+					justify-content: center; /* Center the products */
+					flex-wrap: wrap;
+				}
 				.shop-now-btn {
 					font-size: 16px;
 					/* padding: 15px 20px; */
