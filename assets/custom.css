@@ -8570,9 +8570,9 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
 .brands .marquee img {
   max-height: 45px;
 }
-@media (max-width: 420px) {
+@media (max-width: 450px) {
   .brands .Marquee {
-    margin-top: 105px;
+    margin-top: 55px;
     background-position: center;
   }
   .brands .over{height:100%;}

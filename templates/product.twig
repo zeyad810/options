@@ -352,14 +352,9 @@
 
 							</form>
 							
-							<div class="product-buttons flex gap-10 {% if product.selected_product.out_of_stock %}d-none{% else %}{% endif %}">
+							<div class="product-buttons{% if product.selected_product.out_of_stock %}d-none{% else %}{% endif %}">
 								<div class="border-product "></div>
 								<button id="product-view-add-to-cart" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
-									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
-									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
-									<span>{{ locals.add_to_cart }}</span>
-								</button>
-								<button id="" style="margin-bottom: 20px" class="btn btn-add-to-cart" type="button" onclick="productAddToCart()">
 									<i class="fa fa-shopping-cart me-1" aria-hidden="true"></i>
 									<img class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="25px" height="25px"/>
 									<span>{{ locals.add_to_cart }}</span>

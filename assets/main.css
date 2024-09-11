@@ -1078,8 +1078,7 @@ button.more-button , a.more-button {
 .store-section .social-icons a {
     border: 1px solid #919191;
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
+    padding: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
