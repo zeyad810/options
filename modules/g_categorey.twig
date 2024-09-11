@@ -48,16 +48,16 @@
             <div  style="padding-bottom: 50px; margin-bottom: 50px;">
                 {% include 'title.twig' with { 'component_title': settings.section_title } %}
             </div>
-            <!-- أزرار التنقل -->
-            <div class="content_btns absolute {% if settings.slider_toggle == "false" %} d-none {% endif %}" style="left: 8%; margin-top:20px;">
-                <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-                &lt;
-                </div>
-                <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-                &gt;
-                </div>
-            </div>
             <div class="container overflow-x-hidden">
+                <!-- أزرار التنقل -->
+                <div class="content_btns absolute {% if settings.slider_toggle == "false" %} d-none {% endif %}" style="margin-top:20px;">
+                    <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+                    &lt;
+                    </div>
+                    <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+                    &gt;
+                    </div>
+                </div>
                 <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider bg-white{% endif %} h-auto">
                     <div class=" {% if settings.slider_toggle == "true" %} swiper-wrapper h-auto {% else %} grid grid-cols-2 gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
                         {% for item in settings.categorys %}

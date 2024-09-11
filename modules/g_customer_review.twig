@@ -4,16 +4,16 @@
    <div class="image-title" style="margin: 100px 0px;" >
     <h1> {{settings.title}} </h1>
    </div> 
-   <!-- أزرار التنقل -->
-    <div class="content_btns absolute" style="left: 8%;">
-      <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-      &gt;
-      </div>
-      <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-      &lt;
-      </div>
-    </div>
-		<div class="swiper-container">
+   <div class="swiper-container">
+      <!-- أزرار التنقل -->
+       <div class="content_btns absolute" style="left: 5%;">
+         <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+         &gt;
+         </div>
+         <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+         &lt;
+         </div>
+       </div>
 			<div class="swiper-wrapper">
 				{% for item in settings.customer_reviews %}
 					<div class="swiper-slide relative rounded-lg content_tistimonial">
