@@ -1,4 +1,4 @@
-<section class=" offer-deadline" section-id="{{ sectionId }}">
+{# <section class=" offer-deadline" section-id="{{ sectionId }}">
 
   <!-- Wrapper for all products -->
   <swiper-container  pagination="true"  class="productgroup">
@@ -10,7 +10,8 @@
 
       <!-- Product data section (left half) -->
       <div class="productdata">
-        <h2>عرض الأسبوع</h2>
+       <div class="pro_cont">
+         <h2>عرض الأسبوع</h2>
         <a class="title" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}"></a>       
         <p>{{ product.name }}</p>
         
@@ -41,6 +42,7 @@
                 <a href='{{product.html_url}}'>
                         <button class="shopbtn">تسوقي الآن</button>
                 </a>
+       </div>
       </div>
      
 
@@ -88,12 +90,16 @@
     padding: 0 20px; 
     gap: 10px;
 }
+.productdata .pro_cont{
+    position: relative;
+    right: 25%;
+}
 .productdata h2 {
     font-size: 42px;
     font-weight:bold;
     margin-bottom: 10px;
     padding-right: 40px; 
-
+    position: absolute;
 
 }
 .productdata a{
@@ -105,8 +111,13 @@
        font-size: 22px;
        font-weight:medium;
        margin-top:20px;
+       margin-bottom:20px;
       padding-right: 40px; 
-
+      display:flex;
+      justify-content:start
+}
+.productdata .counttimer {
+      padding-right: 25px;
 }
 .countDown ul {
     list-style: none;
@@ -128,7 +139,11 @@
     height: 50px; 
     width: 50px; 
 }
-
+.shopbtn{
+    position: absolute;
+    right: 40px;
+    bottom: -60px;
+}
 .productimage {
     width: 50%; 
     display: flex;
@@ -619,4 +634,4 @@ total.forEach( (el) =>{
 
 
 
-
+ #}

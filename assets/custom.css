@@ -8542,6 +8542,7 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
     margin-right: 0;
     margin-right: initial;
   }
+  
 }
 [dir=ltr] .product_deadline .data {
   padding: 24px 24px 24px 0;
@@ -8562,12 +8563,19 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
 .brand-item {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.brands .over{height:100%;width:100vw;background-size:auto;background-position: bottom;}
+.brands .over{height:120%;width:100vw;background-size:cover;background-position: bottom;background-repeat: no-repeat;}
 .brands .all{height:206px;width:100vw}
-.brands .Marquee{display:flex;width:200vw;align-items:center;justify-content:center}
+.brands .Marquee{display:flex;width:200vw;align-items:center;justify-content:center;margin-top: 40px;}
 .brands .marquee{width:50vw;background-color:transparent}
 .brands .marquee img {
   max-height: 45px;
+}
+@media (max-width: 420px) {
+  .brands .Marquee {
+    margin-top: 105px;
+    background-position: center;
+  }
+  .brands .over{height:100%;}
 }
 .brands .Row {
   animation: Scrollone 10s linear infinite running;
@@ -9763,7 +9771,8 @@ button.swiper-pagination-bullet {
   transition: 0.2s transform, 0.2s left;
 }
 .swiper-horizontal.swiper-rtl > .swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
-  transition: 0.2s transform, 0.2s right;
+  transition: transform 0.2s, right 0.2s;
+  background: #CE5A67;
 }
 .swiper-pagination-progressbar {
   background: rgba(0, 0, 0, 0.25);
