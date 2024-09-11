@@ -8565,12 +8565,12 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
 }
 .brands .over{height:120%;width:100vw;background-size:cover;background-position: bottom;background-repeat: no-repeat;}
 .brands .all{height:206px;width:100vw}
-.brands .Marquee{display:flex;width:200vw;align-items:center;justify-content:center;margin-top: 40px;}
+.brands .Marquee{display:flex;width:200vw;align-items:center;justify-content:center;margin-top: 105px;}
 .brands .marquee{width:50vw;background-color:transparent}
 .brands .marquee img {
   max-height: 45px;
 }
-@media (max-width: 450px) {
+@media (max-width: 767px) {
   .brands .Marquee {
     margin-top: 55px;
     background-position: center;
