@@ -294,8 +294,28 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 					localStorage.setItem("android", "{{settings.android_store_url }}");						
 					localStorage.setItem("mac", "{{settings.mac_store_url }}");
 					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
-					document.querySelector('a.android-store')?.setAttribute('href', "{{settings.android_store_url }}");
-					document.querySelector('a.mac-store')?.setAttribute('href', "{{settings.mac_store_url }}");
+					let androidLink = document.querySelector('.android-store');
+					let appleLink = document.querySelector('.mac-store');
+					let paragraph = document.querySelector('.pra_app');
+					let mobileSection = document.querySelector('#mobileApps');
+
+
+					androidLink?.setAttribute('href', "{{ settings.android_store_url }}");
+					appleLink?.setAttribute('href', "{{settings.mac_store_url }}");
+
+					// Check if the href is empty or null, and hide the link if it is
+					if (!androidLink.getAttribute('href') || androidLink.getAttribute('href').trim() === "" ) {
+						androidLink.style.display = "none";
+						paragraph.style.display = "none";
+					}
+					if (!appleLink.getAttribute('href') || appleLink.getAttribute('href').trim() === "" ) {
+						paragraph.style.display = "none";
+						appleLink.style.display = "none";
+					}
+					if ((!androidLink || androidLink.style.display === "none") &&
+					(!appleLink || appleLink.style.display === "none")) {
+						mobileSection.style.display = "none";
+					}
 				</script>
 
 				<!-- Initialize Swiper -->
