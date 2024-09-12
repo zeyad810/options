@@ -599,7 +599,7 @@ button.more-button , a.more-button {
     footer
 */
 .footer{
-    margin-top: 5%;
+    margin-top: 0%;
 }
 
 .store-section {
@@ -1966,8 +1966,7 @@ hr {
 
 .footer-copyrights span{
     padding: 5px  0px;
-    font-size: 0.929rem;
-    color: inherit;
+    font-size: 2rem;
 }
 
 .footer-copyrights a {
