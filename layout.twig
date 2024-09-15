@@ -298,11 +298,15 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 					let appleLink = document.querySelector('.mac-store');
 					let paragraph = document.querySelector('.pra_app');
 					let mobileSection = document.querySelector('#mobileApps');
+					let newsletters = document.querySelector('.newsletters');
+					const check = '{{ newsletter }}' === 'true';
 
 
 					androidLink?.setAttribute('href', "{{ settings.android_store_url }}");
 					appleLink?.setAttribute('href', "{{settings.mac_store_url }}");
-
+					if (check) {
+						newsletters.style.display ="none";
+					}
 					// Check if the href is empty or null, and hide the link if it is
 					if (!androidLink.getAttribute('href') || androidLink.getAttribute('href').trim() === "" ) {
 						androidLink.style.display = "none";

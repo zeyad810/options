@@ -10,10 +10,13 @@
 
 		<style>
 			@media(max-width: 576px) {
-				.landing-page-fixed-bannar-{{sectionId}}{
-					background-image: url('{{ settings.bannar_bg_mobile }}') !important;
-				}
-			}
+  .swiper-slide {
+    background-image: url('{{ settings.slider_bannar_bg_mobile }}') !important;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 
 
 			.swiper-container {
@@ -79,47 +82,38 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-let swiperFixBaner = new Swiper('.baner_swiber', {
-slidesPerView: 1,
-pagination: {
-el: '.swiper-pagination',
-clickable: true
-},
-loop: true, // تعطيل الانتقال المستمر لضمان تطابق عدد النقاط
-autoplay: {
-delay: 5000, // تغيير الشريحة كل 5 ثوانٍ
-disableOnInteraction: false, // استمرار التبديل التلقائي بعد التفاعل
-},
-observer: true, // مراقبة التغييرات في DOM
-observeParents: true, // مراقبة التغييرات في عناصر الوالدين
-});
-});
-//
-// الشكل
-document.addEventListener('DOMContentLoaded', function () {
-  const swiperElement = document.querySelector('swiper-container');
-  const shadowRoot = swiperElement.shadowRoot;
-
-  // استهداف جميع النقاط (bullets)
-  const bullets = shadowRoot.querySelectorAll('.swiper-pagination-bullet');
-
-  // تغيير شكل النقاط بناءً على حالة الاكتف
-  bullets.forEach(bullet => {
-    if (!bullet.classList.contains('swiper-pagination-bullet-active')) {
-      // النقاط غير النشطة تكون دائرية
-      bullet.style.backgroundColor = 'rgba(206, 90, 103, 1)'; // اللون الوردي الفاتح
-      bullet.style.width = '10px';
-      bullet.style.height = '10px';
-    //   bullet.style.borderRadius = '50%'; // لجعل النقاط غير النشطة دائرية
-    } else {
-      // النقطة النشطة تكون بيضاوية
-      bullet.style.backgroundColor = 'rgba(206, 90, 103, 1)'; // اللون الأحمر الغامق
-      bullet.style.width = '10px';
-      bullet.style.height = '10px';
-    //   bullet.style.borderRadius = '20px'; // لجعل النقطة النشطة بيضاوية
-    }
+      document.addEventListener('DOMContentLoaded', function () {
+  let swiperFixBaner = new Swiper('.baner_swiber', {
+    slidesPerView: 1,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    observer: true,
+    observeParents: true,
   });
+
+  // تغيير الخلفية بناءً على حجم الشاشة
+  function updateBackgrounds() {
+    const slides = document.querySelectorAll('.swiper-slide');
+    const isMobile = window.innerWidth <= 576;
+
+    slides.forEach(slide => {
+      const backgroundUrl = isMobile ? '{{ settings.slider_bannar_bg_mobile }}' : '{{ settings.slider_bannar_bg }}';
+      slide.style.backgroundImage = `url('${backgroundUrl}')`;
+      slide.style.backgroundSize = 'cover';
+      slide.style.backgroundPosition = 'center';
+    });
+  }
+
+  // تحديث الخلفيات عند تحميل الصفحة وتغيير حجم الشاشة
+  updateBackgrounds();
+  window.addEventListener('resize', updateBackgrounds);
 });
 
 		</script>
@@ -131,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 {
     "name": {
-        "ar": "بنر ثابت",
-        "en": "Test"
+        "ar": "بنر رئيسي",
+        "en": "Main banner"
     },
     "icon": "fal fa-user",
     "display": true,
@@ -148,35 +142,35 @@ document.addEventListener('DOMContentLoaded', function () {
                     "type": "text",
                     "label": {
                         "ar": "العنوان",
-                        "en": "text"
+                        "en": "title"
                     }
                 },
                 "slider_bannar_des":{
                     "type": "text",
                     "label": {
                         "ar": "وصف للبنر",
-                        "en": "text"
+                        "en": "Banner Description"
                     }
                 },
                 "slider_bannar_bg":{
                     "type": "image",
                     "label": {
                         "ar": "خلفيه البنر",
-                        "en": "text"
+                        "en": "Banner background"
                     }
                 },
                 "slider_bannar_bg_mobile":{
                     "type": "image",
                     "label": {
-                        "ar": "خلفيه البنر",
-                        "en": "text"
+                        "ar": " خلفيه البنر ف الموبايل",
+                        "en": "Banner background on mobile"
                     }
                 },
                 "slider_bannar_url":{
                     "type": "url",
                     "label": {
                         "ar": "رابط البنر",
-                        "en": "text"
+                        "en": "Banner link"
                     }
                 },
                 "slider_bannar_btn_text":{
@@ -190,28 +184,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     "type": "select",
                     "label": {
                         "ar": "موضع النص",
-                        "en": "text"
+                        "en": "text position"
                     },
                     "options": [
                         {
                             "value": "left",
                             "label": {
                             "ar": "اليسار",
-                            "en": "all pages"
+                            "en": "left"
                             }
                         },
                         {
                             "value": "right",
                             "label": {
-                            "ar": "اليمن",
-                            "en": "all pages"
+                            "ar": "اليمين",
+                            "en": "right"
                             }
                         },
                         {
                             "value": "center",
                             "label": {
                             "ar": "المركز",
-                            "en": "all pages"
+                            "en": "center"
                             }
                         }
                     ]

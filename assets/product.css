@@ -46,6 +46,11 @@ max-width: 100%;
 .product-item:hover .desk{
     bottom: 10px;
 }
+@media (max-width: 450px) {
+    .product-item {
+        margin-bottom: 24px;
+    }        
+ }
 
 @media (max-width: 768px) {
     .desk{

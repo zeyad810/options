@@ -639,7 +639,7 @@ body[data-template="home"] header{
   position: fixed;
   right: 0;
   left: 0;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(2px);
   z-index: 9999;
 }
 .form-group i{
@@ -1302,7 +1302,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 */
 img,
 video {
-  max-width: 100%;
   height: auto;
 }
 /* Make elements with the HTML hidden attribute stay hidden by default */

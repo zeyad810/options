@@ -164,44 +164,32 @@
 					<div class="row">
 
 						<div class="slide-product col-lg-6">
+    <!-- Carousel -->
+    <!-- Main Swiper -->
+    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+        <div class="swiper-wrapper">
+            {% for key, image in product.selected_product.images %}
+                <div class="swiper-slide">
+                    <img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ product.name }}" loading="lazy">
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
 
-							<!-- Carousel -->
-							<!-- Swiper -->
-							<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2"> <div class="swiper-wrapper">
-									{% for key, image in product.selected_product.images %}
-										<div class='swiper-slide'>
-											<div class="box-1-1">
-												<div class="content">
-													<a class="image-link" style="display:block; width: 100%; height: 100%;">
-														<img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ product.name }}" loading="lazy">
-													</a>
-												</div>
-											</div>
-										</div>
-									{% endfor %}
-								</div>
-
-								<div class="swiper-button-next"></div>
-								<div class="swiper-button-prev"></div>
-							</div>
-
-							<div thumbsslider="" class="swiper mySwiper">
-								<div class="swiper-wrapper">
-									{% for key, image in product.selected_product.images %}
-										<div class="swiper-slide col-3">
-											<div class="box-1-1">
-												<div class="content">
-													<a class="d-flex align-items-center justify-content-center thumb-image-a" data-index="{{ key }}" style="width: 100%; height: 100%;">
-														<img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
-													</a>
-												</div>
-											</div>
-										</div>
-									{% endfor %}
-								</div>
-							</div>
-
-						</div>
+    <!-- Thumbnail Swiper -->
+    <div thumbsSlider="" class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            {% for key, image in product.selected_product.images %}
+                <div class="swiper-slide">
+                    <img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 						<div class="col-lg-6  col-product-info {% if product.selected_product.images | length <= 1 %}col-product-info-single-image{% endif %}">
 
@@ -1136,6 +1124,26 @@ const row = document.querySelectorAll('.table-row-background');
 if (row % 2 === 0) { // الصفوف الفردية (بما أن الفهرس يبدأ من 0، فإن 0 يعني العنصر الأول، 2 يعني الثالث، وهكذا)
         row.style.backgroundColor = 'red'; // اللون الذي تريده للصفوف الفردية
       }
+
+var swiper = new Swiper(".mySwiper", {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+    });
+
+    var swiper2 = new Swiper(".mySwiper2", {
+        loop: true,
+        spaceBetween: 10,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+            swiper: swiper,
+        },
+    });
 </script>
 
 		{% endblock %} 

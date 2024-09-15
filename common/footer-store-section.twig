@@ -164,7 +164,7 @@
 	</div>
 
 	<div class="footer-copyrights-vat-certificate">
-		<div class="container flex justify-between">
+		<div class="container flex justify-between under_footer">
 			<div class="d-flex justify-content-center align-items-center">
 				<span class="text-center footer-copyrights">{{ store.copyrights | raw}}</span>
 			</div>
@@ -216,7 +216,7 @@
 					{% endif %}
 
 					{% if store.social_media.items.business_center %}
-						<div class="maroof-icon">
+						<div class="maroof-icon" style=" width: 80%;margin-left: 30px;">
 							<a href="[https://maroof.sa/{{ 'https://maroof.sa/%7B%7B'~ store.social_media.items.business_center }}" target="_blank">
 								<img src="{{ asset_url ~ 'maroof.png' }}" loading="lazy" alt="" width="auto" height="30px">
 							</a>
