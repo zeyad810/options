@@ -7,7 +7,8 @@
 		<swiper-container class="mySwiper" pagination="true" pagination-dynamic-bullets="true">
 
 			{% for item in settings.bannars %}
-				<swiper-slide style="background-size: 100% 100% !important; width: 100vw !important; background: url({{ settings.bannar_D_image }})" class="swiper-slide slider-bannars-moving">
+					<swiper-slide class="swiper-slide slider-bannars-moving">
+					<div class="swip_div" style="background: url('{{ item.background_image }}') ;background-size: 100% 100% !important; width: 100vw !important;">
 
 					<div class="photo_one">
 						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
@@ -26,6 +27,7 @@
 						<div class="photo">
 							<img loading="lazy" src='{{item.S_image}}' width='80%' alt="img">
 						</div>
+					</div>
 					</swiper-slide>
 				{% endfor %}
 			</swiper-container>
@@ -42,15 +44,15 @@
 			height: 100%;
 		}
 
-		swiper-slide {
+		.swip_div {
 			text-align: center;
 			font-size: 18px;
 			background: #fff;
-			/* display: flex; */
 			justify-content: center;
 			align-items: center;
 			display: flex !important;
 			flex-direction: row !important;
+			padding: 50px 20px 0;
 		}
 
 		swiper-slide img {
@@ -66,7 +68,7 @@
 				display: none; /* إخفاء الصورة الأولى في الشاشات الصغيرة */
 			}
 
-			swiper-slide {
+			.swip_div {
 				flex-direction: column !important; /* تغيير الاتجاه ليصبح عمودي */
 				align-items: center !important;
 			}
@@ -123,13 +125,6 @@ el: '.swiper-scrollbar'
 	    "icon": "fal fa-user",
 	    "display": "true",
 	    "settings": {
-	        "bannar_D_image": {
-	            "type": "image",
-	            "label": {
-	                "ar": "خلفيه الكمبيوتر",
-	                "en": "desktop image"
-	            }
-	        },
 	        "bannars": {
 	            "type": "list",
 	            "label": {
@@ -148,6 +143,13 @@ el: '.swiper-scrollbar'
 	                    "type": "image",
 	                    "label": {
 	                        "ar": "الصوره الثانيه",
+	                        "en": "second image"
+	                    }
+	                },
+	                "background_image": {
+	                    "type": "image",
+	                    "label": {
+	                        "ar": "الصوره الخلفيه",
 	                        "en": "second image"
 	                    }
 	                },

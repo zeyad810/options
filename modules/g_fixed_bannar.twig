@@ -1,21 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Swiper Slider</title>
+<section section-id="{{ sectionId }}">
 
-		<!-- Swiper CSS -->
-		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+			<swiper-container pagination="true">
+				{% for item in settings.slider %}
+					<swiper-slide>
+						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar">
+							<div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
+								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
+								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
+								<a href='{{item.slider_bannar_url}}'>
+									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
+								</a>
+							</div>
+						</div>
+					</swiper-slide>
+				{% endfor %}
+			</swiper-container>
+			<!-- Add Pagination -->
 
-		<style>
+		</section>
+        <style>
 			@media(max-width: 576px) {
-  .swiper-slide {
-    background-image: url('{{ settings.slider_bannar_bg_mobile }}') !important;
-    background-size: cover;
-    background-position: center;
-  }
-}
+                .swiper-slide {
+                    background-image: url('{{ settings.slider_bannar_bg_mobile }}') !important;
+                    background-size: cover;
+                    background-position: center;
+                }
+            }
 
 
 
@@ -55,70 +65,43 @@
 
 
 		</style>
-	</head>
-	<body>
-
-		<section section-id="{{ sectionId }}">
-
-			<swiper-container pagination="true">
-				{% for item in settings.slider %}
-					<swiper-slide>
-						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar">
-							<div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
-								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
-								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
-								<a href='{{item.slider_bannar_url}}'>
-									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
-								</a>
-							</div>
-						</div>
-					</swiper-slide>
-				{% endfor %}
-			</swiper-container>
-			<!-- Add Pagination -->
-
-		</section>
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-  let swiperFixBaner = new Swiper('.baner_swiber', {
-    slidesPerView: 1,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
-    },
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    observer: true,
-    observeParents: true,
-  });
+        let swiperFixBaner = new Swiper('.baner_swiber', {
+        slidesPerView: 1,
+        pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+        },
+        loop: true,
+        autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+        },
+        observer: true,
+        observeParents: true,
+    });
 
   // تغيير الخلفية بناءً على حجم الشاشة
-  function updateBackgrounds() {
-    const slides = document.querySelectorAll('.swiper-slide');
-    const isMobile = window.innerWidth <= 576;
+        function updateBackgrounds() {
+        const slides = document.querySelectorAll('.swiper-slide');
+        const isMobile = window.innerWidth <= 576;
 
-    slides.forEach(slide => {
-      const backgroundUrl = isMobile ? '{{ settings.slider_bannar_bg_mobile }}' : '{{ settings.slider_bannar_bg }}';
-      slide.style.backgroundImage = `url('${backgroundUrl}')`;
-      slide.style.backgroundSize = 'cover';
-      slide.style.backgroundPosition = 'center';
-    });
-  }
+        slides.forEach(slide => {
+        const backgroundUrl = isMobile ? '{{ settings.slider_bannar_bg_mobile }}' : '{{ settings.slider_bannar_bg }}';
+        slide.style.backgroundImage = `url('${backgroundUrl}')`;
+        slide.style.backgroundSize = 'cover';
+        slide.style.backgroundPosition = 'center';
+        });
+    }
 
   // تحديث الخلفيات عند تحميل الصفحة وتغيير حجم الشاشة
   updateBackgrounds();
   window.addEventListener('resize', updateBackgrounds);
 });
 
-		</script>
-	</body>
-</html>
+</script>
 
 
 {% schema %}

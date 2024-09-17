@@ -284,43 +284,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}"></script>
 
 				{# Local storage #}
-				<script>	
-					if ('{{ settings.newsletter_hide }}' !== '1') {
-						localStorage.setItem("newsletter", "{{ settings.newsletter_url }}");
-					} else {
-						localStorage.removeItem("newsletter");
-					}
-
-					localStorage.setItem("android", "{{settings.android_store_url }}");						
-					localStorage.setItem("mac", "{{settings.mac_store_url }}");
-					document.querySelector('form.form-newsletter')?.setAttribute('action', '{{ settings.newsletter_url }}');
-					let androidLink = document.querySelector('.android-store');
-					let appleLink = document.querySelector('.mac-store');
-					let paragraph = document.querySelector('.pra_app');
-					let mobileSection = document.querySelector('#mobileApps');
-					let newsletters = document.querySelector('.newsletters');
-					const check = '{{ newsletter }}' === 'true';
-
-
-					androidLink?.setAttribute('href', "{{ settings.android_store_url }}");
-					appleLink?.setAttribute('href', "{{settings.mac_store_url }}");
-					if (check) {
-						newsletters.style.display ="none";
-					}
-					// Check if the href is empty or null, and hide the link if it is
-					if (!androidLink.getAttribute('href') || androidLink.getAttribute('href').trim() === "" ) {
-						androidLink.style.display = "none";
-						paragraph.style.display = "none";
-					}
-					if (!appleLink.getAttribute('href') || appleLink.getAttribute('href').trim() === "" ) {
-						paragraph.style.display = "none";
-						appleLink.style.display = "none";
-					}
-					if ((!androidLink || androidLink.style.display === "none") &&
-					(!appleLink || appleLink.style.display === "none")) {
-						mobileSection.style.display = "none";
-					}
-				</script>
+				
 
 				<!-- Initialize Swiper -->
 				<link
@@ -372,7 +336,59 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		}
 	</style>
 {% endblock %}
+	<style>
+		.product-item .pr-img{
+			width:100%;
+			height:100%;
+		}
+	</style>
 
+{% if settings.image_control_item %}
+	<style>
+		.product-item .pr-img{
+			height:auto;
+		}
+	</style>
+{% endif %}
+	<style>
+		.newsletters{
+			display:flex;
+		}
+		.btn-img{
+			display:none;
+		}
+	</style>
+{% if settings.newsletter_item %}
+	<style>
+		.newsletters{
+			display:none;
+		}
+		.btn-img{
+			display:flex;
+			flex-direction:column;
+		}
+	</style>
+{% endif %}
+{% if settings.android_store_url | length %}
+	<style>
+		.android-store {
+			display:block;
+		}
+		.btn-img > p  , .pra_hide{
+			display:block;
+		}
+	</style>
+{% endif %}
+{% if settings.mac_store_url | length %}
+	<style>
+		.mac-store {
+			display:block;
+		}
+		.btn-img > p , .pra_hide{
+			display:block;
+		}
+	</style>
+{% endif %}
 		{% schema %}
 		{
 	"colors": {
@@ -710,12 +726,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			"en": "newsletter"
 		},
 		"settings": {
-			"hide": {
+			"item": {
           "type": "checkbox",
-          "label": {
-            "ar": "",
-            "en": ""
-          },
           "option": {
             "ar": "إخفاء",
             "en": "Hide"
@@ -729,6 +741,22 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 					"en": "link for newsletter"
 				}
 			}
+		}
+	},
+	"image_control": {
+		"name": {
+			"ar": "اظهار صورة المنتج كامله فى كارد المنتج",
+			"en": "card"
+		},
+		"settings": {
+			"item": {
+          "type": "checkbox",
+          "option": {
+            "ar": "تفعيل",
+            "en": "Hide"
+          },
+          "noLabel": true
+        }
 		}
 	},
 	"android_store": {

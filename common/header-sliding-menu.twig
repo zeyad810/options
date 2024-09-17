@@ -2,7 +2,7 @@
 <nav class="slide-menu menu-header-theme-bg-primary menu-header-theme-bg-primary-brightness-100" id="sliding-menu">
     <ul class="theme-text-for-primary-bg menu-header-theme-bg-primary menu-header-theme-bg-primary-brightness-100 menu-header-theme-text-for-primary-bg">
         <li>
-            <div style="height: 50px"></div>
+            <div style="display: flex;justify-content: end;align-items: center;padding: 12px;font-size: 40px;color: red;font-weight: 500;" onclick="closeSlidingMenu()" >x</div>
         </li>
         {% for menu in main_navigation_menu.items %}
             {% if menu.url %}
