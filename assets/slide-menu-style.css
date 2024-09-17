@@ -1,5 +1,5 @@
 .slide-menu {
-    width: 70%;
+    width: 60%;
 }
 .slide-menu, .slide-menu a {
     font-size: 1.2rem;
@@ -79,4 +79,4 @@
 }
 
 .sidenav-open .sidenav { width: 250px; }
-.sidenav-open #sidenav-overlay { width: 100%; }
+.sidenav-open #sidenav-overlay { width: 100%; height: 100vh;}

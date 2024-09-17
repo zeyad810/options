@@ -1,10 +1,10 @@
 {# start section banner component #}
 <section id="g_banner">
-    <div class="container g_banner_content">
+    <div class=" g_banner_content">
         {# cards #}
         {% for card in settings.collection %}
         <div id="card-{{ loop.index }}" 
-            style="background: url({{card.collection_image}}) center no-repeat;
+            style="background: url({{card.collection_image}}) center no-repeat; background-size: cover;
             {% if loop.index == 2 and card.collection_position == "start" %} align-items:start;
             {% elseif loop.index == 3 and card.collection_position == "end" %} align-items:end;
             {% elseif card.collection_position == "middle" %} align-items:center; {% endif %}">
@@ -122,6 +122,27 @@
             font-size: 30px;
             font-weight: bolder;
             line-height: 1.5;
+        }
+    }
+    @media (min-width: 1440px ){
+        .g_banner_content #card-1 p {
+            margin: 0 auto 10%;
+            padding:0;
+        }
+        .g_banner_content #card-2 p {
+                font-size: 50px;
+        }
+        .g_banner_content .content-btn #a-2 {
+            padding: 18px 60px;
+            font-size: 30px;
+        }
+        .g_banner_content #card-3 p {
+                font-size: 50px;
+                padding-left:24px
+        }
+        .g_banner_content .content-btn #a-3 {
+            padding: 18px 60px;
+            font-size: 30px;
         }
     }
 </style>

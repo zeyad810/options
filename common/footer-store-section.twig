@@ -37,7 +37,7 @@
 
 
 		<div class="flex flex-col " style="position: relative;">
-			<p style='margin-bottom: 14px;'>{{ locals.phones_apps }}</p>
+			<p class="pra_hide" style='margin-bottom: 14px;'>{{ locals.phones_apps }}</p>
 			<div class="flex flex-wrap gap-4" style="position: relative; bottom: 7px">
 				<a class='android-store'>
 					<img src="https://cdn.salla.network/images/googleplay.png" alt="android">
@@ -52,7 +52,7 @@
 	{# 121222 #}
 
 
-	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg" style=" padding: 15px !important;">
+	<div class="footer-store-section store-section footer-theme-bg-primary footer-theme-text-for-primary-bg" style=" padding: 15px 15px 0px 15px !important;">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-lg-5" style="padding-right: 10px;padding-left: 10px;">
@@ -75,7 +75,7 @@
 				</div>
 
 				<div class="col-12 col-lg-7 container">
-					<div class="row">
+					<div class="row" style="margin-bottom: 20px !important ;">
 						<div class="col-6 col-lg-3">
 							{% if not (about_settings.links_1_hide) %}
 								<div class="footer-about-us-links-div">
@@ -156,10 +156,20 @@
 									{% endif %}
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>
+				<div class="btn-img flex flex-col " style="position: relative; margin:20px 0px">
+					<p style='margin-bottom: 14px;'>{{ locals.phones_apps }}</p>
+					<div class=" flex flex-wrap gap-4" style="position: relative; bottom: 7px">
+						<a class='android-store'>
+							<img src="https://cdn.salla.network/images/googleplay.png" alt="android">
+						</a>
+						<a class='mac-store'>
+							<img src="https://cdn.salla.network/images/appstore.png" alt="mac">
+						</a>
+					</div>
+				</div>
 		</div>
 	</div>
 
@@ -244,3 +254,14 @@
 		</div>
 	</div>
 </div>
+<style>
+	.android-store{
+		display:none;
+	}
+	.mac-store{
+		display:none;
+	}
+	.btn-img > p , .pra_hide{
+		display:none;
+	}
+</style>

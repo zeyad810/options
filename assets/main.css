@@ -666,7 +666,6 @@ button.more-button , a.more-button {
 
 .footer-store-section {
     padding-top: 35px;
-    padding-bottom: 35px;
 }
 
 .footer-store-section-bars {
@@ -1271,7 +1270,7 @@ ul.main-nav > li ul.sub-menu-lists > li > a {
 .banners-area { margin-top: 1.1666666666666667rem; padding-top: 15px; }
 
 @media only screen and (min-width:769px) {
-    .ic.menu { display: none; }
+    .ic.menu { display: none !important; }
     /* Main Menu for Desktop Devices  */
     ul.main-nav { display: block; position: relative; }
     .sub-menu-block { padding: 15px; }
