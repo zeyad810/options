@@ -3,7 +3,7 @@
 			<swiper-container pagination="true">
 				{% for item in settings.slider %}
 					<swiper-slide>
-						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar">
+						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
 							<div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
 								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
 								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
@@ -19,12 +19,14 @@
 
 		</section>
         <style>
-			@media(max-width: 576px) {
-                .swiper-slide {
-                    background-image: url('{{ settings.slider_bannar_bg_mobile }}') !important;
+			@media(max-width: 768px) {
+                {% for item in settings.slider %}
+                 .baner-{{loop.index}} {
+                    background-image: url('{{ item.slider_bannar_bg_mobile }}') !important;
                     background-size: cover;
                     background-position: center;
                 }
+                {% endfor %}
             }
 
 
