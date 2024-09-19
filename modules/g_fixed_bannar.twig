@@ -1,97 +1,106 @@
 <section section-id="{{ sectionId }}">
-  <swiper-container pagination="true">
-    {% for item in settings.slider %}
-    <swiper-slide>
-      <div class="g_fixed_bannar" data-bg-desktop="{{ item.slider_bannar_bg }}" data-bg-mobile="{{ item.slider_bannar_bg_mobile }}">
-        <div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
-          <h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
-          <p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
-          <a href='{{item.slider_bannar_url}}'>
-            <button class="animate__animated animate__fadeInUp custom-dlay-a w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
-          </a>
-        </div>
-      </div>
-    </swiper-slide>
-    {% endfor %}
-  </swiper-container>
-</section>
 
-<style>
-  .g_fixed_bannar {
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
+			<swiper-container pagination="true">
+				{% for item in settings.slider %}
+					<swiper-slide>
+						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar">
+							<div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
+								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
+								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
+								<a href='{{item.slider_bannar_url}}'>
+									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
+								</a>
+							</div>
+						</div>
+					</swiper-slide>
+				{% endfor %}
+			</swiper-container>
+			<!-- Add Pagination -->
 
-  .swiper-container {
-    width: 100vw;
-    height: 100vh;
-  }
+		</section>
+        <style>
+			@media(max-width: 576px) {
+                .swiper-slide {
+                    background-image: url('{{ settings.slider_bannar_bg_mobile }}') !important;
+                    background-size: cover;
+                    background-position: center;
+                }
+            }
 
-  .swiper-pagination {
-    bottom: 20px;
-    display: flex;
-    justify-content: center;
-  }
 
-  .swiper-pagination-bullet {
-    width: 15px;
-    height: 15px;
-    margin: 0 5px;
-    border-radius: 10px;
-    background: #d68d9c;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-  }
 
-  @media (max-width: 768px) {
-    .swiper-container {
-      height: auto;
-    }
-    .g_fixed_bannar{
-        height: 65vh;
-    }
-  }
-</style>
+			.swiper-container {
+				width: 100vw;
+				height: 100vh;
+			}
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+			.baner_swiber.swiper-container {
+				width: 100vw;
+				height: 100vh;
+			}
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const swiperFixBaner = new Swiper('.swiper-container', {
-      slidesPerView: 1,
-      pagination: {
+
+			.baner_swiber .swiper-pagination {
+				bottom: 20px;
+				display: flex;
+				justify-content: center;
+			}
+
+
+			.baner_swiber .swiper-pagination-bullet {
+				width: 15px;
+				height: 15px;
+				margin: 0 5px;
+				border-radius: 10px;
+				background: #d68d9c;
+				opacity: 0.7;
+				transition: all 0.3s ease;
+			}
+
+			@media(max-width: 700px) {
+				.baner_swiber.swiper-container {
+					height: auto;
+				}
+			}
+
+
+		</style>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let swiperFixBaner = new Swiper('.baner_swiber', {
+        slidesPerView: 1,
+        pagination: {
         el: '.swiper-pagination',
         clickable: true
-      },
-      loop: true,
-      autoplay: {
+        },
+        loop: true,
+        autoplay: {
         delay: 5000,
-        disableOnInteraction: false
-      },
-      observer: true,
-      observeParents: true
+        disableOnInteraction: false,
+        },
+        observer: true,
+        observeParents: true,
     });
 
-    function updateBackgroundImages() {
-      const sliders = document.querySelectorAll('.g_fixed_bannar');
-      const isMobile = window.innerWidth <= 767;
+  // تغيير الخلفية بناءً على حجم الشاشة
+        function updateBackgrounds() {
+        const slides = document.querySelectorAll('.swiper-slide');
+        const isMobile = window.innerWidth <= 576;
 
-      sliders.forEach(slider => {
-        const bgDesktop = slider.getAttribute('data-bg-desktop');
-        const bgMobile = slider.getAttribute('data-bg-mobile');
-        const backgroundUrl = isMobile ? bgMobile : bgDesktop;
-        slider.style.backgroundImage = `url('${backgroundUrl}')`;
-        slider.style.backgroundSize = 'cover';
-        slider.style.backgroundPosition = 'center';
-      });
+        slides.forEach(slide => {
+        const backgroundUrl = isMobile ? '{{ settings.slider_bannar_bg_mobile }}' : '{{ settings.slider_bannar_bg }}';
+        slide.style.backgroundImage = `url('${backgroundUrl}')`;
+        slide.style.backgroundSize = 'cover';
+        slide.style.backgroundPosition = 'center';
+        });
     }
 
-    // Update backgrounds on page load and resize
-    updateBackgroundImages();
-    window.addEventListener('resize', updateBackgroundImages);
-  });
+  // تحديث الخلفيات عند تحميل الصفحة وتغيير حجم الشاشة
+  updateBackgrounds();
+  window.addEventListener('resize', updateBackgrounds);
+});
+
 </script>
 
 
