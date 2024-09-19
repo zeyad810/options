@@ -17,6 +17,55 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
+			/* loader edit */
+			.overlay{
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				backdrop-filter: blur(20px);
+				display: flex;
+				z-index: 999;
+				align-items: center;
+				justify-content: center;
+			}
+			.img_loader{
+				position: fixed;
+				z-index: 9999;
+				max-height: 90px;
+				max-width: 90px;
+			}
+			.spinner {
+				height: 7rem;
+				width: 7rem;
+				z-index: 9998; 
+				padding: 20px;
+				cursor: not-allowed;
+				border-radius: 50%;
+				box-shadow: -10px -10px 10px var(--color-primary), 0px -10px 10px 0px var(--s-color), 10px -10px 10px var(--color-primary), 10px 0 10px var(--t-color), 10px 10px 10px 0px var(--s-color), 0 10px 10px 0px var(--color-primary), -10px 10px 10px 0px var(--s-color);
+				animation: rot55 0.7s linear infinite;
+			}
+			.L_logo{
+				height: 20vw;
+				max-height: 50px;
+				width: 20vw;
+				max-width: 50px;
+			}
+			@keyframes rot55 {
+				to {
+				transform: rotate(360deg);
+				}
+			}     
+			.spinner--hidden {
+				display: none;
+			}
+			#app.loaded .overlay,
+			#app.loaded .L_logo{
+				display: none; 
+			}
+
+
 			.sm-search-div.show {
 				display: block !important;
 			}
@@ -118,6 +167,15 @@
 	</head>
 
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
+		{# edit loader #}
+		<div class="overlay">
+			<img src="{{ store.logo }}" class="img_loader"/>
+			<div class="spinner">
+				<div class="spinnerin"></div>
+			</div>
+		</div>
+
+
 		<div class="popup-product-details"></div>
 
 		{% if store.editing_mode %}
@@ -231,6 +289,19 @@
 					{{ zidapi_script|raw }}
 
 <script>
+// edit loader
+	window.addEventListener("load", () => {
+	const loader = document.querySelector(".spinner");
+	loader.classList.add("spinner--hidden");
+	loader.addEventListener("transitionend", () => {
+	if (!document.querySelector(".spinner")) return;
+	document.body.removeChild(loader);
+	});
+	document.body.classList.add('loaded');  
+	}); 
+
+
+
 window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
 
 window.loadToasterScriptIfNotLoaded = function (onCompleted) {
