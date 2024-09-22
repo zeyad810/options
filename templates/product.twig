@@ -393,7 +393,7 @@
 							<div class="row bundle-offer-details-products">
 								{% for key, product in product.bundle_offer.products.results | slice(0, 5) %}
 									<div class="prod-col prod-col-tb">
-										{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+										{% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings } %}
 									</div>
 								{% endfor %}
 							</div>
@@ -759,7 +759,7 @@ conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
 							<div class="con swiper-wrapper justify-center" >
 								{% for key,rProduct in product.related_products %}
 									<div class="swiper-slide prod-col slide-p">
-										{% include 'product-card.twig' with {'product' : rProduct, 'index': key} %}
+										{% include 'product-card.twig' with {'product' : rProduct, 'index': key, 'pr_settings':settings} %}
 									</div>
 								{% endfor %}
 							</div>
@@ -814,7 +814,7 @@ conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
 								<div class="row bundle-offer-details-products-all">
 									{% for key, product in product.bundle_offer.products.results %}
 										<div class="prod-col prod-col-tb">
-											{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+											{% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings} %}
 										</div>
 									{% endfor %}
 								</div>

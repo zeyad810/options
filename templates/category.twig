@@ -85,7 +85,7 @@
                 {% for product in products.data %}
 
                     <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
-                        {% include 'product-card.twig' with {'product' : product, 'index': key} %}
+                        {% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings} %}
                     </div>
 
                 {% endfor %}

@@ -11328,7 +11328,6 @@ section.sticky-product-bar.bg-white.p-5.target\:btn:target.rounded-b-none {
 }
 .horizontal .product-item{
   position: relative;
-  height:300px;
   overflow: hidden;
 } 
 .horizontal .product-item:hover .product-all-content{

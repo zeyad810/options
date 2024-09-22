@@ -3,9 +3,13 @@
 		<a class="d-flex flex-column justify-content-start" href="/products/{{ product.slug }}">
 			<div class="box-1-1">
 				<div class="content">
-					<div class="logo_product" style="position: absolute;width: 50px;">
-						<img class="logo_site" src="{{ store.logo }}" style="max-width: 100%; display:none;"/>
-						<img class="image_site" src="" style="max-width: 100%; display:none;"/>
+					<div class="up-pr-photo" style="position: absolute;width: 50px;">
+						{% if pr_settings.logo_card_add_img_logo == 'logo' %}
+							<img src="{{ store.logo }}" style="max-width: 100%;"/>
+						{% elseif pr_settings.logo_card_add_img_logo == 'photo' %}
+							<img src="{{ pr_settings.logo_card_product_img }}" style="max-width: 100%;"/>
+						{% endif %}
+
 					</div>
 					<div class=" d-flex justify-content-center pr-img">
 						<img style=" border-radius: 5.96px;" id="product-card-img-{{ product.id }}" {% if product.images %} src="{{ imageUrl(product.images[0]['image']['medium'],{ w: 400, q: 85, f:'auto' }) }}" {% else %} src="{{ imageUrl(asset_url ~ 'product-img.svg',{ w: 235, q: 85, f:'auto' }) }}" {% endif %} alt="{{ product.name }}" loading="lazy">
@@ -100,10 +104,9 @@
 		</div>
 	</div>
 {% endif %}
-
 <style>
 	/* kareem edit */
-	.icon-p{
+	.icon-p {
 		background-color: #fff !important;
 		padding: 10px !important;
 		border-radius: 50% !important;
@@ -119,8 +122,8 @@
 
 	.product-item img {
 		width: auto !important;
-    	min-height: 100%;
-    	object-fit: contain;
+		min-height: 100%;
+		object-fit: contain;
 	}
 
 	.text-center button,
@@ -197,56 +200,54 @@
 		color: white;
 	}
 </style>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-			const popupContainer = document.querySelector('div.popup-product-details');
-	
-			document.querySelectorAll('.open-product-details').forEach(button => {
-				button.addEventListener('click', function() {
-					const productId = this.getAttribute('data-product-id');
-					const productName = this.getAttribute('data-product-name');
-					const productDescription = this.getAttribute('data-description');
-					const productImage = this.getAttribute('data-product-image');
-					const productRealPrice = this.getAttribute('data-real-price');
-	
-					const productPrice = this.getAttribute('data-product-price');
-					const productDiscount = this.getAttribute('data-discount');
-					const productCategory = this.getAttribute('data-category');
-					const dataId = this.getAttribute('data-id');
-					const prodcutSlug = this.getAttribute('data-slug');
-	
-					popupContainer.innerHTML = `
-						<div class="popup-content">	
-							<i class="fa-solid fa-xmark" id="close-popup"></i>
-							<div class='photo-product'>
-								<img src="${productImage}" alt="Product Image" class="popup-image" />
-							</div>
-	
-							<div class="popup-text">
-								<div class='category'>${productCategory}</div>
-								<div class='name'>${productName}</div>
-								<div class='description'>${productDescription}</div>
-								<div class='product-formatted-price theme-text-primary'>${productRealPrice}</div>
-								${ productDiscount ? 
-									`<div class='price-product-discound'>
-										<del class='price product-formatted-price-old'>${productPrice}</del>
-										<span class="product-formatted-price-discount" style="color:#f25f5f;">{{ locals.product_discount }} ${productDiscount}%</span>
-									</div>`
-								: '' }
-	
-								<a class="btn btn-primary btn-product-card-select-variant" href="/products/${ prodcutSlug }">{{ locals.read_more }}</a>
-	
-							</div>
-						</div>
-					`;
-					popupContainer.style.display = 'flex';
-	
-					document.getElementById('close-popup').addEventListener('click', function() {
-						popupContainer.style.display = 'none';
+<script>document.addEventListener('DOMContentLoaded', function() {
+					const popupContainer = document.querySelector('div.popup-product-details');
+			
+					document.querySelectorAll('.open-product-details').forEach(button => {
+						button.addEventListener('click', function() {
+							const productId = this.getAttribute('data-product-id');
+							const productName = this.getAttribute('data-product-name');
+							const productDescription = this.getAttribute('data-description');
+							const productImage = this.getAttribute('data-product-image');
+							const productRealPrice = this.getAttribute('data-real-price');
+			
+							const productPrice = this.getAttribute('data-product-price');
+							const productDiscount = this.getAttribute('data-discount');
+							const productCategory = this.getAttribute('data-category');
+							const dataId = this.getAttribute('data-id');
+							const prodcutSlug = this.getAttribute('data-slug');
+			
+							popupContainer.innerHTML = `
+								<div class="popup-content">	
+									<i class="fa-solid fa-xmark" id="close-popup"></i>
+									<div class='photo-product'>
+										<img src="${productImage}" alt="Product Image" class="popup-image" />
+									</div>
+			
+									<div class="popup-text">
+										<div class='category'>${productCategory}</div>
+										<div class='name'>${productName}</div>
+										<div class='description'>${productDescription}</div>
+										<div class='product-formatted-price theme-text-primary'>${productRealPrice}</div>
+										${ productDiscount ? 
+											`<div class='price-product-discound'>
+												<del class='price product-formatted-price-old'>${productPrice}</del>
+												<span class="product-formatted-price-discount" style="color:#f25f5f;">{{ locals.product_discount }} ${productDiscount}%</span>
+											</div>`
+										: '' }
+			
+										<a class="btn btn-primary btn-product-card-select-variant" href="/products/${ prodcutSlug }">{{ locals.read_more }}</a>
+			
+									</div>
+								</div>
+							`;
+							popupContainer.style.display = 'flex';
+			
+							document.getElementById('close-popup').addEventListener('click', function() {
+								popupContainer.style.display = 'none';
+							});
+						});
 					});
 				});
-			});
-		});
-		
-	</script>
+				
+			</script>

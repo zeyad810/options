@@ -30,7 +30,7 @@
 					justify-content: center;
 					background: white;
 					transition: opacity 0.75s, visibility 0.75s;
-					z-index: 99999;
+					z-index: 999999;
 				}
 				
 				.overlay .img_loader {
@@ -454,23 +454,9 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 	</style>
 {% endif %}
 
-{% if settings.logo_card_add_img_logo == 'logo' %}
-	<style>
-		.logo_product .logo_site {
-			display:block !important;
-		}
-	</style>
-{% endif %}
-{% if settings.logo_card_product_img %}
-	<style>
-		.logo_product .image_site {
-			display:block !important;
-		}
-	</style>
-{% endif %}
 {% if settings.logo_card_logo_position == 'top_right' %}
 	<style>
-		.logo_product , .image_site {
+		.up-pr-photo {
 			right:6px;
 			top:6px;
 		}
@@ -478,7 +464,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 {% endif %}
 {% if settings.logo_card_logo_position == 'top_left' %}
 	<style>
-		.logo_product , .image_site{
+		.up-pr-photo{
 			left:6px;
 			top:6px;
 		}
@@ -486,7 +472,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 {% endif %}
 {% if settings.logo_card_logo_position == 'bottom_right' %}
 	<style>
-		.logo_product , .image_site{
+		.up-pr-photo{
 			right:6px;
 			bottom:6px;
 		}
@@ -494,28 +480,12 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 {% endif %}
 {% if settings.logo_card_logo_position == 'bottom_left' %}
 	<style>
-		.logo_product , .image_site{
+		.up-pr-photo{
 			left:6px;
 			bottom:6px;
 		}
 	</style>
 {% endif %}
-<script>
-    window.onload = function() {
-        // استدعاء جميع العناصر التي تحتوي على الكلاس المطلوب
-        const images = document.querySelectorAll('.image_site'); // تأكد من أن الكلاس صحيح
-
-        // استخدام forEach لتطبيق السورس على كل صورة
-        images.forEach(function(image) {
-            image.src = '{{ settings.logo_card_product_img }}'; // تعيين الصورة من الإعدادات
-        });
-    };
-</script>
-
-		{% schema %}
-		{
-=======
-
 	{% schema %}
 	{
 	"load": {
@@ -905,15 +875,15 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 	},
 	"logo_card": {
 		"name": {
-			"ar": "اضافه لوجو او صوره فوق البرودكت",
-			"en": "card"
+			"ar": "اضافه لوجو او صوره على المنتج",
+			"en": "add logo or img on product"
 		},
 		"settings": {
 				"add_img_logo": {
                     "type": "radios",
                     "label": {
-                      "ar": "اضافه لوجو للمتجر",
-                      "en": "Adding a logo to the store"
+                      "ar": "اضافه لوجو المتجر",
+                      "en": "Adding a logo "
                     },
                     "options": [
                       {
@@ -924,7 +894,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                         }
                       },
                       {
-                        "value": "photos",
+                        "value": "photo",
                         "label": {
                           "ar": "اضافه صوره",
                           "en": "Add photo"
@@ -933,7 +903,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                       {
                         "value": "anything",
                         "label": {
-                          "ar": "عدم اضافه شئ",
+                          "ar": "الغاء التفعيل ",
                           "en": "Not adding anything"
                         }
                       }
@@ -942,7 +912,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                 "product_img": {
                     "type": "image",
                     "label": {
-                        "ar": "اضف صوره تضع علي الكارد",
+                        "ar": "اضف صوره علي المنتج",
                         "en": "Add a picture to the card"
                     }
                 },
@@ -982,9 +952,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                         }
                       }
                     ]
-                }
-            
-        
+                }        
     }
 	},
 	"image_control": {
