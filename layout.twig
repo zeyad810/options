@@ -1,22 +1,60 @@
 <!doctype html>
 <html class="no-js" lang="{{ session.lang.code }}" dir="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}">
-
+	
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-
+		
 		{{ header_meta_tags | raw }}
-
-
+		
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-
+		
+		
 		<link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!--jquery UI -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
+			/* loader edit */
+			
+				.overlay {
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100vw;
+					height: 100vh;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: white;
+					transition: opacity 0.75s, visibility 0.75s;
+					z-index: 99999;
+				}
+				
+				.overlay .img_loader {
+					animation: logo_load 3s ease-in-out ;
+				}
+
+				@keyframes logo_load {
+					0% {
+						transform: scale(0.1);
+					}
+					70% {
+						transform: scale(0.8);
+					}
+					100% {
+						transform: scale(1);
+					}
+				}
+			
+			body.loaded .overlay,
+			body.loaded .img_loader{
+				display: none; 
+			}
+
+
 			.sm-search-div.show {
 				display: block !important;
 			}
@@ -67,9 +105,9 @@
 			body,
 			html {
 				overflow-x: hidden !important;
-
+				
 			}
-		</style>
+			</style>
 
 		{% if session.lang.code == 'ar' %}
 			<link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap-rtl.css?v=1.05' }}"/>
@@ -79,12 +117,12 @@
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap-fixes.css?v=1.11') }}"/>
 
-
+		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.structure.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.theme.min.css') }}"/>
-
-
+		
+		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu.css') }}"/>
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}"/>
@@ -99,7 +137,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_commonQ.css') }}"/>
-
+		
 
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
@@ -114,10 +152,18 @@
 			<link rel="stylesheet" href="{{ user_custom_css }}">
 		{% endif %}
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+		
 	</head>
-
+	
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
+		{# edit loader #}
+		{% if  settings.load_loader == "true" %}
+			<div class="overlay">
+				<img src="{{ store.logo }}" class="img_loader"/>
+			</div>
+		{% endif %}
+		
+		
 		<div class="popup-product-details"></div>
 
 		{% if store.editing_mode %}
@@ -232,6 +278,7 @@
 					{{ zidapi_script|raw }}
 
 <script>
+
 window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
 
 window.loadToasterScriptIfNotLoaded = function (onCompleted) {
@@ -299,6 +346,22 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 				
 				{% block footer_scripts %}{% endblock %}
+				
+
+
+				<script>
+					
+				document.addEventListener('DOMContentLoaded', function() {
+					const overlay = document.querySelector(".overlay");
+					overlay.style.display = 'flex';
+				});
+
+				window.addEventListener('load', function() {
+					const overlay = document.querySelector(".overlay").style.display = 'none';
+					const logo = document.querySelecto(".img_loader").style.display = 'none';
+				});
+
+				</script>
 			</body>
 
 
@@ -390,6 +453,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		}
 	</style>
 {% endif %}
+
 {% if settings.logo_card_add_img_logo == 'logo' %}
 	<style>
 		.logo_product .logo_site {
@@ -450,6 +514,43 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 		{% schema %}
 		{
+=======
+
+	{% schema %}
+	{
+	"load": {
+		"name": {
+			"ar": "التحميل",
+			"en": "loading"
+		},
+		"icon": "fa fa-paint-brush",
+		"display": true,
+		"settings": {
+			"loader": {
+				"type": "select",
+				"label": {
+					"ar": "انيمشن تحميل الصفحة",
+					"en": "loader of the page"
+				},
+				"options": [
+					{
+						"value": "true",
+						"label": {
+							"ar": "نعم",
+							"en": "yes"
+						}
+					},
+					{
+						"value": "false",
+						"label": {
+							"ar": "لا",
+							"en": "no"
+						}
+					}
+				]
+			}
+		}
+	},		
 	"colors": {
 		"name": {
 			"ar": "الالوان",
