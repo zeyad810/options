@@ -227,6 +227,7 @@
 							</div>
 						</div>
 					</a>
+					<p>{{ settings.logo_position}}</p>
 
 					<a href="/auth/login" class="flex flex-col items-center justify-center gap-1 ">
 						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
@@ -452,6 +453,68 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		}
 	</style>
 {% endif %}
+
+{% if settings.logo_card_add_img_logo == 'logo' %}
+	<style>
+		.logo_product .logo_site {
+			display:block !important;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_product_img %}
+	<style>
+		.logo_product .image_site {
+			display:block !important;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'top_right' %}
+	<style>
+		.logo_product , .image_site {
+			right:6px;
+			top:6px;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'top_left' %}
+	<style>
+		.logo_product , .image_site{
+			left:6px;
+			top:6px;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'bottom_right' %}
+	<style>
+		.logo_product , .image_site{
+			right:6px;
+			bottom:6px;
+		}
+	</style>
+{% endif %}
+{% if settings.logo_card_logo_position == 'bottom_left' %}
+	<style>
+		.logo_product , .image_site{
+			left:6px;
+			bottom:6px;
+		}
+	</style>
+{% endif %}
+<script>
+    window.onload = function() {
+        // استدعاء جميع العناصر التي تحتوي على الكلاس المطلوب
+        const images = document.querySelectorAll('.image_site'); // تأكد من أن الكلاس صحيح
+
+        // استخدام forEach لتطبيق السورس على كل صورة
+        images.forEach(function(image) {
+            image.src = '{{ settings.logo_card_product_img }}'; // تعيين الصورة من الإعدادات
+        });
+    };
+</script>
+
+		{% schema %}
+		{
+=======
 
 	{% schema %}
 	{
@@ -839,6 +902,90 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				}
 			}
 		}
+	},
+	"logo_card": {
+		"name": {
+			"ar": "اضافه لوجو او صوره فوق البرودكت",
+			"en": "card"
+		},
+		"settings": {
+				"add_img_logo": {
+                    "type": "radios",
+                    "label": {
+                      "ar": "اضافه لوجو للمتجر",
+                      "en": "Adding a logo to the store"
+                    },
+                    "options": [
+                      {
+                        "value": "logo",
+                        "label": {
+                          "ar": "اضافه لوجو",
+                          "en": "Add logo"
+                        }
+                      },
+                      {
+                        "value": "photos",
+                        "label": {
+                          "ar": "اضافه صوره",
+                          "en": "Add photo"
+                        }
+                      },
+                      {
+                        "value": "anything",
+                        "label": {
+                          "ar": "عدم اضافه شئ",
+                          "en": "Not adding anything"
+                        }
+                      }
+                    ]
+                },
+                "product_img": {
+                    "type": "image",
+                    "label": {
+                        "ar": "اضف صوره تضع علي الكارد",
+                        "en": "Add a picture to the card"
+                    }
+                },
+                "logo_position": {
+                    "type": "radios",
+                    "label": {
+                      "ar": "مكان الصوره او اللوجو",
+                      "en": "image or logo position"
+                    },
+                    "options": [
+                      {
+                        "value": "top_right",
+                        "label": {
+                          "ar": "اعلي يمين",
+                          "en": "top_right"
+                        }
+                      },
+                      {
+                        "value": "top_left",
+                        "label": {
+                          "ar": "اعلي يسار",
+                          "en": "top_left"
+                        }
+                      },
+                      {
+                        "value": "bottom_right",
+                        "label": {
+                          "ar": "اسفل يمين",
+                          "en": "bottom_right"
+                        }
+                      },
+                      {
+                        "value": "bottom_left",
+                        "label": {
+                          "ar": "اسفل يسار",
+                          "en": "bottom_left"
+                        }
+                      }
+                    ]
+                }
+            
+        
+    }
 	},
 	"image_control": {
 		"name": {
