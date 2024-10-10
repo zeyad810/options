@@ -10,12 +10,10 @@
 
       <!-- Product data section (left half) -->
       <div class="productdata">
-       <div class="pro_cont">
-         <h2>عرض الأسبوع</h2>
+       <div class="pro_cont ">
+         <h2>{{settings.title}}</h2>
         <a class="title" href="/categories/{{ product.categories[0].id }}/{{ product.categories[0].slug }}"></a>       
         <p>{{ product.name }}</p>
-        
-        
         <!-- Countdown timer section -->
         <div class="counttimer">
           <div class="countDown">
@@ -40,7 +38,7 @@
           </div>
         </div>
                 <a href='{{product.html_url}}'>
-                        <button class="shopbtn">تسوقي الآن</button>
+                     <button class="shopbtn" style="color:{{settings.text_color}}; background-color: {{settings.bg_color}}">{{settings.shop_button}}</button>
                 </a>
        </div>
       </div>
@@ -64,6 +62,7 @@
 </section>
 
 <style>
+
 .offer-deadline {
     width: 100%; 
 }
@@ -79,6 +78,7 @@
 }
 
 .productdata {
+  position: relative;
     width: 50%; 
     height: 100%;
     background-color: #CB657A;
@@ -91,8 +91,8 @@
     gap: 10px;
 }
 .productdata .pro_cont{
-    position: relative;
-    right: 25%;
+    position: absolute;
+    right: 22px;
 }
 .productdata h2 {
     font-size: 33px;
@@ -357,62 +357,67 @@ total.forEach( (el) =>{
 
 {
     "name": {
-        "ar": "  عرض الأسبوع",
-        "en": "Week Offers "
+        "ar": "عرض الأسبوع",
+        "en": "Week Offers"
     },
     "icon": "fal fa-user",
     "display": true,
     "settings": {
-        "title" :{
-            "type":"text",
-            "label":{
-                "ar":" العنوان",
-                "en":"title"
+        "title": {
+            "type": "text",
+            "label": {
+                "ar": "العنوان",
+                "en": "title"
             }
-        }, 
-        "all" :{
-            "type":"url",
-            "label":{
-                "ar":" عرض الكل",
-                "en":"show all"
+        },
+        "shop_button": {
+            "type": "text",
+            "label": {
+                "ar": "نص الزر",
+                "en": "button text"
+            }
+        },
+        "bg_color": {
+            "type": "color",
+            "label": {
+                "ar": "لون خلفية الزر",
+                "en": "button background color"
+            }
+        },
+        "text_color": {
+            "type": "color",
+            "label": {
+                "ar": "لون نص الزر",
+                "en": "button text color"
             }
         },
         "products": {
             "type": "products",
             "label": {
-                "ar": "اختر قائمة المنتجات ",
+                "ar": "اختر قائمة المنتجات",
                 "en": "Select category products"
-            }   
+            }
         },
         "dateTime": {
-                "type": "fieldset",
-                "label": {
-                    "ar": "ادخل تاريخ الانتهاء",
-                    "en": "date for emd offer"
-                },
-                "expandable": true,
-                "settings": {
-                    "enter":{
-                    "type":"text",
-                    "info":{
-                        "ar":"YYYY-MM-DD",
-                        "en":"YYYY-MM-DD"
-                    }
-                    },
-                    "shop_button":{
-                      "type":"text",
-                      "label":{
-                      "er":"نص الزر",
-                      "en" :"button text"
-
-                      }
-
-
+            "type": "fieldset",
+            "label": {
+                "ar": "ادخل تاريخ الانتهاء",
+                "en": "date for end offer"
+            },
+            "expandable": true,
+            "settings": {
+                "enter": {
+                    "type": "text",
+                    "info": {
+                        "ar": "YYYY-MM-DD",
+                        "en": "YYYY-MM-DD"
                     }
                 }
             }
+        }
     }
 }
+
 
 {% endschema %}
 

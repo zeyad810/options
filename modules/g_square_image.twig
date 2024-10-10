@@ -22,7 +22,11 @@
 			{% elseif loop.index == 4 %}
 				<div class="img f_img">
 					<div class="card h-100">
-						<img loading="lazy" src="{{item.square_image}}" alt="" class="card-img-top" data-lasturl={{settings.last_image_mobile}}>
+					<picture>
+					  <source srcset="{{ item.square_image }} 2x" media="(min-width: 768px)">
+					  <source srcset="{{ settings.last_image_mobile }} 1x" media="(max-width: 767px)">
+					  <img loading="lazy" src="{{ item.square_image }}" alt="" class="img-fluid" />
+					</picture>
 						<div class="over">
 							<div class="p-2 bg-opacity-50 text">
 								<p class="mb-2 text-black">
@@ -47,6 +51,7 @@
 
 
 <style>
+ 
 	.ads .img .over:hover .text{
 		opacity: 1;
 	}
@@ -55,21 +60,36 @@
 		opacity: 0;
 		transition: .3s;
 	}
+	.imgs .img {
+		overflow: hidden;
+	}
 
-	@media (max-width: 768px) {
+.imgs .img img {
+    transition: all 0.3s ease;
+    transform-origin: 50px 20px;
+}
+
+.imgs .img:hover img {
+    transform: scale(1.1);
+}
+
+
+.imgs .img:nth-child(4):hover img {
+    transform: none; 
+}
+
+
+	@media (max-width: 767px) {
 		.ads .img .over .text{
 		opacity: 1;
+	  }
 	}
+	@media (min-width: 768px) {
+	.ads .img img {
+       opacity:1;
+      }
 	}
 </style>
-
-<script>
-	let last_image = document.querySelector('.card-img-top');
-        let imageUrlMobile = last_image?.dataset.lasturl;
-        if (window.innerWidth <= 767) {
-            last_image.src = imageUrlMobile;
-        }
-</script>
 
 
 {% schema %}
