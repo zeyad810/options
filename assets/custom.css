@@ -8632,7 +8632,7 @@ input[type=radio].sr-only:checked ~ div.product_deadline .data .s-count-down-end
 .image-title .title-heade {
   text-align: center;
   min-width: 260px;
-  background-color: white;
+  /* background-color: white; */
   padding: 14px 30px;
   border-radius: 4px;
   font-weight: 600;

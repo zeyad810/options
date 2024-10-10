@@ -1,6 +1,6 @@
 {% if product %}
 	<div class="product-item {% if product.is_infinite == false and product.quantity <= 0 %}product-item-out-of-stock{% endif %} ">
-		<a class="d-flex flex-column justify-content-start" href="/products/{{ product.slug }}">
+		<p class="d-flex flex-column justify-content-start" >
 			<div class="box-1-1">
 				<div class="content">
 					<div class="up-pr-photo" style="position: absolute;width: 50px;">
