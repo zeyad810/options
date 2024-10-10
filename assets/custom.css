@@ -642,6 +642,7 @@ body[data-template="home"] header{
   backdrop-filter: blur(2px);
   z-index: 9999;
 }
+
 .form-group i{
     z-index: 11111;
     position: relative;

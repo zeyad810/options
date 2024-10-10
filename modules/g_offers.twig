@@ -92,73 +92,99 @@
         {% endif %}
     </div>
 </section>
-
+<style>
+.dead_line .product_deadline{
+    padding: 20px;
+}
+.dead_line .img{
+    height: 100%;
+    border-radius: 8px;
+}
+.dead_line img{
+    height: 100%;
+}
+.dead_line .img a{
+    height: 100%;
+}
+.dead_line .data{
+    padding: 0px;
+}
+.main_img{
+    object-fit: cover;
+    height: 100%;
+    border-radius: 8px;
+}
+</style>
 <script>
+    // Function to convert a string date (yyyy-mm-dd) to a Date object
+    function convertToDate(textDate) {
+        if (!textDate || !textDate.trim()) {
+            return null;
+        }
 
+        const parts = textDate.split('-');
+        if (parts.length !== 3) {
+            return null;
+        }
 
-	function convertToDate(textDate) {
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1; // Months are zero-indexed
+        const day = parseInt(parts[2], 10);
+        return new Date(year, month, day);
+    }
 
-if (! textDate || ! textDate.trim()) {
-return null;
-}
+    // Get the target countdown date
+    const realDate = convertToDate('{{ settings.dateTime_choose }}');
+    const countDownDate = new Date(realDate).getTime();
 
-const parts = textDate.split('-');
-if (parts.length !== 3) {
-return null;
-}
+    // Select all countdown elements
+    const allCount = document.querySelectorAll('.countdown');
 
-const year = parseInt(parts[0], 10);
-const month = parseInt(parts[1], 10) - 1;
-const day = parseInt(parts[2], 10);
+    allCount.forEach((el) => {
+        if (el) {
+            const daysContainer = el.querySelector('.js-days span');
+            const hoursContainer = el.querySelector('.js-hours span');
+            const minutesContainer = el.querySelector('.js-minutes span');
+            const secondsContainer = el.querySelector('.js-seconds span');
 
-return new Date(year, month, day);
-}
-const realDAte = convertToDate('{{ settings.dateTime_choose }}');
-const countDownDate = new Date(realDAte).getTime();
-const allCOunt = document.querySelectorAll('.countdown');
-allCOunt.forEach((el) => {
+            // Start the countdown timer
+            const startCountdown = () => {
+                const timer = setInterval(function () {
+                    let now = new Date().getTime();
+                    let distance = countDownDate - now;
 
-if (el) {
-const dayscontainer = el.querySelector('.js-days span');
-const hourscontainer = el.querySelector('.js-hours span');
-const minutescontainer = el.querySelector('.js-minutes span');
-const secondscontainer = el.querySelector('.js-seconds span');
+                    // When the countdown ends
+                    if (distance < 0) {
+                        el.remove(); // Remove the countdown element
+                        document.querySelectorAll('.te').forEach(e => {
+                            e.innerHTML = `
+                                <h1 class="offer_end">
+                                    انتهى العرض
+                                </h1>
+                            `;
+                        });
+                        clearInterval(timer); // Stop the timer
+                    }
 
-const startCountdown = () => {
-const timer = setInterval(function () {
+                    // Time calculations for days, hours, minutes, and seconds
+                    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-let now = new Date().getTime();
+                    // Display the result in the respective elements
+                    daysContainer.innerHTML = days;
+                    hoursContainer.innerHTML = hours;
+                    minutesContainer.innerHTML = minutes;
+                    secondsContainer.innerHTML = seconds;
+                }, 1000);
+            };
 
-let distance = countDownDate - now;
-if (distance < 0) {
-el.remove();
-document.querySelectorAll('.te').forEach(e => {
-e.innerHTML = `
-            <h1 class="offer_end">
-                انتهي العرض
-            </h1>
-            `
-})
-clearInterval(timer);
-}
-
-let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-
-dayscontainer.innerHTML = days;
-hourscontainer.innerHTML = hours;
-minutescontainer.innerHTML = minutes;
-secondscontainer.innerHTML = seconds;
-
-
-}, 1000);
-} startCountdown();
-}
-})
+            startCountdown(); // Initiate the countdown
+        }
+    });
 </script>
+
 
 {% schema %}
 

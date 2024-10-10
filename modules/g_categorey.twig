@@ -45,7 +45,7 @@
 </head>
 <body> 
     <section id="g_cat_{{ sectionId }}" class="g_cat" style="background-color: #fff; padding:70px 0px;" dir="ltr">
-            <div  style="padding-bottom: 50px; margin-bottom: 50px;">
+            <div  style=" margin-bottom: 50px;">
                 {% include 'title.twig' with { 'component_title': settings.section_title } %}
             </div>
             <div class="container overflow-x-hidden q-category">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider bg-white{% endif %} h-auto">
-                    <div class=" {% if settings.slider_toggle == "true" %} swiper-wrapper h-auto {% else %} grid grid-cols-2 !place-items-center  gap-4 md:flex md:flex-wrap md:gap-6 md:justify-center {% endif %}">
+                    <div class=" {% if settings.slider_toggle == "true" %}  swiper-wrapper h-auto {% else %} is-grid {% endif %}">
                         {% for item in settings.categorys %}
                             <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
                                  style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }} display:flex; flex-direction: column; align-items: center;">
@@ -82,6 +82,9 @@
     </section>
     
     <style>
+    .content_btns{
+        left: -8px;
+    }
     .q-category::-webkit-scrollbar {
   display: none;
 }
@@ -92,6 +95,21 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+.is-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    place-items:center;
+}
+
+@media (max-width:768px) {
+    .is-grid{
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+    
+}
     </style>
 <script>
 document.addEventListener('DOMContentLoaded', function () {

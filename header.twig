@@ -1,218 +1,53 @@
-<header section-id="{{ sectionId }}" class='d-flex flex-column'>
+<header section-id="{{ sectionId }}" id="head" class='d-flex flex-column'>
+  {% include 'template_for_store_messages' %}
+  {% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
+  {% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 
-	{% include 'template_for_store_messages' %}
-	{% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
-	{% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
+  <div id="fixed-header" style="z-index: 3">
+    <!-- input search for mobile view -->
+    <div style="z-index: 3">
+      {% include 'header-search-header.twig' with { 'header_settings' : settings } %}
+    </div>
+    <div style="position: relative; z-index: -1" class="container">
+      <div class="sm-search-div">
+        <div class="autocomplete" style="position: relative">
+          <input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
+          <div class="autocomplete-items"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  {% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
+  {% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
 
-	<div
-		id="fixed-header" style="z-index: 3">
-		<!-- input search for mobile view -->
-		<div style="z-index: 3">
-			{% include 'header-search-header.twig' with { 'header_settings' : settings } %}
-		</div>
-		<div style="position: relative; z-index: -1" class="container">
-			<div class="sm-search-div">
-				<div class="autocomplete" style="position: relative">
-					<input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
-					<div class="autocomplete-items"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	{% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
-	{% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
-
-	{% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
-		<div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-body" style="padding: 10px">
-
-						{% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
-
-					</div>
-				</div>
-			</div>
-		</div>
-	{% endif %}
+  {% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
+  <div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body" style="padding: 10px">
+          {% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </header>
+
 
 
 <div class="header-bottom"></div>
 
 {% block stylesheets %}
-  <style>
-  #langCurrecyModal{
-    overflow:unset;
+<style>
+  #langCurrecyModal {
+    overflow: unset;
   }
-    .header-bottom {
-      width: 100%;
-      height: 200px;
-      background-color: #FFF;
-    }
-  </style>
-{% endblock %}
 
-{% schema %}
-{
-  "name": {
-    "ar": "اعلى الصفحة",
-    "en": "Header"
-  },
-  "icon": "fa fa-square",
-  "display": true,
-  "settings": {
-    "announcement_bar": {
-      "type": "fieldset",
-      "label": {
-        "ar": "شريط التنبيهات",
-        "en": "Announcement bar"
-      },
-      "icon": "font_awesome",
-      "expandable": true,
-      "settings": {
-        "display": {
-          "type": "checkbox",
-          "label": {
-            "ar": " ",
-            "en": " "
-          },
-          "option": {
-            "ar": "إظهار",
-            "en": "Display menu"
-          },
-          "noLabel": true
-        },
-        "text": {
-          "type": "text",
-          "label": {
-            "ar": "النص",
-            "en": "Text"
-          }
-        },
-        "url": {
-          "type": "url",
-          "label": {
-            "ar": "الرابط",
-            "en": "Link"
-          },
-          "info": {
-            "ar": "في حال كان الحقل فارغا لن يتم الانتقال للرابط عند الضغط",
-            "en": "This is an info text sample here"
-          }
-        },
-        "page_display": {
-          "type": "select",
-          "label": {
-            "ar": "عرض شريط التنبيهات في",
-            "en": "Display announcement bar in"
-          },
-          "options": [
-            {
-              "value": "all",
-              "label": {
-                "ar": "جميع الصفحات",
-                "en": "all pages"
-              }
-            },
-            {
-              "value": "home",
-              "label": {
-                "ar": "الصفحة الرئيسية ففط",
-                "en": "home page only"
-              }
-            }
-          ],
-          "default": "all"
-        },
-        "background_color": {
-          "type": "color",
-          "label": {
-            "ar": "لون الخلفية",
-            "en": "Text color"
-          }
-        },
-        "text_color": {
-          "type": "color",
-          "label": {
-            "ar": "لون النص",
-            "en": "Text color"
-          }
-        }
-      }
-    },
-    "header": {
-      "type": "fieldset",
-      "label": {
-        "ar": "رأس الصفحة",
-        "en": "Header"
-      },
-      "icon": "font_awesome",
-      "expandable": true,
-      "settings": {
-        "logo": {
-          "type": "image",
-          "label": {
-            "ar": "الشعار",
-            "en": "Logo"
-          },
-          "info": {
-            "ar": "ارفع صورة بحجم 750 * 750 ",
-            "en": "This is an info text sample here"
-          }
-        },
-        "logo_mobile": {
-          "type": "image",
-          "label": {
-            "ar": " الشعار للجوال (اختياري)",
-            "en": "Logo mobile (optional)"
-          },
-          "info": {
-            "ar": "ارفع صورة بحجم 322 * 750 ",
-            "en": "This is an info text sample here"
-          }
-        },
-        "options": {
-          "type": "checkboxes",
-          "label": {
-            "ar": "الخيارات",
-            "en": "Options"
-          },
-          "options": [
-            {
-              "value": "hide_search_bar",
-              "label": {
-                "ar": "إخفاء شريط البحث",
-                "en": "Hide search bar"
-              }
-            },
-            {
-              "value": "hide_language",
-              "label": {
-                "ar": "إخفاء اللغة",
-                "en": "Hide language"
-              }
-            },
-            {
-              "value": "hide_country",
-              "label": {
-                "ar": "إخفاء اسم الدولة",
-                "en": "Hide country"
-              }
-            }
-          ]
-        },
-        "search_placeholder": {
-          "type": "text",
-          "label": {
-            "ar": "تلميح شريط البحث",
-            "en": "Search placeholder"
-          }
-        }
-      }
-    }
+  .header-bottom {
+    width: 100%;
+    height: 200px;
+    background-color: #FFF;
   }
-}
-{% endschema %}
+</style>
+{% endblock %}
