@@ -1,12 +1,12 @@
 <section class="slide-review container w-full section_c_r" section-id="{{ sectionId }}">
   {# start section #}
   <div class="container container_review">
-   <div class="image-title" style="margin: 100px 0px;" >
+   <div class="image-title" style="margin: 80px 0px 160px;" >
     <h1> {{settings.title}} </h1>
    </div> 
    <div class="swiper-container">
       <!-- أزرار التنقل -->
-       <div class="content_btns absolute" style="left: 5%;">
+       <div class="content_btns absolute">
          <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
          &gt;
          </div>
@@ -127,6 +127,17 @@
   	font-size: 24px !important;
   }
   
+  .container_review .content_btns{
+    margin-top:-15px !important;
+}
+.container_review .content_btns  div{
+    padding: 20.49px 21px 19px !important;
+    font-size: 20px;
+    font-family: 'FontAwesome';
+}
+
+
+
   .slide-review .swiper-button-next {
     left: -22px !important;
   }
@@ -149,6 +160,17 @@
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
+
+  @media (max-width:768px) {
+
+    .container_review   .content_btns{
+        left: 0px;
+    }
+    .container_review  .content_btns div{
+        padding: 10px 20px 9px !important;
+        font-size: 15px;
+    }
+}
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
