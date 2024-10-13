@@ -237,7 +237,7 @@
 								{% endif %}
 								<div class="d-flex">
 									<div class="d-flex items-baseline gap-[12px] mt-[16px]">
-										<h1 class="product-formatted-price text-[24px] font-bold leading-[147%]">
+										<h1 class="product-formatted-price text-[24px] font-bold leading-[147%]" style="color: var(--primary-color);">
 											{% if product.selected_product.formatted_sale_price %}
 												{{ product.selected_product.formatted_sale_price }}
 											{% else %}
@@ -494,6 +494,10 @@
 				}
 				.cont-table{
 					border-top:1px solid #CE5A67;
+				}
+
+				#product-description-a{
+					color: var(--primary-color);
 				}
 				
 			</style>
