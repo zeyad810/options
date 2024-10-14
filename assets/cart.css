@@ -61,8 +61,10 @@
 }
 
 .cart-product-col-img {
-    width: 60px;
+    height: 100px !important;
+    width: 100px !important;
 }
+
 
 .cart-product-col-img img {
     max-width: 100%;

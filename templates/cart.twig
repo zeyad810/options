@@ -112,7 +112,7 @@
 
 					</div>
 
-					<div class="cart-discount-rule-wrapper free-shipping-rule-section mt-5 {% if cart.fee_shipping_discount_rules %}d-block{% else %}d-none{% endif %}">
+					<div class="cart-discount-rule-wrapper free-shipping-rule-section  {% if cart.fee_shipping_discount_rules %}d-block{% else %}d-none{% endif %}">
 						<div class="d-flex align-items-center">
 							<div class="message flex-grow-1 free-shipping-rule-message">
 								{{ cart.fee_shipping_discount_rules.conditions_subtotal.status.message }}
@@ -124,7 +124,7 @@
 							</div>
 						</div>
 						<div class="discount-progress-linear" class="{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'min_not_reached' %}d-block{% else %}d-none{% endif %}">
-							<div class="progress-bar free-shipping-rule-progress" style="width: 100%; max-width: 100%;">
+							<div class="progress-bar free-shipping-rule-progress" style="width: 100%; max-width: 100%; background-color: #a79e9e; border-radius: 5px; font-size: 14px; margin-top: 10px; height: 35px;">
 								{% if cart.fee_shipping_discount_rules.conditions_subtotal.status.code == 'applied' %}
 									<span>{{ locals.coupon_discount_free_shipping }}</span>
 								{% else %}
@@ -138,11 +138,12 @@
 					<div>
 						<div class="mt-5">
 							{% if store.availability.closed_now %}
-								<a href="#" class="btn btn-lg btn-block btn-disabled">
+								<a href="#" class="btn btn-lg btn-block btn-disabled" style="border-radius: 5px; height: 50px; font-size: 18px;">
 									{{ locals.cart_continue_to_purchase }}
 								</a>
 							{% else %}
-								<a href="{% if customer %}/checkout/choose-address-and-shipping{% else %}/auth/login?redirect_to=/checkout/choose-address-and-shipping{% endif %}" class="btn btn-primary btn-lg btn-block">
+								<a href="{% if customer %}/checkout/choose-address-and-shipping{% else %}/auth/login?redirect_to=/checkout/choose-address-and-shipping{% endif %}" class="btn btn-primary btn-lg btn-block" style="border-radius: 5px;  height: 50px; font-size: 18px;">
+
 									{{ locals.cart_continue_to_purchase }}
 								</a>
 							{% endif %}
@@ -156,7 +157,7 @@
 						{% endif %}
 
 						<div class="mt-3">
-							<a href="/" class="btn btn-outline-primary btn-lg btn-block">
+							<a href="/" class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 5px; height: 50px; font-size: 18px;">
 								{{ locals.cart_back_to_store }}
 							</a>
 						</div>
@@ -181,7 +182,27 @@
 			</div>
 		</div>
 	</div>
-
+<style>
+ .cart-product-row{
+	 align-items: center !important;
+	 border-radius:8px;
+ }
+ .header-wrapper{
+	background-color: transparent !important;
+ }
+ .discount-progress{
+	font-weight:bold;
+ }
+  .cart-product-col-img{
+		width: 100px !important;
+	}
+	.cart-product-col-details{
+		max-width: 250px !important;
+	}
+	.cart-product-delete{
+		 margin-right: 10px;
+	}
+</style>
 {% endblock %}
 
 {% block footer_scripts %}
