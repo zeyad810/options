@@ -76,24 +76,99 @@
             </div>
         {% endif %}
         <div class="products-container flex-grow-1 pt-4">
-            {% if  products.filters|length <= 0 %}
-                <div>
-                    {% include 'products-filter.twig' with { 'count' : products.total, 'has_products_filtration': ( products.filters|length > 0) } %}
-                </div>
-             {% endif %}
-            <div id="products-list" class="grid grid-cols-3 products-list">
-                {% for product in products.data %}
+            <div class="side-banners">
+				{% for banner in settings.categorySideBanners_sideBannerList %}
+					<div class="banner-item">
+						<a href="{{banner.sideBanerLinkUrl}}" class="containt">
+							<h3>
+								{{ banner.sideBanerTitle}}
+							</h3>
+							<p>{{banner.sideBanerLink}}</p>
+						</a>
+                        <img src="{{ banner.sideBanerImage }}" alt="{{ banner.title }}">
+                    </div>	
+				{% endfor %}
+			</div>
+            <div class="products-area">
 
-                    <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
-                        {% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings} %}
+                {% if  products.filters|length <= 0 %}
+                    <div>
+                        {% include 'products-filter.twig' with { 'count' : products.total, 'has_products_filtration': ( products.filters|length > 0) } %}
                     </div>
-
-                {% endfor %}
+                 {% endif %}
+                <div id="products-list" class="grid grid-cols-3 products-list">
+                    {% for product in products.data %}
+    
+                        <div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
+                            {% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings} %}
+                        </div>
+    
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
 
     {% include 'pagination.twig' with { 'totalPages' : products.last_page , 'currentPage' : products.current_page } %}
+
+        <style>
+			.products-container{
+				display: flex;
+			}
+			.side-banners{
+				flex-basis: 20%;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+			.side-banners .banner-item {
+				position: relative;
+				border-radius: 8px;
+				overflow: hidden;
+			}
+			.side-banners .banner-item .containt{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #0000003b;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				opacity: 0;
+				transition: all ease-in-out 0.3s;
+			}
+			.side-banners .banner-item .containt:hover{
+				opacity: 1;
+			}
+
+			.side-banners .banner-item .containt h3{
+				color: var(--primary-color);
+					text-align: center;
+					font-size: 28px;
+					font-weight: 600;
+					line-height: 38.5px;
+			}
+			.side-banners .banner-item .containt p{
+				color: var(--text-color-primary-bg);
+				font-size: 28px;
+				font-weight: 700;
+			}
+			
+			.products-area{
+				flex-basis: 78%;
+			}
+			@media (max-width: 992px){
+				.side-banners{
+					display: none;
+				}
+				.products-area{
+				flex-basis: 100%;
+			}
+			}
+		</style>
 
 {% endblock %}
 
