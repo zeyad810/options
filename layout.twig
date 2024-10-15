@@ -68,6 +68,8 @@
 				;
 				--text-color-primary-bg: {{store.colors.text_of_primary_bg}}
 				;
+				--newsletter-color-bg: {{store.colors.primary}}6e
+				;
 
 				--sub-primary-color: #521B25;
 				--white-color: #fff;
@@ -227,7 +229,7 @@
 							</div>
 						</div>
 					</a>
-					<p>{{ settings.logo_position}}</p>
+					{# <p>{{ settings.logo_position}}</p> #}
 
 					<a href="/auth/login" class="flex flex-col items-center justify-center gap-1 ">
 						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
@@ -398,6 +400,38 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		.text-header-bottom {
 			width: fit-content;
 		}
+
+		.show-stars {
+			position: relative;
+			
+		}
+.show-stars:before {
+    opacity: 0;
+    content: "";
+    background-image: url({{settings.stars_icon}}); 
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 8px;
+    top: 8px;
+    transition: opacity 0.3s ease; 
+}
+
+.show-stars:after {
+    opacity: 0;
+    content: "";
+    background-image: url({{settings.stars_icon}}); 
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: 8px;
+    bottom: 8px;
+    transition: opacity 0.3s ease; 
+}
 	</style>
 {% endblock %}
 	<style>
@@ -850,6 +884,26 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			}
 		}
 	},
+	
+  "stars": {
+    "type": "fieldset",
+    "name": {
+      "ar": "اضافه صورة ايقون",
+      "en": "add image icon"
+    },
+    "expandable": true,
+    "settings": {
+	  "icon": {
+		    "type": "image",
+            "label": {
+              "ar": "صورة الايقون تظهر في بعض الازرار",
+              "en": "Icon image on some buttons"
+            }
+         }
+	  }
+  },
+
+
 	"newsletter": {
 		"name": {
 			"ar": "النشره البريديه",

@@ -8,7 +8,7 @@
 								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]">{{ item.slider_bannar_title }}</h1>
 								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]">{{ item.slider_bannar_des }}</p>
 								<a href='{{item.slider_bannar_url}}'>
-									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
+									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full show-stars  w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
 								</a>
 							</div>
 						</div>
@@ -55,9 +55,13 @@
 				margin: 0 5px;
 				border-radius: 10px;
 				background: #d68d9c;
-				opacity: 0.7;
+				opacity: 0.8;
 				transition: all 0.3s ease;
 			}
+           .g_fixed_bannar a:hover .show-stars:before, 
+           .g_fixed_bannar a:hover .show-stars:after {
+               opacity: 1 !important; 
+           }
 
 			@media(max-width: 700px) {
 				.baner_swiber.swiper-container {
