@@ -37,7 +37,7 @@
           </div>
         </div>
                 <a href='{{product.html_url}}'>
-                     <button class="shopbtn show-stars" style="color:{{settings.text_color}}; background-color: {{settings.bg_color}}">{{settings.shop_button}}</button>
+                     <button class="shopbtn show-stars" style="--color:{{settings.text_color}}; --background-color: {{settings.bg_color}}">{{settings.shop_button}}</button>
                 </a>
        </div>
       </div>
@@ -161,11 +161,14 @@
     position: absolute;
     right: 40px;
     bottom: -60px;
+    color: --color;
+    background-color: --background-color;
     transition:background-color 0.3s; 
 }
 .shopbtn:hover{
-    background-color: transparent;
-    
+    background-color: #fbfbfb33;
+    color:white;
+     cursor: pointer;
 }
 a{
     position: relative;
@@ -174,6 +177,15 @@ a:hover .show-stars:before,
 a:hover .show-stars:after {
     opacity: 1 !important; 
 }
+a .show-stars:before{
+      left: 0;
+      top: -7px;
+}
+a .show-stars:after {
+      right: 0;
+      bottom: -7px;
+}
+
 .productimage {
     width: 50%; 
     display: flex;
