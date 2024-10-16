@@ -10,7 +10,7 @@
             {% elseif card.collection_position == "middle" %} align-items:center; {% endif %}">
             <p style="color: {{ card.collection_color }};"> {{ card.collection_name }} </p>
             <div class="content-btn">
-                <a href="{{ card.collection_url }}" id="a-{{loop.index}}"> {{ card.collection_text_btn }} </a>
+                <a href="{{ card.collection_url }}" id="a-{{loop.index}}" class="show-stars"> {{ card.collection_text_btn }} </a>
             </div>
         </div>
         {% endfor %}
@@ -95,6 +95,20 @@
         display: inline-block;
         font-size: 16px;
     }
+  .g_banner_content .content-btn #a-2:hover{
+    background-color: #fbfbfb33;
+    color:white;
+    cursor: pointer;
+}
+.content-btn{
+    position: relative;
+    width: fit-content;
+}
+.content-btn:hover .show-stars:before, 
+.content-btn:hover .show-stars:after {
+    opacity: 1 !important; 
+}
+
     /* media */
     @media (max-width: 768px ){
         .g_banner_content{
