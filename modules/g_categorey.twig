@@ -44,7 +44,7 @@
     </style>
 </head>
 <body> 
-    <section id="g_cat_{{ sectionId }}" class="g_cat" style="background-color: #fff; padding:70px 0px;" dir="ltr">
+    <section id="g_cat_{{ sectionId }}" class="g_cat" style=" padding:70px 0px;" dir="ltr">
             <div  style=" margin-bottom: 50px;">
                 {% include 'title.twig' with { 'component_title': settings.section_title } %}
             </div>
@@ -58,7 +58,7 @@
                     &gt;
                     </div>
                 </div>
-                <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider bg-white{% endif %} h-auto">
+                <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider{% endif %} h-auto">
                     <div class=" {% if settings.slider_toggle == "true" %}  swiper-wrapper h-auto {% else %} is-grid {% endif %}" style="margin-top: 35px;">
                         {% for item in settings.categorys %}
                             <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
@@ -117,7 +117,7 @@
 }
 @media (max-width:768px) {
     .is-grid{
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     }
     .q-category   .content_btns{
         left: -8px;
