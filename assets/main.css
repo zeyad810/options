@@ -690,7 +690,7 @@ button.more-button , a.more-button {
     padding: 5px 8px;
 }
 .footer .logistics-pay-icons a img{
-    width: 50%;
+    max-width: 70%;
 }
 @media (max-width: 767px){
     .under_footer {

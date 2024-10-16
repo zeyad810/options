@@ -215,14 +215,14 @@
 							<div class="icons w-full">
 								<div class="logistics-pay-icons">
 									{% for shipping_method in store.shipping_methods %}
-										<a href="/shipping-and-payment" class="d-flex justify-content-center ">
+										<a href="/shipping-and-payment" class="d-flex justify-content-center footer_icon_up ">
 											<img src="{{ imageUrl(shipping_method.icon,{ h: 80, q: 85 }) }}" loading="lazy" alt="" height="21">
 										</a>
 									{% endfor %}
 
 
 									{% for payment_method in store.payment_methods %}
-										<a href="/shipping-and-payment">
+										<a href="/shipping-and-payment" class=" footer_icon_up">
 											<img src="{{ imageUrl(payment_method.icon,{ h: 80, q: 85 }) }}" loading="lazy" alt="" height="21">
 										</a>
 									{% endfor %}
@@ -295,7 +295,16 @@
 		.pra_hide {
 			display: none;
 		}
+
+
+		.logistics-pay-icons .footer_icon_up{
+			width: 100px;
+		}
+		.logistics-pay-icons .footer_icon_up img{
+			width: 100%;
+
 		.footer-copyrights-vat-certificate{
 			background-color: var(--newsletter-color-bg) !important;
+
 		}
 	</style>

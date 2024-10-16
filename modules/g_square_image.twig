@@ -2,7 +2,7 @@
 	<div class="imgs">
 		{% for item in settings.images %}
 			{% if loop.index <= 3 %}
-				<div class="img ">
+				<div class="img top-images ">
 					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
 					<div class="over">
 						<div class="text">
@@ -24,7 +24,7 @@
 					<div class="card h-100">
 					<picture>
 					  <source srcset="{{ item.square_image }} 2x" media="(min-width: 768px)">
-					  <source srcset="{{ settings.last_image_mobile }} 1x" media="(max-width: 767px)">
+					  <source srcset="{{ settings.last_image_mobile ? settings.last_image_mobile : item.square_image }} 1x" media="(max-width: 767px)">
 					  <img loading="lazy" src="{{ item.square_image }}" alt="" class="img-fluid" />
 					</picture>
 						<div class="over">
@@ -51,6 +51,11 @@
 
 
 <style>
+
+	.ads .f_img{
+		max-height: 245px;
+		width: 100%;
+	}
  
 	.ads .img .over:hover .text{
 		opacity: 1;
@@ -83,11 +88,17 @@
 		.ads .img .over .text{
 		opacity: 1;
 	  }
+
+	  .imgs .img:hover img {
+    		transform: scale(1);
+		}
+	  
 	}
 	@media (min-width: 768px) {
 	.ads .img img {
        opacity:1;
       }
+
 	}
 </style>
 
