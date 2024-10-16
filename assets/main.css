@@ -684,7 +684,7 @@ button.more-button , a.more-button {
 }
 
 .footer-copyrights-vat-certificate{
-    background: #FBEAEF;
+    background-color: var(--newsletter-color-bg) !important;
 }
 .footer .icons a, .footer .logistics-pay-icons a {
     padding: 5px 8px;
