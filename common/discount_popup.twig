@@ -1,0 +1,158 @@
+{% if discount.discount_is_popup %}
+<section class="discount_popup" >
+    <div class="img-containt">
+        <i class="fa-solid fa-xmark popup_close_icon"></i>
+        <div class="img-parent">
+            <img src="{{discount.discount_popup_img}}" alt="discount image">
+        </div>
+        <div class="containt">
+            <form action="{{discount.discount_action_url }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
+                <h2>{{ discount.discount_popup_title }}</h2>
+                <p>{{ discount.discount_popup_percentage }}</p> 
+                <p>{{ discount.discount_popup_subtitle }}</p>
+                {# {% if discount.discount_action_url | length > 0 %} #}
+                    <input type="email" placeholder="{{ discount.discount_popup_placeholder }}">
+                    <button type="submit">{{ discount.discount_popup_btn_title }}</button>  
+                {# {% endif %} #}
+            </form>
+        </div>
+    </div>
+</section>
+{% endif %}
+<style>
+
+.discount_popup i{
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    z-index: 100;
+}
+.discount_popup {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    backdrop-filter: blur(12px); /* Approximation of `backdrop-blur-md` */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.popup_discount_show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.discount_popup .img-containt {
+   display: flex;
+   position: relative; 
+   padding: 0.625rem; 
+   flex-direction: row-reverse; 
+   gap: 0.5rem; 
+   align-items: center; 
+   border-radius: 0.5rem; 
+   width:70% ;
+   max-width: 600px;
+   height: fit-content; 
+   max-height: 100%; 
+   background-color: #ffffff; 
+}
+
+
+
+.discount_popup .sicon-cancel {
+    font-size: 1.875rem;
+    color: #AEAEAE;
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    cursor: pointer;
+}
+
+
+.discount_popup .img-parent {
+    flex-basis: 100%;
+    width: 11rem;
+    height: auto;
+}
+
+
+
+.discount_popup .img-parent img {
+   flex-basis: 100%; 
+   width: 100%;
+   height: fit-content; 
+}
+
+.discount_popup .containt {
+    margin: 16px;
+    width: 80%;
+}
+
+
+.discount_popup form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+
+
+.discount_popup h2 {
+    font-weight:700;
+    font-size: 2.25rem;
+}
+.discount_popup p {
+    font-size: 2.25rem;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+
+.discount_popup p + p {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #525252;
+}
+
+.discount_popup input {
+    width: 100%;
+    padding: 10px;
+}
+.discount_popup button {
+    background: var(--primary-color);
+    color: white;
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+    font-size: 20px;
+    margin-top:10px;
+}
+</style>
+
+<script>
+const popup = document.querySelector('.discount_popup');
+const close_icon = document.querySelector('.popup_close_icon');
+
+window.addEventListener('load', function() {
+    // Wait for 2 seconds before displaying the popup
+    setTimeout(() => {
+        popup.classList.add('popup_discount_show');
+    }, 2000); // 2000 milliseconds = 2 seconds
+});
+
+close_icon.addEventListener('click', function() {
+    popup.classList.remove('popup_discount_show');
+});
+
+</script>
+
+
+

@@ -165,7 +165,7 @@
 			</div>
 		{% endif %}
 		
-		
+
 		<div class="popup-product-details"></div>
 
 		{% if store.editing_mode %}
@@ -272,6 +272,8 @@
 			</div>
 				<div class="main flex-grow-1 app-content" style="background-color:#fff;" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
 					</div>
+				     {# <p>{{settings}}</p> #}
+	               	 {% include 'discount_popup.twig'  with {'discount': settings} %}
 					<div class="footer"> {% block footer %}{% endblock %}
 						</div>
 						{% block footer_sticky %}{% endblock %}
@@ -884,16 +886,15 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			}
 		}
 	},
-	
-  "stars": {
-    "type": "fieldset",
-    "name": {
-      "ar": "اضافه صورة ايقون",
-      "en": "add image icon"
-    },
-    "expandable": true,
-    "settings": {
-	  "icon": {
+     "stars": {
+      "type": "fieldset",
+      "name": {
+        "ar": "اضافه صورة ايقون",
+        "en": "add image icon"
+      },
+      "expandable": true,
+      "settings": {
+  	  "icon": {
 		    "type": "image",
             "label": {
               "ar": "صورة الايقون تظهر في بعض الازرار",
@@ -901,9 +902,73 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
             }
          }
 	  }
-  },
-
-
+     },
+    "discount": {
+    "type": "fieldset",
+    "name": {
+      "ar": "نافذة الخصم منبثقة",
+      "en": "Pop-up discount window"
+    },
+    "expandable": true,
+    "settings": {
+      "is_popup": {
+        "type": "checkbox",
+        "label": {
+          "ar": "تفعيل نافذة الخصم",
+          "en": "Activate the discount window"
+        }
+      },
+      "popup_img": {
+        "type": "image",
+        "label": {
+          "ar": "الصور",
+          "en": "the image"
+        }
+      },
+      "popup_title": {
+        "type": "text",
+        "label": {
+          "ar": "العنوان",
+          "en": "title"
+        }
+      },
+      "popup_percentage": {
+        "type": "text",
+        "label": {
+          "ar": "نسبة الخصم",
+          "en": "discount rate"
+        }
+      },
+      "popup_subtitle": {
+        "type": "text",
+        "label": {
+          "ar": "الوصف",
+          "en": "description"
+        }
+      },
+      "popup_placeholder": {
+        "type": "text",
+        "label": {
+          "ar": "نص توضيحي في مكان ادخال البريد",
+          "en": "Explanatory Text in Enter Mail"
+        }
+      },
+      "popup_btn_title": {
+        "type": "text",
+        "label": {
+          "ar": "نص الزر",
+          "en": "button text"
+        }
+      },
+      "action_url": {
+        "type": "url",
+        "label": {
+          "ar": "رابط الفورم",
+          "en": "form URL"
+        }
+      }
+    }
+     },
 	"newsletter": {
 		"name": {
 			"ar": "النشره البريديه",
