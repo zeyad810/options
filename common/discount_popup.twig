@@ -25,7 +25,6 @@
     position: absolute;
     top: 14px;
     right: 20px;
-    z-index: 100;
 }
 .discount_popup {
     width: 100%;
@@ -46,6 +45,7 @@
 .popup_discount_show {
     visibility: visible;
     opacity: 1;
+     z-index: 100000;
 }
 
 .discount_popup .img-containt {
@@ -134,6 +134,26 @@
     border-radius: 4px;
     font-size: 20px;
     margin-top:10px;
+}
+
+@media (max-width: 480px) {
+    .discount_popup .img-containt{
+      flex-direction: column;
+       width:75% ;
+    }
+     .discount_popup .img-parent {
+      width: 15rem;
+    }
+}
+@media (min-width: 481px) and (max-width: 768px){
+    .discount_popup .img-containt{
+       flex-direction: column;
+       width:55% ;
+    }
+    .discount_popup .img-parent {
+      width: 15rem;
+    }
+    
 }
 </style>
 
