@@ -35,7 +35,7 @@ max-width: 100%;
 
 
 .desk{
-    z-index: 111111;
+    z-index: 122;
     position: relative;
     bottom: -50px;
     transition: all 0.3s;

@@ -1,8 +1,9 @@
 <div id="sidenav-overlay" onclick="closeSlidingMenu()"></div>
 <nav class="slide-menu menu-header-theme-bg-primary menu-header-theme-bg-primary-brightness-100" id="sliding-menu">
     <ul class="theme-text-for-primary-bg menu-header-theme-bg-primary menu-header-theme-bg-primary-brightness-100 menu-header-theme-text-for-primary-bg">
-        <li>
-            <div style="display: flex;justify-content: end;align-items: center;padding: 12px;font-size: 40px;color: red;font-weight: 500;" onclick="closeSlidingMenu()" >x</div>
+        <li style="text-align: end; padding: 11px 0px 0px 11px;">
+           
+            <i onclick="closeSlidingMenu()" class="fa-solid fa-xmark" style="font-size: 25px;"></i>
         </li>
         {% for menu in main_navigation_menu.items %}
             {% if menu.url %}
