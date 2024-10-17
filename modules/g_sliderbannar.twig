@@ -14,7 +14,7 @@
 						<img loading="lazy" width='100%' src='{{item.F_image}}' alt="img">
 					</div>
 
-					<div class=" content">
+					<div class="content">
 						<h2>{{ item.bannar_title}}
 							<span class="percent">{{item.bannar_percentage}}</h2>
 							<p style="color:{{item.bannar_color}}">{{item.bannar_desc}}</p>
@@ -62,7 +62,9 @@
 			object-fit: cover;
 		}
 
-
+      	.content h2{
+			cursor: default !important;
+			}
 		@media(max-width: 767px) {
 			.photo_one {
 				display: none; /* إخفاء الصورة الأولى في الشاشات الصغيرة */
@@ -76,7 +78,9 @@
 				margin-bottom: 20px; /* إضافة مسافة أسفل النص */
 				justify-content: center !important;
 				align-items: center !important;
+				
 			}
+		
 		}
 
 		.content .percent {

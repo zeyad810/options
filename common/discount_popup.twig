@@ -6,7 +6,7 @@
             <img src="{{discount.discount_popup_img}}" alt="discount image">
         </div>
         <div class="containt">
-            <form action="{{discount.discount_action_url }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
+            <form action="{{discount.discount_action_url }}"  method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
                 <h2>{{ discount.discount_popup_title }}</h2>
                 <p>{{ discount.discount_popup_percentage }}</p> 
                 <p>{{ discount.discount_popup_subtitle }}</p>
@@ -25,6 +25,7 @@
     position: absolute;
     top: 14px;
     right: 20px;
+    cursor: pointer;
 }
 .discount_popup {
     width: 100%;
@@ -173,6 +174,8 @@ close_icon.addEventListener('click', function() {
 });
 
 </script>
+
+
 
 
 
