@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center justify-content-between products-filter flex-column flex-lg-row">
     <div class="d-flex filter-buttons-container flex-column flex-lg-row mb-3 mb-lg-0">
-        <div class="product_shap d-flex align-items-center justify-content-between gap-3 p-2 border border-secondary rounded" style="width: 100%; max-width: 400px; height: 56px;align-items: center;border: 1px solid #b2bdc7 !important;border-radius: 8px !important;">
+        <div class="product_shap d-flex align-items-center justify-content-between gap-3 p-2 border border-secondary rounded" style="width: 100%; max-width: 400px; height: 56px;align-items: center;border: 1px solid #b2bdc7 !important;border-radius: 8px !important; margin: 0px !important;">
             <div>
                 <label class="filter-result d-none">{{ locals.products_list_filter }}</label>
             </div>
@@ -10,12 +10,14 @@
                 <span>{{ locals.products_list_filter }}</span>&nbsp;
                 <i class="icon-add filter-icons filters_expanded"></i>
                 <i class="icon-remove filter-icons filters_not_expanded d-none"></i>
+                <i class="fa-solid fa-filter"></i>
             </button>
 
             <!-- Large screen filter button -->
-            <button id="products-list-filter" type="button" class="btn btn-filter d-none d-lg-inline-block" data-toggle="modal" data-target="#filterModal" style="height: 30px; border: 1px #B6B6B6 solid; border-radius: 8px;">
+            <button id="products-list-filter" type="button" class="btn btn-filter d-none d-lg-flex align-items-center" data-toggle="modal" data-target="#filterModal" style="height: 30px; border: 1px #B6B6B6 solid; border-radius: 8px;">
                 <span>{{ locals.products_list_filter }}</span>&nbsp;
-                <i class="icon-filter-secondary" aria-hidden="true"></i>
+                 <i class="fa-solid fa-filter"></i>
+                 <i class="icon-filter-secondary" aria-hidden="true"></i>
             </button>
 
             <div class="d-flex align-items-center gap-2">
@@ -24,9 +26,11 @@
             </div>
 
             <div class="dropdown">
+                
                 <label class="filter-order text-muted mb-0">{{ locals.products_list_sort }}</label>
                 <button id="products-list-sort" type="button" class="btn btn-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"style="border: none;padding: 0 !important;">
                     {# <span style="font-size: 14px;">{{ sort_option }}</span>&nbsp; #}
+                      
                         <span style="font-size: 14px;">
                         {% if requestGet('sort_by') == 'popularity_order' %}
                             {{ locals.products_list_filter_popularity }}
@@ -37,6 +41,7 @@
                         {% else %}
                             {{ locals.products_list_filter_latest }}
                         {% endif %}
+                          <i class="fa-solid fa-caret-down"></i>
                     </span>&nbsp;
                     
                 </button>
@@ -54,6 +59,7 @@
                         {{ locals.products_list_filter_price_high }}
                     </a>
                 </div>
+               
             </div>
         </div>
     </div>
@@ -112,6 +118,13 @@
 
 <!-- Responsive Styling -->
 <style>
+
+     .product_shap .dropdown {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+    }
     @media (max-width: 768px) {
         .products-filter {
             flex-direction: column;
@@ -123,7 +136,6 @@
             width: 100%;
         }
     }
-
     @media (min-width: 769px) {
         .products-filter {
             flex-direction: row;
