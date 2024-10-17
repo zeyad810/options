@@ -260,9 +260,7 @@
 
 								</div>
 
-								<div>
-									{{ template_for_product_payments_widget }}
-								</div>
+								
 							</section>
 
 
@@ -501,6 +499,11 @@
 				}
 				
 			</style>
+
+			<div class="product_payments">
+				{{ template_for_product_payments_widget }}
+			</div>
+
 			<ul id="abas" class="teste ">
 				{% if product.description and product.description| striptags | trim | length > 0 %}
 					<li class="selecionada ">
@@ -726,31 +729,39 @@
 .options-table .m-col {
     margin: 10px 0px !important;
 }
+
+.product_payments{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 25px ;
+}
 </style>
 			<script>
 				var abas = document.getElementById("abas");
-var conteudos = document.getElementById("conteudos");
+				var conteudos = document.getElementById("conteudos");
 
-/* Essa função retira a classe "selecionada" e esconde a DIV com o conteúdo visível */
-function limparSelecao() {
-abas.getElementsByClassName("selecionada")[0].classList.remove("selecionada");
-conteudos.getElementsByClassName("visivel")[0].classList.remove("visivel");
-}
+				/* Essa função retira a classe "selecionada" e esconde a DIV com o conteúdo visível */
+				function limparSelecao() {
+				abas.getElementsByClassName("selecionada")[0].classList.remove("selecionada");
+				conteudos.getElementsByClassName("visivel")[0].classList.remove("visivel");
+				}
 
-/* Essa é executada quando alguma das abas é clicada */
-abas.addEventListener("click", function (event) {
-var abaClicada = event.target.id;
-var itemSelecionado = abaClicada.substring(abaClicada.lastIndexOf("_"));
+				/* Essa é executada quando alguma das abas é clicada */
+				abas.addEventListener("click", function (event) {
+				var abaClicada = event.target.id;
+				var itemSelecionado = abaClicada.substring(abaClicada.lastIndexOf("_"));
 
-/* Chama função que tira a seleção do item atual */
-limparSelecao();
+				/* Chama função que tira a seleção do item atual */
+				limparSelecao();
 
-/* Insere a classe "selecionada" na nova aba visível */
-event.target.parentElement.classList.add("selecionada");
+				/* Insere a classe "selecionada" na nova aba visível */
+				event.target.parentElement.classList.add("selecionada");
 
-/* Insere a classe "visivel" para o conteúdo da aba selecionada */
-conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
-});
+				/* Insere a classe "visivel" para o conteúdo da aba selecionada */
+				conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
+				});
 			</script>
 
 
