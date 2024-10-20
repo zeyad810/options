@@ -20,20 +20,20 @@
 </section>
 {% endif %}
 <style>
-
-.discount_popup i{
+.discount_popup i {
     position: absolute;
     top: 14px;
     right: 20px;
     cursor: pointer;
 }
+
 .discount_popup {
     width: 100%;
     height: 100vh;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    backdrop-filter: blur(12px); /* Approximation of `backdrop-blur-md` */
+    backdrop-filter: blur(12px);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -43,28 +43,32 @@
     opacity: 0;
 }
 
+@supports not (backdrop-filter: blur(12px)) {
+    .discount_popup {
+        background-color: rgba(255, 255, 255, 0.8); 
+    }
+}
+
 .popup_discount_show {
     visibility: visible;
-    opacity: 1;
-     z-index: 200000;
+    opacity: 1 !important;
+    z-index: 200000;
 }
 
 .discount_popup .img-containt {
-   display: flex;
-   position: relative; 
-   padding: 0.625rem; 
-   flex-direction: row-reverse; 
-   gap: 0.5rem; 
-   align-items: center; 
-   border-radius: 0.5rem; 
-   width:70% ;
-   max-width: 600px;
-   height: fit-content; 
-   max-height: 100%; 
-   background-color: #ffffff; 
+    display: flex;
+    position: relative;
+    padding: 0.625rem;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    width: 70%;
+    max-width: 600px;
+    height: fit-content;
+    max-height: 100%;
+    background-color: #ffffff;
 }
-
-
 
 .discount_popup .sicon-cancel {
     font-size: 1.875rem;
@@ -75,26 +79,21 @@
     cursor: pointer;
 }
 
-
 .discount_popup .img-parent {
     flex-basis: 100%;
-    width: 11rem;
-    height: auto;
+    width: auto;
 }
 
-
-
 .discount_popup .img-parent img {
-   flex-basis: 100%; 
-   width: 100%;
-   height: fit-content; 
+    flex-basis: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .discount_popup .containt {
     margin: 16px;
     width: 80%;
 }
-
 
 .discount_popup form {
     display: flex;
@@ -103,19 +102,16 @@
     gap: 6px;
 }
 
-
-
 .discount_popup h2 {
-    font-weight:700;
+    font-weight: 700;
     font-size: 2.25rem;
 }
+
 .discount_popup p {
-    font-size: 2.25rem;
     font-size: 2.25rem;
     font-weight: 700;
     color: var(--primary-color);
 }
-
 
 .discount_popup p + p {
     font-weight: 600;
@@ -127,6 +123,7 @@
     width: 100%;
     padding: 10px;
 }
+
 .discount_popup button {
     background: var(--primary-color);
     color: white;
@@ -134,28 +131,31 @@
     height: 50px;
     border-radius: 4px;
     font-size: 20px;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
+/* تحسين للمظهر في الشاشات الصغيرة */
 @media (max-width: 480px) {
-    .discount_popup .img-containt{
-      flex-direction: column;
-       width:75% ;
-    }
-     .discount_popup .img-parent {
-      width: 15rem;
-    }
-}
-@media (min-width: 481px) and (max-width: 768px){
-    .discount_popup .img-containt{
-       flex-direction: column;
-       width:55% ;
+    .discount_popup .img-containt {
+        flex-direction: column;
+        width: 75%;
     }
     .discount_popup .img-parent {
-      width: 15rem;
+        width: auto;
+        height: auto;
     }
-    
 }
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .discount_popup .img-containt {
+        flex-direction: column;
+        width: 55%;
+    }
+    .discount_popup .img-parent {
+        width: 15rem;
+    }
+}
+
 </style>
 
 <script>
