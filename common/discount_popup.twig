@@ -1,4 +1,4 @@
-{% if discount.discount_is_popup %}
+{% if discount.discount_is_popup and template == 'home' %}
 <section class="discount_popup" >
     <div class="img-containt">
         <i class="fa-solid fa-xmark popup_close_icon"></i>
@@ -6,13 +6,15 @@
             <img src="{{discount.discount_popup_img}}" alt="discount image">
         </div>
         <div class="containt">
-            <form action="{{discount.discount_action_url }}"  method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form">
+
+            <form action="{{discount.discount_action_url }}"  method="post"  class="popup-form">
                 <h2>{{ discount.discount_popup_title }}</h2>
                 <p>{{ discount.discount_popup_percentage }}</p> 
                 <p>{{ discount.discount_popup_subtitle }}</p>
                 {% if discount.discount_action_url | length > 0 %}
-                    <input type="email" placeholder="{{ discount.discount_popup_placeholder }}">
-                    <button type="submit">{{ discount.discount_popup_btn_title }}</button>  
+                    <input type="email" id="email" name="email"   placeholder="{{ discount.discount_popup_placeholder }}" class="popup-email" required>
+                    <span id="emailError" class="error">Please enter a valid email address.</span>
+                    <button id="myFormSubmet" type="submit" class="popup-submet">{{ discount.discount_popup_btn_title }}</button>  
                 {% endif %}
             </form>
         </div>
@@ -68,6 +70,10 @@
     height: fit-content;
     max-height: 100%;
     background-color: #ffffff;
+}
+.discount_popup #emailError {
+display: none;
+color: tomato;
 }
 
 .discount_popup .sicon-cancel {
@@ -172,6 +178,35 @@ window.addEventListener('load', function() {
 close_icon.addEventListener('click', function() {
     popup.classList.remove('popup_discount_show');
 });
+
+
+{# form validation #}
+document.querySelector(".popup-form").addEventListener("submit", function(event) {
+    // Prevent form from submitting initially
+    event.preventDefault();
+
+    // Validation flags
+    let valid = true;
+
+    // Get form inputs
+    const email = document.querySelector('.popup-email').value;
+
+    // Email validation
+    const emailError = document.getElementById("emailError");
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      emailError.style.display = "block";
+      valid = false;
+    } else {
+      emailError.style.display = "none";
+    }
+
+    // If form is valid, submit it
+    if (valid) {
+      document.querySelector(".popup-form").submit();
+    }
+  });
+
+
 
 </script>
 
