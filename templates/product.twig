@@ -265,12 +265,12 @@
 
 
 							<div class="border-product"></div>
-							<div style="margin-bottom: 25px" class="div-product-sku {% if not product.selected_product.sku %}d-none{% endif %}">
+							{# <div style="margin-bottom: 25px" class="div-product-sku {% if not product.selected_product.sku %}d-none{% endif %}">
 								<h4 class="product-title">{{ locals.product_sku }}</h4>
 								<div class="product-sku">
 									{{ product.selected_product.sku }}
 								</div>
-							</div>
+							</div> #}
 
 							<div style="margin-bottom: 25px" class="div-product-weight {% if not product.selected_product.weight.value %}d-none{% endif %}">
 								<h4 class="product-title">{{ locals.product_weight }}</h4>
@@ -469,7 +469,7 @@
 					line-height:auto;
 				}
 				#abas li.selecionada {
-					background-color: #FFFFFF;
+					background-color: var(--primary-color);
 					position: relative;
 					top: 1px;
 					font-weight: bold;
@@ -503,8 +503,9 @@
 			<div class="product_payments">
 				{{ template_for_product_payments_widget }}
 			</div>
-
-			<ul id="abas" class="teste ">
+			<div>
+			<div>
+				<ul id="abas" class="teste ">
 				{% if product.description and product.description| striptags | trim | length > 0 %}
 					<li class="selecionada ">
 						<a id="aba_1" class="rounded-lg">تفاصيل المنتج</a>
@@ -520,7 +521,14 @@
 						<a id="aba_3" class="rounded-lg">تقييمات المنتج</a>
 					</li>
 				{% endif %}
+				{% if store.is_product_question_and_answer_enabled %}
+					<li>
+						<a id="aba_4" class="rounded-lg">الاسئلة والاجوبة </a>
+					</li>
+				{% endif %}
 			</ul>
+			</div>
+			</div>
 			<div id="conteudos" class="cont-table">
 				<div id="conteudo_1" class="conteudo visivel">
 					{% if product.description and product.description| striptags | trim | length > 0 %}
@@ -544,6 +552,8 @@
 												{% endfor %}
 												<div class="col col-price">{{ locals.product_images }}</div>
 												<div class="col col-price">{{ locals.product_price }}</div>
+												<div class="col col-price">{{ locals.product_sku }}</div>
+
 											</div>
 										</div>
 									</div>
@@ -591,10 +601,17 @@
 																<h4 style="font-size: 1.2rem" class="price-detail d-inline-block">{{ variant.formatted_sale_price }}
 																	<del>{{ variant.formatted_price }}</del>
 																</h4>
+																
 															{% else %}
 																<h4 class="d-inline-block" style="font-size: 1.2rem">{{ variant.formatted_price }}</h4>
+																
+															
 															{% endif %}
+															
 														</div>
+																<div class="col">
+																{{ product.selected_product.sku }}
+															</div>
 
 
 													</div>
@@ -723,10 +740,36 @@
 						{% include 'customer-reviews-add.twig' with {'product' : product } %}
 
 					{% endif %}
+					
 				</div>
+				<div id="conteudo_4" class="conteudo">
+				{% if store.is_product_question_and_answer_enabled %}
+            <section class="questiion mt-5 review-details">
+                <div>
+                    <div class="d-flex flex-wrap align-items-center" style="width: 100%">
+                        <div class="description-icon">
+                            <span class="icon-reviews_black"></span>
+                        </div>
+                        <div class="description-title">
+                            {{ locals.product_questions }}
+                        </div>
+                          {% if product.questions is not empty %}
+                          <button type="button" class="btn btn-primary add-review-btn" id="addQuestionButton"><span class="icon-add_circle"></span>{{ locals.add_product_question}} </button>
+                          {% endif %}
+                    </div>
+                </div>
+                {% include 'product-questions.twig' with {'questions' : product.questions} %}
+                {% include 'product-question-add.twig' with {'product' : product} %}
+            </section>
+             {% endif %}
+			</div>
 			</div>
 
 <style>
+.questiion{
+	width:50% ;
+	margin: 0 auto;
+}
 .options-table .m-col {
     margin: 10px 0px !important;
 }
@@ -737,6 +780,16 @@
 	align-items: center;
 	flex-wrap: wrap;
 	margin-bottom: 25px ;
+}
+@media (max-width: 768px) {
+	.questiion{
+		width:100% !important;
+	}
+	#abas li a {
+		padding: 6px 10px !important;
+		font-size: 10px !important;
+	}
+
 }
 </style>
 			<script>

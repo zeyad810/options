@@ -228,5 +228,6 @@
     "active_payment_session_cancel":"Discard cart & continue shopping",
     "go_all_reviews":"All reviews",
     "read_more": "Read More",
+    "add_product_question": "Add a question",
     "newsletter_success": "Data sent successfully!"
 }
