@@ -227,5 +227,6 @@
     "active_payment_session_notification" : "You have an active payment session in another browser, you can't edit the cart contents",
     "active_payment_session_cancel":"Discard cart & continue shopping",
     "go_all_reviews":"All reviews",
-    "read_more": "Read More"
+    "read_more": "Read More",
+    "newsletter_success": "Data sent successfully!"
 }

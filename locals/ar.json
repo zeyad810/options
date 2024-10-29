@@ -221,5 +221,6 @@
   "active_payment_session_notification" : "يوجد لديك عملية دفع قائمة في صفحة أخرى للمتجر، لا يمكنك تعديل محتويات السلة",
   "active_payment_session_cancel":"إلغاء السلة و متابعة الشراء",
   "go_all_reviews":"جميع التقييمات",
-  "read_more": "اعرف المزيد"
+  "read_more": "اعرف المزيد",
+  "newsletter_success": "تم إرسال البيانات بنجاح!"
 }
