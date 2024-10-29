@@ -159,9 +159,9 @@
 	
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
 		{# edit loader #}
-		{% if  settings.load_loader == "true" %}
+		{% if  settings.load_loader == "true" and template == 'home' %}
 			<div class="overlay">
-				<img src="{{ store.logo }}" class="img_loader"/>
+				<img src="{{ store.logo }}" class="img_loader" />
 			</div>
 		{% endif %}
 		
@@ -273,7 +273,9 @@
 				<div class="main flex-grow-1 app-content" {% if settings.colors_background_image %} style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
 					</div>
 				     {# <p>{{settings}}</p> #}
-	               	 {% include 'discount_popup.twig'  with {'discount': settings} %}
+					 {% if template == 'home'  %}
+	               	 	{% include 'discount_popup.twig'  with {'discount': settings} %}  
+					 {% endif %}
 					<div class="footer"> {% block footer %}{% endblock %}
 						</div>
 						{% block footer_sticky %}{% endblock %}
@@ -333,6 +335,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				<script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}"></script>
 
 				<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+
 				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.117') }}"></script>
 
 				{# Local storage #}
@@ -440,15 +443,24 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		.product-item .pr-img{
 			width:100%;
 			height:100%;
+			align-items: center;
+		}
+</style>
+{% if settings.image_control_item %}
+	<style>
+		.product-item .pr-img img{
+			height: 100% !important;
+			width: auto !important;
+		}
+	</style>
+{% else %}
+	<style>
+		.product-item .pr-img img{
+			width: 100% !important;
+			height: auto !important;
 		}
 	</style>
 
-{% if settings.image_control_item %}
-	<style>
-		.product-item .pr-img{
-			height:auto;
-		}
-	</style>
 {% endif %}
 	
 {% if settings.android_store_url | length %}
@@ -1091,7 +1103,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 	"image_control": {
 		"name": {
 			"ar": "اظهار صورة المنتج كامله فى كارد المنتج",
-			"en": "card"
+			"en": "Show the full image of the product in the product card."
 		},
 		"settings": {
 			"item": {

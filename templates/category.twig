@@ -98,6 +98,16 @@
                         {% include 'products-filter.twig' with { 'count' : products.total, 'has_products_filtration': ( products.filters|length > 0) } %}
                     </div>
                  {% endif %}
+                 {% if  products.total <= 0 %}
+                 <div class="w-100 d-flex justify-content-center align-items-center flex-column" style="padding: 5rem;">
+                     <img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="" width="auto" height="auto">
+                     <div class="mt-4">
+                         <h3>{{locals.noproducts}}</h3>
+                         <p>{{locals.noproducts_desc}}</p>
+                    </div>
+                </div>
+                 {% endif %}
+                 
                 <div id="products-list" class="grid grid-cols-3 products-list">
                     {% for product in products.data %}
     
