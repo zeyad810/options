@@ -9,7 +9,7 @@
 	{% embed 'breadcrumb.twig' %}
 		{% block breadcrumb_items %}
 			<li class="breadcrumb-item" aria-current="page">
-				<a href="/">{{ locals.home_title }}</a> 
+				<a href="/">{{ locals.home_title }}</a>
 			</li>
 			<li class="breadcrumb-item active " aria-current="page">{{ locals.products_title }}</li>
 		{% endblock %}
@@ -36,39 +36,46 @@
 								</h3>
 								<p>{{banner.sideBanerLink}}</p>
 							</a>
-							<img src="{{ banner.sideBanerImage }}" alt="{{ banner.title }}">
-						</div>	
+							{% if banner.mediaType == "image" %}
+								<img src="{{ banner.sideBanerImage }}" alt="{{ banner.sideBanerTitle }}">
+							{% elseif banner.mediaType == "video" %}
+								<video autoplay muted style="height:500px; width:276px; overflow:hidden; object-fit:cover;">
+									<source src="{{ banner.sideBanerVideoUrl }}" type="video/mp4">
+									Your browser does not support the video tag.
+								</video>
+							{% endif %}
+						</div>
 					{% endfor %}
 				</div>
 			{% endif %}
-			
+
 			<div class="products-area">
 				{% if  products.filters|length <= 0 %}
 					<div>
 						{% include 'products-filter.twig' with { 'count' : products.total, 'has_products_filtration': ( products.filters|length > 0) } %}
 					</div>
 					{% if  products.total <= 0 %}
-					<div class="w-100 d-flex justify-content-center align-items-center flex-column" style="padding: 5rem;">
-						<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="" width="auto" height="auto">
-						<div class="mt-4">
-							<h3>{{locals.noproducts}}</h3>
-							<p>{{locals.noproducts_desc}}</p>
-					   </div>
-				   </div>
+						<div class="w-100 d-flex justify-content-center align-items-center flex-column" style="padding: 5rem;">
+							<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="" width="auto" height="auto">
+							<div class="mt-4">
+								<h3>{{locals.noproducts}}</h3>
+								<p>{{locals.noproducts_desc}}</p>
+							</div>
+						</div>
 					{% endif %}
-					
+
 
 				{% endif %}
 				{# hussein-row>grid #}
 				<div id="products-list" class="grid  grid-cols-3 products-list vertical">
 					{% for product in products.data %}
-	
+
 						<div class="prod-col {% if products.filters|length > 0 %}prod-col-attr{% endif %} prod-col-tb">
 							{% include 'product-card.twig' with {'product' : product, 'index': key, 'pr_settings':settings} %}
 						</div>
-	
+
 					{% endfor %}
-						
+
 				</div>
 			</div>
 		</div>
@@ -76,74 +83,126 @@
 
 	{% include 'pagination.twig' with { 'totalPages' : products.last_page , 'currentPage' : products.current_page } %}
 
-		<style>
-			#products-list .salla{
-				display: flex;
-				justify-content: center;
-			}
-			.products-container{
-				display: flex;
-			}
-			.side-banners{
-				flex-basis: 20%;
-				display: flex;
-				flex-direction: column;
-				gap: 20px;
-			}
-			.side-banners .banner-item {
-				position: relative;
-				border-radius: 8px;
-				overflow: hidden;
-			}
-			.side-banners .banner-item .containt{
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #0000003b;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
-				opacity: 0;
-				transition: all ease-in-out 0.3s;
-			}
-			.side-banners .banner-item .containt:hover{
-				opacity: 1;
-			}
+	<style>
 
-			.side-banners .banner-item .containt h3{
-				color: var(--primary-color);
-					text-align: center;
-					font-size: 28px;
-					font-weight: 600;
-					line-height: 38.5px;
+		.side-banners .banner-item {
+			position: relative;
+			overflow: hidden;
+			border-radius: 8px;
+			transition: transform 0.3s ease, opacity 0.3s ease;
+		}
+		.side-banners .banner-item:hover img {
+			transform: scale(1.05);
+		}
+		.side-banners .banner-item .containt {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.3);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			opacity: 0;
+			transition: opacity 0.3s ease-in-out;
+		}
+		.side-banners .banner-item:hover .containt {
+			opacity: 1;
+			Z-index: 1111;
+		}
+		.side-banners .banner-item img {
+			transition: transform 0.3s ease, opacity 0.3s ease;
+		}
+		.products-area {
+			padding-right: 30px;
+		}
+		#products-list .salla {
+			display: flex;
+			justify-content: center;
+		}
+		.products-container {
+			display: flex;
+		}
+		.side-banners {
+			flex-basis: 20%;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+		.side-banners .banner-item {
+			position: relative;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+		.side-banners .banner-item .containt {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #0000003b;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			opacity: 0;
+			transition: all ease-in-out 0.3s;
+		}
+		.side-banners .banner-item .containt:hover {
+			opacity: 1;
+		}
+
+		.side-banners .banner-item .containt h3 {
+			color: var(--primary-color);
+			text-align: center;
+			font-size: 28px;
+			font-weight: 600;
+			line-height: 38.5px;
+		}
+		.side-banners .banner-item .containt p {
+			color: var(--text-color-primary-bg);
+			font-size: 28px;
+			font-weight: 700;
+		}
+
+		{% if settings.categorySideBanners_sideBanerCondetion %}
+			.products-area {
+				flex-basis: 78%;
 			}
-			.side-banners .banner-item .containt p{
-				color: var(--text-color-primary-bg);
-				font-size: 28px;
-				font-weight: 700;
-			}
-			
-			{% if settings.categorySideBanners_sideBanerCondetion  %}
-				.products-area{
-					flex-basis: 78%;
-				}
-			{% else %}
-				.products-area{
-					flex-basis:100%;
-				}
-			{% endif %}
-			@media (max-width: 992px){
-				.side-banners{
-					display: none;
-				}
-				.products-area{
+		{% else %}
+			.products-area {
 				flex-basis: 100%;
 			}
+		{% endif %}
+		@media(max-width: 992px) {
+			.side-banners {
+				display: none;
 			}
-		</style>
+			.products-area {
+				flex-basis: 100%;
+			}
+		}
+	</style>
+	<script>
+
+		function isIOS() {
+return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
+const video = document.getElementById('myVideo');
+
+if (isIOS()) {
+
+video.setAttribute('controls', 'controls');
+video.removeAttribute('autoplay');
+} else {
+
+video.setAttribute('autoplay', 'autoplay');
+video.removeAttribute('controls');
+}
+	</script>
 {% endblock %}
 
 {% block footer %}

@@ -462,31 +462,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 	</style>
 
 {% endif %}
-<<<<<<< HEAD
-
-
-	<style>
-		.newsletters{
-			display:flex;
-		}
-		.btn-img{
-			display:none;
-		}
-	</style>
-{% if settings.newsletter_item %}
-	<style>
-		.newsletters{
-			display:none;
-		}
-		.btn-img{
-			display:flex;
-			flex-direction:column;
-		}
-	</style>
-{% endif %}
-=======
 	
->>>>>>> 1f4cbb7487527524ff056cd8ee54ebd9e5abc4cc
 {% if settings.android_store_url | length %}
 	<style>
 		.android-store {
@@ -568,7 +544,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 						"value": "false",
 						"label": {
 							"ar": "لا",
-							"en": "no"
+							"menuen": "no"
 						}
 					}
 				]
@@ -987,61 +963,99 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
         }
       }
     }
-     },
-  "categorySideBanners": {
-		"type": "fieldset",
-		"name": {
-			"ar": "وضع بنرات جانبيه في صفحة التصنيف ",
-			"en": "Place side banners on the category page "
-		},
-		"expandable": true,
-		"settings": {
-			"sideBanerCondetion": {
-					"type": "checkbox",
-					"label": {
-					"ar": "اظهار البنرات الجانبيه في صفحه الاقسام",
-					"en": "Show side banners on sections page"
-					}
-				},
-			"sideBannerList": {
-				"type": "list",
-				"label": {
-				"ar": "اضف البنرات الجانبيه",
-				"en": "Add side banners"
-				},
-				"settings": {
-					"sideBanerImage": {
-						"type": "image",
-						"label": {
-						"ar": "الصوره",
-						"en": "image"
-						}
-					},
-					"sideBanerTitle": {
-						"type": "text",
-						"label": {
-							"ar": "عنوان البنر ",
-							"en": "banner Title"
-						}
-					},
-					"sideBanerLink": {
-						"type": "text",
-						"label": {
-							"ar": "نص الزر",
-							"en": "button Text"
-						}
-					},
-					"sideBanerLinkUrl": {
-						"type": "url",
-						"label": {
-							"ar": "رابط الزر",
-							"en": "link URL"
-						}
-					}
-				}
-			}
-		}
-	},
+     },"categorySideBanners": {
+    "type": "fieldset",
+    "name": {
+        "ar": "وضع بنرات جانبيه في صفحة التصنيف",
+        "en": "Place side banners on the category page"
+    },
+    "expandable": true,
+    "settings": {
+        "sideBanerCondetion": {
+            "type": "checkbox",
+            "label": {
+                "ar": "اظهار البنرات الجانبيه في صفحه الاقسام",
+                "en": "Show side banners on sections page"
+            }
+        },
+        "sideBannerList": {
+            "type": "list",
+            "label": {
+                "ar": "اضف البنرات الجانبيه",
+                "en": "Add side banners"
+            },
+            "settings": {
+                "mediaType": {
+                    "type": "select",
+                    "label": {
+                        "ar": "نوع الوسائط",
+                        "en": "Media Type"
+                    },
+                    "options": [
+                        {
+                            "value": "image",
+                            "label": {
+                                "ar": "صورة",
+                                "en": "Image"
+                            }
+                        },
+                        {
+                            "value": "video",
+                            "label": {
+                                "ar": "فيديو",
+                                "en": "Video"
+                            }
+                        }
+                    ]
+                },
+                "sideBanerImage": {
+                    "type": "image",
+                    "label": {
+                        "ar": "الصوره",
+                        "en": "image"
+                    },
+                    "condition": {
+                        "field": "mediaType",
+                        "value": "image"
+                    }
+                },
+                "sideBanerVideoUrl": {
+                    "type": "text",
+                    "label": {
+                        "ar": "رابط الفيديو",
+                        "en": "Video URL"
+                    },
+                    "condition": {
+                        "field": "mediaType",
+                        "value": "video"
+                    }
+                },
+                "sideBanerTitle": {
+                    "type": "text",
+                    "label": {
+                        "ar": "عنوان البنر",
+                        "en": "banner Title"
+                    }
+                },
+                "sideBanerLink": {
+                    "type": "text",
+                    "label": {
+                        "ar": "نص الزر",
+                        "en": "button Text"
+                    }
+                },
+                "sideBanerLinkUrl": {
+                    "type": "url",
+                    "label": {
+                        "ar": "رابط الزر",
+                        "en": "link URL"
+                    }
+                }
+            }
+        }
+    }
+}
+,
 	"logo_card": {
 		"name": {
 			"ar": "اضافه لوجو او صوره على المنتج",

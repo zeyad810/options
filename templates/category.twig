@@ -20,7 +20,7 @@
         {% endblock %}
     {% endembed %}
 
-    {% include 'breadcrumb-subTitle-detail.twig' with { 'title' : category.name, 'description': category.description } %}
+    {# {% include 'breadcrumb-subTitle-detail.twig' with { 'title' : category.name, 'description': category.description } %} #}
 
     {% if category.sub_categories | length > 0 %}
     <div class="container pt-2 category-page-slider">
@@ -76,21 +76,31 @@
             </div>
         {% endif %}
         <div class="products-container flex-grow-1 pt-4">
+        {# banner #}
             {% if settings.categorySideBanners_sideBanerCondetion  %}
 				<div class="side-banners">
 					{% for banner in settings.categorySideBanners_sideBannerList %}
 						<div class="banner-item">
 							<a href="{{banner.sideBanerLinkUrl}}" class="containt">
-								<h3>
+								<h3 style="color:var(--text-color-primary-bg);">
 									{{ banner.sideBanerTitle}}
 								</h3>
-								<p>{{banner.sideBanerLink}}</p>
+								<p style="color: var(--primary-color);" >{{banner.sideBanerLink}}</p>
 							</a>
-							<img src="{{ banner.sideBanerImage }}" alt="{{ banner.title }}">
+							
+                            {% if banner.mediaType == "image" %}
+                                <img src="{{ banner.sideBanerImage }}" alt="{{ banner.sideBanerTitle }}">
+                            {% elseif banner.mediaType == "video" %}
+                                <video autoplay muted style="height:500px; width:276px; overflow:hidden; object-fit:cover;" >
+                                    <source  src="{{ banner.sideBanerVideoUrl }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% endif %}
 						</div>	
 					{% endfor %}
 				</div>
 			{% endif %}
+            {# END #}
             <div class="products-area">
 
                 {% if  products.filters|length <= 0 %}
@@ -122,8 +132,10 @@
     </div>
 
     {% include 'pagination.twig' with { 'totalPages' : products.last_page , 'currentPage' : products.current_page } %}
-
         <style>
+            .products-area{
+                padding-right: 30px;
+            }
 			.products-container{
 				display: flex;
 			}
@@ -138,24 +150,6 @@
 				border-radius: 8px;
 				overflow: hidden;
 			}
-			.side-banners .banner-item .containt{
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #0000003b;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
-				opacity: 0;
-				transition: all ease-in-out 0.3s;
-			}
-			.side-banners .banner-item .containt:hover{
-				opacity: 1;
-			}
-
 			.side-banners .banner-item .containt h3{
 				color: var(--primary-color);
 					text-align: center;
@@ -186,8 +180,56 @@
 				flex-basis: 100%;
 			}
 			}
+            .side-banners .banner-item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 8px;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            .side-banners .banner-item:hover img {
+                transform: scale(1.05);
+            }
+            .side-banners .banner-item .containt {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+            }
+            .side-banners .banner-item:hover .containt {
+                opacity: 1;
+                Z-index: 1111;
+            }
+            .side-banners .banner-item img {
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
 		</style>
 
+   <script>
+        
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+
+        const video = document.getElementById('myVideo');
+
+        if (isIOS()) {
+         
+            video.setAttribute('controls', 'controls');
+            video.removeAttribute('autoplay');
+        } else {
+           
+            video.setAttribute('autoplay', 'autoplay');
+            video.removeAttribute('controls');
+        }
+    </script>
 {% endblock %}
 
 {% block footer %} {{ include('footer.twig') }} {% endblock %}
