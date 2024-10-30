@@ -12,13 +12,13 @@
 			</div>
 		</div>
 		<div id="mc_embed_shell" class="flex-col flex-1 w-full gap-5 felx">
-			<link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+			{# <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css"> #}
 
 
 			<h2 style='margin-bottom: 12px; font-size: 12px;' class="text-[14px] text-sm font-medium">{{ settings.newsletterScema_newslatterSecoundDescription }}</h2>
-			<form action="" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-newsletter flex items-center justify-start gap-2 validate" target="_blank">
+			<form action="{{settings.newsletterScema_newslatterLink}}" method="post"  class="form-newsletter flex items-center justify-start gap-2 validate" target="hidden_iframe"  onsubmit="handleFormSubmit()"  >
 				<div style='flex-grow: 1;' id="mc_embed_signup_scroll" class="flex flex-wrap items-center justify-between gap-2">
-					<input type="email" name="EMAIL" id="mce-EMAIL" required="" value="" placeholder="{{ locals.email }}" class="email_button required email p-[10px] rounded-lg max-h-[48px] flex-1 border-none outline-none"/>
+					<input type="email" name="Email" id="mce-EMAIL" required="" value="" placeholder="{{ locals.email }}" class="email_button required email p-[10px] rounded-lg max-h-[48px] flex-1 border-none outline-none newslaterIn"/>
 				</div>
 				<div id="mce-responses" class="clear foot">
 					<div class="w-0 h-0 overflow-hidden response" id="mce-error-response" style="display: none;"></div>
@@ -33,7 +33,11 @@
 					</div>
 				</div>
 			</form>
+      <!-- مكان عرض رسالة التأكيد -->
+      <p id="confirmationMessage" style="display: none; color: green;">{{locals.newsletter_success}}</p>
 
+        <!-- إخفاء الإطار لضمان عدم الانتقال لصفحة جديدة -->
+        <iframe name="hidden_iframe" style="display:none;"></iframe>
 		</div>
 
 
@@ -53,6 +57,19 @@
 
 
     {% include 'footer-store-section.twig' with { 'about_settings' : settings } %}
+
+
+    
+        <script>
+            function handleFormSubmit() {
+                document.getElementById('confirmationMessage').style.display = 'block';
+
+                setTimeout(() => {
+                  document.querySelector('.newslaterIn').value="";
+                  document.getElementById('confirmationMessage').style.display = 'none';
+                }, 2000);
+            }
+        </script>
 
 </footer>
 <style>

@@ -18,6 +18,8 @@
 
     "search_placeholder": "Search",
     "phones_apps": "mobile applications",
+    "noproducts":"لا توجد منتجات حتى الآن",
+    "noproducts_desc":"بحثك لم يطابق أي منتجات",
 
     "store_language" : "Language",
     "store_currency_country" : "Country",
@@ -226,5 +228,6 @@
     "active_payment_session_cancel":"Discard cart & continue shopping",
     "go_all_reviews":"All reviews",
     "read_more": "Read More",
-    "add_product_question": "Add a question"
+    "add_product_question": "Add a question",
+    "newsletter_success": "Data sent successfully!"
 }

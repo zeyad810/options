@@ -11347,6 +11347,15 @@ section.sticky-product-bar.bg-white.p-5.target\:btn:target.rounded-b-none {
   transition: all 0.3s ease-in-out;
 
 }
+@media (max-width: 767px){
+    .horizontal .product-item {
+        border-radius: 8px;
+    }
+    .horizontal .product-all-content{
+        display: none;
+    }
+}
+
 
 .cart-product-delete span.icon-delete::before {
   content: "\f1f8";

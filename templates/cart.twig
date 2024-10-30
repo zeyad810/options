@@ -156,7 +156,7 @@
 							</div>
 						{% endif %}
 
-						<div class="mt-3">
+						<div class="mt-3 ">
 							<a href="/" class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 5px; height: 50px; font-size: 18px;">
 								{{ locals.cart_back_to_store }}
 							</a>
@@ -172,8 +172,11 @@
 						<span class="path1"></span>
 						<span class="path2"></span>
 					</span>
+					<div class="sallaicon">
+						<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="" width="auto" height="auto">
+					</div>
 					<h1 class="mt-3">{{ locals.cart_list_empty }}</h1>
-					<div class="mt-3">
+					<div class="mt-3 butontext">
 						<a href="/" class="btn btn-outline-primary btn-lg btn-block">
 							{{ locals.cart_back_to_store }}
 						</a>
@@ -183,6 +186,10 @@
 		</div>
 	</div>
 <style>
+	.cart-empty .butontext {
+		padding-top: 10px;
+
+	}
  .cart-product-row{
 	 align-items: center !important;
 	 border-radius:8px;

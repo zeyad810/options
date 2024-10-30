@@ -180,15 +180,16 @@
 
     <!-- Thumbnail Swiper -->
     <div thumbsSlider="" class="swiper mySwiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper allsmallimages ">
             {% for key, image in product.selected_product.images %}
-                <div class="swiper-slide">
-                    <img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy">
+                <div class="swiper-slide small_images">
+                    <img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy" class="thumbimagee">
                 </div>
             {% endfor %}
         </div>
     </div>
-</div>
+	
+						</div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 						<div class="col-lg-6  col-product-info {% if product.selected_product.images | length <= 1 %}col-product-info-single-image{% endif %}">
@@ -405,6 +406,16 @@
 				</section>
 			{% endif %}
 			<style>
+				.allsmallimages{
+					align-items: center;
+				}
+				.thumbimagee{
+					height: 100px;
+				}
+				.slide-product{
+					display: flex;
+					flex-direction: row-reverse;
+				}
 				.sec_des p span{
 					font-size:16px;
 					font-weight: 400;
@@ -427,9 +438,10 @@
 				}
 
 				.slide-product .mySwiper {
-					height: 20%;
+					height: 80%;
 					box-sizing: border-box;
 					padding: 2px 0;
+					width: 30%;
 				}
 
 				.slide-product .mySwiper .swiper-slide {
@@ -442,12 +454,6 @@
 					opacity: 1;
 				}
 
-				.slide-product .swiper-slide img {
-					display: block;
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
 
 				#abas {
 					margin: 0;
@@ -629,8 +635,8 @@
 				<div id="conteudo_3" class="conteudo">
 					{% if store.is_product_reviews_enabled %}
 						<section class="mt-5 review-details">
-							<div>
-								<div class="flex-wrap d-flex align-items-center" style="width: 100%">
+							<div class="d-flex review-container" style="width: 100% ">
+								<div class="flex-wrap d-flex align-items-center review-btn" >
 									<div class="description-icon">
 										<span class="icon-reviews_black"></span>
 									</div>
@@ -653,70 +659,71 @@
 										{{ locals.add_product_review}}
 									</button>
 								</div>
-								<div class="reviews-break-down-div description-paragrah">
-									<div class="mt-3 mb-4 d-flex align-items-center">
-										{% if product.rating %}
-											<h4 class="rating-average">{{ product.rating.average }}</h4>
-											<div class="d-flex flex-column">
-
-
-												<div class="row card-rate">
-													<span class="rating_count_5">{{ product.rating['5_ratings'].count }}</span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													&nbsp;  &nbsp;
-													<span>{{ locals.reviews_rating_5 }}</span>
+								<div class="reviews-commints">
+									<div class="reviews-break-down-div description-paragrah">
+										<div class="mt-3 mb-4 d-flex align-items-center">
+											{% if product.rating %}
+												<h4 class="rating-average">{{ product.rating.average }}</h4>
+												<div class="d-flex flex-column">
+	
+													<div class="row card-rate">
+														<span class="rating_count_5">{{ product.rating['5_ratings'].count }}</span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														&nbsp;  &nbsp;
+														<span>{{ locals.reviews_rating_5 }}</span>
+													</div>
+													<div class="row card-rate">
+														<span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1 deactive"></span>
+														&nbsp;  &nbsp;
+														<span>{{ locals.reviews_rating_4 }}</span>
+													</div>
+													<div class="row card-rate">
+														<span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1 deactive"></span>
+														<span class="icon-star1 deactive"></span>
+														&nbsp;  &nbsp;
+														<span>{{ locals.reviews_rating_3 }}</span>
+													</div>
+													<div class="row card-rate">
+														<span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1 deactive"></span>
+														<span class="icon-star1 deactive"></span>
+														<span class="icon-star1 deactive"></span>
+														&nbsp;  &nbsp;
+														<span>{{ locals.reviews_rating_2 }}</span>
+													</div>
+													<div class="row card-rate">
+														<span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
+														<span class="icon-star1"></span>
+														<span class="icon-star1 deactive"></span>
+														<span class="icon-star1 deactive"></span>
+														<span class="icon-star1 deactive"></span>
+														<span class="icon-star1 deactive"></span>
+														&nbsp;  &nbsp;
+														<span>{{ locals.reviews_rating_1 }}</span>
+													</div>
 												</div>
-												<div class="row card-rate">
-													<span class="rating_count_4">{{ product.rating['4_ratings'].count }}</span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1 deactive"></span>
-													&nbsp;  &nbsp;
-													<span>{{ locals.reviews_rating_4 }}</span>
-												</div>
-												<div class="row card-rate">
-													<span class="rating_count_3">{{ product.rating['3_ratings'].count }}</span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1 deactive"></span>
-													<span class="icon-star1 deactive"></span>
-													&nbsp;  &nbsp;
-													<span>{{ locals.reviews_rating_3 }}</span>
-												</div>
-												<div class="row card-rate">
-													<span class="rating_count_2">{{ product.rating['2_ratings'].count }}</span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1 deactive"></span>
-													<span class="icon-star1 deactive"></span>
-													<span class="icon-star1 deactive"></span>
-													&nbsp;  &nbsp;
-													<span>{{ locals.reviews_rating_2 }}</span>
-												</div>
-												<div class="row card-rate">
-													<span class="rating_count_1">{{ product.rating['1_ratings'].count }}</span>
-													<span class="icon-star1"></span>
-													<span class="icon-star1 deactive"></span>
-													<span class="icon-star1 deactive"></span>
-													<span class="icon-star1 deactive"></span>
-													<span class="icon-star1 deactive"></span>
-													&nbsp;  &nbsp;
-													<span>{{ locals.reviews_rating_1 }}</span>
-												</div>
-											</div>
-										{% endif %}
+											{% endif %}
+										</div>
 									</div>
-								</div>
-								<div class="reviews-break-down-empty description-paragrah d-none">
-									<div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
-										<span>{{ locals.product_no_reviews }}</span>
+									<div class="reviews-break-down-empty description-paragrah d-none">
+										<div style="border: 1px solid #ccc; margin: 10px 0px; padding: 10px; border-radius: 3px">
+											<span>{{ locals.product_no_reviews }}</span>
+										</div>
 									</div>
 								</div>
 
@@ -847,10 +854,36 @@
 						max-width: 30%;
 						margin-left: 15px;
  					}
+					.review-btn{
+						width: 20%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+					}
+					.reviews-commints{
+						width: 70%;
+					}
+					.add-review-btn{
+						margin-right: 0px;
+						padding: 15px 30px;
+						font-size: 15px;
+					}
 					@media(max-width:786px){
 						.con{
 							display: flex;
 							flex-wrap: wrap;
+						}
+						.review-btn{
+							width: fit-content;
+						
+						}
+						.reviews-commints{
+							width: 100%;
+						}
+						.review-container{
+							flex-direction: column	;
+							align-items: center;
 						}
 					}
 					@media(max-width:425px){
@@ -1180,7 +1213,9 @@ var swiper = new Swiper(".slide-product .mySwiper", {
 spaceBetween: 10,
 slidesPerView: 4,
 freeMode: true,
-watchSlidesProgress: true
+watchSlidesProgress: true,
+direction: 'vertical' // اجعل الشريط الصغير عمودي
+
 });
 var swiper2 = new Swiper(".slide-product .mySwiper2", {
 spaceBetween: 4,
