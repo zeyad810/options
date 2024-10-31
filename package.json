@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@zidsa/themes-cli": "^1.0.1",
     "swiper": "^11.1.12"
   }
 }
