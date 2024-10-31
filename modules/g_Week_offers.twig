@@ -1,12 +1,13 @@
-<section class=" offer-deadline" section-id="{{ sectionId }}">
+<section class="offer-deadline" section-id="{{ sectionId }}">
 
-  <!-- Wrapper for all products -->
+<div class="slider-product">
+      <!-- Wrapper for all products -->
   <swiper-container  pagination="true"  class="productgroup">
 
     {% for product in settings.products.products %}
    
     <!-- Each product slide -->
-    <swiper-slide class=" product-end">
+    <swiper-slide class="product-end">
       <!-- Product data section (left half) -->
       <div class="productdata show-stars">
        <div class="pro_cont ">
@@ -57,6 +58,10 @@
   <!-- Swiper navigation -->
   <div class="swiper-button-prev"></div>
   <div class="swiper-button-next"></div>
+
+
+  
+<div>
 
 </section>
 
@@ -385,10 +390,45 @@
     }
 }
 </style>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+ 
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+const swiper = new Swiper('.slider-product .swiper', {
+
+direction: 'vertical',
+loop: true,
+pagination: {
+el: ".swiper-pagination",
+clickable: true,
+dynamicBullets: true
+},
+
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev'
+},
+
+scrollbar: {
+el: '.swiper-scrollbar'
+}
+
+
+});
+});
+
+let eles = document.querySelectorAll("swiper-container");
+   
+	eles.forEach((ele)=>{
+        let shadowRoot = ele.shadowRoot;
+		console.log(shadowRoot)
+        const extraSheet = new CSSStyleSheet();
+        extraSheet.replaceSync(".swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev {transform: scale(1);} .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {transform: scale(1);}.swiper-pagination-bullet {width: 12px; border-radius: 50% !important; height: 12px; opacity: .7; background: #FBA1B7;} .swiper-pagination-bullet-active { background: #CE5A67;height:  12px;width: 25px; border-radius: 8px !important; opacity: 1;}");
+        shadowRoot.adoptedStyleSheets.push(extraSheet)
+    })
+
+{# this old code can not working and can not access on pagination  #}
+{# document.addEventListener('DOMContentLoaded', function() {
   const swiperEl = document.querySelector(' swiper-container');
   
   if (swiperEl && swiperEl.shadowRoot) {
@@ -398,7 +438,7 @@ document.addEventListener('DOMContentLoaded', function() {
       activeBullet.style.backgroundColor = '#CB657A'; 
     }
   }
-});
+}); #}
 
 function convertToDate(textDate) {
  

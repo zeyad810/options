@@ -38,7 +38,6 @@
 
 	<style>
 
-
 		swiper-container {
 			width: 100%;
 			height: 100%;
@@ -91,7 +90,7 @@
 	</style>
 
 
-	<script>
+<script>
 
 		// swiper
 document.addEventListener('DOMContentLoaded', function () {
@@ -100,7 +99,7 @@ const swiper = new Swiper('.slider-bannars_items .swiper', {
 direction: 'vertical',
 loop: true,
 pagination: {
-el: ".navigate",
+el: ".swiper-pagination",
 clickable: true,
 dynamicBullets: true
 },
@@ -117,7 +116,36 @@ el: '.swiper-scrollbar'
 
 });
 });
+
+	
+
+
+
+  {# let ele = document.querySelector("swiper-container");
+  console.log(ele);
+  console.log(ele.shadowRoot);
+
+
+
+  let shadowRoot = ele.shadowRoot
+  console.log(shadowRoot); #}
+
+  {# const shadowElement = shadowRoot.querySelector('.swiper-pagination-bullett');
+  shadowElement.style.width = "14px";
+  shadowElement.style.height = "14px";
+  shadowElement.style.border-radius = "50%";
+  shadowElement.style.opacity = ".7"; #}
+
+ {# console.log(shadowElement);
+  console.log(shadowele);
+  console.log(ele.attachShadow({mode: "closed"}));
+  
+
+  ele.insertRule(".swiper-pagination-bullet {width: 14px; border-radius: 50% !important; height: 14px; opacity: .7; background: #FBA1B7;} .swiper-pagination-bullet-active { background: #CE5A67;height:  12px;width: 37px; border-radius: 8px !important;}"); #}
+
 	</script>
+
+
 
 
 	{% schema %}
@@ -204,3 +232,20 @@ el: '.swiper-scrollbar'
 	    }
 	}
 	{% endschema %}
+
+
+
+
+{# <div class="swiper swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden" part="container">
+      <slot name="container-start"></slot>
+      <div class="swiper-wrapper" part="wrapper" id="swiper-wrapper-df368fbd7db1c67a" aria-live="polite">
+        <slot></slot>
+        
+      </div>
+      <slot name="container-end"></slot>
+      
+      
+        <div part="pagination" class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-bullets-dynamic" style="width: 80px;"><span part="bullet-active" class="swiper-pagination-bullet swiper-pagination-bullet-active swiper-pagination-bullet-active-main" aria-current="true" style="right: 8px;"></span><span part="bullet" class="swiper-pagination-bullet swiper-pagination-bullet-active-next" style="right: 8px;"></span></div>
+      
+      
+    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div> #}
