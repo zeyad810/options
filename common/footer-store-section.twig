@@ -189,9 +189,9 @@
 
 						{% if store.social_media.items.business_center %}
 							<div class="maroof-icon " style="text-align: center;">
-							<a class="d-flex flex-column  align-items-center" href="https://eauthenticate.saudibusiness.gov.sa/inquiry?certificateRefID={{ store.social_media.items.business_center }}">
+							<a class="d-flex flex-column  align-items-center" href="https://eauthenticate.saudibusiness.gov.sa/inquiry?certificateRefID={{ store.social_media.items.business_center }}" style="width: 80px;">
 								<img
-									src="{{ asset_url ~ 'business_center.png' }}" loading="lazy" alt="" width="auto" height="30" style="height:30px;width: auto;">
+									src="{{ asset_url ~ 'business_center.png' }}" loading="lazy" alt="" width="100%">
 									{% if about_settings.businessCenter_showNumber %}
 										<div>{{ store.social_media.items.business_center }}</div>
 									{% endif %}
@@ -268,10 +268,12 @@
 		}
 
 
-		.maroof-icon a{
-			width: 90px;
-		}
-		.maroof-icon a img{
-			width: 75%;
-		}
+	.maroof-icon a{
+		width: 90px;
+	}
+
+	.maroof-icon a img{
+		width: 75%;
+	}
+
 	</style>
