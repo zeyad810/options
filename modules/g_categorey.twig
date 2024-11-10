@@ -1,10 +1,11 @@
-<head>
+
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     {# styling #}
     <style>
         .swiper-button-next,
@@ -42,8 +43,60 @@
             }
         }
     </style>
-</head>
-<body> 
+
+    <style>
+   
+    .q-category::-webkit-scrollbar {
+       display: none;
+      }
+    .q-category {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+      }
+    .q-category .content_btns{
+        margin-top:55px !important;
+      }
+    .q-category .content_btns  div{
+        padding: 20.49px 21px 19px !important;
+        font-size: 20px;
+        font-family: 'FontAwesome';
+    }
+    .q-category .image-parent {
+        overflow: hidden;
+    }
+    .q-category .image-parent img{
+        transition: all 0.3s; 
+    }
+    .q-category .image-parent img:hover {
+       transform: rotate(25deg) scale(1.4);
+    }
+    .is-grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        place-items:center;
+    }
+    @media (max-width:768px) {
+        .is-grid{
+            grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+        }
+        .q-category   .content_btns{
+            left: -8px;
+            margin-top: 85px !important;
+        }
+        .q-category  .content_btns div{
+            padding: 10px 20px 9px !important;
+            font-size: 15px;
+        }
+    }
+
+
+    </style>
+
+
+
+
     <section id="g_cat_{{ sectionId }}" class="g_cat" style=" padding:70px 0px;" dir="ltr">
             <div  style=" margin-bottom: 50px;">
                 {% include 'title.twig' with { 'component_title': settings.section_title } %}
@@ -62,7 +115,7 @@
                     <div class=" {% if settings.slider_toggle == "true" %}  swiper-wrapper h-auto {% else %} is-grid {% endif %}" style="margin-top: 35px;">
                         {% for item in settings.categorys %}
                             <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
-                                 style="max-width: 150px; {{ loop.length > 3  ? 'max-width: 200px;' : '' }} display:flex; flex-direction: column; align-items: center;">
+                                 style="display:flex; flex-direction: column; align-items: center;">
                                 <div class="overflow-hidden rounded image-parent " >
                                     <a href="{{ item.cat_url }}">
                                         <img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
@@ -81,53 +134,7 @@
             </div>
     </section>
     
-    <style>
-   
-.q-category::-webkit-scrollbar {
-   display: none;
-  }
-.q-category {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-  }
-.q-category .content_btns{
-    margin-top:55px !important;
-  }
-.q-category .content_btns  div{
-    padding: 20.49px 21px 19px !important;
-    font-size: 20px;
-    font-family: 'FontAwesome';
-}
-.q-category .image-parent {
-    overflow: hidden;
-}
-.q-category .image-parent img{
-    transition: all 0.3s; 
-}
-.q-category .image-parent img:hover {
-   transform: rotate(25deg) scale(1.4);
-}
-.is-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    place-items:center;
-}
-@media (max-width:768px) {
-    .is-grid{
-        grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
-    }
-    .q-category   .content_btns{
-        left: -8px;
-        margin-top: 85px !important;
-    }
-    .q-category  .content_btns div{
-        padding: 10px 20px 9px !important;
-        font-size: 15px;
-    }
-}
-    </style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var swiperElement = document.querySelector('.swiper-container.slider');
@@ -160,7 +167,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
-</body>
+
+
+
+
 
 {% schema %}
 {
