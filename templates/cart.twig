@@ -87,7 +87,7 @@
 					</div>
 					<div>{{ template_for_cart_payments_widget }}</div>
 
-					<div class="coupon-form mt-5 has_hidden_coupon">
+					<div class="coupon-form mt-3 has_hidden_coupon">
 						<form>
 							<div class="form-group">
 								<h4>{{ locals.coupon_discount }}</h4>
@@ -186,6 +186,22 @@
 		</div>
 	</div>
 <style>
+	.send-coupon:active{
+		border: 1px solid var(--primary-color);
+
+	}
+	.send-coupon:focus{
+		border: 1px solid var(--primary-color);
+
+	}
+	.send-coupon{
+		border: 1px solid #cccccc;
+	}
+	.coupon-form{
+		border: 1px solid #cccccc;
+		border-radius: 3px;
+		padding: 10px;
+	}
 	.form-group h4{
 		padding-bottom: 15px;
 	}
@@ -196,6 +212,7 @@
  .cart-product-row{
 	 align-items: center !important;
 	 border-radius:8px;
+	 justify-content: space-between;
  }
  .header-wrapper{
 	background-color: transparent !important;
