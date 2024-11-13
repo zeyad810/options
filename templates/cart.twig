@@ -230,6 +230,21 @@
 		 margin-right: 10px;
 	}
 </style>
+
+{# {% if cart.products_count > 0 %} #}
+	<script>
+		const cart_counter_hidden = ()=>{
+			let cart_empty = document.querySelector(".cart-empty");
+			let cart_badge_counter=document.querySelector(".cart-badge");
+			if(!cart_empty.classList.contains("d-none")){
+				//cart_empty.classList.remove("d-none");
+				//cart_badge_counter.classList.remove("d-none")
+				cart_badge_counter.classList.add("d-none")
+			}
+		}
+	</script>
+{# {% endif %} #}
+
 {% endblock %}
 
 {% block footer_scripts %}
@@ -238,6 +253,8 @@
 		{{ cart_view_scripts|raw }}
 
 		<script>
+
+		
 
 			$(document).ready(function () {
 	addDeleteProgressImage()
@@ -294,6 +311,7 @@
 	if (cart.products_count <= 0) {
 	$('.cart-products-with-totals').addClass('d-none');
 	$('.cart-empty').removeClass('d-none');
+	cart_counter_hidden()
 	return;
 	} else {
 	$('.cart-products-with-totals').removeClass('d-none');
