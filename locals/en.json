@@ -15,12 +15,12 @@
     "header_all_categories":"All categories",
     "header_delivery_and_payment_options":"Payment and delivery options",
     "Discover_more": " اكتشفي المزيد",
-
+    "salla_shops" : "cart of shops" ,
     "search_placeholder": "Search",
     "phones_apps": "mobile applications",
     "noproducts":"لا توجد منتجات حتى الآن",
     "noproducts_desc":"بحثك لم يطابق أي منتجات",
-
+    "empty_salla":"not found products",
     "store_language" : "Language",
     "store_currency_country" : "Country",
     "customer_reviews": "Customer reviews ",

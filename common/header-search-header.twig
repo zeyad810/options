@@ -72,50 +72,60 @@
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</div>
 				{% endif %}
-				<div class="d-none d-lg-block">
-					<a href="/cart/view" style="color: inherit" class="relative">
-						<h3 class="cart-badge"></h3>
-						<i class="fa-solid fa-cart-shopping"></i>
-					</a>
-				</div>
-				<div class="d-block d-lg-none" style=" position: relative">
-					<a class="a-shopping-cart" href="/cart/view" style="color: inherit">
-						<i class="fa-solid fa-cart-shopping"></i>
-						<span class="cart-badge d-none"></span>
-					</a>
-					{% if store.gift_order_settings.is_gift_order_customer_motivation_enabled == '1' %}
-						<div id="tooltip" class="d-none popover" role="tooltip">
-							<div class="arrow"></div>
-							<div class="gift-popover-body">
-								<img src="{{ asset_url }}gift-popover-icon.svg" width="24px" height="24px"/>
-								<p class="my-2 h6">
-									{{ locals.cart_send_as_gift }}
-								</p>
-								<button class="btn round primary d-block">
-									<a href="/cart/view" class="no-border d-block">
-										{{ locals.continue }}
-									</a>
-								</button>
-							</div>
-						</div>
-					{% endif %}
-				</div>
-               
-				<div class="account-area">
-					{% if customer %}
-						<button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn">
-							<i class="fa-solid fa-user header-theme-icon-primary" style="position: relative; top: 1px"></i>
-							<span style="position: relative; bottom: 2px">{{ locals.hello }}&nbsp;{{ customer.name }}&nbsp;</span>
-						</button>
-					{% else %}
-						<button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn">
-							<i class="fa-solid fa-user header-theme-icon-primary" style="position: relative; top: 1px"></i>
-						</button>
-					{% endif %}
-				</div>
+				
+				<div style="position: relative">
+                            <a {% if header_settings.side_bar_settings.option %} href="/cart/view" {% else %} class="a-shopping-cart" {% endif %}  style="color:inherit;">
+                                <span class="header-theme-icon-primary" style="color:black;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.40002 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.51003C4.00003 22 3.24002 19.99 3.54002 17.53L4.44003 10.03C4.66003 8.09 5.00002 6.5 8.40002 6.5Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M20.41 17.03H8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                </span>
+                                <span class="cart-badge d-none"></span>
+                            </a>
+                            {% if store.gift_order_settings.is_gift_order_customer_motivation_enabled == '1' %}
+                            <div id="tooltip" class="d-none popover" role="tooltip">
+                                <div class="arrow"></div>
+                                <div class="gift-popover-body">
+                                <img src="{{ asset_url }}gift-popover-icon.svg" width="24" height="24" />
+                                <p class="h6-+ my-2">
+                                   {{ locals.cart_send_as_gift }}
+                                </p>
+                                <button class="btn round primary d-block">
+                                    <a href="/cart/view" class="no-border d-block">
+                                    {{ locals.continue }}
+                                    </a>
+                                </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+							<div class="account-area mobile-style">
+                            {% if customer %}
+                                <button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn" style="background-color: transparent;">
+                                    <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            {% else %}
+                                <button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn" style="background-color: transparent;">
+                                    <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                       
+                </div>
 			</div>
 		</div>
 	</div>
+	
 </div>
 <style>
 .search-header{
@@ -131,4 +141,38 @@
 .bd-highlight i {
 	cursor: pointer;
 }
+
 </style>
+
+
+<script>
+
+    
+    document.addEventListener('DOMContentLoaded', function () {
+    let cartBtn = document.querySelector(".a-shopping-cart");
+    let slideBar = document.querySelector('.salla-side-bar');
+
+    // Show sidebar when clicking the cart button
+    cartBtn.onclick = (event) => {
+        event.stopPropagation(); // Prevents the event from bubbling to `document`
+        slideBar.style.display = 'block';
+    };
+
+    // Hide sidebar when clicking anywhere outside of it
+    document.addEventListener("click", function (event) {
+        // Check if the click is outside both the sidebar and the cart button
+        if (!slideBar.contains(event.target) && event.target !== cartBtn) {
+			
+            slideBar.style.display = 'none';
+        }
+    });
+
+    // Prevent sidebar from hiding when clicking inside it
+    slideBar.onclick = (event) => {
+        event.stopPropagation();
+    };
+});
+
+
+
+</script>

@@ -389,10 +389,24 @@
       font-weight: 500 !important;
     }
 }
+swiper-container::part(bullet) {
+            background-color: #FBA1B7;;
+            opacity: .5;
+            width: 30px;
+            height: 8px;
+            border-radius: 20px;
+         }
+swiper-container::part(bullet-active) {
+           background-color: #CE5A67;
+           width: 30px;
+           height: 8px;
+           border-radius: 20px;
+ }
 </style>
  
 <script>
-
+{# this old code can not working and can not access on pagination  #}
+{# 
 document.addEventListener('DOMContentLoaded', function () {
 const swiper = new Swiper('.slider-product .swiper', {
 
@@ -425,9 +439,9 @@ let eles = document.querySelectorAll("swiper-container");
         const extraSheet = new CSSStyleSheet();
         extraSheet.replaceSync(".swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev {transform: scale(1);} .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {transform: scale(1);}.swiper-pagination-bullet {width: 12px; border-radius: 50% !important; height: 12px; opacity: .7; background: #FBA1B7;} .swiper-pagination-bullet-active { background: #CE5A67;height:  12px;width: 25px; border-radius: 8px !important; opacity: 1;}");
         shadowRoot.adoptedStyleSheets.push(extraSheet)
-    })
+    }) #}
 
-{# this old code can not working and can not access on pagination  #}
+
 {# document.addEventListener('DOMContentLoaded', function() {
   const swiperEl = document.querySelector(' swiper-container');
   
