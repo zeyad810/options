@@ -87,7 +87,7 @@
     "products_list_filter_price": "Price",
     "products_list_filter_price_from": "From",
     "products_list_filter_price_to": "To",
-
+    
     "products_list_result": "Total products",
 
     "products_list_result_products": "products",
@@ -101,7 +101,7 @@
     "product_description":"product description",
     "product_options": "product description",
     "product_product_readmore":"product_readmore",
-    "add_to_cart":"add to cart",
+    "add_to_cart":"Add to cart",
     "product_price":"price",
     "product_all_available_options":"All options available",
     "product_cart_quantity":"Quantity",

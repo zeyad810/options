@@ -382,7 +382,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
         try {
             // Fetch the data with zid store
             let data = await zid.store.cart.fetch();
-
+				console.log(data);
             function updateSidebar() {
                 // Check if there are no products 
                 if (data.data.cart.products.length === 0) {
@@ -412,7 +412,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 
                 let productsHTML = `
-                    <div style="display:flex; align-items:center; margin-inline:15px;">
+                    <div style="display:flex; align-items:center; padding-right: 10px; position: sticky; top: 0; background-color: #fff; box-shadow: -5px -12px 13px 9px #00000075;">
                         <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
                             viewBox="0 0 512 512"
                             style="cursor: pointer;">
@@ -421,8 +421,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                         </svg>
                         <h1 style="padding: 20px; ">  {{ locals.salla_shops }}  </h1>
                     </div>
-                    <hr>
-                    <a href="/cart/view" style="position:fixed; bottom:2%; width:-webkit-fill-available;border-radius:10px; color:#fff; background-color:#ce5a67; padding:10px 25px; text-align:center; font-size:19px; box-shadow: 0px 0px 4px 0px #363131; margin-inline:20px;"> الذهاب للسله </a>`;
+                    
+                    `;
                 
                 // Loop over products to create the product HTML
                 data.data.cart.products.forEach((product, index) => {
@@ -432,16 +432,20 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                     });
 
                     productsHTML += `
-                        <div class="product" style="padding:10px; display: flex; align-items: center; justify-content: space-between; margin: 0 10px 0 10px;">
-                            <div class="product-images">${imagesHTML}</div>
-                            <div class="text_cart" style="display:flex; flex-direction:column; align-items:center; max-width: 400px;">
-                                <p style="font-size:15px;color:#000;">${product.name}</p>
+                        <div class="product">
+                           <a href="${product.url}"> 
+						    <div class="product-images">${imagesHTML}</div>
+							</a>							
+							<div class="text_cart" style="display:flex; flex-direction:column; align-items:center;">
+							<a href="${product.url}">
+                                <p>${product.name}</p>
+							</a>	
                                 <div class="prices" style="display:flex; align-items:center; gap:15px;">
-                                    <p style="font-size:16px; text-decoration:line-through; color:#ce5a67;"> ${product.price_before_string ? "Price:" + product.price_before_string : ""}</p>
-                                    <p style="font-size:16px; color:#000;">Price: ${product.price_string}</p>
+                                    <p style="text-decoration:line-through; color:#ce5a67;"> ${product.price_before_string ? "Price:" + product.price_before_string : ""}</p>
+                                    <p>Price: ${product.price_string}</p>
                                 </div>
                             </div>
-                            <svg class="remove-btn" data-index="${index}" data-product-id="${product.id}" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
+                            <svg class="remove-btn" data-index="${index}" data-product-id="${product.id}" xmlns="http://www.w3.org/2000/svg" height="25" width="25"
                                 viewBox="0 0 512 512"
                                 style="cursor: pointer;">
                                 <path fill="#ce5a67"
@@ -451,6 +455,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                         <hr>
                     `;
                 });
+
+				productsHTML += `<a href="/cart/view" style="position:fixed; bottom:2%; width:-webkit-fill-available;border-radius:10px; color:#fff; background-color:#ce5a67; padding:10px 25px; text-align:center; font-size:19px; box-shadow: 0px 0px 4px 0px #363131; margin-inline:20px;">  {{locals.add_to_cart}} </a>`
 
                 sallaSideBar.innerHTML = productsHTML;
 
@@ -548,9 +554,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 <style>
 		.salla-side-bar {
-			position: relative;
-			height: 100%;
 			position: fixed;
+			height: 100%;
 			left: 0;
 			top: 0;
 			background-color: #fff;
@@ -561,6 +566,20 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			width: 0;
 			animation: move 0.4s ease forwards; 
 			display: none;
+			padding-bottom: 70px;
+		}
+		.salla-side-bar	.text_cart {
+			font-size:16px;
+			color:#000;
+			max-width: 350px;
+		}
+		.salla-side-bar	 .product{
+			padding:10px; 
+			display: flex; 
+			align-items: center; 
+			text-align: center; 
+			justify-content: space-between;
+		    margin: 0 10px;
 		}
 		.header-bottom {
 			display: none;
@@ -592,7 +611,12 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
         width: 100%; 
       }
     }
+	.salla-side-bar	.text_cart{
+			font-size: 13px;
+			max-width: 170px;
+		}
   }
+  
 		@media (max-width: 765px) {
 			.header-bottom {
 				display: flex;
@@ -608,8 +632,25 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				left: 0;
 				z-index: 33;
 			}
+		.salla-side-bar	.text_cart{
+			font-size: 13px;
+			max-width: 225px;
 		}
+		.salla-side-bar	 .product{
+		 margin: 0;
+		}
+		}
+@media (max-width:425px){
+    
+	.salla-side-bar	.text_cart{
+			font-size: 13px;
+			max-width: 170px;
+		}
+	.salla-side-bar .product{
+		padding: 10px 10px 10px 5px;
 
+	}
+  }
 </style>
 	<style>
 		.product-item .pr-img{
