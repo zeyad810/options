@@ -374,8 +374,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 
 
-
-				let cartBtn = document.querySelector(".a-shopping-cart");
+	//side cart 
+	let cartBtn = document.querySelector(".a-shopping-cart");
     let slideBar = document.querySelector('.salla-side-bar');
 
     // Show sidebar when clicking the cart button
@@ -416,7 +416,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
                           <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
                               viewBox="0 0 512 512"
                               style="cursor: pointer;">
-                              <path fill="#ce5a67"
+                              <path fill="var(--primary-color)"
                                   d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
                           </svg>
                           <h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
