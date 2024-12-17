@@ -6,12 +6,10 @@
 					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
 					<div class="over">
 						<div class="text">
-							<p>
-								{{item.square_title}}
-							</p>
+							<p style="color:{{item.address_color}}"> {{item.square_title}} </p>
 							{% if settings.button_title %}
 								<a href="{{item.square_url.url}}">
-									<button type="button" class="duration-300 ">
+									<button type="button" class="duration-300 "style="color:{{item.button_color}}">
 										{{settings.button_title}}
 									</button>
 								</a>
@@ -149,6 +147,20 @@
                             "en": "title"
                         }
                     },
+					"address_color":{
+						"type":"color",
+						"label":{
+							"ar":"لون العنوان",
+							"en":"text color"
+						}
+					},
+					"button_color":{
+						"type":"color",
+						"label":{
+							"ar":"لون نص الزر",
+							"en":"text color"
+						}
+					},
                     "square_url": {
                         "type": "category",
                         "label": {

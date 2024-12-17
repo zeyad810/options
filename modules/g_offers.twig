@@ -33,11 +33,11 @@
                         </div>
                     </div>
                     <div class="price_component">
-                        <p style='color: #AE445A;' class="price">
+                        <p class="price">
                         {{ product.sale_price ? product.sale_price : product.price}} {{ product.currency }}</p>
                         <del class="last_price">{{ product.sale_price ? product.price : '' }} {{ product.sale_price ? product.currency: '' }}</del>
                         {% if product.sale_price %}
-                            <span style="color:#f25f5f;">
+                            <span>
                             &nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
                             </span>
                         {% endif %}
@@ -45,21 +45,21 @@
                     <div class="flex justify-center sm:justify-start">
                         <div class="te">
                         <div class="countdown">
-                            <h3 style='color: #454545;'>{{locals.rest}} :</h3>
-                            <ul>
-                                <li style='color: #767676;' class="countdown__seconds js-seconds">
-                                <span style='color: #F39F5A; font-size: 18px; font-weight: 700'></span>
+                            <h3>{{locals.rest}} :</h3>
+                            <ul class="count-ul">
+                                <li class="countdown__seconds js-seconds">
+                                <span style='font-size: 18px; font-weight: 700'></span>
                                 {{locals.sec}}
                                 </li>:
-                                <li style='color: #767676;' class="countdown__minutes js-minutes">
-                                <span style='color: #F39F5A; font-size: 18px; font-weight: 700'></span>
+                                <li class="countdown__minutes js-minutes">
+                                <span style='font-size: 18px; font-weight: 700'></span>
                                 {{locals.min}}
                                 </li>:
-                                <li style='color: #767676;' class="countdown__hours js-hours">
-                                <span style='color: #F39F5A; font-size: 18px; font-weight: 700'></span>
+                                <li  class="countdown__hours js-hours">
+                                <span style='font-size: 18px; font-weight: 700'></span>
                                 {{locals.hour}}</li>:
-                                <li style='color: #767676;' class="countdown__days js-days">
-                                <span style='color: #F39F5A; font-size: 18px; font-weight: 700'></span>
+                                <li  class="countdown__days js-days">
+                                <span style='font-size: 18px; font-weight: 700'></span>
                                 {{locals.day}}
                                 </li>
                             </ul>
@@ -93,6 +93,22 @@
     </div>
 </section>
 <style>
+    .count-ul li{
+        color: var(--secondary-color-alt8);
+    }
+    .count-ul span{
+        color: var(--warning-color);
+        
+    }
+    .countdown h3{
+        color: var(--secondary-color-alt8);
+    }
+    .price_component p{
+        color: var(--primary-color);
+    }
+    .price_component span{
+        color: var(--primary-color);
+    }
 .dead_line .product_deadline{
     padding: 20px;
 }

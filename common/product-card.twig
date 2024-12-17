@@ -54,7 +54,7 @@
 
 							{% endif %}
 						</span>
-						<a style='display: blog; color: #000; font-size: 16px; font-weight: 400;' href="/products/{{ product.slug }}">{{ product.name }}</a>
+						<a  class="namepro"  style='display: blog; color: #000; font-size: 16px; font-weight: 400;' href="/products/{{ product.slug }}">{{ product.name }}</a>
 					</div>
 					{% if store.is_product_reviews_enabled %}
 						<div class="product-card-rating-wrapper" style="height: 18px">
@@ -121,6 +121,16 @@
 		border-radius: 10px;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 	} */
+
+	.namepro:hover{
+		color: var(--danger-color) !important;	
+	}
+	.icon-p:hover{
+		background-color: var(--danger-color) !important;
+	}
+	.fa-eye:hover{
+		color:white;
+	}
 
 	.addToCartBtn{
 		font-size: 16px;

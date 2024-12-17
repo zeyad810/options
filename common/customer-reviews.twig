@@ -10,9 +10,8 @@
                                                 {% include 'rating-stars.twig' with {'rating' : review.rating } %}
                                             </div>
                                     </div>
-                                    <div class="card-date user-review-date">
-                                        {{ datetimeFormat(review.created_at, 'd-m-Y g:i:s A', session.lang.code) }}
-                                    </div>
+                                    <div class="card-date user-review-date" data-time-ago-date="{{ review.created_at }}">    
+                                </div>
                             </div>
                             <div class="card-paragraph text-justify mt-2 user-review-text">{{ review.comment | raw }}</div>
                     </div>
