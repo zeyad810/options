@@ -17,21 +17,21 @@
         <!-- Countdown timer section -->
         <div class="counttimer">
           <div class="countDown">
-            <ul>
-              <li class="countdown__seconds js-seconds" style="color: white;">
-                <span style="color: white; font-size: 25px; font-weight: 700"></span>
+            <ul class="offer-ul">
+              <li class="countdown__seconds js-seconds">
+                <span style="font-size: 25px; font-weight: 700"></span>
                 {{ locals.sec }}
               </li>       
-              <li class="countdown__minutes js-minutes" style="color: white;">
-                <span style="color: white; font-size: 25px; font-weight: 700"></span>
+              <li class="countdown__minutes js-minutes">
+                <span style="font-size: 25px; font-weight: 700"></span>
                 {{ locals.min }}
               </li>
-              <li class="countdown__hours js-hours" style="color: white;">
-                <span style="color: white; font-size: 25px; font-weight: 700"></span>
+              <li class="countdown__hours js-hours">
+                <span style="font-size: 25px; font-weight: 700"></span>
                 {{ locals.hour }}
               </li>
-              <li class="countdown__days js-days" style="color: white;">
-                <span style="color: white; font-size: 25px; font-weight: 700"></span>
+              <li class="countdown__days js-days">
+                <span style="font-size: 25px; font-weight: 700"></span>
                 {{ locals.day }}
               </li>
             </ul>
@@ -66,7 +66,9 @@
 </section>
 
 <style>
-
+.countDown .offer-ul li, .countDown .offer-ul span {
+    color: var(--white-color);
+}
 .offer-deadline {
     width: 100%; 
 }
@@ -85,8 +87,8 @@
   position: relative;
     width: 50%; 
     height: 100%;
-    background-color: #CB657A;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -167,12 +169,12 @@
     right: 40px;
     bottom: -60px;
     color: --color;
-    background-color: --background-color;
+    background-color: ;
     transition:background-color 0.3s; 
 }
 .shopbtn:hover{
     background-color: #fbfbfb33;
-    color:white;
+    color:var(--white-color);
      cursor: pointer;
 }
 .pro_cont a{
@@ -198,11 +200,11 @@
 }
 
 .productdata button {
-  background-color:white;
+  background-color:var(--white-color);
   width:173px;
   height:65px;
   text:16px;
-  color:#CE5A67;
+  color:var(--primary-color);
   font-weight:bold;
   border-radius:10px;
 }

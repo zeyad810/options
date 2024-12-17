@@ -1,14 +1,14 @@
 {% if rating %}
-        {% set ratingRounded = ((rating * 2 )|round(0, 'ceil')) / 2 %}
-        <div class="d-inline-block product-card-rating" data-rating="{{ rating }}">
+    {% set ratingRounded = ((rating * 2)|round(0, 'ceil')) / 2 %}
+    <div class="d-inline-block product-card-rating" data-rating="{{ rating }}">
         {% for n in rangeN(1, 5) %}
             {% if (n <= ratingRounded) %}
-                <span class="icon-star1"></span>
+                <i class="fa fa-star" style="color: #edb900;"></i> 
             {% elseif (n <= ratingRounded + 0.5) %}
-                <span class="icon-half-star"></span>
+                <i class="fa fa-star-half-o" style="color: #edb900;"></i>
             {% else %}
-                <span class="icon-star1 deactive"></span>
+                <i class="fa fa-star-o" style="color: #ccc;"></i>
             {% endif %}
         {% endfor %}
-        </div>
+    </div>
 {% endif %}

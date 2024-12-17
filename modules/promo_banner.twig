@@ -25,7 +25,6 @@
 			}
 
 			.promo-title {
-				color: #333;
 				margin-bottom: 60px;
 				font-weight: bold;
 				font-size: 38px;
@@ -35,7 +34,6 @@
 			}
 
 			.shop-now-btn {
-				background-color: #ce5a67;
 				color: #fff;
 				padding: 13px 45px;
 				border-radius: 5px;
@@ -60,7 +58,7 @@
 			}
 
 			.product-card {
-				background-color: #fff;
+				background-color: var(--white-color);
 				border-radius: 8px;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 				width: 100%; /* Full width on small screens */
@@ -81,7 +79,8 @@
 			.product-title {
 				font-size: 18px;
 				margin-bottom: 10px;
-				color: #555;
+/* 				color: #555;
+ */				color: var(--secondary-color-alt0)
 			}
 
 			.product-price {
@@ -195,8 +194,8 @@
 	<body>
 		<section class="promo-banner" style="background-image: url('{{ settings.background_image }}');">
 			<div class="promo-content">
-				<h2 class="promo-title">{{ settings.section_title }}</h2>
-				<a href="{{ settings.button_link }}" class="shop-now-btn">{{ settings.button_text }}</a>
+				<h2 class="promo-title" style="color:{{settings.address_color}};">{{ settings.section_title }}</h2>
+				<a href="{{ settings.button_link }}" class="shop-now-btn" style="color:{{settings.button_color}};background-color:{{settings.button_color_bg}}">{{ settings.button_text }}</a>
 			</div>
 
 			<div class="products-grid">
@@ -249,6 +248,13 @@
         "en": "Background Image"
       }
     },
+	"address_color":{
+		"type":"color",
+		"label":{
+			"ar":"لون العنوان",
+			"en":"text color"
+		}
+	},
     "section_title": {
       "type": "text",
       "label": {
@@ -270,6 +276,20 @@
         "en": "Button Text"
       }
     },
+	"button_color":{
+		"type":"color",
+		"label":{
+			"ar":"لون النص",
+			"en":"text color"
+		}
+	},
+	"button_color_bg":{
+		"type":"color",
+		"label":{
+			"ar":"لون الخلفية",
+			"en":"bg color"
+		}
+	},
     "products": {
       "type": "products",
       "label": {
