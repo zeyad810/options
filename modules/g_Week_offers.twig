@@ -66,6 +66,7 @@
 </section>
 
 <style>
+    <style>
 .countDown .offer-ul li, .countDown .offer-ul span {
     color: var(--white-color);
 }
@@ -84,72 +85,65 @@
 }
 
 .productdata {
-  position: relative;
-    width: 50%; 
-    height: 100%;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: flex-start; 
-    padding: 0 20px; 
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: flex-start; 
+  gap: 10px;
+  width: 50%; 
+  height: 100%;
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
 .productdata.show-stars:before, 
 .productdata.show-stars:after {
     opacity: 1 !important; 
 }
 .productdata.show-stars:before {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background-size: 100%;
     top: 25px;
     left: 25px;
 }
 
 .productdata.show-stars:after {
-    width: 80px;
-    height: 80px;
+    width:50px;
+    height:50px;
     background-size: 100%;
     bottom: 25px;
     right: 25px;
 }
 .productdata .pro_cont{
-    position: absolute;
-    right: 22px;
+    margin-left: auto;
+    margin-right: 22px;
 }
 .productdata h2 {
     font-size: 33px;
-    font-weight:bold;
+    font-weight: bold;
     margin-bottom: 10px;
     padding-right: 40px; 
-    position: absolute;
-
+    margin-left: auto;
 }
 .productdata a{
       padding-right: 40px; 
-      margin-top:10px;
+      margin-top: 10px;
+      margin-left: auto;
 }
 
 .productdata p{
        font-size: 18px;
-       font-weight:medium;
-       margin-top:20px;
-       margin-bottom:20px;
-      padding-right: 40px; 
-      display:flex;
-      justify-content:start
-}
-.productdata .counttimer {
-      padding-right: 25px;
+       font-weight: medium;
+       margin-top: 20px;
+       margin-bottom: 20px;
+      justify-content: start;
 }
 .countDown ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    margin-top:20px;
+    margin-top: 20px;
 }
 .countDown li {
     display: flex;
@@ -165,20 +159,19 @@
     width: 50px; 
 }
 .shopbtn{
-    position: absolute;
-    right: 40px;
-    bottom: -60px;
+    margin-left: auto;
+    margin-right: 40px;
     color: --color;
     background-color: ;
-    transition:background-color 0.3s; 
+    transition: background-color 0.3s; 
 }
 .shopbtn:hover{
     background-color: #fbfbfb33;
-    color:var(--white-color);
+    color: var(--white-color);
      cursor: pointer;
 }
 .pro_cont a{
-    position: relative;
+    margin-left: auto;
 }
 .pro_cont a:hover .show-stars:before, 
 .pro_cont a:hover .show-stars:after {
@@ -187,10 +180,10 @@
 
 
 .productimage {
-    width: 50%; 
     display: flex;
     justify-content: center;
     align-items: center; 
+    width: 50%; 
 }
 
 .productimage img {
@@ -200,13 +193,14 @@
 }
 
 .productdata button {
-  background-color:var(--white-color);
-  width:173px;
-  height:65px;
-  text:16px;
-  color:var(--primary-color);
-  font-weight:bold;
-  border-radius:10px;
+  background-color: var(--white-color);
+  width: 173px;
+  height: 65px;
+  text: 16px;
+  color: var(--primary-color);
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 25px;
 }
 
 /*swiper pagenation style*/
@@ -235,51 +229,46 @@
         width: 100%;
         height: 100%;
         text-align: center;
-        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
     .productdata .pro_cont {
-        position: relative;
-        right: 0;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
     }
 
     .productdata h2 {
         font-size: 28px;
-        position: static;
+        margin-bottom: 40px;
         padding-right: 0;
-        margin-bottom: 10px;
-        position: absolute;
     }
 
     .productdata p {
         font-size: 16px;
         margin-top: 12px;
-        margin-bottom: 10px;
-        position: absolute;
-        top: 30px;
-        right: -40px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .productdata button {
         width: 140px;
         height: 50px;
         font-size: 14px;
-        position: static;
         margin-top: 30px;
-        text-align: center;
     }
     .productdata a {
-    padding-right: 0px; }
+        padding-right: 0px; 
+    }
     .countDown {
-        font-size: 14px; /* Adjust font size of the countdown */
+        font-size: 14px;
     }
 
     .countDown ul {
-        margin-top: 10px; /* Adjust margin */
+        margin-top: 10px;
     }
 
     .countDown li {
@@ -292,16 +281,11 @@
     .productimage {
         width: 100%;
         height: 100%;
-        display: flex;
         justify-content: center;
     }
-    .productdata .counttimer{
-      padding-right: 0px;
-      margin-top: 23%;
-    }
     .productimage img {
-        width: 100%; /* Full width */
-        height: 100%; /* Adjust height */
+        width: 100%;
+        height: 100%;
     }
     .counttimer .countDown ul li span {
       font-size: 14px !important;
@@ -310,59 +294,54 @@
 }
 @media (max-width: 767px) {
     .product-end {
-        flex-direction: column-reverse !important; /* Stack vertically */
-        height: auto; /* Adjust height */
+        flex-direction: column-reverse !important;
+        height: auto;
     }
 
     .productdata {
         width: 100%;
         height: 50%;
         text-align: center;
-        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
     .productdata .pro_cont {
-        position: relative;
-        right: 0;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
     }
 
     .productdata h2 {
         font-size: 24px;
-        position: static;
+        margin-bottom: 25px;
         padding-right: 0;
-        margin-bottom: 10px;
-        position: absolute;
     }
 
     .productdata p {
         font-size: 14px;
         margin-top: 10px;
-        margin-bottom: 10px;
-        position: absolute;
-        top: 30px;
-        right: -40px;
+        margin-bottom: 25px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .productdata button {
         width: 140px;
         height: 50px;
         font-size: 14px;
-        position: static;
         margin-top: 30px;
-        text-align: center;
     }
     .productdata a {
-    padding-right: 0px; }
+        padding-right: 0px; 
+    }
     .countDown {
-        font-size: 14px; /* Adjust font size of the countdown */
+        font-size: 14px;
     }
 
     .countDown ul {
-        margin-top: 10px; /* Adjust margin */
+        margin-top: 10px;
     }
 
     .countDown li {
@@ -375,16 +354,11 @@
     .productimage {
         width: 100%;
         height: 50%;
-        display: flex;
         justify-content: center;
     }
-    .productdata .counttimer{
-      padding-right: 0px;
-      margin-top: 23%;
-    }
     .productimage img {
-        width: 100%; /* Full width */
-        height: auto; /* Adjust height */
+        width: 100%;
+        height: auto;
     }
     .counttimer .countDown ul li span {
       font-size: 14px !important;
@@ -404,6 +378,8 @@ swiper-container::part(bullet-active) {
            height: 8px;
            border-radius: 20px;
  }
+</style>
+
 </style>
  
 <script>

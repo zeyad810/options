@@ -3,15 +3,24 @@
 			<swiper-container pagination="true">
 				{% for item in settings.slider %}
 					<swiper-slide>
-						<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
-							<div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
-								<h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]" style="color:{{item.address_color}}"> {{ item.slider_bannar_title }}</h1>
-								<p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]"style="color:{{item.descr_color}}" >{{ item.slider_bannar_des }}</p>
-								<a href='{{item.slider_bannar_url}}'>
-									<button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full show-stars  w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">{{item.slider_bannar_btn_text}}</button>
-								</a>
-							</div>
-						</div>
+                        <div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
+                            <div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
+                                <h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]" 
+                                    style="color: {{ item.address_color ? item.address_color : '#000000' }}">
+                                    {{ item.slider_bannar_title }}
+                                </h1>
+                                <p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]" 
+                                    style="color: {{ item.descr_color ? item.descr_color : '#666666' }}">
+                                    {{ item.slider_bannar_des }}
+                                </p>
+                                <a href='{{item.slider_bannar_url}}'>
+                                    <button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full show-stars w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">
+                                        {{item.slider_bannar_btn_text}}
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        
 					</swiper-slide>
 				{% endfor %}
 			</swiper-container>

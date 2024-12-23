@@ -294,7 +294,6 @@ function setCartIconTotal(total) {
 }
 
 function setCartBadge(badge) {
-    console.log(badge); 
     if(badge > 0){
         $('.cart-badge').removeClass('d-none');
         $('.cart-badge').html(badge);
