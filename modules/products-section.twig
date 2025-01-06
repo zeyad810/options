@@ -29,8 +29,8 @@
 }
 
 .slider_part swiper-slide{
-      min-width: 200px;
-      max-width: 270px;
+      min-width: 180px;
+      max-width: 240px;
       width: 100% !important;
 }
 
@@ -47,6 +47,19 @@
   left: 0;
 
 }
+
+	.slider_part swiper-slide .product-item .product-price{
+		margin-bottom: 10px;
+		width:fit-content;
+	}
+	.slider_part swiper-slide .product-item .dis-offer{
+    display: flex !important; 
+    align-items: center;
+
+  }
+	.slider_part swiper-slide .product-item .dis-offer span{
+    font-size: 11px;
+  }
 
 .slider_part::part(button-prev),
 .slider_part::part(button-next){
@@ -67,8 +80,8 @@
     height: 20px !important;
   }
   .slider_part swiper-slide{
-      min-width: 170px;
-      max-width: 200px;
+      min-width: 150px;
+      max-width: 180px;
       width: 100% !important;
 }
 }
@@ -85,8 +98,8 @@ const nextButton = document.querySelector('#button-next');
 
 // إعدادات Swiper
 const swiperParams = {
-  slidesPerView: 6,
-  spaceBetween: 50,
+  slidesPerView: 2,
+  spaceBetween: 20,
   speed: 300,
   loop: false,
   navigation: true,
@@ -98,8 +111,8 @@ const swiperParams = {
       spaceBetween: 20,
     },
     768: {
-      slidesPerView: 3,
-      spaceBetween: 30,
+      slidesPerView: 2,
+      spaceBetween: 20,
     },
     992: {
       slidesPerView: 4,

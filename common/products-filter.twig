@@ -22,7 +22,7 @@
 
             <div class="d-flex align-items-center gap-2">
                 <i class="fa-solid fa-table-cells border border-light rounded p-2 cursor-pointer vr_hr_active" data-display="vertical"></i>
-                <i class="fa-solid fa-bars border border-light rounded p-2 cursor-pointer" data-display="horizontal"></i>
+                <i class="fa-solid fa-bars border border-light rounded p-2 cursor-pointer d-none d-lg-inline" data-display="horizontal"></i>
             </div>
 
             <div class="dropdown">
@@ -125,6 +125,18 @@
       gap: 16px;
 
     }
+    .product_shap {
+         max-width: 500px !important;
+    }
+    .product_shap i{
+        border-radius: 8px;
+    }
+    #products-list-filter {
+        height: 35px;
+        width: 100%;
+        max-width: 160px !important;
+        
+    }
     @media (max-width: 768px) {
         .products-filter {
             flex-direction: column;
@@ -135,6 +147,13 @@
         .product_shap {
             width: 100%;
         }
+      #products-list-filter {
+        max-width: 140px !important;
+
+    }
+    .form-products-filter{
+        padding: 10px;
+    }
     }
     @media (min-width: 769px) {
         .products-filter {
@@ -143,9 +162,6 @@
         .filter-buttons-container {
             /* width: auto; */
             width: 100%;
-        }
-        .product_shap {
-            width: 400px;
         }
     }
     @media (max-width:767px) {

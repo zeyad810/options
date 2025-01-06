@@ -70,9 +70,9 @@
 								<div class="product-price theme-title-primary">
 									<span>{{ product.formatted_sale_price }}</span>
 								</div>
-								<div style="color: #494949">
+								<div style="color: #494949" class="dis-offer">
 									<span class="product-prev-price">{{ product.formatted_price }}</span>
-									<span style="color:#f25f5f;">
+									<span style="color:#f25f5f; between-offer">
 										&nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
 									</span>
 								</div>
@@ -107,12 +107,15 @@
 	</div>
 {% endif %}
 <style>
-
+  .horizontal .product-item {
+	height: 300px;
+  }
   .product-item	.box-1-1:before{
 		content: "";
 		display: block;
 		height: 200px;
 		width: 260px;
+		padding-top: 0;
 	}
 	.product-item .content {
         margin-block: 0;
@@ -140,13 +143,23 @@
 		border-radius: 50% !important;
 	}
 	.product-item .section-product-price{
-		margin: 0;
+		margin: 0 ;
+		gap:0 !important; 
+		justify-content: space-between;
+		height: 26px;
 	}
 	.product-item .product-price{
+		width: 60%;
+	}
+
+	.product-all-content .product-crd-spec {
 		margin-bottom: 10px;
 	}
 	.mob a{
         width: 100%;
+	}
+	.between-offer{
+		font-size: 12px;
 	}
 	/* إعدادات المكونات */
 	/* .product-item {

@@ -163,11 +163,12 @@
 				<div>
 					<div class="row">
 
-						<div class="slide-product col-lg-6">
+  <div class="slide-product col-lg-6">
     <!-- Carousel -->
     <!-- Main Swiper -->
     <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
         <div class="swiper-wrapper">
+	
             {% for key, image in product.selected_product.images %}
                 <div class="swiper-slide">
                     <img src="{{ image.image.full_size }}" class="carousel-img" alt="{{ product.name }}" loading="lazy">
@@ -866,14 +867,14 @@ max-width:fit-content;
 
 
 					<div class="slider-inspire container overflow-hidden description-paragrah">
-						<div class="swiper-containerr">
-							<div class="con swiper-wrapper justify-center" >
+						<swiper-container navigation="true"  class="slider_part_single" >
+							{# <div class="con swiper-wrapper justify-center" > #}
 								{% for key,rProduct in product.related_products %}
-									<div class="swiper-slide prod-col slide-p">
+									<swiper-slide class="swiper-slidexx prod-col slide-p">
 										{% include 'product-card.twig' with {'product' : rProduct, 'index': key, 'pr_settings':settings} %}
-									</div>
+									</swiper-slide>
 								{% endfor %}
-							</div>
+							{# </div> #}
 
 							<div class="swiper-button-next"></div>
 							<div class="swiper-button-prev"></div>
@@ -881,6 +882,67 @@ max-width:fit-content;
 					</div>
 				</section>
 				<style>
+
+                        
+						.slider_part_single swiper-slide{
+							min-width: 180px;
+							max-width: 240px;
+							width: 100% !important;
+						}
+
+						.slider_part_single::part(container){
+							padding-top: 100px;
+						}
+						.slider_part_single::part(button-prev){
+						top: 25px;
+							left: 50px;
+							right: unset;
+						}
+						.slider_part_single::part(button-next){
+						top: 25px;
+						left: 0;
+
+						}
+
+							.slider_part_single swiper-slide .product-item .product-price{
+								margin-bottom: 10px;
+								width:fit-content;
+							}
+							.slider_part_single swiper-slide .product-item .dis-offer{
+							display: flex !important; 
+							align-items: center;
+
+						}
+							.slider_part_single swiper-slide .product-item .dis-offer span{
+							font-size: 11px;
+						}
+
+						.slider_part_single::part(button-prev),
+						.slider_part_single::part(button-next){
+						color: var(--primary-color) !important;
+							background-color: white  !important;
+							padding: 10px !important;
+							width: 25px !important;
+							height: 25px !important;
+							border: 1px solid gainsboro !important;
+							border-radius: 8px !important;
+						}
+
+						@media (max-width: 768px) {
+						.slider_part_single::part(button-prev),
+						.slider_part_single::part(button-next){
+							padding: 8px !important;
+							width: 20px !important;
+							height: 20px !important;
+						}
+						.slider_part_single swiper-slide{
+							min-width: 150px;
+							max-width: 180px;
+							width: 100% !important;
+						}
+						}
+
+
 					.slide-p{
 						max-width: 30%;
 						margin-left: 15px;
@@ -940,6 +1002,54 @@ max-width:fit-content;
 					}
 				</style>
 				<script>
+				    const swiperEl = document.querySelector('.slider_part_single');
+					const prevButton = document.querySelector('#button-prev');
+					const nextButton = document.querySelector('#button-next');
+
+					// إعدادات Swiper
+					const swiperParams = {
+					slidesPerView: 5,
+					spaceBetween: 40,
+					speed: 300,
+					loop: false,
+					navigation: true,
+					cssMode: true,
+					watchOverflow: true,
+						breakpoints: {
+						320: {
+						slidesPerView: 2,
+						spaceBetween: 20,
+						},
+						768: {
+						slidesPerView: 2,
+						spaceBetween: 20,
+						},
+						992: {
+						slidesPerView: 5,
+						spaceBetween: 40,
+						},
+					},
+					};
+
+					// دمج الإعدادات مع swiper-container
+					Object.assign(swiperEl, swiperParams);
+
+					// تهيئة Swiper
+					swiperEl.initialize();
+
+					// تحقق عند التهيئة
+					swiperEl.addEventListener('ready', () => {
+					console.log('Swiper is ready!');
+					});
+
+					// أحداث إضافية للأزرار (اختياري)
+					prevButton.addEventListener('click', () => {
+					swiperEl.swiper.slidePrev();
+					});
+
+					nextButton.addEventListener('click', () => {
+					swiperEl.swiper.slideNext();
+					});
 					document.addEventListener("DOMContentLoaded", function () {
 					    showRelatedProducts();
 					});

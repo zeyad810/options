@@ -4,17 +4,17 @@
 				{% for item in settings.slider %}
 					<swiper-slide>
                         <div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
-                            <div style='text-align:{{ item.slider_text_place }};' class="container relative txt">
-                                <h1 class="animate__animated animate__fadeInUp custom-dlay-heading text-black max-w-full  md:w-full text-[35px] md:text-[48px] font-semibold md:font-bold leading-[50px] md:leading-[70px]" 
+                            <div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt">
+                                <h1 class="animate__animated animate__fadeInUp custom-dlay-heading " 
                                     style="color: {{ item.address_color ? item.address_color : '#000000' }}">
                                     {{ item.slider_bannar_title }}
                                 </h1>
-                                <p class="animate__animated animate__fadeInUp custom-dlay-p hidden md:block text-black font-medium text-[20px] leading-[70px]" 
+                                <p class="animate__animated animate__fadeInUp custom-dlay-p d-none d-md-block" 
                                     style="color: {{ item.descr_color ? item.descr_color : '#666666' }}">
                                     {{ item.slider_bannar_des }}
                                 </p>
                                 <a href='{{item.slider_bannar_url}}'>
-                                    <button class="animate__animated animate__fadeInUp custom-dlay-a max-w-full show-stars w-[200px] mt-[32px] h-[56px] text-[16px] font-bold rounded-lg duration-300 hover:!opacity-80 bg-[var(--f-color)] text-white">
+                                    <button class="animate__animated animate__fadeInUp custom-dlay-a" style="color:{{item.slider_bannar_btn_text_color}}">
                                         {{item.slider_bannar_btn_text}}
                                     </button>
                                 </a>
@@ -28,14 +28,41 @@
 
 		</section>
         <style>
-			@media(max-width: 768px) {
+        .g_fixed_bannar{
+            height: 80vh
+        }
+            .g_fixed_bannar h1 {
+                        font-size: 36px;
+                        line-height: 1.5;
+                        width: 70%;
+                        font-weight: bold;
+            }
+          .g_fixed_bannar p{
+                margin-block: 15px;
+                font-size: 20px;
+          }
+       
+        .g_fixed_bannar a button{
+                max-width: 175px;
+                height: 50px;
+                font-size: 18px;
+        }
+        
+
+                @media(max-width: 768px) {
                 {% for item in settings.slider %}
                  .baner-{{loop.index}} {
                     background-image: url('{{ item.slider_bannar_bg_mobile }}') !important;
                     background-size: cover;
                     background-position: center;
+                    height:50vh
                 }
                 {% endfor %}
+                .g_fixed_bannar h1 {
+                  margin-bottom: 38px;
+                  font-size: 28px;
+                  font-weight: 600;
+                }
             }
 
 			{# .swiper-container {
@@ -74,6 +101,11 @@
 				.baner_swiber.swiper-container {
 					height: auto;
 				}
+
+                .animate__animated{
+                    font-size:28px;
+                    width: 80%;
+                }
 			}
 
 
@@ -188,6 +220,13 @@
                     "label": {
                         "ar": "عنوان الزر",
                         "en": "button title"
+                    }
+                },
+                "slider_bannar_btn_text_color":{
+                    "type":"color",
+                    "label":{
+                        "ar":"لون الزر ",
+                        "en":"text color"
                     }
                 },
                 "slider_text_place":{

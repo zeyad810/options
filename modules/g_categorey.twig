@@ -1,141 +1,166 @@
+<!-- Swiper CSS -->
+<link
+rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Swiper JS -->
+ <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+{# styling #}
+	<style>
+.swiper-button-next,
+.swiper-button-prev
+{
+	top: -66px !important;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover
+{
+	border: 1px solid #E7ADB3 !important;
+}
+.swiper-button-next
+{
+	left: 70px !important;
+}
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after
+{
+	font-size: 19px !important;
+	color: #C0C0C0;
+}
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after
+{
+	font-size: 19px !important;
+	color: #C0C0C0;
+}
+.swiper-button-next:focus::after,
+.swiper-button-prev:focus::after
+{
+	color: #CE5A67 !important;
+}
+@media(max-width:762px)
+{
+	.content_btns
+	{
+		left: 10%;
+	}
+}
+@media(max-width:425px)
+{
+	.content_btns
+	{
+		left: 5%;
+	}
+}
+</style>
 
-    {# styling #}
-    <style>
-        .swiper-button-next,
-        .swiper-button-prev{
-            top: -66px !important;
-        }
-        .swiper-button-next:hover,
-        .swiper-button-prev:hover{
-            border: 1px solid #E7ADB3 !important;
-        }
-        .swiper-button-next{
-            left: 70px !important;
-        }
-        .swiper-button-next:after,
-        .swiper-rtl .swiper-button-prev:after {
-            font-size:19px !important;
-            color: #C0C0C0;
-        }
-        .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
-            font-size: 19px !important;
-            color: #C0C0C0;
-        }
-        .swiper-button-next:focus::after,
-        .swiper-button-prev:focus::after {
-            color: #CE5A67 !important;
-        }
-        @media(max-width:762px){
-            .content_btns{
-                left: 10%;
-            }
-        }
-        @media(max-width:425px){
-            .content_btns{
-                left: 5%;
-            }
-        }
-    </style>
+	<style>
 
-    <style>
-   
-    .q-category::-webkit-scrollbar {
-       display: none;
-      }
-    .q-category {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-      }
-    .q-category .content_btns{
-        margin-top:55px !important;
-      }
-    .q-category .content_btns  div{
-        padding: 20.49px 21px 19px !important;
-        font-size: 20px;
-        font-family: 'FontAwesome';
-    }
-    .q-category .image-parent {
-        overflow: hidden;
-    }
-    .q-category .image-parent img{
-        transition: all 0.3s; 
-    }
-    .q-category .image-parent img:hover {
-       transform: rotate(25deg) scale(1.4);
-    }
-    .is-grid{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 20px;
-        padding: 20px;
-        place-items:center;
-    }
-    @media (max-width:768px) {
-        .is-grid{
-            grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
-        }
-        .q-category   .content_btns{
-            left: -8px;
-            margin-top: 85px !important;
-        }
-        .q-category  .content_btns div{
-            padding: 10px 20px 9px !important;
-            font-size: 15px;
-        }
-    }
+.q-category::-webkit-scrollbar
+{
+	display: none;
+}
+.q-category
+{
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.q-category .content_btns
+{
+	margin-top: 55px !important;
+}
+.q-category .content_btns .swiper-button-next,
+.q-category .content_btns .swiper-button-prev
+{
+	padding: 22px !important;
+	border-radius: 8px !important;
+}
+.q-category .content_btns div
+{
+	padding: 20.49px 21px 19px !important;
+	font-size: 20px;
+	font-family: 'FontAwesome';
+}
+.q-category .image-parent
+{
+	overflow: hidden;
+}
+.q-category .image-parent img
+{
+	transition: all 0.3s;
+}
+.q-category .image-parent img:hover
+{
+	transform: rotate(25deg) scale(1.4);
+}
+.is-grid
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 20px;
+	padding: 20px;
+	place-items: center;
+}
+@media(max-width:768px)
+{
+	.is-grid
+	{
+		grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+	}
+	.q-category .content_btns
+	{
+		left: -25px;
+		margin-top: 85px !important;
+
+	}
+	.q-category .content_btns div
+	{
+		padding: 10px 20px 9px !important;
+		font-size: 15px;
+	}
+}
+</style>
 
 
-    </style>
+	<section id="g_cat_{{ sectionId }}" class="g_cat" style=" padding:70px 0px;" dir="ltr"> <div style=" margin-bottom: 50px;">
+		{% include 'title.twig' with { 'component_title': settings.section_title } %}
+	</div>
+	<div
+		class="container overflow-x-hidden q-category">
+		<!-- أزرار التنقل -->
+		<div class="content_btns absolute {% if settings.slider_toggle == " false" %} d-none {% endif %} {% if settings.hide_arrows == " false" %} d-none {% endif %}" style="margin-top:20px;">
+			<div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+				<i class="fa-solid fa-chevron-left" style="color:var(--primary-color) !important;"></i>
+			</div>
+			<div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
+				<i class="fa-solid fa-chevron-right" style="color:var(--primary-color) !important;"></i>
+			</div>
+		</div>
+		<div class=" {% if settings.slider_toggle == " true" %}swiper-container category-slider slider{% endif %} h-auto">
+			<div class=" {% if settings.slider_toggle == " true" %}  swiper-wrapper h-auto {% else %} is-grid {% endif %}" style="margin-top: 35px;">
+				{% for item in settings.categorys %}
+					<div class="{% if settings.slider_toggle == "true" %} swiper-slide category flex flex-col items-center products-item {% endif %}" style="display:flex; flex-direction: column; align-items: center;">
+						<div class="overflow-hidden rounded image-parent ">
+							<a href="{{ item.cat_url }}">
+								<img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
+							</a>
+						</div>
+						<a href="{{ item.cat_url }}">
+							<h3 class="mt-3 text-center font-medium text-dark text-xl">
+								{{ item.category_name }}
+							</h3>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+</section>
 
 
-
-
-    <section id="g_cat_{{ sectionId }}" class="g_cat" style=" padding:70px 0px;" dir="ltr">
-            <div  style=" margin-bottom: 50px;">
-                {% include 'title.twig' with { 'component_title': settings.section_title } %}
-            </div>
-            <div class="container overflow-x-hidden q-category">
-                <!-- أزرار التنقل -->
-                <div class="content_btns absolute {% if settings.slider_toggle == "false" %} d-none {% endif %} {% if settings.hide_arrows == "false" %} d-none {% endif %}" style="margin-top:20px;">
-                    <div class="swiper-button-prev transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-                    &lt;
-                    </div>
-                    <div class="swiper-button-next transition" style="background-color:#fff; border:1px solid #C0C0C0; border-radius:4px; padding: 20.49px 21px;">
-                    &gt;
-                    </div>
-                </div>
-                <div class=" {% if settings.slider_toggle == "true" %}swiper-container category-slider slider{% endif %} h-auto">
-                    <div class=" {% if settings.slider_toggle == "true" %}  swiper-wrapper h-auto {% else %} is-grid {% endif %}" style="margin-top: 35px;">
-                        {% for item in settings.categorys %}
-                            <div class="{% if settings.slider_toggle == "true" %} swiper-slide  category flex flex-col items-center products-item {% endif %}" 
-                                 style="display:flex; flex-direction: column; align-items: center;">
-                                <div class="overflow-hidden rounded image-parent " >
-                                    <a href="{{ item.cat_url }}">
-                                        <img loading="lazy" class="img-fluid" src="{{ item.category_image }}" alt="img-1">
-                                    </a>
-                                </div>
-                                <a href="{{ item.cat_url }}">
-                                    <h3 class="mt-3 text-center font-medium text-dark text-xl">
-                                        {{ item.category_name }}
-                                    </h3>
-                                </a>    
-                            </div>
-                        {% endfor %}
-                    </div>
-
-                </div>
-            </div>
-    </section>
-    
-
-<script>
+ <script>
 document.addEventListener('DOMContentLoaded', function () {
     var swiperElement = document.querySelector('.swiper-container.slider');
 
@@ -167,9 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
-
-
-
 
 
 {% schema %}

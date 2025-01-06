@@ -23,7 +23,7 @@
 	<div class="container mb-5">
 		<div class="cart-view">
 			<div class="row cart-products-with-totals {% if cart.products_count <= 0 %}d-none{% endif %}">
-				<div class="col-12 col-lg-8">
+				<div class="col-12 col-lg-8">	
 					<div class="section-cart-products">
 						<h1 class="section-title ">{{ locals.cart_products_title }}</h1>
 						<div class="header-wrapper">
@@ -185,54 +185,66 @@
 			</div>
 		</div>
 	</div>
-<style>
-	.send-coupon:active{
-		border: 1px solid var(--primary-color);
+	<style>
+		.send-coupon:active
+		{
+			border: 1px solid var(--primary-color);
 
-	}
-	.send-coupon:focus{
-		border: 1px solid var(--primary-color);
+		}
+		.send-coupon:focus
+		{
+			border: 1px solid var(--primary-color);
 
-	}
-	.send-coupon{
-		border: 1px solid #cccccc;
-	}
-	.coupon-form{
-		border: 1px solid #cccccc;
-		border-radius: 3px;
-		padding: 10px;
-	}
-	.form-group h4{
-		padding-bottom: 15px;
-	}
-	.cart-empty .butontext {
-		padding-top: 10px;
+		}
+		.send-coupon
+		{
+			border: 1px solid #cccccc;
+		}
+		.coupon-form
+		{
+			border: 1px solid #cccccc;
+			border-radius: 3px;
+			padding: 10px;
+		}
+		.form-group h4
+		{
+			padding-bottom: 15px;
+		}
+		.cart-empty .butontext
+		{
+			padding-top: 10px;
 
-	}
- .cart-product-row{
-	 align-items: center !important;
-	 border-radius:8px;
-	 justify-content: space-between;
- }
- .header-wrapper{
-	background-color: transparent !important;
- }
- .discount-progress{
-	font-weight:bold;
- }
-  .cart-product-col-img{
-		width: 100px !important;
-	}
-	.cart-product-col-details{
-		max-width: 250px !important;
-	}
-	.cart-product-delete{
-		 margin-right: 10px;
-	}
-</style>
+		}
+		.cart-product-row
+		{
+			align-items: center !important;
+			border-radius: 8px;
+			justify-content: space-between;
+		}
+		.header-wrapper
+		{
+			background-color: transparent !important;
+		}
+		.discount-progress
+		{
+			font-weight: bold;
+		}
+		.cart-product-col-img
+		{
+			width: 100px !important;
+		}
+		.cart-product-col-details
+		{
+			max-width: 250px !important;
+		}
+		.cart-product-delete
+		{
+			margin-right: 10px;
+		}
+	</style>
 
-{# {% if cart.products_count > 0 %} #}
-	<script>
+	{# {% if cart.products_count > 0 %} #}
+ <script>
 		const cart_counter_hidden = ()=>{
 			let cart_empty = document.querySelector(".cart-empty");
 			let cart_badge_counter=document.querySelector(".cart-badge");
@@ -243,140 +255,141 @@
 			}
 		}
 	</script>
-{# {% endif %} #}
+	{# {% endif %} #}
 
 {% endblock %}
 
 {% block footer_scripts %}
-		<script type="text/javascript" src="{{ asset_url ~ 'toastr.min.js' }}"></script>
+	 <script type="text/javascript" src="{{ asset_url ~ 'toastr.min.js' }}"></script>
 
-		{{ cart_view_scripts|raw }}
+	{{ cart_view_scripts|raw }}
 
-		<script>
-
+	 <script>
+	
+			
+	
+				$(document).ready(function () {
+		addDeleteProgressImage()
+		});
+	
+		function addDeleteProgressImage() {
+		$('.cart-product-delete a .prefix', document).addClass('d-none');
+		$('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src=" {{ asset_url }}spinner.gif" width="15px" height="15px"/>');
+		}
+	
+		$(document).on('click', '.cart-product-delete a', function (event) {
+		$('.icon-delete', event.currentTarget).addClass('d-none');
+		$('.prefix', event.currentTarget).removeClass('d-none');
+		});
+	
+		function sendCoupon() {
+		if (!$('.send-coupon-progress').hasClass('d-none')) 
+		return;
+	
+	
+		$('.send-coupon-progress').removeClass('d-none');
+		zid.store.cart.redeemCoupon($('.send-coupon').val()).then(function (response) {
+		if (response.status === 'success') {
+		toastr.success('{{ locals.sent_successfully }}', null)
+		window.location.reload();
+		} else {
+		toastr.error(response.data.message, '{{ locals.sorry }}')
+		}
+		$('.send-coupon-progress').addClass('d-none');
+		}).catch(function (err) {
+		$('.send-coupon-progress').addClass('d-none');
+		})
+		}
+	
+		function deleteCoupon() {
+		if (!$('.delete-coupon-progress').hasClass('d-none')) 
+		return;
+	
+	
+		$('.delete-coupon-progress').removeClass('d-none');
+		zid.store.cart.removeCoupon().then(function (response) {
+		if (response.status === 'success') {
+		toastr.success('{{ locals.sent_successfully }}', null)
+		window.location.reload();
+		} else {
+		toastr.error(response.data.message, '{{ locals.sorry }}')
+		}
+		$('.delete-coupon-progress').addClass('d-none');
+		})
+		}
+	
+	
+		function cartProductsHtmlChanged(html, cart) {
+		if (cart.products_count <= 0) {
+		$('.cart-products-with-totals').addClass('d-none');
+		$('.cart-empty').removeClass('d-none');
+		cart_counter_hidden()
+		return;
+		} else {
+		$('.cart-products-with-totals').removeClass('d-none');
+		$('.cart-empty').addClass('d-none');
+		}
+	
+	
+		$('.template_for_cart_products_list').html(html);
+	
+		if (cart && cart.totals) {
+		var strCartTotlas = '';
+		for (var i = 0; i < cart.totals.length; i++) {
+		var cartTotal = cart.totals[i];
+	
+		var totalStyle = '';
+	
+		if (cartTotal.code === 'total') {
+		totalStyle = 'font-weight: bold; color: var( --primary-color)';
+		}
+	
+		var vat_included = '';
+		if (cartTotal.code === 'total') {
+	
+		var is_cart_total_vat_included = {{ store.is_cart_total_vat_included ? 'true' : 'false' }};
+		var local_sys_lbl_cart_includes_vat = '{{ locals.sys_lbl_cart_includes_vat }}';
+	
+		if (is_cart_total_vat_included) {
+		vat_included = '&nbsp;<small>' + local_sys_lbl_cart_includes_vat + '</small>';
+		}
+	
+		}
+	
+	
+		strCartTotlas += '<div class="cart-product-row-wrapper cart-totals-row-wrapper">' + '<div class="flex-grow-1">' + cartTotal.title + vat_included + '</div>' + '                                <div class="flex-shrink-0" style="width: 30%; ' + totalStyle + '">' + cartTotal.value_string + '</div>' + '                            </div>'
+		}
+	
+		$('.cart-totals-div').html(strCartTotlas);
+		}
+	
+		if (cart.fee_shipping_discount_rules) {
+		$('.free-shipping-rule-section').removeClass('d-none')
+		$('.free-shipping-rule-message').html(cart.fee_shipping_discount_rules.conditions_subtotal.status.message)
+		$('.free-shipping-rule-progress').css('width', `${
+		cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min
+		}%`)
+		if (cart.fee_shipping_discount_rules.conditions_subtotal.status.code === 'applied') {
+		$('.free-shipping-rule-done').removeClass('d-none')
+		$('.free-shipping-rule-read-more').addClass('d-none')
+		$('.free-shipping-rule-progress').html('{{ locals.coupon_discount_free_shipping }}')
+		} else {
+		$('.free-shipping-rule-done').addClass('d-none')
+		$('.free-shipping-rule-read-more').removeClass('d-none')
+		$('.free-shipping-rule-progress').html (`${
+		cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min
+		}%`)
+		}
+		} else {
+		$('.free-shipping-rule-section').addClass('d-none')
+		}
+	
+	
+		setCartTotalAndBadge(cart);
+		addDeleteProgressImage();
 		
-
-			$(document).ready(function () {
-	addDeleteProgressImage()
-	});
-
-	function addDeleteProgressImage() {
-	$('.cart-product-delete a .prefix', document).addClass('d-none');
-	$('.cart-product-delete a .prefix', document).html('<img class="send-coupon-progress" src=" {{ asset_url }}spinner.gif" width="15px" height="15px"/>');
-	}
-
-	$(document).on('click', '.cart-product-delete a', function (event) {
-	$('.icon-delete', event.currentTarget).addClass('d-none');
-	$('.prefix', event.currentTarget).removeClass('d-none');
-	});
-
-	function sendCoupon() {
-	if (!$('.send-coupon-progress').hasClass('d-none')) 
-	return;
-
-
-	$('.send-coupon-progress').removeClass('d-none');
-	zid.store.cart.redeemCoupon($('.send-coupon').val()).then(function (response) {
-	if (response.status === 'success') {
-	toastr.success('{{ locals.sent_successfully }}', null)
-	window.location.reload();
-	} else {
-	toastr.error(response.data.message, '{{ locals.sorry }}')
-	}
-	$('.send-coupon-progress').addClass('d-none');
-	}).catch(function (err) {
-	$('.send-coupon-progress').addClass('d-none');
-	})
-	}
-
-	function deleteCoupon() {
-	if (!$('.delete-coupon-progress').hasClass('d-none')) 
-	return;
-
-
-	$('.delete-coupon-progress').removeClass('d-none');
-	zid.store.cart.removeCoupon().then(function (response) {
-	if (response.status === 'success') {
-	toastr.success('{{ locals.sent_successfully }}', null)
-	window.location.reload();
-	} else {
-	toastr.error(response.data.message, '{{ locals.sorry }}')
-	}
-	$('.delete-coupon-progress').addClass('d-none');
-	})
-	}
-
-
-	function cartProductsHtmlChanged(html, cart) {
-	if (cart.products_count <= 0) {
-	$('.cart-products-with-totals').addClass('d-none');
-	$('.cart-empty').removeClass('d-none');
-	cart_counter_hidden()
-	return;
-	} else {
-	$('.cart-products-with-totals').removeClass('d-none');
-	$('.cart-empty').addClass('d-none');
-	}
-
-
-	$('.template_for_cart_products_list').html(html);
-
-	if (cart && cart.totals) {
-	var strCartTotlas = '';
-	for (var i = 0; i < cart.totals.length; i++) {
-	var cartTotal = cart.totals[i];
-
-	var totalStyle = '';
-
-	if (cartTotal.code === 'total') {
-	totalStyle = 'font-weight: bold; color: var( --primary-color)';
-	}
-
-	var vat_included = '';
-	if (cartTotal.code === 'total') {
-
-	var is_cart_total_vat_included = {{ store.is_cart_total_vat_included ? 'true' : 'false' }};
-	var local_sys_lbl_cart_includes_vat = '{{ locals.sys_lbl_cart_includes_vat }}';
-
-	if (is_cart_total_vat_included) {
-	vat_included = '&nbsp;<small>' + local_sys_lbl_cart_includes_vat + '</small>';
-	}
-
-	}
-
-
-	strCartTotlas += '<div class="cart-product-row-wrapper cart-totals-row-wrapper">' + '                                <div class="flex-grow-1">' + cartTotal.title + vat_included + '</div>' + '                                <div class="flex-shrink-0" style="width: 30%; ' + totalStyle + '">' + cartTotal.value_string + '</div>' + '                            </div>'
-	}
-
-	$('.cart-totals-div').html(strCartTotlas);
-	}
-
-	if (cart.fee_shipping_discount_rules) {
-	$('.free-shipping-rule-section').removeClass('d-none')
-	$('.free-shipping-rule-message').html(cart.fee_shipping_discount_rules.conditions_subtotal.status.message)
-	$('.free-shipping-rule-progress').css('width', `${
-	cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min
-	}%`)
-	if (cart.fee_shipping_discount_rules.conditions_subtotal.status.code === 'applied') {
-	$('.free-shipping-rule-done').removeClass('d-none')
-	$('.free-shipping-rule-read-more').addClass('d-none')
-	$('.free-shipping-rule-progress').html('{{ locals.coupon_discount_free_shipping }}')
-	} else {
-	$('.free-shipping-rule-done').addClass('d-none')
-	$('.free-shipping-rule-read-more').removeClass('d-none')
-	$('.free-shipping-rule-progress').html (`${
-	cart.fee_shipping_discount_rules.conditions_subtotal.products_subtotal_percentage_from_min
-	}%`)
-	}
-	} else {
-	$('.free-shipping-rule-section').addClass('d-none')
-	}
-
-
-	setCartTotalAndBadge(cart);
-	addDeleteProgressImage();
-	}
-		</script>
+		}
+			</script>
 {% endblock %}
 
 
