@@ -70,9 +70,9 @@
 								<div class="product-price theme-title-primary">
 									<span>{{ product.formatted_sale_price }}</span>
 								</div>
-								<div style="color: #494949" class="dis-offer">
+								<div style="color: #494949">
 									<span class="product-prev-price">{{ product.formatted_price }}</span>
-									<span style="color:#f25f5f; between-offer">
+									<span style="color:#f25f5f" class="between_offer">
 										&nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
 									</span>
 								</div>
@@ -107,6 +107,9 @@
 	</div>
 {% endif %}
 <style>
+ .between_offer{
+		font-size: 13px !important;
+	}
   .horizontal .product-item {
 	height: 300px;
   }
@@ -144,23 +147,23 @@
 	}
 	.product-item .section-product-price{
 		margin: 0 ;
-		gap:0 !important; 
-		justify-content: space-between;
+		gap:10 !important; 
 		height: 26px;
 	}
 	.product-item .product-price{
-		width: 60%;
+		width: fit-content;
 	}
-
+  .product-prev-price{
+	font-size: 14px !important;
+  }
 	.product-all-content .product-crd-spec {
 		margin-bottom: 10px;
 	}
 	.mob a{
         width: 100%;
 	}
-	.between-offer{
-		font-size: 12px;
-	}
+
+	
 	/* إعدادات المكونات */
 	/* .product-item {
 		padding: 15px;
@@ -278,11 +281,17 @@
 		color: white;
 		width: 100%;
 	}
-	{# @media (max-width: 768px) {
-		.product-item{
-			width: 200px;
-		}
-	} #}
+	@media (max-width: 768px) {
+	.between_offer{
+		font-size: 11px !important;
+	}
+	.section-product-price{
+		justify-content: space-between;
+	}
+	 .product-prev-price{
+	font-size: 12px !important;
+  }
+	}
 </style>
 <script>document.addEventListener('DOMContentLoaded', function() {
 					const popupContainer = document.querySelector('div.popup-product-details');
