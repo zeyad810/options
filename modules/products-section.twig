@@ -28,14 +28,10 @@
   margin-top: 20px;
 }
 
-.slider_part swiper-slide{
-      min-width: 180px;
-      max-width: 240px;
-      width: 100% !important;
-}
+
 
 .slider_part::part(container){
-    padding-top: 100px;
+    padding-top: 75px;
 }
 .slider_part::part(button-prev){
    top: 25px;
@@ -79,11 +75,7 @@
     width: 20px !important;
     height: 20px !important;
   }
-  .slider_part swiper-slide{
-      min-width: 150px;
-      max-width: 180px;
-      width: 100% !important;
-}
+
 }
 
 
@@ -99,8 +91,8 @@ const nextButton = document.querySelector('#button-next');
 // إعدادات Swiper
 const swiperParams = {
   slidesPerView: 2,
-  spaceBetween: 20,
-  speed: 300,
+  spaceBetween: 10,
+  speed: 600,
   loop: false,
   navigation: true,
   cssMode: true,
@@ -108,7 +100,7 @@ const swiperParams = {
     breakpoints: {
     320: {
       slidesPerView: 2,
-      spaceBetween: 20,
+      spaceBetween: 10,
     },
     768: {
       slidesPerView: 2,
@@ -116,7 +108,7 @@ const swiperParams = {
     },
     992: {
       slidesPerView: 4,
-      spaceBetween: 40,
+      spaceBetween: 30,
     },
   },
 };
