@@ -72,9 +72,9 @@
 								</div>
 								<div style="color: #494949">
 									<span class="product-prev-price">{{ product.formatted_price }}</span>
-									<span style="color:#f25f5f" class="between_offer">
+									{# <span style="color:#f25f5f" class="between_offer">
 										&nbsp;  &nbsp;{{ locals.product_discount }}&nbsp;{{ product.discount_percentage }}%
-									</span>
+									</span> #}
 								</div>
 							</div>
 						{% else %}
@@ -162,7 +162,7 @@
 	.mob a{
         width: 100%;
 	}
-  .product-all-content a , .product-all-content .btn-product-card-select-variant{
+   .product-card-add-to-cart ,.product-all-content .btn-product-card-select-variant{
 	height: 45px !important;
     font-size:14px;
   }
