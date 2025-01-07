@@ -32,7 +32,7 @@
                 <ul class="flex-wrap main-nav d-flex flex-grow-1 menu-header-theme-text-for-primary-bg">
                     
                     {% for menu in main_navigation_menu.items %}
-                        {% if menu.url %}
+                        {% if menu.url    %}
                             <li class="top-level-link " >
                                 <a href="{{ menu.url }}"
                                         {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.name }}</span></a>
@@ -139,17 +139,7 @@
 .bd-highlight i {
 	cursor: pointer;
 }
-
+ ul.main-nav > li:last-child{
+     display: inline-block !important;
+ }
 </style>
-
-
-<script>
-
-    
-    document.addEventListener('DOMContentLoaded', function () {
-    
-});
-
-
-
-</script>
