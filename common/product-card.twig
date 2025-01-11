@@ -28,7 +28,7 @@
 					{% elseif ( product.has_options or product.has_fields ) %}
 						<a class="btn btn-primary btn-product-card-select-variant addToCartBtn" href="/products/{{ product.slug }}">{{ locals.add_to_cart }}</a>
 					{% else %}
-						<a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart">
+						<a href="javascript:void(0)" class="btn btn-primary product-card-add-to-cart" onclick="productCartAddToCart(this,'{{ product.id }}')">
 							<img style="display: inline" class="add-to-cart-progress d-none" src="{{ asset_url }}spinner.gif" width="20px" height="20px"/>
 							{{ locals.add_to_cart }}
 						</a>
@@ -137,7 +137,9 @@
 		margin-black:10px ;
 	}
 	.product-item .add-to-cart-progress {
-		width: 20px !important;
+		width: 20px !important;      
+		height: unset;
+        margin-left: 8px;
 	}
 	/* kareem edit */
 	.icon-p {

@@ -155,14 +155,17 @@ function productCartAddToCart(elm, product_id) {
         return;
 
     $('.add-to-cart-progress', elm).removeClass('d-none');
-
+    setTimeout(() => {
+        $('.add-to-cart-progress', elm).addClass('d-none');
+    }, 2000);
+    
     addToCart(product_id, 1 , function () {
         $('.add-to-cart-progress', elm).addClass('d-none');
 
         if(elm){
             var getParentDiv = $(elm).parent().parent();
 
-            var image = $('#product-card-img-'+product_id, getParentDiv);
+            var image = $('#product-card-img-'+ product_id, getParentDiv);
             var cart = $('.a-shopping-cart');
 
             addToCartAnimation(cart, image);
