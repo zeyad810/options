@@ -1,5 +1,5 @@
 <div class="account-lang-currency upper-bar header-theme-bg-primary header-theme-text-for-primary-bg">
-    <div class="container d-flex justify-content-between">
+    <div class="d-flex justify-content-between p-0">
         {% if not ('hide_country' in header_settings.header_options) or not ('hide_language' in header_settings.header_options)%}
         <div class="language-currency d-flex justify-content-between" data-toggle="modal" data-target="#langCurrecyModal">
 
@@ -34,9 +34,10 @@
 <style>
 .language-currency {
     border: none;
+    padding: 0;
 }
-.language-currency  i{
+{# .language-currency  i{
     margin-bottom: 6px;
     margin-left: 7px;
-}
+} #}
 </style>

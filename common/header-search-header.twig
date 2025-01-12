@@ -1,9 +1,9 @@
 <div class="search-header header-theme-bg-primary">
 	<div class="container ">
 		<div style='margin: 20px 0px' class="d-flex align-items-center search-header-bar">
-			<div class="d-flex align-items-center bd-highlight header-logo"  style="width: fit-content;">
+			<div class="d-flex align-items-center bd-highlight header-logo" style="width: fit-content;">
 
-                <a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
+				<a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
 					<i class="fa-sharp fa-solid fa-bars"></i>
 				</a>
 				{% if template != 'home' %}
@@ -26,120 +26,152 @@
 					{% endif %}
 				</a>
 			</div>
-			
-			 <nav style="width: 100%;{# overflow-y: scroll; #}" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
 
-                <ul class="flex-wrap main-nav d-flex flex-grow-1 menu-header-theme-text-for-primary-bg">
-                    
-                    {% for menu in main_navigation_menu.items %}
-                        {% if menu.url    %}
-                            <li class="top-level-link " >
-                                <a href="{{ menu.url }}"
-                                        {% if menu.items | length > 0 %} class="mega-menu" {% endif %} ><span>{{ menu.name }}</span></a>
-                                {% if menu.items | length > 0 %}
-                                    <div class="sub-menu-block">
-                                        <div class="row">
-                                            {% for menu_sub in menu.items %}
-                                                <div class="col-md-4 col-lg-4 col-sm-4">
-                                                    {% if menu_sub.items | length > 0 %}
-                                                        <h2 class="sub-menu-head">
-                                                            <a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.name }}</a>
-                                                        </h2>
-                                                        <ul class="sub-menu-lists">
-                                                            {% for menu_sub_sub in menu_sub.items %}
-                                                                <li><a href="{{ menu_sub_sub.url }}">{{ menu_sub_sub.name }}</a></li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    {% else %}
-                                                        <h2 class="sub-menu-head"><a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.name }}</a></h2>
-                                                    {% endif %}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </li>
-                        {% endif %}
-                    {% endfor %}
+			<nav style="width: 100%;{# overflow-y: scroll; #}" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
+
+				<ul class="flex-wrap main-nav d-flex flex-grow-1 menu-header-theme-text-for-primary-bg">
+
+					{% for menu in main_navigation_menu.items %}
+						{% if menu.url    %}
+							<li class="top-level-link ">
+								<a href="{{ menu.url }}" {% if menu.items | length > 0 %} class="mega-menu" {% endif %}>
+									<span>{{ menu.name }}</span>
+								</a>
+								{% if menu.items | length > 0 %}
+									<div class="sub-menu-block">
+										<div class="row">
+											{% for menu_sub in menu.items %}
+												<div class="col-md-4 col-lg-4 col-sm-4">
+													{% if menu_sub.items | length > 0 %}
+														<h2 class="sub-menu-head">
+															<a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.name }}</a>
+														</h2>
+														<ul class="sub-menu-lists">
+															{% for menu_sub_sub in menu_sub.items %}
+																<li>
+																	<a href="{{ menu_sub_sub.url }}">{{ menu_sub_sub.name }}</a>
+																</li>
+															{% endfor %}
+														</ul>
+													{% else %}
+														<h2 class="sub-menu-head">
+															<a style="font-size: 1.16rem; color: inherit" href="{{ menu_sub.url }}">{{ menu_sub.name }}</a>
+														</h2>
+													{% endif %}
+												</div>
+											{% endfor %}
+										</div>
+									</div>
+								{% endif %}
+							</li>
+						{% endif %}
+					{% endfor %}
 
 
-                </ul>
-            </nav>
-			<div class="bd-highlight d-flex align-items-center justify-content-end header-cart">
-				 {% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
+				</ul>
+			</nav>
+			<div class="bd-highlight d-flex align-items-center justify-content-end header-cart icons-header">
+				{% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
-					<div class="d-block sm-search-icon">
+					<div class="d-block sm-search-icon m-0">
 						<i class="fa-solid fa-magnifying-glass"></i>
 					</div>
 				{% endif %}
-				
+
 				<div style="position: relative">
-                    <a {% if header_settings.side_bar_check %}  {% if template == "cart" %} href="/cart/view" {% else %} class="a-shopping-cart" {% endif %} {% else %} href="/cart/view" {% endif %}  style="color:inherit;">
-                        <span class="header-theme-icon-primary" style="color:black;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.40002 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.51003C4.00003 22 3.24002 19.99 3.54002 17.53L4.44003 10.03C4.66003 8.09 5.00002 6.5 8.40002 6.5Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M20.41 17.03H8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                </span>
-                                <span class="cart-badge d-none"></span>
-                            </a>
-                            {% if store.gift_order_settings.is_gift_order_customer_motivation_enabled == '1' %}
-                            <div id="tooltip" class="d-none popover" role="tooltip">
-                                <div class="arrow"></div>
-                                <div class="gift-popover-body">
-                                <img src="{{ asset_url }}gift-popover-icon.svg" width="24" height="24" />
-                                <p class="h6-+ my-2">
-                                   {{ locals.cart_send_as_gift }}
-                                </p>
-                                <button class="btn round primary d-block">
-                                    <a href="/cart/view" class="no-border d-block">
-                                    {{ locals.continue }}
-                                    </a>
-                                </button>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-							<div class="account-area mobile-style">
-                            {% if customer %}
-                                <button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn" style="background-color: transparent;">
-                                    <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            {% else %}
-                                <button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn" style="background-color: transparent;">
-                                    <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            {% endif %}
-                        </div>
-                        
-                    </div>
-                       
-                </div>
+					<a {% if header_settings.side_bar_check %} {% if template == "cart" %} href="/cart/view" {% else %} class="a-shopping-cart" {% endif %} {% else %} href="/cart/view" {% endif %} style="color:inherit;">
+						<span class="header-theme-icon-primary" style="color:black;">
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M8.40002 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.51003C4.00003 22 3.24002 19.99 3.54002 17.53L4.44003 10.03C4.66003 8.09 5.00002 6.5 8.40002 6.5Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M20.41 17.03H8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</span>
+						<span class="cart-badge d-none"></span>
+					</a>
+					{% if store.gift_order_settings.is_gift_order_customer_motivation_enabled == '1' %}
+						<div id="tooltip" class="d-none popover" role="tooltip">
+							<div class="arrow"></div>
+							<div class="gift-popover-body">
+								<img src="{{ asset_url }}gift-popover-icon.svg" width="24" height="24"/>
+								<p class="h6-+ my-2">
+									{{ locals.cart_send_as_gift }}
+								</p>
+								<button class="btn round primary d-block">
+									<a href="/cart/view" class="no-border d-block">
+										{{ locals.continue }}
+									</a>
+								</button>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+				<div class="account-area mobile-style">
+					{% if customer %}
+						<button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn" style="background-color: transparent;">
+							<svg width="26" height="26" viewbox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</button>
+					{% else %}
+						<button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn" style="background-color: transparent;">
+							<svg width="26" height="26" viewbox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</button>
+					{% endif %}
+				</div>
+
 			</div>
+
 		</div>
+	</div>
+</div>
 
 <style>
-.search-header{
-	padding: 0px;
-}
+	.search-header
+	{
+		padding: 0;
+	}
 
-.search-header .top-level-link a{
-  padding: 10px 13px !important; 
-}
-.search-header .account-area button{
-	padding-top:1px ;
-}
-.bd-highlight i {
-	cursor: pointer;
-}
- ul.main-nav > li:last-child{
-     display: inline-block !important;
- }
+	.search-header .top-level-link a
+	{
+		padding: 10px 13px !important;
+	}
+	.search-header .account-area button
+	{
+		padding-top: 1px;
+	}
+	.icons-header
+	{
+		align-items: center !important;
+		justify-content: space-between !important;
+		height: fit-content;
+		width: fit-content;
+		gap: 14px;
+	}
+	.icons-header .sm-search-icon
+	{
+		height: fit-content;
+		padding-top: 4px;
+	}
+	.bd-highlight i
+	{
+		cursor: pointer;
+	}
+	ul.main-nav > li:last-child
+	{
+		display: inline-block !important;
+	}
+	.account-btn
+	{
+		padding: 0;
+		margin-bottom: 2px;
+	}
+	.account-lang-currency
+	{
+		padding: 0;
+	}
 </style>
