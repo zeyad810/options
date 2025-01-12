@@ -607,9 +607,7 @@
 
 .description-text-clear *{
     max-width: 100% !important;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: auto;
+
 }
 
 .bundle-offer-details-products {
