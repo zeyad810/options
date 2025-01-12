@@ -168,7 +168,7 @@ function productCartAddToCart(elm, product_id) {
             var image = $('#product-card-img-'+ product_id, getParentDiv);
             var cart = $('.a-shopping-cart');
 
-            addToCartAnimation(cart, image);
+            // addToCartAnimation(cart, image);
         }
 
     })
