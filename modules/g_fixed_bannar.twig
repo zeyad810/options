@@ -1,119 +1,136 @@
 <section section-id="{{ sectionId }}">
 
-			<swiper-container pagination="true">
-				{% for item in settings.slider %}
-					<swiper-slide>
-                        <div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
-                            <div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt text-banner">
-                                <h1 class="animate__animated animate__fadeInUp custom-dlay-heading " 
-                                    style="color: {{ item.address_color ? item.address_color : '#000000' }}">
-                                    {{ item.slider_bannar_title }}
-                                </h1>
-                                <p class="animate__animated animate__fadeInUp custom-dlay-p d-none d-md-block" 
-                                    style="color: {{ item.descr_color ? item.descr_color : '#666666' }}">
-                                    {{ item.slider_bannar_des }}
-                                </p>
-                                <a href='{{item.slider_bannar_url}}'>
-                                    <button class="animate__animated animate__fadeInUp custom-dlay-a" style="color:{{item.slider_bannar_btn_text_color}}">
-                                        {{item.slider_bannar_btn_text}}
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                        
-					</swiper-slide>
-				{% endfor %}
-			</swiper-container>
-			<!-- Add Pagination -->
+	<swiper-container pagination="true">
+		{% for item in settings.slider %}
+			<swiper-slide>
+				<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
+					<div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt text-banner">
+						<h1 class="animate__animated animate__fadeInUp custom-dlay-heading " style="color: {{ item.address_color ? item.address_color : '#000000' }}">
+							{{ item.slider_bannar_title }}
+						</h1>
+						<p class="animate__animated animate__fadeInUp custom-dlay-p d-none d-md-block" style="color: {{ item.descr_color ? item.descr_color : '#666666' }}">
+							{{ item.slider_bannar_des }}
+						</p>
+						<a href='{{item.slider_bannar_url}}'>
+							<button class="animate__animated animate__fadeInUp custom-dlay-a" style="color:{{item.slider_bannar_btn_text_color}}">
+								{{item.slider_bannar_btn_text}}
+							</button>
+						</a>
+					</div>
+				</div>
 
-		</section>
-        <style>
-        .g_fixed_bannar{
-            height: 90vh
-        }
+			</swiper-slide>
+		{% endfor %}
+	</swiper-container>
+	<!-- Add Pagination -->
 
-            .g_fixed_bannar h1 {
-                        font-size: 36px;
-                        line-height: 1.5;
-                        font-weight: bold;
-            }
-          .g_fixed_bannar p{
-                margin-block: 15px;
-                font-size: 20px;
-          }
-        .text-banner{
-            width: 70%;
-        }
-        .g_fixed_bannar a button{
-                max-width: 175px;
-                height: 50px;
-                font-size: 18px;
-        }
-        
+</section>
+<style>
+	.g_fixed_bannar
+	{
+		height: 90vh
+	}
 
-                @media(max-width: 768px) {
-                {% for item in settings.slider %}
-                 .baner-{{loop.index}} {
-                    background-image: url('{{ item.slider_bannar_bg_mobile }}') !important;
-                    background-size: cover;
-                    background-position: center;
-                    height:50vh
-                }
-                {% endfor %}
-                .g_fixed_bannar h1 {
-                  margin-bottom: 38px;
-                  font-size: 28px;
-                  font-weight: 600;
-                }
-            }
+	.g_fixed_bannar h1
+	{
+		font-size: 36px;
+		line-height: 1.5;
+		font-weight: bold;
+	}
+	.g_fixed_bannar p
+	{
+		margin-block: 15px;
+		font-size: 20px;
+	}
+	.text-banner
+	{
+		width: 70%;
+	}
+	.g_fixed_bannar a button
+	{
+		max-width: 175px;
+		height: 50px;
+		font-size: 18px;
+	}
 
-			{# .swiper-container {
-				width: 100vw;
-				height: 100vh;
-			} #}
 
-			.baner_swiber.swiper-container {
-				width: 100vw;
-				height: 100vh;
+	@media(max-width: 768px)
+	{
+		{% for item in settings.slider %}
+			.baner-{{loop.index}}{
+				background-image: url('{{ item.slider_bannar_bg_mobile }}') !important;
+				background-size: cover;
+				background-position: center;
+				height: 60vh;
 			}
+		{% endfor %}
+		.g_fixed_bannar h1
+		{
+			margin-bottom: 38px;
+			font-size: 28px;
+			font-weight: 600;
+		}
+		.text-banner
+		{
+			width: 90%;
+		}
+	}
+
+	{
+		# .swiper-container
+		{
+			width: 100vw;
+			height: 100vh;
+		} #
+	}
+
+	.baner_swiber.swiper-container
+	{
+		width: 100vw;
+		height: 100vh;
+	}
 
 
-			.baner_swiber .swiper-pagination {
-				bottom: 20px;
-				display: flex;
-				justify-content: center;
-			}
+	.baner_swiber .swiper-pagination
+	{
+		bottom: 20px;
+		display: flex;
+		justify-content: center;
+	}
 
 
-			.baner_swiber .swiper-pagination-bullet {
-				width: 15px;
-				height: 15px;
-				margin: 0 5px;
-				border-radius: 10px;
-				background: #d68d9c;
-				opacity: 0.8;
-				transition: all 0.3s ease;
-			}
-           .g_fixed_bannar a:hover .show-stars:before, 
-           .g_fixed_bannar a:hover .show-stars:after {
-               opacity: 1 !important; 
-           }
+	.baner_swiber .swiper-pagination-bullet
+	{
+		width: 15px;
+		height: 15px;
+		margin: 0 5px;
+		border-radius: 10px;
+		background: #d68d9c;
+		opacity: 0.8;
+		transition: all 0.3s ease;
+	}
+	.g_fixed_bannar a:hover .show-stars:before,
+	.g_fixed_bannar a:hover .show-stars:after
+	{
+		opacity: 1 !important;
+	}
 
-			@media(max-width: 700px) {
-				.baner_swiber.swiper-container {
-					height: auto;
-				}
+	@media(max-width: 700px)
+	{
+		.baner_swiber.swiper-container
+		{
+			height: auto;
+		}
 
-                .animate__animated{
-                    font-size:28px;
-                    width: 80%;
-                }
-			}
-
-
-		</style>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-    <script>
+		.animate__animated
+		{
+			font-size: 28px;
+			width: 80%;
+		}
+	}
+</style>
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+ <script>
       document.addEventListener('DOMContentLoaded', function () {
         let swiperFixBaner = new Swiper('.baner_swiber', {
         slidesPerView: 1,

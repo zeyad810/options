@@ -1,0 +1,168 @@
+<section section-id="{{ sectionId }}" class="{{sectionId}} g-products {{ settings.is_slider ? 'product-slider' : 'product-grid' }} ">
+	<div class="container overflow-hidden position-relative">
+		<div class="head">
+			
+            <div class="image-title" style="margin-block:40px">
+                 <h1 class="title-heade">{{settings.head_title}}</h1>
+            </div>
+		</div>
+        {% if  settings.is_slider %}
+           <div class="arrows position-relative">
+                <div id="next" class="swiper-button-next"> <i class="fa-solid fa-chevron-right"></i></div>
+                <div id="prev" class="swiper-button-prev" ><i class="fa-solid fa-chevron-left"></i></div>
+          </div>
+        {% endif %}
+		{% if   settings.is_slider %}
+			<div class="swiper-container ">
+		{% endif %}
+			<div class="{{settings.is_slider ? 'swiper-wrapper' : 'all-product-container'}} ">
+				{% for product in settings.products.products %}
+					<div class="one-product {{settings.is_slider ? 'swiper-slide' : '' }} ">
+						{% include 'product-card.twig' with {'product' : product, 'index': key} %}
+					</div>
+				{% endfor %}
+			</div>
+			{% if settings.is_more %}
+			</div>
+                <div class="mt-5 text-center category-products-display-more-section">
+                    <a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.text_url }}</a>
+                </div>
+	    	{% endif %}
+                
+	</div>
+</section>
+<style>
+	.all-product-container
+	{
+		display: grid;
+		grid-template-columns: repeat(4, minmax(150px, 1fr));
+		gap: 20px;
+	}
+	@media(max-width: 768px)
+	{
+		.all-product-container
+		{
+			grid-template-columns: repeat(3, minmax(100px, 1fr));
+		}
+	}
+	@media(max-width: 480px)
+	{
+		.all-product-container
+		{
+			grid-template-columns: repeat(2, minmax(100px, 1fr));
+		}
+	}
+  #next i, #prev i {
+    font-size:26px;
+  }
+  #next i::before, #prev i::before {
+    color: var(--primary-color) !important;
+    background-color: white !important;
+    padding: 10px !important;
+    width: 35px !important;
+    height: 35px !important;
+    border: 1px solid #a5a5a5 !important;
+    border-radius: 8px !important;
+}
+
+.product-slider .arrows  {
+    position: absolute !important;
+    left: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    width: fit-content;
+}
+
+@media (max-width:768px){
+    .product-slider .arrows{
+    left: 10px;
+}}
+
+</style>
+{% if settings.is_slider %}
+	 <script>
+		    document.addEventListener('DOMContentLoaded', function () {
+		      let productSwiper = new Swiper('.product-slider .swiper-container', {
+		        slidesPerView: 2, 
+		        spaceBetween: 10,
+		        loop: false,
+		         navigation: {
+                    nextEl: '.product-slider .swiper-button-prev',
+                    prevEl: '.product-slider .swiper-button-next',
+                },
+		        watchOverflow: true, 
+		        breakpoints: {
+		          576: {
+		            slidesPerView: 3, 
+                    spaceBetween: 20,
+		          },
+		          768: {
+		            slidesPerView: 3, 
+                    spaceBetween: 20,
+		          },
+		          992: {
+		            slidesPerView: 4,
+                    spaceBetween: 30,
+		          }
+		        },
+		      });
+		    });
+		    </script>
+{% endif %}
+
+{% schema %}
+{
+    "name": {
+        "ar": " قائمة المنتجات (محسن) ",
+        "en": "glamour products "
+        },
+        "icon": "fal fa-user",
+        "display": true,
+        "settings":{
+          	"head_title": {
+                    "type": "text",
+                    "label": {
+                        "ar": "عنوان القسم",
+                        "en": "Title Section"
+                    }
+			},
+             "is_slider": {
+              "type": "checkbox",
+              "label": {
+                "ar": "تشغيل الشريط",
+                "en": "Show slider"
+              }
+           },
+           	"url": {
+				"type": "url",
+				"label": {
+					"ar": "رابط المزيد",
+					"en": "Link More"
+				}
+			},
+            "text_url": {
+                "type": "text",
+                "label": { 
+                    "ar": "نص رابط المزيد",
+                    "en": "Link More"
+                }
+            },
+             "is_more": {
+              "type": "checkbox",
+              "label": {
+                "ar": "اظهار زر المزيد",
+                "en": "Show btn slider"
+              }
+           },
+            "products": {
+                "type": "products",
+                "label": {
+                "ar": "اختر قائمة المنتجات ",
+                "en": "Select category products"
+                }
+            }
+      }
+   }
+{% endschema %}
