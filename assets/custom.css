@@ -452,7 +452,6 @@
 
 @media (max-width: 768px) {
     .header-cart {
-        flex-grow: 1;
         width: 50%;
     }
     nav.d-flex.flex-grow-1{
