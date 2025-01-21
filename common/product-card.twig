@@ -48,11 +48,11 @@
 							{% if product.is_infinite or product.quantity > 0 %}
 
 								{% if (product.has_options or product.has_fields) %}
-									<small style="font-size: 1.1rem">{{ locals.product_has_options }}</small>
+									<small style="font-size: 1rem">{{ locals.product_has_options }}</small>
 								{% endif %}
 
 								{% if not product.is_taxable %}
-									<small style="font-size: 1.1rem">{{ locals.product_is_not_taxable }}</small>
+									<small style="font-size: 1rem">{{ locals.product_is_not_taxable }}</small>
 								{% endif %}
 
 							{% endif %}
@@ -164,7 +164,11 @@
   .product-prev-price{
 	font-size: 14px !important;
   }
-	.product-all-content .product-crd-spec {
+	.product-item .product-all-content {
+		padding:  10px;
+		margin-bottom: 0px;
+	}
+	.product-item .product-all-content .product-crd-spec {
 		margin-bottom: 10px;
 	}
 	.mob a{

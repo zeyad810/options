@@ -1,4 +1,3 @@
-
 <div class="search-header header-theme-bg-primary">
 	<div class="container ">
 		<div style='margin: 20px 0px' class="d-flex align-items-center justify-content-between search-header-bar">
@@ -75,14 +74,17 @@
 				{% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
 					<div class="d-block sm-search-icon m-0">
-						<i class="fa-solid fa-magnifying-glass"></i>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+							<path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M22 22L20 20" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
 					</div>
 				{% endif %}
 
 				<div style="position: relative">
 					<a {% if header_settings.side_bar_check %} {% if template == "cart" %} href="/cart/view" {% else %} class="a-shopping-cart" {% endif %} {% else %} href="/cart/view" {% endif %} style="color:inherit;">
 						<span class="header-theme-icon-primary" style="color:black;">
-							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<svg width="26" height="26" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M8.40002 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.51003C4.00003 22 3.24002 19.99 3.54002 17.53L4.44003 10.03C4.66003 8.09 5.00002 6.5 8.40002 6.5Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								<path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								<path d="M20.41 17.03H8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -144,6 +146,11 @@
 	{
 		padding-top: 1px;
 	}
+	@media  (max-width: 768px) {
+	  .search-header .image-logo{
+	   	padding: 5px;
+	  }	
+	}
 	.icons-header
 	{
 		align-items: center !important;
@@ -155,7 +162,6 @@
 	.icons-header .sm-search-icon
 	{
 		height: fit-content;
-		padding-top: 4px;
 	}
 	.bd-highlight i
 	{
@@ -174,7 +180,11 @@
 	{
 		padding: 0;
 	}
-	.rtl .cart-badge{
-		left: 18px;
+	.rtl .cart-badge
+	{
+		left: 14px;
+	}
+	.icon-menu-top .fa-bars{
+	    font-size: 22px;
 	}
 </style>

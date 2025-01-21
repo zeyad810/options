@@ -1,20 +1,24 @@
 <section section-id="{{ sectionId }}" class="{{sectionId}} g-products {{ settings.is_slider ? 'product-slider' : 'product-grid' }} ">
 	<div class="container overflow-hidden position-relative">
 		<div class="head">
-			
-            <div class="image-title" style="margin-block:40px">
-                 <h1 class="title-heade">{{settings.head_title}}</h1>
-            </div>
+
+			<div class="image-title" style="margin-block:40px">
+				<h1 class="title-heade">{{settings.head_title}}</h1>
+			</div>
 		</div>
-        {% if  settings.is_slider %}
-           <div class="arrows position-relative">
-                <div id="next" class="swiper-button-next"> <i class="fa-solid fa-chevron-right"></i></div>
-                <div id="prev" class="swiper-button-prev" ><i class="fa-solid fa-chevron-left"></i></div>
-          </div>
-        {% endif %}
+		{% if  settings.is_slider %}
+			<div class="arrows position-relative">
+				<div id="next" class="swiper-button-next">
+					<i class="fa-solid fa-chevron-right"></i>
+				</div>
+				<div id="prev" class="swiper-button-prev">
+					<i class="fa-solid fa-chevron-left"></i>
+				</div>
+			</div>
+		{% endif %}
 		{% if   settings.is_slider %}
 			<div class="swiper-container ">
-		{% endif %}
+			{% endif %}
 			<div class="{{settings.is_slider ? 'swiper-wrapper' : 'all-product-container'}} ">
 				{% for product in settings.products.products %}
 					<div class="one-product {{settings.is_slider ? 'swiper-slide' : '' }} ">
@@ -24,11 +28,11 @@
 			</div>
 			{% if settings.is_more %}
 			</div>
-                <div class="mt-5 text-center category-products-display-more-section">
-                    <a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.text_url }}</a>
-                </div>
-	    	{% endif %}
-                
+			<div class="mt-5 text-center category-products-display-more-section">
+				<a href="/categories/{{ settings.category.id }}/{{ settings.category.slug }}" class="more-button btn btn-outline-primary theme-text-primary theme-border-primary">{{ settings.text_url }}</a>
+			</div>
+		{% endif %}
+
 	</div>
 </section>
 <style>
@@ -52,64 +56,83 @@
 			grid-template-columns: repeat(2, minmax(100px, 1fr));
 		}
 	}
-  #next i, #prev i {
-    font-size:26px;
-  }
-  #next i::before, #prev i::before {
-    color: var(--primary-color) !important;
-    background-color: white !important;
-    padding: 10px !important;
-    width: 35px !important;
-    height: 35px !important;
-    border: 1px solid #a5a5a5 !important;
-    border-radius: 8px !important;
-}
+	#next i,
+	#prev i
+	{
+		font-size: 26px;
+	}
+	#next i::before,
+	#prev i::before
+	{
+		color: var(--primary-color) !important;
+		background-color: white !important;
+		padding: 10px !important;
+		width: 35px !important;
+		height: 35px !important;
+		border: 1px solid #a5a5a5 !important;
+		border-radius: 8px !important;
+	}
 
-.product-slider .arrows  {
-    position: absolute !important;
-    left: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:10px;
-    width: fit-content;
-}
+	.product-slider .arrows
+	{
+		position: absolute !important;
+		left: 45px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		width: fit-content;
+		top: 230px;
+	}
+	.product-slider .arrows .swiper-button-prev:hover,
+	.product-slider .arrows .swiper-button-next:hover
+	{
+		border: none !important;
+	}
 
-@media (max-width:768px){
-    .product-slider .arrows{
-    left: 10px;
-}}
-
+	@media(max-width:768px)
+	{
+		.product-slider .arrows
+		{
+			left: 10px;
+			top: 246px;
+		}
+		#next i,
+		#prev i
+		{
+			font-size: 14px;
+		}
+	}
 </style>
 {% if settings.is_slider %}
 	 <script>
-		    document.addEventListener('DOMContentLoaded', function () {
-		      let productSwiper = new Swiper('.product-slider .swiper-container', {
-		        slidesPerView: 2, 
-		        spaceBetween: 10,
-		        loop: false,
-		         navigation: {
-                    nextEl: '.product-slider .swiper-button-prev',
-                    prevEl: '.product-slider .swiper-button-next',
-                },
-		        watchOverflow: true, 
-		        breakpoints: {
-		          576: {
-		            slidesPerView: 3, 
-                    spaceBetween: 20,
-		          },
-		          768: {
-		            slidesPerView: 3, 
-                    spaceBetween: 20,
-		          },
-		          992: {
-		            slidesPerView: 4,
-                    spaceBetween: 30,
-		          }
-		        },
-		      });
-		    });
-		    </script>
+			    document.addEventListener('DOMContentLoaded', function () {
+			      let productSwiper = new Swiper('.product-slider .swiper-container', {
+			        slidesPerView: 2, 
+			        spaceBetween: 10,
+			        loop: false,
+			         navigation: {
+	                    nextEl: '.product-slider .swiper-button-prev',
+	                    prevEl: '.product-slider .swiper-button-next',
+	                },
+			        watchOverflow: true, 
+			        breakpoints: {
+			          576: {
+			            slidesPerView: 3, 
+	                    spaceBetween: 20,
+			          },
+			          768: {
+			            slidesPerView: 3, 
+	                    spaceBetween: 20,
+			          },
+			          992: {
+			            slidesPerView: 4,
+	                    spaceBetween: 30,
+			          }
+			        },
+			      });
+			    });
+			    </script>
 {% endif %}
 
 {% schema %}
