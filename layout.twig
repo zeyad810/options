@@ -10,7 +10,8 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		
-		
+		{# gsap library #}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
 		<link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!--jquery UI -->
@@ -130,7 +131,7 @@
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}"/>
 
-		<link rel="stylesheet" href="{{ assetUrl('main.css?v=1.219') }}"/>
+		<link rel="stylesheet" href="{{ assetUrl('main.css?v=1.228') }}"/>
 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_cat.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}"/>
@@ -215,8 +216,13 @@
 		</style>
 		{% block top_body %}{% endblock %}
 		<div class="visible  d-flex flex-column">
-			<div class="header">
-				{% block header %}{% endblock %}
+			<div class="header po">
+					<div class="ine-header" >
+					
+						{% include 'slider_top.twig' with {'te_setting': settings} %}
+						{% block header %}{% endblock %}
+					</div>
+					
 				<div class="header-bottom hidden">
 					<a href="/" class="flex flex-col items-center justify-center gap-1 ">
 						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
@@ -340,7 +346,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 				<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 
-				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.125') }}"></script>
+				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.129') }}"></script>
 
 				{# Local storage #}
 				
@@ -349,11 +355,8 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 				<link
 				rel="stylesheet"
 				href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-				/>
-
-				
+				/>				
 				<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-				
 				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 				
 				{% block footer_scripts %}{% endblock %}
@@ -938,6 +941,68 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			}
 		}
 	},	
+	"slider_top": {
+		"type": "fieldset",
+		"name": {
+		"ar": "الشريط العلوي",
+		"en": "Sidebar Banner in Categories Page"
+		},
+		"icon": "font_awesome",
+		"expandable": true,
+		"settings": {
+		"is_sidebar": {
+			"type": "checkbox",
+			"label": {
+			"ar": "تفعيل الشريط العلوي",
+			"en": "Activate the Top Slider"
+			}
+		},
+		"text_list": {
+			"type": "list",
+			"label": {
+			"ar": "قائمة نصوص الشريط",
+			"en": "Slider Text List"
+			},
+			"settings": {
+			"image": {
+				"type": "image",
+				"label": {
+				"ar": "أيقونة",
+				"en": "Icon"
+				}
+			},
+			"title": {
+				"type": "text",
+				"label": {
+				"ar": "النص الرئيسي",
+				"en": "Main Text"
+				}
+			},
+			"featured_text": {
+				"type": "text",
+				"label": {
+				"ar": "النص المميز",
+				"en": "Featured Text"
+				}
+			},
+			"featured_text_color": {
+				"type": "color",
+				"label": {
+				"ar": "لون النص المميز",
+				"en": "color featured Text"
+				}
+			},
+			"link": {
+				"type": "url",
+				"label": {
+				"ar": "رابط",
+				"en": "URL"
+				}
+			}
+			}
+		}
+		}
+	},
 	"colors": {
 		"name": {
 			"ar": "الالوان",

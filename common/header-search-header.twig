@@ -134,6 +134,15 @@
 </div>
 
 <style>
+	#tooltip
+	{
+		border-radius: 8px;
+		border: none;
+		box-shadow: 0 0 10px 5px #8080801f;
+	}
+	.popover .arrow::before{
+		top: 1px;
+	}
 	.search-header
 	{
 		padding: 0;
@@ -146,10 +155,12 @@
 	{
 		padding-top: 1px;
 	}
-	@media  (max-width: 768px) {
-	  .search-header .image-logo{
-	   	padding: 5px;
-	  }	
+	@media(max-width: 768px)
+	{
+		.search-header .image-logo
+		{
+			padding: 5px;
+		}
 	}
 	.icons-header
 	{
@@ -184,7 +195,18 @@
 	{
 		left: 14px;
 	}
-	.icon-menu-top .fa-bars{
-	    font-size: 22px;
+	.icon-menu-top .fa-bars
+	{
+		font-size: 22px;
+	}
+	.gift-popover-body
+	{
+		height: 115px;
+	}
+	.gift-popover-body button
+	{
+		line-height: 0;
+		max-height: 20px;
+		height: fit-content;
 	}
 </style>

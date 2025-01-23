@@ -1,0 +1,126 @@
+{% if te_setting.slider_top_is_sidebar %}
+<div class="ticker-container">
+    {% for item in te_setting.slider_top_text_list %}
+        <div class="ticker_text">
+            <a href="{{ item.link }}" target="_blank">
+                <div class="slider-top-tag">              
+                        <img src="{{ item.image }}" alt="Icon" class="icon-slider" />   
+                    <p>
+                        {{ item.title }}
+                        <span style="color:{{item.featured_text_color}};">{{ item.featured_text }}</span>
+                    </p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+<style>
+
+.ticker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    overflow: hidden;
+    padding: 10px;
+    background-color: var(--primary-color);
+}
+
+
+
+.ticker_text {
+    margin: 0.25rem 0;
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    opacity: 0;
+}
+
+
+.slider-top-tag {
+    display: flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+.slider-top-tag .icon-slider {
+   width: 20px;
+}
+
+.slider-top-tag p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-weight: normal;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.slider-top-tag p span {
+    color:var(--secondary-color);;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    width: fit-content;
+}
+
+.slider-top-tag  i {
+    color: white;
+}
+
+@media (min-width: 640px) { 
+    .slider-top-tag p {
+        font-size: 18px;
+    }
+        .ticker-container {
+        height: 40px;
+    }
+        .slider-top-tag p i {
+        margin-top: 2px;
+    }
+}
+
+@media (max-width: 768px) {
+.slider-top-tag .icon-slider {
+   width: 22px;
+}
+}
+
+</style>
+
+ <script>
+      // إنشاء تسلسل زمني لتحريك العناصر بالتتابع
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.1 });
+
+      // تطبيق الحركة على جميع العناصر داخل .ticker_text
+      gsap.utils.toArray(".ticker_text").forEach((text) => {
+        tl.fromTo(text, 
+          { y: 50, opacity: 0 }, // البداية من الأسفل وخارج الشاشة
+          { 
+            y: 0, // الوصول إلى المنتصف
+            opacity: 1, 
+            duration: 1.5, 
+            ease: "power2.out"
+          }
+        )
+        // تأثير النبض في المنتصف
+        .to(text, { 
+            scale: 1.1, // تكبير بسيط ليعطي شعور النبض
+            duration: 0.3,
+            yoyo: true, // عودة إلى الحجم الأصلي لتكرار النبض
+            repeat: 1, // تكرار النبض مرة واحدة
+            ease: "power1.inOut"
+          }
+        )
+        // تحرك العنصر من المنتصف إلى الأعلى خارج الشاشة
+        .to(text, {
+          y: -50, // يتحرك إلى خارج الشاشة من الأعلى
+          opacity: 0, 
+          duration: 1.5, 
+          ease: "power2.in"
+        });
+      });
+    </script>

@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<div style=" text-align: center" class="desk">
-					<button type="button" style="margin-bottom: 4px; transition: .3s;" id="open-product-details-{{ product.id }}" class="open-product-details" data-product-id="{{ product.selected_product.id }}" data-product-name="{{ product.name }}" data-product-image="{{ imageUrl(product.images[0]['image']['medium'], { w: 400, q: 85, f: 'auto' }) }}" data-real-price="{{ product.formatted_sale_price ? product.formatted_sale_price : product.formatted_price }}" data-product-price="{{ product.formatted_price }}" data-discount="{{ product.discount_percentage }}" data-category="{{ product.categories[0].name }}" data-description="{{ product.short_description }}" data-id="{{ product.id }}" data-isinfinite="{{ product.is_infinite }}" data-quantity="{{ product.quantity }}" data-has-options="{{ product.has_options }}" data-has-fields="{{ product.has_options }}" data-slug="{{ product.slug }}" data-asset-url="{{ asset_url }}">
+					<button type="button" style=" transition: .3s;" id="open-product-details-{{ product.id }}" class="open-product-details" data-product-id="{{ product.selected_product.id }}" data-product-name="{{ product.name }}" data-product-image="{{ imageUrl(product.images[0]['image']['medium'], { w: 400, q: 85, f: 'auto' }) }}" data-real-price="{{ product.formatted_sale_price ? product.formatted_sale_price : product.formatted_price }}" data-product-price="{{ product.formatted_price }}" data-discount="{{ product.discount_percentage }}" data-category="{{ product.categories[0].name }}" data-description="{{ product.short_description }}" data-id="{{ product.id }}" data-isinfinite="{{ product.is_infinite }}" data-quantity="{{ product.quantity }}" data-has-options="{{ product.has_options }}" data-has-fields="{{ product.has_options }}" data-slug="{{ product.slug }}" data-asset-url="{{ asset_url }}">
 						<i class="fa-regular fa-eye icon-p"></i>
 					</button>
 
@@ -201,10 +201,10 @@
     text-wrap-mode: nowrap;
   }
 	.namepro:hover{
-		color: var(--danger-color) !important;	
+		color: var(--primary-color) !important;	
 	}
 	.icon-p:hover{
-		background-color: var(--danger-color) !important;
+		background-color: var(--primary-color) !important;
 	}
 	.fa-eye:hover{
 		color:white;
@@ -291,7 +291,9 @@
 		align-items: center;
 		gap: 10px;
 	}
-
+    .open-product-details{
+		margin-block: 7px !important;
+	}
 	#close-popup {
 		position: absolute;
 		top: 20px;

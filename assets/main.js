@@ -5,12 +5,23 @@ var cart_products = [];
 
 window.onscroll = () => fixed_header_to_top();
 
+
 function menuFiixedHeader() {
 
     fixed_header = document.getElementById("fixed-header");
     sticky = fixed_header.offsetTop;
 }
 
+document.addEventListener("scroll", function () {
+    const scrollTop = window.scrollY;
+  
+    if (scrollTop > 100) {
+        console.log("hi")
+    } else {
+        console.log("hi")
+    }
+  });
+  
 
 function fixed_header_to_top() {
     if (window.pageYOffset > sticky) {
@@ -18,7 +29,6 @@ function fixed_header_to_top() {
             fixed_header.classList.add("sticky")
             $('.app-content').addClass('app-content-padded')
         }
-
     } else {
         if(fixed_header){
             fixed_header.classList.remove("sticky");

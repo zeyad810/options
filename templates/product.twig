@@ -419,8 +419,10 @@
 					display: flex;
 					flex-direction: row-reverse;
 					padding: 0 !important;
+					align-items: center;
 					gap:5px;
 					margin-bottom: 25px;
+					height: 55vh;
 				}
 				.sec_des p span{
 					font-size:16px;
@@ -1355,35 +1357,6 @@ $('.app').removeClass('d-hide');
 gallery.init();
 };
 
-// Swiper
-  document.addEventListener('DOMContentLoaded', function () {
-  var swiper = new Swiper('.slider-inspire .swiper-containerr', {
-    // loop: true,
-    slidesPerView: 3,
-    spaceBetween: 5,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 24,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 30,
-      },
-    }
-  });
-});
-
-
-
 
 // Swiper
 var swiper = new Swiper(".slide-product .mySwiper", {
@@ -1405,83 +1378,69 @@ swiper: swiper
 }
 });
 
-const row = document.querySelectorAll('.table-row-background');
+const row = document.querySelectorAll('.table-row-background');	
 if (row % 2 === 0) { // الصفوف الفردية (بما أن الفهرس يبدأ من 0، فإن 0 يعني العنصر الأول، 2 يعني الثالث، وهكذا)
         row.style.backgroundColor = 'red'; // اللون الذي تريده للصفوف الفردية
       }
 
-var swiper = new Swiper(".mySwiper", {
-        // loop: true,
-        spaceBetween: 10,
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesProgress: true,
-    });
 
-    var swiper2 = new Swiper(".mySwiper2", {
-        // loop: true,
-        spaceBetween: 10,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        thumbs: {
-            swiper: swiper,
-        },
-    });
-
-
-	document.addEventListener('DOMContentLoaded', function () {
-  // Swiper للصور الرئيسية
-  var mainSwiper = new Swiper(".slide-product .mySwiper2", {
-    spaceBetween: 4,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
-    },
-    thumbs: {
-      swiper: thumbSwiper // سنعلن عن المتغير لاحقاً لتمريره هنا
-    }
-  });
-
-  // دالة لتشغيل أو تحديث Swiper للصور المصغرة
+// Swiper
+document.addEventListener('DOMContentLoaded', function () {
+  // Function to initialize a Swiper instance for thumbnails
   function initializeThumbSwiper(direction) {
     return new Swiper(".slide-product .mySwiper", {
       spaceBetween: 10,
       slidesPerView: 4,
-    //   freeMode: true,
-    //   watchSlidesProgress: true,
-      direction: direction // ضبط الاتجاه بناءً على حجم الشاشة (إما "vertical" أو "horizontal")
+      freeMode: true,
+      watchSlidesProgress: true,
+       direction: 'vertical'  // Pass direction dynamically
     });
   }
 
-  // تشغيل Swiper للصور المصغرة بالوضع العمودي كإعداد افتراضي
-  var thumbSwiper = initializeThumbSwiper('vertical');
+  // Initialize thumbSwiper and mainSwiper
+  let thumbSwiper = initializeThumbSwiper('vertical');
+  let mainSwiper = new Swiper(".slide-product .mySwiper2", {
+    spaceBetween: 4,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    thumbs: {
+      swiper: thumbSwiper, // Link to the thumbnail swiper
+    },
+  });
 
-  // الاستماع لتغيير حجم النافذة لتعديل التخطيط في الوضع الاستجابي
+  // Function to adjust layout based on screen width
   function adjustSwiperLayout() {
     const screenWidth = window.innerWidth;
 
-    // للشاشات التي أقل من 768 بكسل، جعل شريط الصور المصغرة أفقي
+    // Destroy and reinitialize thumbSwiper with the correct direction
+    thumbSwiper.destroy(true, true);
     if (screenWidth < 768) {
-      thumbSwiper.destroy(true, true); // حذف مثيل swiper الحالي
-      thumbSwiper = initializeThumbSwiper('horizontal'); // إعادة التشغيل بالوضع الأفقي
-	  document.querySelector(".slide-product .mySwiper").style.width = "100%"; // إضافة مسافة عند الحاجة
-	  document.querySelector(".slide-product .mySwiper").style.height = "25%"; // إضافة مسافة عند الحاجة
-
-
+      thumbSwiper = initializeThumbSwiper('horizontal'); // Horizontal for small screens
+      document.querySelector(".slide-product .mySwiper").style.width = "100%";
+      document.querySelector(".slide-product .mySwiper").style.height = "25%";
     } else {
-      thumbSwiper.destroy(true, true); // حذف مثيل swiper الحالي
-      thumbSwiper = initializeThumbSwiper('vertical'); // إعادة التشغيل بالوضع العمودي
-      document.querySelector(".slide-product .mySwiper").style.marginTop = "0"; // إزالة المسافة للشاشات الأكبر
+      thumbSwiper = initializeThumbSwiper('vertical'); // Vertical for larger screens
+      document.querySelector(".slide-product .mySwiper").style.marginTop = "0";
     }
+
+    // Update mainSwiper to use the new thumbSwiper instance
+    mainSwiper.thumbs.swiper = thumbSwiper;
   }
 
-  // ضبط التخطيط عند تحميل الصفحة وعند تغيير حجم النافذة
+  // Initial adjustment
   adjustSwiperLayout();
+
+  // Adjust layout on window resize
   window.addEventListener('resize', adjustSwiperLayout);
 });
 
+ 
+  // تشغيل Swiper للصور المصغرة بالوضع العمودي كإعداد افتراضي
+  var thumbSwiper = initializeThumbSwiper('vertical');
+ 
+
 </script>
 
-		{% endblock %} 
+{% endblock %} 
