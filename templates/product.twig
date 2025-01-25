@@ -455,10 +455,12 @@
 					width: 30%;
 					margin-top: 20px;  
 					overflow-y: scroll ;
-				}
-              	   .slide-product .mySwiper::-webkit-scrollbar {
-				    	 width: 0px;
-					}
+					-ms-overflow-style: none;  
+  					scrollbar-width: none;
+				       }
+              	          	.slide-product .mySwiper::-webkit-scrollbar {
+					display: none;
+				       }
 
 					/* Track */
 					.slide-product .mySwiper::-webkit-scrollbar-track {
