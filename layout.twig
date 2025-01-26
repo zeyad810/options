@@ -215,14 +215,10 @@
 			{% endif %}
 		</style>
 		{% block top_body %}{% endblock %}
+		{% include 'slider_top.twig' with {'te_setting': settings} %}
 		<div class="visible  d-flex flex-column">
 			<div class="header po">
-					<div class="ine-header" >
-					
-						{% include 'slider_top.twig' with {'te_setting': settings} %}
-						{% block header %}{% endblock %}
-					</div>
-					
+					{% block header %}{% endblock %}		
 				<div class="header-bottom hidden">
 					<a href="/" class="flex flex-col items-center justify-center gap-1 ">
 						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
@@ -330,7 +326,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 </script>
 
 
-					<style>:root
+				<style>:root
 					{
 						--title-bg: url({{settings.titlebg_image}});
 					}
@@ -346,7 +342,7 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 
 				<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 
-				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.129') }}"></script>
+				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.151') }}"></script>
 
 				{# Local storage #}
 				
