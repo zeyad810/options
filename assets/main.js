@@ -15,10 +15,10 @@ window.addEventListener('wheel', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
      fixed_header = document.getElementById("fixed-header");
  
-    if (scrollTop > 30 ){
+    if (scrollTop > 10 ){
         fixed_header.style.top = "0"
     }
-    if (scrollTop < 30 ){
+    if (scrollTop < 10 ){
           fixed_header.style.top = "unset"
     }
 
@@ -28,10 +28,10 @@ window.addEventListener('wheel', () => {
 window.addEventListener('touchmove', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     fixed_header = document.getElementById("fixed-header"); 
-    if (scrollTop > 20 ){
+    if (scrollTop >10 ){
        fixed_header.style.top = "0"
     }
-    if (scrollTop < 20 ){
+    if (scrollTop < 10 ){
         fixed_header.style.top = "unset"
     }
 });
