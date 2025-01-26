@@ -15,13 +15,11 @@ window.addEventListener('wheel', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
      fixed_header = document.getElementById("fixed-header");
  
-    if (scrollTop > 40 ){
-        // fixed_header.style.position = "sticky"
+    if (scrollTop > 30 ){
         fixed_header.style.top = "0"
     }
-    if (scrollTop < 40 ){
-        //  fixed_header.style.position = "fixed"
-          fixed_header.style.top = "40px"
+    if (scrollTop < 30 ){
+          fixed_header.style.top = "unset"
     }
 
 });
@@ -30,13 +28,11 @@ window.addEventListener('wheel', () => {
 window.addEventListener('touchmove', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     fixed_header = document.getElementById("fixed-header"); 
-    if (scrollTop > 30 ){
-    //    fixed_header.style.position = "sticky"
+    if (scrollTop > 20 ){
        fixed_header.style.top = "0"
     }
-    if (scrollTop < 30 ){
-    //    fixed_header.style.position = "fixed"
-        fixed_header.style.top = "34px"
+    if (scrollTop < 20 ){
+        fixed_header.style.top = "unset"
     }
 });
 
