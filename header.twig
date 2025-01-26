@@ -1,66 +1,80 @@
-<header section-id="{{ sectionId }}" id="head" class='d-flex flex-column'>
-  {% include 'template_for_store_messages' %}
-  {% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
- 
+<header section-id="{{ sectionId }}" id="head" class='d-flex flex-column header-sticky'>
+	{% include 'template_for_store_messages' %}
+	{% include 'header-announcement-bar.twig' with { 'ab_settings' : settings } %}
 
-  <div id="fixed-header" style="z-index: 3">
-    <!-- input search for mobile view -->
-    <div style="z-index: 3">
-      {% include 'header-search-header.twig' with { 'header_settings' : settings } %}
-    </div>
-    <div style="position: relative; z-index: -1" class="container">
-      <div class="sm-search-div" style=" background: transparent;">
-        <div class="autocomplete" style="position: relative;">
-          <input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
-          <div class="autocomplete-items"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  {% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
-  {% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
+	<div
+		id="fixed-header" style="z-index: 3">
+		<!-- input search for mobile view -->
+		<div style="z-index: 3">
+			{% include 'header-search-header.twig' with { 'header_settings' : settings } %}
+		</div>
+		<div style="position: relative; z-index: -1" class="container">
+			<div class="sm-search-div" style=" background: transparent;">
+				<div class="autocomplete" style="position: relative;">
+					<input type="text" data-cat-id="{{ category.id }}" class="form-control search-input-input" placeholder="{% if header_settings.search_placeholder %}{{ header_settings.search_placeholder }}{% else %}{{ locals.search_placeholder }}{% endif %}">
+					<div class="autocomplete-items"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  {% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
-  <div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog" style="height: 100vh !important;">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body" style="padding: 10px">
-          {% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
+	{% include 'header-sliding-menu.twig' with { 'menu_settings' : settings } %}
+	{% include 'header-mega-menu.twig' with { 'menu_settings' : settings } %}
+
+	{% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
+		<div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog" style="height: 100vh !important;">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-body" style="padding: 10px">
+						{% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 </header>
-
 
 
 {# <div class="header-bottom"></div> #}
 
 {% block stylesheets %}
-<style>
+	<style>
 
-  #langCurrecyModal {
-    overflow: unset;
-  }
+		#langCurrecyModal
+		{
+			overflow: unset;
+		}
 
-  .header-bottom {
-    width: 100%;
-    height: 200px;
-    background-color: #FFF;
-  }
+		.header-bottom
+		{
+			width: 100%;
+			height: 200px;
+			background-color: #FFF;
+
+		}
 
 
-  @media (max-width:768px){
-      #fixed-header{
-        height: 70px !important;
-      }
-      .search-header-bar{
-        margin: 8px 0px !important;
-      }
-  }
-</style>
+		#fixed-header
+		{
+			width: 100%;
+			position: fixed;
+			transition: 0.2s;
+			z-index: 111;
+			backdrop-filter: blur(4px);
+		}
+		@media(max-width:768px)
+		{
+			#fixed-header
+			{
+				height: 70px !important;
+			}
+			.search-header-bar
+			{
+				margin: 8px 0 !important;
+			}
+		}
+	</style>
 {% endblock %}
 
 {% schema %}

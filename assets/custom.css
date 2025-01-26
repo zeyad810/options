@@ -634,12 +634,12 @@
 }
 
 
-body[data-template="home"] .ine-header{
+/* body[data-template="home"] .ine-header{
   position: fixed;
   width: 100%;
   z-index: 111;
   backdrop-filter: blur(4px);
-}
+} */
 
 .form-group i{
     z-index: 11111;

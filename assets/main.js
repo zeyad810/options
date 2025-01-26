@@ -3,14 +3,38 @@ var sticky;
 var cart_products = [];
 
 
-window.onscroll = () => fixed_header_to_top();
 
 
-function menuFiixedHeader() {
 
-    fixed_header = document.getElementById("fixed-header");
-    sticky = fixed_header.offsetTop;
-}
+
+
+
+// Listen for 'wheel' event
+window.addEventListener('wheel', () => {
+
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+     fixed_header = document.getElementById("fixed-header");
+ 
+    if (scrollTop > 30 ){
+        fixed_header.style.top = "0"
+    }
+    if (scrollTop < 30 ){
+          fixed_header.style.top = "unset"
+    }
+
+});
+
+// Listen for 'touchmove' event
+window.addEventListener('touchmove', () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    fixed_header = document.getElementById("fixed-header"); 
+    if (scrollTop > 20 ){
+       fixed_header.style.top = "0"
+    }
+    if (scrollTop < 20 ){
+        fixed_header.style.top = "unset"
+    }
+});
 
 
 function fixed_header_to_top() {
