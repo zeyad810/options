@@ -14,7 +14,7 @@ window.addEventListener('wheel', () => {
 
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
      fixed_header = document.getElementById("fixed-header");
- 
+     console.log(scrollTop)
     if (scrollTop > 10 ){
         fixed_header.style.top = "0"
     }
@@ -27,6 +27,7 @@ window.addEventListener('wheel', () => {
 // Listen for 'touchmove' event
 window.addEventListener('touchmove', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    console.log(scrollTop)
     fixed_header = document.getElementById("fixed-header"); 
     if (scrollTop >10 ){
        fixed_header.style.top = "0"
