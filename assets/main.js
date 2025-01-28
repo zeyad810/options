@@ -14,7 +14,6 @@ window.addEventListener('wheel', () => {
 
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
      fixed_header = document.getElementById("fixed-header");
- 
     if (scrollTop > 10 ){
         fixed_header.style.top = "0"
     }
