@@ -546,8 +546,13 @@
 					justify-content: space-between;
 					flex-direction: row;
 				}
-			
-
+			.slide-product .mySwiper2{
+				height: 80%;
+			}
+			.slide-product .mySwiper{
+				width: 100%;
+			}
+     
 			}
 				 #product-view-add-to-cart {
 					height: 50px;
@@ -1360,7 +1365,7 @@ gallery.init();
 };
 
 
-// Swiper
+{# // Swiper
 var swiper = new Swiper(".slide-product .mySwiper", {
 spaceBetween: 10,
 slidesPerView: 4,
@@ -1380,10 +1385,6 @@ swiper: swiper
 }
 });
 
-const row = document.querySelectorAll('.table-row-background');	
-if (row % 2 === 0) { // الصفوف الفردية (بما أن الفهرس يبدأ من 0، فإن 0 يعني العنصر الأول، 2 يعني الثالث، وهكذا)
-        row.style.backgroundColor = 'red'; // اللون الذي تريده للصفوف الفردية
-      }
 
 
 // Swiper
@@ -1436,12 +1437,85 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Adjust layout on window resize
   window.addEventListener('resize', adjustSwiperLayout);
+}); #}
+
+const row = document.querySelectorAll('.table-row-background');	
+if (row % 2 === 0) { // الصفوف الفردية (بما أن الفهرس يبدأ من 0، فإن 0 يعني العنصر الأول، 2 يعني الثالث، وهكذا)
+        row.style.backgroundColor = 'red'; // اللون الذي تريده للصفوف الفردية
+      }
+
+// Swiper
+var swiper = new Swiper(".slide-product .mySwiper", {
+spaceBetween: 10,
+slidesPerView: 4,
+freeMode: true,
+watchSlidesProgress: true,
+direction: 'vertical' // اجعل الشريط الصغير عمودي
+
 });
 
- 
-  // تشغيل Swiper للصور المصغرة بالوضع العمودي كإعداد افتراضي
-  var thumbSwiper = initializeThumbSwiper('vertical');
- 
+ document.addEventListener('DOMContentLoaded', function () {
+  let thumbSwiper, mainSwiper;
+
+  function initializeThumbSwiper(direction) {
+    return new Swiper(".slide-product .mySwiper", {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      freeMode: true,
+      watchSlidesProgress: true,
+      direction: direction
+    });
+  }
+
+  function initializeMainSwiper() {
+    return new Swiper(".slide-product .mySwiper2", {
+      spaceBetween: 4,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: swiper, // سيتم تحديثه لاحقًا
+      },
+    });
+  }
+
+  function adjustSwiperLayout() {
+    const screenWidth = window.innerWidth;
+    let newDirection = screenWidth < 768 ? 'horizontal' : 'vertical';
+
+    // التحقق مما إذا كان الاتجاه بحاجة إلى التحديث
+    if (thumbSwiper && thumbSwiper.params.direction !== newDirection) {
+      thumbSwiper.destroy(true, true); // تدمير swiper القديم
+      thumbSwiper = initializeThumbSwiper(newDirection); // إعادة التهيئة
+      
+      // ضبط الأنماط حسب الاتجاه
+      if (newDirection === 'horizontal') {
+        document.querySelector(".slide-product .mySwiper").style.width = "100%";
+        document.querySelector(".slide-product .mySwiper").style.height = "auto";
+      } else {
+        document.querySelector(".slide-product .mySwiper").style.width = "";
+        document.querySelector(".slide-product .mySwiper").style.height = "";
+      }
+
+      // تحديث swiper الرئيسي بعد تغيير thumbnails
+      mainSwiper.thumbs.swiper = thumbSwiper;
+      mainSwiper.update();
+    }
+  }
+
+  // تهيئة Swipers
+  thumbSwiper = initializeThumbSwiper(window.innerWidth < 768 ? 'horizontal' : 'vertical');
+  mainSwiper = initializeMainSwiper();
+
+  // التحقق من التحديث عند تغيير حجم الشاشة
+  window.addEventListener('resize', function () {
+    setTimeout(adjustSwiperLayout, 300); // تأخير صغير لضمان استقرار التحديث
+  });
+
+  // ضبط مبدئي
+  adjustSwiperLayout();
+});
 
 </script>
 
