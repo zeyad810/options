@@ -6,7 +6,7 @@
 	<div
 		id="fixed-header" style="z-index: 600">
 		<!-- input search for mobile view -->
-		<div >
+		<div>
 			{% include 'header-search-header.twig' with { 'header_settings' : settings } %}
 		</div>
 		<div style="position: relative; z-index: -1" class="container">
@@ -62,7 +62,16 @@
 			transition: 0.2s;
 			z-index: 111;
 			backdrop-filter: blur(4px);
+			-webkit-backdrop-filter: blur(4px);
 		}
+		@supports(-webkit-backdrop-filter: blur(4px))
+		{
+			#fixed-header
+			{
+				background: rgba(255, 255, 255, 0.3);
+			}
+		}
+
 		@media(max-width:768px)
 		{
 			#fixed-header
@@ -79,36 +88,36 @@
 
 {% schema %}
 {
-  "name": {
-    "ar": "خصائص السلة",
-    "en": "Header"
-  },
-  "icon": "fa fa-square",
-  "display": true,
-  "settings": {
-    "side_bar": {
-      "type": "fieldset",
-      "label": {
-        "ar": "السلة الجانبية",
-        "en": "Side Bar"
-      },
-      "icon": "font_awesome",
-      "expandable": true,
-      "settings": {
-        "check": {
-          "type": "checkbox",
-          "label": {
-            "ar": "تفعيل السله الجانبيه",
-            "en": "display the side bar"
-          },
-          "option": {
-            "ar": "تفعيل السله الجانبيه",
-            "en": "Display menu"
-          },
-          "noLabel": true
-        }
-      }
-    }
-  }
-}
+	  "name": {
+	    "ar": "خصائص السلة",
+	    "en": "Header"
+	  },
+	  "icon": "fa fa-square",
+	  "display": true,
+	  "settings": {
+	    "side_bar": {
+	      "type": "fieldset",
+	      "label": {
+	        "ar": "السلة الجانبية",
+	        "en": "Side Bar"
+	      },
+	      "icon": "font_awesome",
+	      "expandable": true,
+	      "settings": {
+	        "check": {
+	          "type": "checkbox",
+	          "label": {
+	            "ar": "تفعيل السله الجانبيه",
+	            "en": "display the side bar"
+	          },
+	          "option": {
+	            "ar": "تفعيل السله الجانبيه",
+	            "en": "Display menu"
+	          },
+	          "noLabel": true
+	        }
+	      }
+	    }
+	  }
+	}
 {% endschema %}
