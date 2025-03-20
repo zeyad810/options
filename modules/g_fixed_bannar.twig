@@ -3,7 +3,12 @@
 	<swiper-container pagination="true">
 		{% for item in settings.slider %}
 			<swiper-slide>
-				<div style="background-image: url('{{ item.slider_bannar_bg }}');" class="g_fixed_bannar  baner-{{loop.index}}">
+				<div class="g_fixed_bannar">
+					<picture>
+						<source srcset="{{ item.slider_bannar_bg_mobile }}" media="(max-width: 768px)"/>
+						<source srcset="{{ item.slider_bannar_bg }}" media="(min-width: 769px)"/>
+						<img src="{{ item.slider_bannar_bg }}" alt="Slider Image" class="img-bg"/>
+					</picture>
 					<div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt text-banner">
 						<h1 class="animate__animated animate__fadeInUp custom-dlay-heading " style="color: {{ item.address_color ? item.address_color : '#000000' }}">
 							{{ item.slider_bannar_title }}
@@ -28,7 +33,7 @@
 <style>
 	.g_fixed_bannar
 	{
-		height: 90vh
+		height: 85vh
 	}
 
 	.g_fixed_bannar h1
@@ -53,17 +58,18 @@
 		font-size: 18px;
 	}
 
-
+	.img-bg
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 	@media(max-width: 768px)
 	{
-		{% for item in settings.slider %}
-			.baner-{{loop.index}}{
-				background-image: url('{{ item.slider_bannar_bg_mobile }}') !important;
-				background-size: cover;
-				background-position: center;
-				height: 60vh;
-			}
-		{% endfor %}
+		.g_fixed_bannar
+		{
+			height: 80vh
+		}
 		.g_fixed_bannar h1
 		{
 			margin-bottom: 38px;
@@ -74,14 +80,6 @@
 		{
 			width: 95%;
 		}
-	}
-
-	{
-		# .swiper-container
-		{
-			width: 100vw;
-			height: 100vh;
-		} #
 	}
 
 	.baner_swiber.swiper-container
