@@ -24,8 +24,8 @@
 
 	{% if not ('hide_country' in settings.header_options) or not ('hide_language' in settings.header_options)%}
 		<div class="modal" id="langCurrecyModal" tabindex="-1" role="dialog" style="height: 100vh !important;">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
+			<div class="modal-dialog modal-dialog-centered" role="document" style="z-index: 1050;">
+				<div class="modal-content" >
 					<div class="modal-body" style="padding: 10px">
 						{% include 'template_for_shipping_destination_currency_lang' with { 'hideDestination' : ('hide_country' in settings.header_options), 'hideLanguage' : ('hide_language' in settings.header_options) , 'hideCurrency' : ('hide_country' in settings.header_options)  } %}
 					</div>
@@ -53,7 +53,9 @@
 			background-color: #FFF;
 
 		}
-
+		.modal-backdrop {
+			z-index: 999 !important;
+		}
 
 		#fixed-header
 		{
