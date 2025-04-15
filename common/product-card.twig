@@ -15,7 +15,10 @@
 						<a href="/products/{{ product.slug }}">
 							<img style=" border-radius: 5.96px;" id="product-card-img-{{ product.id }}" {% if product.images %} src="{{ imageUrl(product.images[0]['image']['medium'],{ w: 400, q: 85, f:'auto' }) }}" {% else %} src="{{ imageUrl(asset_url ~ 'product-img.svg',{ w: 235, q: 85, f:'auto' }) }}" {% endif %} alt="{{ product.name }}" loading="lazy">
 						</a>
-						<span class="product-card-bundle-offer" data-bundle-offer-product-id="{{ product.id }}">{{product.discount_percentage}}</span>
+						{% if product.badge %}
+							{% include 'template_for_products_badge' ignore missing %}
+						{% endif %}
+						<span class="product-card-bundle-offer" data-bundle-offer-product-id="{{ product.id }}"></span>
 					</div>
 						
 				</div>
