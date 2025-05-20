@@ -40,6 +40,7 @@
 						</div>
 
 						{% if cart.gift_card_details | length > 0 %}
+						{# <pre>{{ cart.gift_card_details|json_encode }}</pre> #}
 							<div class="cart-gift-card">
 								<p class="font-weight-bold mb-2">
 									<img src="{{ asset_url }}gift_icon.png" style="display: inline-block"/>
@@ -59,6 +60,25 @@
 									</p>
 								{% endif %}
 							</div>
+							{% if cart.gift_card_details.card_design is defined and cart.gift_card_details.card_design | length > 0 %}
+								<div style="position: relative; display: inline-block; text-align: center; ">	
+									<img src="{{ cart.gift_card_details.card_design }}" alt="gift-image-preview"
+											style="max-width: 100%; height: auto; border-radius: 12px;" />
+									<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+												display: flex; flex-direction: column; justify-content: center; align-items: center;
+												padding: 20px; color: #fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
+										<h3 style="margin-bottom: 10px;">{{ cart.gift_card_details.sender_name }} </h3>
+								
+										{% if cart.gift_card_details.gift_message | length > 0 %}
+										<p style="font-size: 1.1rem; background: rgba(0,0,0,0.4); padding: 10px 20px; border-radius: 8px;">
+											{{ cart.gift_card_details.gift_message }}
+										</p>
+										{% endif %}
+										<h3 style="margin-bottom: 10px;">{{ cart.gift_card_details.receiver_name }}</h3>
+									</div>
+								
+								</div>
+							{% endif %}
 						{% endif %}
 					</div>
 				</div>
