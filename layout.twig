@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="{{ session.lang.code }}" dir="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}">
-	
+	{% set pop_single = settings.popSingle_item %}
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -286,6 +286,7 @@
 					</div>
 
 					{{ zidapi_script|raw }}
+
 
 <script>
 
@@ -1658,6 +1659,23 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 					"en": "Show discount coupon",
 				"noLabel": true
 				}
+			}
+		}
+	},
+	"popSingle": {
+		"name": {
+			"ar": "تفعيل قائمة بالمنتجات المتشابها في صفحة المنتج",
+			"en": "Show discount coupon in cart"
+		},
+		"settings": {
+			"item": {
+				"type": "checkbox",
+				"option": {
+					"ar": "اظهار",
+					"en": "Show ",
+				"noLabel": true
+				},
+				"noLabel": true
 			}
 		}
 	}

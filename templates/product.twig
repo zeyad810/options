@@ -895,14 +895,10 @@ max-width:fit-content;
 
 
 			{% if (product.related_products | length) >  0 %}
-				<section class="mt-5 mb-5">
+				<section class="mt-5 mb-5" >
 					<div class="justify-center d-flex align-items-center">
-
-
 						{% include 'title.twig' with { 'component_title': locals.similar_products_title  } %}
 					</div>
-
-
 					<div class="slider-inspire container overflow-hidden description-paragrah">
 						<swiper-container navigation="true"  class="slider_part_single" >
 							{# <div class="con swiper-wrapper justify-center" > #}
@@ -1037,6 +1033,7 @@ max-width:fit-content;
 							align-items: center;
 						}
 					}
+					
 				</style>
 				<script>
 				    const swiperEl = document.querySelector('.slider_part_single');
@@ -1092,9 +1089,11 @@ max-width:fit-content;
 					});
 				</script>
 			{% endif %}
+			
 
 		</div>
 
+		
 		{% if product.bundle_offer.products.results | length > 5 %}
 			<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg modal-dialog-scrollable bundle-offer-products-dialog">
@@ -1118,6 +1117,50 @@ max-width:fit-content;
 					</div>
 				</div>
 			</div>
+		{% endif %}
+
+		{% if pop_single %}
+			{% if (product.related_products | length) >  0 %}
+				<style>
+						#popup_container {
+							width: 80%;
+							max-width: 600px;
+							border-radius: 10px;
+							overflow-x: scroll;
+							height: 80%;
+						}
+						#close_popup {
+							margin-bottom: 10px;
+							margin-bottom: 10px;
+							position: absolute;
+							background-color: #a91515;
+							padding: 1px 9px;
+							border-radius: 33px;
+							color: #fff;
+						}
+						#popup_container #popup_content section#like-product {
+						display: block; /* override the inline style:none on the original */
+						}
+
+						/* Responsive grid: 2 cols on ≥768px, 1 col on smaller */
+						#popup_container #popup_content .grid {
+							display: grid;
+							gap: 1rem;
+						}
+
+						@media (max-width: 767px) {
+							#popup_container #popup_content .grid {
+								grid-template-columns: 1fr;
+							}
+						}
+				</style>
+				<div id="popup_container" style="display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 10; scrollbar-width: none;">
+					<button id="close_popup">X</button>
+					<div id="popup_content">
+						{% include 'pop_single.twig' with {'related_products' : product.related_products} %}
+					</div>
+				</div>
+			{% endif %}
 		{% endif %}
 	</section>
 {% endblock %}
@@ -1443,6 +1486,24 @@ document.addEventListener('DOMContentLoaded', function () {
   setTimeout(adjustSwiperLayout, 100);
 });
 
+let btn_popup = document.getElementById('product-view-add-to-cart');
+let popupContainer = document.getElementById('popup_container');
+let popupContent = document.getElementById('popup_content');
+let closePopup = document.getElementById('close_popup');
+
+if(btn_popup) {
+	btn_popup.addEventListener('click', function () {
+		popupContainer.style.display = 'block';
+	});
+
+	closePopup.addEventListener('click', function () {
+		popupContainer.style.display = 'none';
+	});
+}
 </script>
+
+
+	
+
 
 {% endblock %} 
