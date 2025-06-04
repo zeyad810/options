@@ -261,7 +261,20 @@
 									</div>
 
 								</div>
+								{# conut logic #}
+                                {% if store.is_low_stock_label_enabled %}
+                                    {% if product.quantity is not null and product.quantity <= store.low_stock_quantity_limit %}
+                                        <div class="number_products font-bold" style="color:#4D4D4D; margin-bottom:7px; font-size:25px;"> 
+                                            {{ locals.txtOne }} {{ product.quantity }} {{ locals.txtTwo }}
+                                        </div>
 
+                                        <div style="height:6px; width:426px; background-color:#F2F2F2; border-radius:6px; position:relative;">
+                                            <div style="background-color:#FF3B30; height:100%; border-radius:6px; position:absolute; right:0;
+                                                width: calc( {{ 100 * product.quantity / store.low_stock_quantity_limit }}% );">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
 								
 							</section>
 
