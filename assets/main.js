@@ -11,16 +11,16 @@ var cart_products = [];
 
 // Listen for 'wheel' event
 window.addEventListener('wheel', () => {
-
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-     fixed_header = document.getElementById("fixed-header");
+    const fixed_header = document.getElementById("fixed-header");
     if (scrollTop > 10 ){
-        fixed_header.style.top = "0"
+        fixed_header.style.top = "0";
+        fixed_header?.classList.add("sticky_header");
     }
     if (scrollTop < 10 ){
-          fixed_header.style.top = "unset"
+        fixed_header.style.top = "unset";
+        fixed_header?.classList.remove("sticky_header");
     }
-
 });
 
 // Listen for 'touchmove' event
