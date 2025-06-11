@@ -27,7 +27,7 @@
 				</a>
 			</div>
 
-			<nav style="width: 100%;{# overflow-y: scroll; #}" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
+			<nav style="width: 100%;" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
 
 				<ul class="flex-wrap main-nav d-flex flex-grow-1 menu-header-theme-text-for-primary-bg">
 
@@ -74,9 +74,9 @@
 				{% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
 					<div class="d-block sm-search-icon m-0">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-							<path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							<path d="M22 22L20 20" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" style="cursor: pointer; fill: transparent !important;">
+							<path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M22 22L20 20" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
 					</div>
 				{% endif %}
@@ -84,10 +84,10 @@
 				<div style="position: relative">
 					<a {% if header_settings.side_bar_check %} {% if template == "cart" %} href="/cart/view" {% else %} class="a-shopping-cart" {% endif %} {% else %} href="/cart/view" {% endif %} style="color:inherit;">
 						<span class="header-theme-icon-primary" style="color:black;">
-							<svg width="26" height="26" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M8.40002 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.51003C4.00003 22 3.24002 19.99 3.54002 17.53L4.44003 10.03C4.66003 8.09 5.00002 6.5 8.40002 6.5Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M20.41 17.03H8" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<svg width="26" height="26" viewbox="0 0 24 24" style="cursor: pointer; fill: transparent !important;" xmlns="http://www.w3.org/2000/svg">
+								<path d="M8.40002 6.5H15.6C19 6.5 19.34 8.09 19.57 10.03L20.47 17.53C20.76 19.99 20 22 16.5 22H7.51003C4.00003 22 3.24002 19.99 3.54002 17.53L4.44003 10.03C4.66003 8.09 5.00002 6.5 8.40002 6.5Z" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M8 8V4.5C8 3 9 2 10.5 2H13.5C15 2 16 3 16 4.5V8" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M20.41 17.03H8" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							</svg>
 						</span>
 						<span class="cart-badge d-none"></span>
@@ -112,16 +112,16 @@
 				<div class="account-area mobile-style">
 					{% if customer %}
 						<button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn" style="background-color: transparent;">
-							<svg width="26" height="26" viewbox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<svg width="26" height="26" viewbox="0 0 20 22" style="cursor: pointer; fill: transparent !important;" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							</svg>
 						</button>
 					{% else %}
 						<button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn" style="background-color: transparent;">
-							<svg width="26" height="26" viewbox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<svg width="26" height="26" viewbox="0 0 20 22" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; fill: transparent !important;">
+								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 							</svg>
 						</button>
 					{% endif %}
@@ -134,77 +134,65 @@
 </div>
 
 <style>
-	#tooltip
-	{
+	#tooltip {
 		border-radius: 8px;
 		border: none;
 		box-shadow: 0 0 10px 5px #8080801f;
 	}
-	.popover .arrow::before{
+	.popover .arrow::before {
 		top: 1px;
 	}
-	.search-header
-	{
+	.search-header {
 		padding: 0;
 	}
-	.search-header .top-level-link a
-	{
+	.search-header .top-level-link a {
 		padding: 10px 13px !important;
 	}
-	.search-header .account-area button
-	{
+	.search-header .account-area button {
 		padding-top: 1px;
 	}
-	@media(max-width: 768px)
-	{
-		.search-header .image-logo
-		{
+	@media(max-width: 768px) {
+		.search-header .image-logo {
 			padding: 5px;
 		}
 	}
-	.icons-header
-	{
+	.icons-header {
 		align-items: center !important;
 		justify-content: space-between !important;
 		height: fit-content;
 		width: fit-content;
 		gap: 14px;
 	}
-	.icons-header .sm-search-icon
-	{
+	.icons-header .sm-search-icon {
 		height: fit-content;
 	}
-	.bd-highlight i
-	{
+	.bd-highlight i {
 		cursor: pointer;
 	}
-	ul.main-nav > li:last-child
-	{
+	ul.main-nav > li {
+		color: {{header_icons_color}}
+		!important;
+	}
+	ul.main-nav > li:last-child {
 		display: inline-block !important;
 	}
-	.account-btn
-	{
+	.account-btn {
 		padding: 0;
 		margin-bottom: 2px;
 	}
-	.account-lang-currency
-	{
+	.account-lang-currency {
 		padding: 0;
 	}
-	.rtl .cart-badge
-	{
+	.rtl .cart-badge {
 		left: 14px;
 	}
-	.icon-menu-top .fa-bars
-	{
+	.icon-menu-top .fa-bars {
 		font-size: 22px;
 	}
-	.gift-popover-body
-	{
+	.gift-popover-body {
 		height: 115px;
 	}
-	.gift-popover-body button
-	{
+	.gift-popover-body button {
 		line-height: 0;
 		max-height: 20px;
 		height: fit-content;
