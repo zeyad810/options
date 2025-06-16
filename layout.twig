@@ -1,63 +1,50 @@
 <!doctype html>
 <html class="no-js" lang="{{ session.lang.code }}" dir="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}">
 	{% set pop_single = settings.popSingle_item %}
+	{% set header_icons_color = settings.slider_top_header_icons_color %}
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		
 		{{ header_meta_tags | raw }}
-		
-		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		
-		{# gsap library #}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 		<link rel="shortcut icon" type="image/jpg" href={{ store.icon }}/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<!--jquery UI -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 		<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@200..1000&display=swap" rel="stylesheet">
 		<style>
-			/* loader edit */
-			
-				.overlay {
-					position: fixed;
-					top: 0;
-					left: 0;
-					width: 100vw;
-					height: 100vh;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					background: white;
-					transition: opacity 0.75s, visibility 0.75s;
-					z-index: 999999;
-				}
-				
-				.overlay .img_loader {
-					animation: logo_load 3s ease-in-out ;
-				}
-
-				@keyframes logo_load {
-					0% {
-						transform: scale(0.1);
-					}
-					70% {
-						transform: scale(0.8);
-					}
-					100% {
-						transform: scale(1);
-					}
-				}
-			
-			body.loaded .overlay,
-			body.loaded .img_loader{
-				display: none; 
+			.overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: white;
+				transition: opacity 0.75s, visibility 0.75s;
+				z-index: 999999;
 			}
-
-
+			.overlay .img_loader {
+				animation: logo_load 3s ease-in-out;
+			}
+			@keyframes logo_load {
+				0% {
+				transform: scale(0.1);
+				}
+				70% {
+				transform: scale(0.8);
+				}
+				100% {
+				transform: scale(1);
+				}
+			}
+			body.loaded .overlay,
+			body.loaded .img_loader {
+				display: none;
+			}
 			.sm-search-div.show {
 				display: block !important;
 			}
@@ -67,18 +54,14 @@
 				gap: 10px;
 			}
 			:root {
-				--primary-color: {{store.colors.primary}}
-				;
-				--text-color-primary-bg: {{store.colors.text_of_primary_bg}}
-				;
-				--newsletter-color-bg: {{store.colors.primary}}2e
-				;
-
+				--primary-color: {{store.colors.primary}};
+				--text-color-primary-bg: {{store.colors.text_of_primary_bg}};
+				--newsletter-color-bg: {{store.colors.primary}}2e;
 				--sub-primary-color: #521B25;
 				--white-color: #fff;
 				--warning-color: #FFCF57;
 				--danger-color: #EC5550;
-				--sucess-color: #5AA788;
+				--success-color: #5AA788;
 				--black-color: #0000;
 				--secondary-color: #DEDEDE;
 				--secondary-color-alt0: #6B6B6B;
@@ -95,46 +78,32 @@
 				--secondary-color-alt11: #606060;
 				--secondary-color-alt12: #767676;
 				--secondary-color-alt13: #F8F8F8;
-				--
-				/* font-wieght */
 				--font-weight-sizeOne: 400;
-				--font-wieght-sizeTwo: 700;
-				--font-wieght-sizeThree: 600;
-				/* font-size */
+				--font-weight-sizeTwo: 700;
+				--font-weight-sizeThree: 600;
 				--font-size-forteen: 1.167;
 				--font-size-sixteen: 1.333;
 				--font-size-eighteen: 1.5;
-
 				--main-slider-height: 471.43px;
 				--main-slider-sm-height: 115px;
 			}
 			body,
 			html {
 				overflow-x: hidden !important;
-				
 			}
-			</style>
-
+		</style>
 		{% if session.lang.code == 'ar' %}
 			<link rel="stylesheet" type="text/css" href="{{ asset_url ~ 'bootstrap-rtl.css?v=1.05' }}"/>
 		{% else %}
 			<link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap.min.css?v=1.01') }}"/>
 		{% endif %}
-
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('bootstrap-fixes.css?v=1.11') }}"/>
-
-		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.structure.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.theme.min.css') }}"/>
-		
-		
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu.css') }}"/>
-
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}"/>
-
 		<link rel="stylesheet" href="{{ assetUrl('main.css?v=1.228') }}"/>
-
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_cat.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_fixed_bannar.css') }}"/>
@@ -143,780 +112,656 @@
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_commonQ.css') }}"/>
-		
-
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
-
 		{% if session.lang.code == 'ar' %}
 			<link rel="stylesheet" href="{{ assetUrl('main.rtl.css?v=1.25') }}">
 		{% endif %}
-
 		{% block top_links %}{% endblock %}
-
 		{% if user_custom_css %}
 			<link rel="stylesheet" href="{{ user_custom_css }}">
 		{% endif %}
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-		
 	</head>
-	
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
-		{# edit loader #}
 		{% if  settings.load_loader == "true" and template == 'home' %}
 			<div class="overlay">
 				<img src="{{ store.logo }}" class="img_loader" />
 			</div>
 		{% endif %}
-		
-
 		<div class="popup-product-details"></div>
-
 		{% if store.editing_mode %}
 			<link href="https://fonts.googleapis.com/css2?family={% if settings.fonts_name %}{{ settings.fonts_name }}{% else %}Changa{% endif %}:wght@300;400;500;700&display=swap" rel="stylesheet">
 		{% endif %}
 		<style>
 			body,
 			html {
-				font-family: {% if settings.fonts_name %}
-					{{strReplace('+', ' ', settings.fonts_name)}}
+				font-family: 
+				{% if settings.fonts_name %}
+					{{ strReplace('+', ' ', settings.fonts_name) }}
 				{% else %}
-					'Changa'{% endif %}, sans-serif;
+					'Changa'
+				{% endif %}, sans-serif;
 			}
-
 			:root {
 				{% if settings.colors_header_background_color %}
-					--header-primary-color: {{settings.colors_header_background_color}};
+				--header-primary-color: {{ settings.colors_header_background_color }};
 				{% endif %}
 				{% if settings.colors_header_menu_background_color %}
-					--menu-header-primary-color: {{settings.colors_header_menu_background_color}};
-					--header-primary-brightness: brightness(100%);
+				--menu-header-primary-color: {{ settings.colors_header_menu_background_color }};
+				--header-primary-brightness: brightness(100%);
 				{% elseif settings.colors_header_background_color %}
-					--menu-header-primary-color: {{settings.colors_header_background_color}};
-					--header-primary-brightness: brightness(80%);
+				--menu-header-primary-color: {{ settings.colors_header_background_color }};
+				--header-primary-brightness: brightness(80%);
 				{% endif %}
 				{% if settings.colors_header_menu_text_color %}
-					--menu-header-text-color-primary-bg: {{settings.colors_header_menu_text_color}};
+				--menu-header-text-color-primary-bg: {{ settings.colors_header_menu_text_color }};
 				{% elseif settings.colors_header_text_color %}
-					--menu-header-text-color-primary-bg: {{settings.colors_header_text_color}};
+				--menu-header-text-color-primary-bg: {{ settings.colors_header_text_color }};
 				{% endif %}
 				{% if settings.colors_header_text_color %}
-					--header-text-color-primary-bg: {{settings.colors_header_text_color}};
+				--header-text-color-primary-bg: {{ settings.colors_header_text_color }};
 				{% endif %}
 				{% if settings.colors_footer_background_color %}
-					--footer-primary-color: {{settings.colors_footer_background_color}};
+				--footer-primary-color: {{ settings.colors_footer_background_color }};
 				{% endif %}
 				{% if settings.colors_footer_text_color %}
-					--footer-text-color-primary-bg: {{settings.colors_footer_text_color}};
+				--footer-text-color-primary-bg: {{ settings.colors_footer_text_color }};
 				{% endif %}
 			}
 			{% if settings.coupon_item %}
-			.has_hidden_coupon {
-				display: none !important;
-			}
+				.has_hidden_coupon {
+					display: none !important;
+				}
 			{% endif %}
 		</style>
 		{% block top_body %}{% endblock %}
 		{% include 'slider_top.twig' with {'te_setting': settings} %}
-		<div class="visible  d-flex flex-column">
-			<div class="header po" style="z-index:1000">
-					{% block header %}{% endblock %}		
-				<div class="header-bottom hidden">
-					<a href="/" class="flex flex-col items-center justify-center gap-1 ">
-						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
-							<div class="relative shrink-0">
-								<svg style="" width="25" height="25" viewbox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M0.5 9.93841C0.5 8.71422 1.06058 7.55744 2.02142 6.79888L7.52142 2.45677C8.97466 1.30948 11.0253 1.30948 12.4786 2.45677L17.9786 6.79888C18.9394 7.55744 19.5 8.71422 19.5 9.93841V16.5C19.5 18.7091 17.7091 20.5 15.5 20.5H14C13.4477 20.5 13 20.0523 13 19.5V16.5C13 15.3954 12.1046 14.5 11 14.5H9C7.89543 14.5 7 15.3954 7 16.5V19.5C7 20.0523 6.55228 20.5 6 20.5H4.5C2.29086 20.5 0.5 18.7091 0.5 16.5L0.5 9.93841Z" stroke="#818181" stroke-width="1.5"/>
-								</svg>
-							</div>
-							<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
-								{{ locals.home_title }}
-							</div>
-						</div>
-					</a>
-					{# <p>{{ settings.logo_position}}</p> #}
-					
-					<a href="/auth/login" class="flex flex-col items-center justify-center gap-1 ">
-						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
-							<div class="relative shrink-0">
-								<i class="auth-login fa-regular fa-circle-user"></i>
-							</div>
-							<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
-								{{ locals.account }}
-							</div>
-						</div>
-					</a>
+		<div class="visible d-flex flex-column">
+		<div class="header po" style="z-index: 1000">
+			{% block header %}{% endblock %}
 
-					<a href="/products" class="flex flex-col items-center justify-center gap-1 ">
-						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
-							<div class="relative shrink-0">
-								<i class="fa-solid fa-cart-plus"></i>
-							</div>
-							<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
-								{{ locals.products }}
-							</div>
-						</div>
-					</a>
-
-					<a href="/cart/view" class="flex flex-col items-center justify-center gap-1 ">
-						<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
-							<div class="relative shrink-0">
-								<svg style="" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M9.11072 7.33643H16.3107C19.7107 7.33643 20.0507 8.92642 20.2807 10.8664L21.1807 18.3664C21.4707 20.8264 20.7107 22.8364 17.2107 22.8364H8.22072C4.71072 22.8364 3.95072 20.8264 4.25072 18.3664L5.15073 10.8664C5.37073 8.92642 5.71072 7.33643 9.11072 7.33643Z" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-									<path d="M8.71069 8.83643V5.33643C8.71069 3.83643 9.71069 2.83643 11.2107 2.83643H14.2107C15.7107 2.83643 16.7107 3.83643 16.7107 5.33643V8.83643" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-									<path d="M21.1207 17.8662H8.71069" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-								</svg>
-							</div>
-							<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
-								{{ locals.salla }}
-							</div>
-						</div>
-					</a>
-
+			<div class="header-bottom hidden">
+			<!-- Home Link -->
+			<a href="/" class="flex flex-col items-center justify-center gap-1">
+				<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
+				<div class="relative shrink-0">
+					<!-- Home Icon -->
+					<svg width="25" height="25" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0.5 9.93841C0.5 8.71422 1.06058 7.55744 2.02142 6.79888L7.52142 2.45677C8.97466 1.30948 11.0253 1.30948 12.4786 2.45677L17.9786 6.79888C18.9394 7.55744 19.5 8.71422 19.5 9.93841V16.5C19.5 18.7091 17.7091 20.5 15.5 20.5H14C13.4477 20.5 13 20.0523 13 19.5V16.5C13 15.3954 12.1046 14.5 11 14.5H9C7.89543 14.5 7 15.3954 7 16.5V19.5C7 20.0523 6.55228 20.5 6 20.5H4.5C2.29086 20.5 0.5 18.7091 0.5 16.5L0.5 9.93841Z" stroke="#818181" stroke-width="1.5"/>
+					</svg>
 				</div>
+				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
+					{{ locals.home_title }}
+				</div>
+				</div>
+			</a>
+
+			<!-- Login Link -->
+			<a href="/auth/login" class="flex flex-col items-center justify-center gap-1">
+				<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
+				<div class="relative shrink-0">
+					<i class="auth-login fa-regular fa-circle-user"></i>
+				</div>
+				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
+					{{ locals.account }}
+				</div>
+				</div>
+			</a>
+
+			<!-- Products Link -->
+			<a href="/products" class="flex flex-col items-center justify-center gap-1">
+				<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
+				<div class="relative shrink-0">
+					<i class="fa-solid fa-cart-plus"></i>
+				</div>
+				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
+					{{ locals.products }}
+				</div>
+				</div>
+			</a>
+
+			<!-- Cart Link -->
+			<a href="/cart/view" class="flex flex-col items-center justify-center gap-1">
+				<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
+				<div class="relative shrink-0">
+					<!-- Cart Icon -->
+					<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M9.11072 7.33643H16.3107C19.7107 7.33643 20.0507 8.92642 20.2807 10.8664L21.1807 18.3664C21.4707 20.8264 20.7107 22.8364 17.2107 22.8364H8.22072C4.71072 22.8364 3.95072 20.8264 4.25072 18.3664L5.15073 10.8664C5.37073 8.92642 5.71072 7.33643 9.11072 7.33643Z" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M8.71069 8.83643V5.33643C8.71069 3.83643 9.71069 2.83643 11.2107 2.83643H14.2107C15.7107 2.83643 16.7107 3.83643 16.7107 5.33643V8.83643" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M21.1207 17.8662H8.71069" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</div>
+				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
+					{{ locals.salla }}
+				</div>
+				</div>
+			</a>
 			</div>
-				<div class="main flex-grow-1 app-content {% if template != 'home' %} p-header {% endif %}" {% if settings.colors_background_image %} style="background-repeat: repeat;  background-image: url('{{ settings.colors_background_image }}');" {% endif %}> {% block main_content %}{% endblock %}
-					</div>
-				     {# <p>{{settings}}</p> #}
-					 {% if template == 'home'  %}
-	               	 	{% include 'discount_popup.twig'  with {'discount': settings} %}  
-					 {% endif %}
-					<div class="salla-side-bar" ></div>
-					<div class="footer"> {% block footer %}{% endblock %}
-						</div>
-						{% block footer_sticky %}{% endblock %}
-					</div>
-
-					{{ zidapi_script|raw }}
-
-
-<script>
-
-window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
-
-window.loadToasterScriptIfNotLoaded = function (onCompleted) {
-    var list = document.getElementsByTagName('script');
-    var i = list.length,
-        flag = false;
-
-    while (i--) {
-        if (list[i].src === "{{ asset_url ~ 'toastr.min.js' }}") {
-            flag = true;
-            break;
-        }
-    }
-
-    if (!flag) {
-        var script = document.createElement('script');
-        script.src = "{{ asset_url ~ 'toastr.min.js' }}";
-        document.getElementsByTagName('head')[0].appendChild(script);
-
-        var fileref = document.createElement("link");
-        fileref.rel = "stylesheet";
-        fileref.type = "text/css";
-        fileref.href = "{{ asset_url ~ 'toastr.min.css' }}";
-        document.getElementsByTagName("head")[0].appendChild(fileref);
-
-        script.onload = function () {
-            if (onCompleted) onCompleted();
-        };
-    } else {
-        if (onCompleted) onCompleted();
-    }
-}
-
-
-</script>
-
-
-				<style>:root
-					{
-						--title-bg: url({{settings.titlebg_image}});
-					}
-				</style>
-				<script src="{{ assetUrl('jquery-3.6.0.min.js?v=1.0.0') }}"></script>
-
-				<script src="{{ assetUrl('jquery-ui.min.js') }}"></script>
-
-				<script src="{{ assetUrl('popper.min.js?v=1.0') }}"></script>
-				<script src="{{ assetUrl('bootstrap.min.js') }}"></script>
-
-				<script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}"></script>
-
-				<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-
-				<script type="text/javascript" src="{{ assetUrl('main.js?v=1.159') }}"></script>
-
-				{# Local storage #}
-				
-
-				<!-- Initialize Swiper -->
-				<link
-				rel="stylesheet"
-				href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-				/>				
-				<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-				
-				{% block footer_scripts %}{% endblock %}
-				
-
-
-				<script>
+		</div>
+		<div class="main flex-grow-1 app-content {% if template != 'home' %} p-header {% endif %}"
+			{% if settings.colors_background_image %}
+			style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');"
+			{% endif %}
+		>
+			{% block main_content %}{% endblock %}
+		</div>
+		{% if template == 'home' %}
+			{% include 'discount_popup.twig' with {'discount': settings} %}
+		{% endif %}
+		<div class="salla-side-bar"></div>
+		<div class="footer">
+			{% block footer %}{% endblock %}
+		</div>
+		{% block footer_sticky %}{% endblock %}
+		</div>
+		{{ zidapi_script|raw }}
+		<script>
+			window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
+			window.loadToasterScriptIfNotLoaded = function (onCompleted) {
+				const scriptAlreadyLoaded = Array.from(document.getElementsByTagName('script')).some(script =>
+				script.src === "{{ asset_url ~ 'toastr.min.js' }}"
+				);
+				if (!scriptAlreadyLoaded) {
+				const script = document.createElement('script');
+				script.src = "{{ asset_url ~ 'toastr.min.js' }}";
+				script.onload = function () {
+					if (onCompleted) onCompleted();
+				};
+				document.head.appendChild(script);
+				const style = document.createElement('link');
+				style.rel = 'stylesheet';
+				style.type = 'text/css';
+				style.href = "{{ asset_url ~ 'toastr.min.css' }}";
+				document.head.appendChild(style);
+				} else {
+				if (onCompleted) onCompleted();
+				}
+			};
+		</script>
+		<style>
+			:root{
+				--title-bg: url({{settings.titlebg_image}});
+			}
+		</style>
+		<script src="{{ assetUrl('jquery-3.6.0.min.js?v=1.0.0') }}"></script>
+		<script src="{{ assetUrl('jquery-ui.min.js') }}"></script>
+		<script src="{{ assetUrl('popper.min.js?v=1.0') }}"></script>
+		<script src="{{ assetUrl('bootstrap.min.js') }}"></script>
+		<script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}"></script>
+		<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+		<script type="text/javascript" src="{{ assetUrl('main.js?v=1.159') }}"></script>
+		<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+		/>				
+		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+		{% block footer_scripts %}{% endblock %}
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const overlay = document.querySelector(".overlay");
+				overlay.style.display = 'flex';
+			});
+			window.addEventListener('load', function() {
+				const overlay = document.querySelector(".overlay").style.display = 'none';
+				const logo = document.querySelecto(".img_loader").style.display = 'none';
+			});
+			let cartBtn = document.querySelector(".a-shopping-cart");
+			let slideBar = document.querySelector('.salla-side-bar');
+			cartBtn.onclick = async(event) => {
+				event.stopPropagation(); // Prevents the event from bubbling to `document`
+				await fetchData();
+				slideBar.style.display = 'block';
+			};
+			document.addEventListener("click", function (event) {
+				if (!slideBar.contains(event.target) && event.target !== cartBtn) {
 					
-				document.addEventListener('DOMContentLoaded', function() {
-					const overlay = document.querySelector(".overlay");
-					overlay.style.display = 'flex';
-				});
-
-				window.addEventListener('load', function() {
-					const overlay = document.querySelector(".overlay").style.display = 'none';
-					const logo = document.querySelecto(".img_loader").style.display = 'none';
-				});
-
-
-
-
-	//side cart 
-	let cartBtn = document.querySelector(".a-shopping-cart");
-    let slideBar = document.querySelector('.salla-side-bar');
-
-    // Show sidebar when clicking the cart button
-    cartBtn.onclick = async(event) => {
-        event.stopPropagation(); // Prevents the event from bubbling to `document`
-		await fetchData();
-        slideBar.style.display = 'block';
-    };
-
-    // Hide sidebar when clicking anywhere outside of it
-    document.addEventListener("click", function (event) {
-        // Check if the click is outside both the sidebar and the cart button
-        if (!slideBar.contains(event.target) && event.target !== cartBtn) {
-			
-            slideBar.style.display = 'none';
-        }
-    });
-
-    // Prevent sidebar from hiding when clicking inside it
-    slideBar.onclick = (event) => {
-        event.stopPropagation();
-    };
-			
-
-			 //  funtion of side bar
-			 let sallaSideBar = document.querySelector('.salla-side-bar');
-
-			 async function fetchData() {
-        try {
-            // Fetch the data with zid store
-            let data = await zid.store.cart.fetch();
-				console.log(data);
-            function updateSidebar() {
-                // Check if there are no products 
-                if (data.data.cart.products.length === 0) {
-                  sallaSideBar.innerHTML = `
-                      <div style="display:flex; align-items:center;margin-inline:15px;"> 
-                          <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
-                              viewBox="0 0 512 512"
-                              style="cursor: pointer;">
-                              <path fill="var(--primary-color)"
-                                  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-                          </svg>
-                          <h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
-                      </div>
-                      <hr>
-                      <div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
-                        <img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
-                        <p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
-                      </div>
-                  `;
-				
-                  const closeButton = sallaSideBar.querySelector('.close-sidebar');
-                  closeButton.addEventListener('click', function() {
-                      sallaSideBar.style.display = 'none';
-                  });
-                 return;
-              }
-
-
-                let productsHTML = `
-                    <div style="display:flex; align-items:center; padding-right: 10px; position: sticky; top: 0; background-color: #fff; box-shadow: -5px -12px 13px 9px #00000075;">
-                        <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
-                            viewBox="0 0 512 512"
-                            style="cursor: pointer;">
-                            <path fill="#ce5a67"
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-                        </svg>
-                        <h1 style="padding: 20px; ">  {{ locals.salla_shops }}  </h1>
-                    </div>
-                    
-                    `;
-                
-                // Loop over products to create the product HTML
-                data.data.cart.products.forEach((product, index) => {
-                    let imagesHTML = '';
-                    product.images.forEach(image => {
-                        imagesHTML += `<img src="${image.origin}" alt="${product.name}" style="width: 95px; height: auto;"/>`;
-                    });
-
-                    productsHTML += `
-					<div style="height:80vh">
-                        <div class="product">
-                           <a href="${product.url}"> 
-						    <div class="product-images">${imagesHTML}</div>
-							</a>							
-							<div class="text_cart" style="display:flex; flex-direction:column; align-items:center;">
-							<a href="${product.url}">
-                                <p>${product.name}</p>
-							</a>	
-                                <div class="prices" style="display:flex; align-items:center; gap:15px;">
-                                    <p style="text-decoration:line-through; color:#ce5a67;"> ${product.price_before_string ? "Price:" + product.price_before_string : ""}</p>
-                                    <p>Price: ${product.price_string}</p>
-                                </div>
-                            </div>
-                            <svg class="remove-btn" data-index="${index}" data-product-id="${product.id}" xmlns="http://www.w3.org/2000/svg" height="25" width="25"
-                                viewBox="0 0 512 512"
-                                style="cursor: pointer;">
-                                <path fill="#ce5a67"
-                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6-9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-                            </svg>
-                        </div> 
-                        </div> 
-                        <hr>
-                    `;
-                });async function fetchData() {
-					try {
-						// Fetch the data with zid store
-						let data = await zid.store.cart.fetch();
-							console.log(data);
-						function updateSidebar() {
-							// Check if there are no products 
-							if (data.data.cart.products.length === 0) {
-							  sallaSideBar.innerHTML = `
-								  <div style="display:flex; align-items:center;margin-inline:15px;"> 
-									  <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
-										  viewBox="0 0 512 512"
-										  style="cursor: pointer;">
-										  <path fill="#ce5a67"
-											  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-									  </svg>
-									  <h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
-								  </div>
-								  <hr>
-								  <div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
-									<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
-									<p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
-								  </div>
-							  `;
-							
-							  const closeButton = sallaSideBar.querySelector('.close-sidebar');
-							  closeButton.addEventListener('click', function() {
-								  sallaSideBar.style.display = 'none';
-							  });
-							 return;
-						  }
-			
-			
-							let productsHTML = `
-								<div style="display:flex; align-items:center; padding-right: 10px; position: sticky; top: 0; background-color: #fff; box-shadow: -5px -12px 13px 9px #00000075;">
+					slideBar.style.display = 'none';
+				}
+			});
+			slideBar.onclick = (event) => {
+				event.stopPropagation();
+			};
+			let sallaSideBar = document.querySelector('.salla-side-bar');
+			async function fetchData() {
+				try {
+					let data = await zid.store.cart.fetch();
+					console.log(data);
+					function updateSidebar() {
+						if (data.data.cart.products.length === 0) {
+							sallaSideBar.innerHTML = `
+								<div style="display:flex; align-items:center;margin-inline:15px;"> 
 									<svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
 										viewBox="0 0 512 512"
 										style="cursor: pointer;">
-										<path fill="#ce5a67"
-											d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+										<path fill="var(--primary-color)"
+											d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
 									</svg>
-									<h1 style="padding: 20px; ">  {{ locals.salla_shops }}  </h1>
+									<h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
 								</div>
-								
-								`;
+								<hr>
+								<div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
+									<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
+									<p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
+								</div>
+							`;
 							
-							// Loop over products to create the product HTML
-							data.data.cart.products.forEach((product, index) => {
-								let imagesHTML = '';
-								product.images.forEach(image => {
-									imagesHTML += `<img src="${image.origin}" alt="${product.name}" style="width: 95px; height: auto;"/>`;
-								});
-			
-								productsHTML += `
-									<div class="product">
-									   <a href="${product.url}"> 
-										<div class="product-images">${imagesHTML}</div>
-										</a>							
-										<div class="text_cart" style="display:flex; flex-direction:column; align-items:center;">
-										<a href="${product.url}">
-											<p>${product.name}</p>
-										</a>	
-											<div class="prices" style="display:flex; align-items:center; gap:15px;">
-												<p style="text-decoration:line-through; color:#ce5a67;"> ${product.price_before_string ? "Price:" + product.price_before_string : ""}</p>
-												<p>Price: ${product.price_string}</p>
-											</div>
-										</div>
-										<svg class="remove-btn" data-index="${index}" data-product-id="${product.id}" xmlns="http://www.w3.org/2000/svg" height="25" width="25"
-											viewBox="0 0 512 512"
-											style="cursor: pointer;">
-											<path fill="#ce5a67"
-												d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6-9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-										</svg>
-									</div> 
-									<hr>
-								`;
-							});
-			
-							productsHTML += `<a href="/cart/view" style="position:fixed; bottom:2%; width:-webkit-fill-available;border-radius:10px; color:#fff; background-color:#ce5a67; padding:10px 25px; text-align:center; font-size:19px; box-shadow: 0px 0px 4px 0px #363131; margin-inline:20px;">  {{locals.go_cart}} </a>`
-			
-							sallaSideBar.innerHTML = productsHTML;
-			
-							// Add event listeners to each delete button
-							sallaSideBar.querySelectorAll('.remove-btn').forEach(button => {
-								button.addEventListener('click', async function () {
-									const productId = button.getAttribute('data-product-id');
-									
-									// Call the API to remove the product from the server-side cart
-									try {
-										await zid.store.cart.removeProduct(productId);
-										
-										// Remove the product locally from the array
-										const index = parseInt(button.getAttribute('data-index'));
-										data.data.cart.products.splice(index, 1);
-			
-										// Refresh the sidebar content
-										updateSidebar();
-									} catch (error) {
-										console.error('Error removing product from cart:', error);
-									}
-								});
-							});
-			
-							// Add event listener to close the sidebar
 							const closeButton = sallaSideBar.querySelector('.close-sidebar');
 							closeButton.addEventListener('click', function() {
 								sallaSideBar.style.display = 'none';
 							});
+							return;
 						}
-			
-						updateSidebar();
-			
-					} catch (error) {
-						sallaSideBar.innerHTML = `
-								  <div style="display:flex; align-items:center;margin-inline:15px;"> 
-									  <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
-										  viewBox="0 0 512 512"
-										  style="cursor: pointer;">
-										  <path fill="#ce5a67"
-											  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-									  </svg>
-									  <h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
-								  </div>
-								 
-								  <div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
-									<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
-									<p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
-								  </div>
-							  `;
+						let productsHTML = `
+							<div style="display:flex; align-items:center; padding-right: 10px; position: sticky; top: 0; background-color: #fff; box-shadow: -5px -12px 13px 9px #00000075;">
+								<svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
+									viewBox="0 0 512 512"
+									style="cursor: pointer;">
+									<path fill="#ce5a67"
+										d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+								</svg>
+								<h1 style="padding: 20px; ">  {{ locals.salla_shops }}  </h1>
+							</div>
+							
+							`;
+						
+						data.data.cart.products.forEach((product, index) => {
+							let imagesHTML = '';
+							product.images.forEach(image => {
+								imagesHTML += `<img src="${image.origin}" alt="${product.name}" style="width: 95px; height: auto;"/>`;
+							});
+
+							productsHTML += `
+							<div style="height:80vh">
+								<div class="product">
+								<a href="${product.url}"> 
+									<div class="product-images">${imagesHTML}</div>
+									</a>							
+									<div class="text_cart" style="display:flex; flex-direction:column; align-items:center;">
+									<a href="${product.url}">
+										<p>${product.name}</p>
+									</a>	
+										<div class="prices" style="display:flex; align-items:center; gap:15px;">
+											<p style="text-decoration:line-through; color:#ce5a67;"> ${product.price_before_string ? "Price:" + product.price_before_string : ""}</p>
+											<p>Price: ${product.price_string}</p>
+										</div>
+									</div>
+									<svg class="remove-btn" data-index="${index}" data-product-id="${product.id}" xmlns="http://www.w3.org/2000/svg" height="25" width="25"
+										viewBox="0 0 512 512"
+										style="cursor: pointer;">
+										<path fill="#ce5a67"
+											d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6-9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+									</svg>
+								</div> 
+								</div> 
+								<hr>
+							`;
+						});
+						async function fetchData() {
+							try {
+								// Fetch the data with zid store
+								let data = await zid.store.cart.fetch();
+									console.log(data);
+								function updateSidebar() {
+									// Check if there are no products 
+									if (data.data.cart.products.length === 0) {
+									sallaSideBar.innerHTML = `
+										<div style="display:flex; align-items:center;margin-inline:15px;"> 
+											<svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
+												viewBox="0 0 512 512"
+												style="cursor: pointer;">
+												<path fill="#ce5a67"
+													d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+											</svg>
+											<h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
+										</div>
+										<hr>
+										<div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
+											<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
+											<p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
+										</div>
+									`;
+									
+									const closeButton = sallaSideBar.querySelector('.close-sidebar');
+									closeButton.addEventListener('click', function() {
+										sallaSideBar.style.display = 'none';
+									});
+									return;
+								}
+					
+					
+									let productsHTML = `
+										<div style="display:flex; align-items:center; padding-right: 10px; position: sticky; top: 0; background-color: #fff; box-shadow: -5px -12px 13px 9px #00000075;">
+											<svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
+												viewBox="0 0 512 512"
+												style="cursor: pointer;">
+												<path fill="#ce5a67"
+													d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+											</svg>
+											<h1 style="padding: 20px; ">  {{ locals.salla_shops }}  </h1>
+										</div>
+										
+										`;
+									
+									// Loop over products to create the product HTML
+									data.data.cart.products.forEach((product, index) => {
+										let imagesHTML = '';
+										product.images.forEach(image => {
+											imagesHTML += `<img src="${image.origin}" alt="${product.name}" style="width: 95px; height: auto;"/>`;
+										});
+					
+										productsHTML += `
+											<div class="product">
+											<a href="${product.url}"> 
+												<div class="product-images">${imagesHTML}</div>
+												</a>							
+												<div class="text_cart" style="display:flex; flex-direction:column; align-items:center;">
+												<a href="${product.url}">
+													<p>${product.name}</p>
+												</a>	
+													<div class="prices" style="display:flex; align-items:center; gap:15px;">
+														<p style="text-decoration:line-through; color:#ce5a67;"> ${product.price_before_string ? "Price:" + product.price_before_string : ""}</p>
+														<p>Price: ${product.price_string}</p>
+													</div>
+												</div>
+												<svg class="remove-btn" data-index="${index}" data-product-id="${product.id}" xmlns="http://www.w3.org/2000/svg" height="25" width="25"
+													viewBox="0 0 512 512"
+													style="cursor: pointer;">
+													<path fill="#ce5a67"
+														d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4-9.4-24.6-9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+												</svg>
+											</div> 
+											<hr>
+										`;
+									});
+					
+									productsHTML += `<a href="/cart/view" style="position:fixed; bottom:2%; width:-webkit-fill-available;border-radius:10px; color:#fff; background-color:#ce5a67; padding:10px 25px; text-align:center; font-size:19px; box-shadow: 0px 0px 4px 0px #363131; margin-inline:20px;">  {{locals.go_cart}} </a>`
+					
+									sallaSideBar.innerHTML = productsHTML;
+					
+									// Add event listeners to each delete button
+									sallaSideBar.querySelectorAll('.remove-btn').forEach(button => {
+										button.addEventListener('click', async function () {
+											const productId = button.getAttribute('data-product-id');
+											
+											// Call the API to remove the product from the server-side cart
+											try {
+												await zid.store.cart.removeProduct(productId);
+												
+												// Remove the product locally from the array
+												const index = parseInt(button.getAttribute('data-index'));
+												data.data.cart.products.splice(index, 1);
+					
+												// Refresh the sidebar content
+												updateSidebar();
+											} catch (error) {
+												console.error('Error removing product from cart:', error);
+											}
+										});
+									});
+					
+									// Add event listener to close the sidebar
+									const closeButton = sallaSideBar.querySelector('.close-sidebar');
+									closeButton.addEventListener('click', function() {
+										sallaSideBar.style.display = 'none';
+									});
+								}
+					
+								updateSidebar();
+					
+							} catch (error) {
+								sallaSideBar.innerHTML = `
+										<div style="display:flex; align-items:center;margin-inline:15px;"> 
+											<svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
+												viewBox="0 0 512 512"
+												style="cursor: pointer;">
+												<path fill="#ce5a67"
+													d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+											</svg>
+											<h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
+										</div>
+										
+										<div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
+											<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
+											<p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
+										</div>
+									`;
+							}
+						}
+						productsHTML += `<div style="position: sticky; bottom: 0; background: #fff; padding: 20px; box-shadow: 0px -4px 8px rgba(0,0,0,0.05);">
+										<a href="/cart/view" style="display: block; background: #ce5a67; color: #fff; border-radius: 10px; text-align: center; padding: 12px 0; font-size: 18px;">
+											{{ locals.go_cart }}
+										</a>
+										</div>
+										`
+
+						sallaSideBar.innerHTML = productsHTML;
+						sallaSideBar.querySelectorAll('.remove-btn').forEach(button => {
+							button.addEventListener('click', async function () {
+								const productId = button.getAttribute('data-product-id');
+								try {
+									await zid.store.cart.removeProduct(productId);
+									const index = parseInt(button.getAttribute('data-index'));
+									data.data.cart.products.splice(index, 1);
+									updateSidebar();
+								} catch (error) {
+									console.error('Error removing product from cart:', error);
+								}
+							});
+						});
+						const closeButton = sallaSideBar.querySelector('.close-sidebar');
+						closeButton.addEventListener('click', function() {
+							sallaSideBar.style.display = 'none';
+						});
 					}
+					updateSidebar();
+				} catch (error) {
+					sallaSideBar.innerHTML = `
+							<div style="display:flex; align-items:center;margin-inline:15px;"> 
+								<svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
+									viewBox="0 0 512 512"
+									style="cursor: pointer;">
+									<path fill="#ce5a67"
+										d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+								</svg>
+								<h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
+							</div>
+							<hr>
+							<div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
+								<img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
+								<p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
+							</div>
+						`;
 				}
-
-				productsHTML += `<div style="position: sticky; bottom: 0; background: #fff; padding: 20px; box-shadow: 0px -4px 8px rgba(0,0,0,0.05);">
-  <a href="/cart/view" style="display: block; background: #ce5a67; color: #fff; border-radius: 10px; text-align: center; padding: 12px 0; font-size: 18px;">
-    {{ locals.go_cart }}
-  </a>
-</div>
-`
-
-                sallaSideBar.innerHTML = productsHTML;
-
-                // Add event listeners to each delete button
-                sallaSideBar.querySelectorAll('.remove-btn').forEach(button => {
-                    button.addEventListener('click', async function () {
-                        const productId = button.getAttribute('data-product-id');
-                        
-                        // Call the API to remove the product from the server-side cart
-                        try {
-                            await zid.store.cart.removeProduct(productId);
-                            
-                            // Remove the product locally from the array
-                            const index = parseInt(button.getAttribute('data-index'));
-                            data.data.cart.products.splice(index, 1);
-
-                            // Refresh the sidebar content
-                            updateSidebar();
-                        } catch (error) {
-                            console.error('Error removing product from cart:', error);
-                        }
-                    });
-                });
-
-                // Add event listener to close the sidebar
-                const closeButton = sallaSideBar.querySelector('.close-sidebar');
-                closeButton.addEventListener('click', function() {
-                    sallaSideBar.style.display = 'none';
-                });
-            }
-
-            updateSidebar();
-
-        } catch (error) {
-			sallaSideBar.innerHTML = `
-                      <div style="display:flex; align-items:center;margin-inline:15px;"> 
-                          <svg class="close-sidebar" xmlns="http://www.w3.org/2000/svg" height="30" width="30"
-                              viewBox="0 0 512 512"
-                              style="cursor: pointer;">
-                              <path fill="#ce5a67"
-                                  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
-                          </svg>
-                          <h1 style="padding: 20px; margin-top: 10px;"> {{ locals.salla_shops }}</h1>
-                      </div>
-                      <hr>
-                      <div style="display:flex; align-items:center; justify-content:center; height: 75%; flex-direction:column;">
-                        <img src="{{ asset_url ~ 'emptysalla.png' }}" loading="lazy" alt="emptysalla" width="auto" height="auto">
-                        <p style="text-align:center; padding:20px; font-size:18px; color:#ce5a67;"> {{ locals.empty_salla }} </p>
-                      </div>
-                  `;
-        }
-    }
-
-
-
-	
-  document.addEventListener('DOMContentLoaded', function () {
-    
-    fetchData();
-});
-
-
-				</script>
-			</body>
-
-
-		</html>
-
-
-{% block header_bottom %}
-	<style>
-	
-		.auth-login {
-			font-size: 21px;
-		}
-
-		.text-header-bottom {
-			width: fit-content;
-		}
-
-		.show-stars {
-			position: relative;
-			
-		}
-.show-stars:before {
-    opacity: 0;
-    content: "";
-    background-image: url({{settings.stars_icon}}); 
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    left: 8px;
-    top: 8px;
-    transition: opacity 0.3s ease; 
-}
-
-.show-stars:after {
-    opacity: 0;
-    content: "";
-    background-image: url({{settings.stars_icon}}); 
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    right: 8px;
-    bottom: 8px;
-    transition: opacity 0.3s ease; 
-}
-	</style>
-{% endblock %}
+			}
+			document.addEventListener('DOMContentLoaded', function () {
+				fetchData();
+			});
+		</script>
+	</body>
+</html>
 
 <style>
- .p-header{
-		padding-top:100px ;
-	  }
-		.salla-side-bar {
-			position: fixed;
-			height: 100%;
-			left: 0;
-			top: 0;
-			background-color: #fff;
-			border-radius: 4px;
-			box-shadow: 0px 0px 0px 2000px rgba(0, 0, 0, 0.5);
-			overflow-y: auto;
-			z-index: 99999;
-			width: 0;
-			animation: move 0.4s ease forwards; 
-			display: none;
-			padding-bottom: 0px;
-		}
-		.salla-side-bar	.text_cart {
-			font-size:16px;
-			color:#000;
-			max-width: 350px;
-		}
-		.salla-side-bar	 .product{
-			padding:10px; 
-			display: flex; 
-			align-items: center; 
-			text-align: center; 
-			justify-content: space-between;
-			margin: 10px;
-		}
-		.header-bottom {
-			display: none;
-		}
+	.auth-login {
+		font-size: 21px;
+	}
+	.text-header-bottom {
+		width: fit-content;
+	}
+	.show-stars {
+		position: relative;
+	}
+	.show-stars:before {
+		opacity: 0;
+		content: "";
+		background-image: url({{settings.stars_icon}});
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		background-size: contain;
+		background-repeat: no-repeat;
+		left: 8px;
+		top: 8px;
+		transition: opacity 0.3s ease;
+	}
+	.show-stars:after {
+		opacity: 0;
+		content: "";
+		background-image: url({{settings.stars_icon}});
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		background-size: contain;
+		background-repeat: no-repeat;
+		right: 8px;
+		bottom: 8px;
+		transition: opacity 0.3s ease;
+	}
+	.p-header {
+		padding-top: 100px;
+	}
+	.salla-side-bar {
+		position: fixed;
+		height: 100%;
+		left: 0;
+		top: 0;
+		background-color: #fff;
+		border-radius: 4px;
+		box-shadow: 0px 0px 0px 2000px rgba(0, 0, 0, 0.5);
+		overflow-y: auto;
+		z-index: 99999;
+		width: 0;
+		animation: move 0.4s ease forwards;
+		display: none;
+		padding-bottom: 0px;
+	}
+	.salla-side-bar .text_cart {
+		font-size: 16px;
+		color: #000;
+		max-width: 350px;
+	}
+	.salla-side-bar .product {
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		justify-content: space-between;
+		margin: 10px;
+	}
+	.header-bottom {
+		display: none;
+	}
 	@keyframes move {
-    from {
-      width: 0;
-    }
-    to {
-      width: 40%; 
-    }
-  }
-  @media (max-width:768px){
-    @keyframes move {
-      from {
-        width: 0;
-      }
-      to {
-        width: 90%; 
-      }
-    }
-  }
-  @media (max-width:425px){
-    @keyframes move {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%; 
-      }
-    }
-	.salla-side-bar	.text_cart{
-			font-size: 13px;
-			max-width: 170px;
+		from {
+		width: 0;
 		}
-  }
-  
-		@media (max-width: 765px) {
-			.header-bottom {
-				display: flex;
-				gap: 20px;
-				justify-content: space-around;
-				align-items: center;
-				padding: 10px;
-				width: 100%;
-				height: 60px;
-				background-color: #FFF;
-				position: fixed;
-				bottom: 0;
-				left: 0;
-				z-index: 33;
+		to {
+		width: 40%;
+		}
+	}
+	@media (max-width: 768px) {
+		@keyframes move {
+			from {
+				width: 0;
 			}
-		.salla-side-bar	.text_cart{
+			to {
+				width: 90%;
+			}
+		}
+		.salla-side-bar .text_cart {
 			font-size: 13px;
 			max-width: 225px;
 		}
-
+		.header-bottom {
+			display: flex;
+			gap: 20px;
+			justify-content: space-around;
+			align-items: center;
+			padding: 10px;
+			width: 100%;
+			height: 60px;
+			background-color: #fff;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			z-index: 33;
 		}
-@media (max-width:425px){
-    
-	.salla-side-bar	.text_cart{
+	}
+	@media (max-width: 425px) {
+		@keyframes move {
+			from {
+				width: 0;
+			}
+			to {
+				width: 100%;
+			}
+		}
+		.salla-side-bar .text_cart {
 			font-size: 13px;
 			max-width: 170px;
 		}
-	.salla-side-bar .product{
-		padding: 10px 10px 10px 5px;
-
+		.salla-side-bar .product {
+			padding: 10px 10px 10px 5px;
+		}
 	}
-  }
+	.product-item .pr-img {
+		width: 100%;
+		height: 100%;
+		align-items: center;
+	}
+	{% if settings.image_control_item %}
+	.product-item .pr-img img {
+		height: 100% !important;
+		width: auto !important;
+	}
+	{% else %}
+	.product-item .pr-img img {
+		width: 100% !important;
+		height: auto !important;
+	}
+	{% endif %}
+	{% if settings.android_store_url | length %}
+	.android-store,
+	.btn-img > p,
+	.pra_hide {
+		display: block;
+	}
+	{% endif %}
+	{% if settings.mac_store_url | length %}
+	.mac-store,
+	.btn-img > p,
+	.pra_hide {
+		display: block;
+	}
+	{% endif %}
+	{% if settings.logo_card_logo_position == 'top_right' %}
+	.up-pr-photo {
+		right: 6px;
+		top: 6px;
+	}
+	{% endif %}
+	{% if settings.logo_card_logo_position == 'top_left' %}
+	.up-pr-photo {
+		left: 6px;
+		top: 6px;
+	}
+	{% endif %}
+	{% if settings.logo_card_logo_position == 'bottom_right' %}
+	.up-pr-photo {
+		right: 6px;
+		bottom: 6px;
+	}
+	{% endif %}
+	{% if settings.logo_card_logo_position == 'bottom_left' %}
+	.up-pr-photo {
+		left: 6px;
+		bottom: 6px;
+	}
+	{% endif %}
 </style>
-	<style>
-		.product-item .pr-img{
-			width:100%;
-			height:100%;
-			align-items: center;
-		}
-</style>
-{% if settings.image_control_item %}
-	<style>
-		.product-item .pr-img img{
-			height: 100% !important;
-			width: auto !important;
-		}
-	</style>
-{% else %}
-	<style>
-		.product-item .pr-img img{
-			width: 100% !important;
-			height: auto !important;
-		}
-	</style>
 
-{% endif %}
-	
-{% if settings.android_store_url | length %}
-	<style>
-		.android-store {
-			display:block;
-		}
-		.btn-img > p  , .pra_hide{
-			display:block;
-		}
-	</style>
-{% endif %}
-{% if settings.mac_store_url | length %}
-	<style>
-		.mac-store {
-			display:block;
-		}
-		.btn-img > p , .pra_hide{
-			display:block; 
-		}
-	</style>
-{% endif %}
-
-{% if settings.logo_card_logo_position == 'top_right' %}
-	<style>
-		.up-pr-photo {
-			right:6px;
-			top:6px;
-		}
-	</style>
-{% endif %}
-{% if settings.logo_card_logo_position == 'top_left' %}
-	<style>
-		.up-pr-photo{
-			left:6px;
-			top:6px;
-		}
-	</style>
-{% endif %}
-{% if settings.logo_card_logo_position == 'bottom_right' %}
-	<style>
-		.up-pr-photo{
-			right:6px;
-			bottom:6px;
-		}
-	</style>
-{% endif %}
-{% if settings.logo_card_logo_position == 'bottom_left' %}
-	<style>
-		.up-pr-photo{
-			left:6px;
-			bottom:6px;
-		}
-	</style>
-{% endif %}
-
-	{% schema %}
-	{
+{% schema %}
+{
 	"load": {
 		"name": {
 			"ar": "التحميل",
@@ -959,57 +804,64 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		"icon": "font_awesome",
 		"expandable": true,
 		"settings": {
-		"is_sidebar": {
-			"type": "checkbox",
-			"label": {
-			"ar": "تفعيل الشريط العلوي",
-			"en": "Activate the Top Slider"
-			}
-		},
-		"text_list": {
-			"type": "list",
-			"label": {
-			"ar": "قائمة نصوص الشريط",
-			"en": "Slider Text List"
-			},
-			"settings": {
-			"image": {
-				"type": "image",
+			"is_sidebar": {
+				"type": "checkbox",
 				"label": {
-				"ar": "أيقونة",
-				"en": "Icon"
+				"ar": "تفعيل الشريط العلوي",
+				"en": "Activate the Top Slider"
 				}
 			},
-			"title": {
-				"type": "text",
+			"text_list": {
+				"type": "list",
 				"label": {
-				"ar": "النص الرئيسي",
-				"en": "Main Text"
+				"ar": "قائمة نصوص الشريط",
+				"en": "Slider Text List"
+				},
+				"settings": {
+				"image": {
+					"type": "image",
+					"label": {
+					"ar": "أيقونة",
+					"en": "Icon"
+					}
+				},
+				"title": {
+					"type": "text",
+					"label": {
+					"ar": "النص الرئيسي",
+					"en": "Main Text"
+					}
+				},
+				"featured_text": {
+					"type": "text",
+					"label": {
+					"ar": "النص المميز",
+					"en": "Featured Text"
+					}
+				},
+				"featured_text_color": {
+					"type": "color",
+					"label": {
+					"ar": "لون النص المميز",
+					"en": "color featured Text"
+					}
+				},
+				"link": {
+					"type": "url",
+					"label": {
+					"ar": "رابط",
+					"en": "URL"
+					}
+				}
 				}
 			},
-			"featured_text": {
-				"type": "text",
-				"label": {
-				"ar": "النص المميز",
-				"en": "Featured Text"
-				}
-			},
-			"featured_text_color": {
+			"header_icons_color": {
 				"type": "color",
 				"label": {
-				"ar": "لون النص المميز",
-				"en": "color featured Text"
-				}
-			},
-			"link": {
-				"type": "url",
-				"label": {
-				"ar": "رابط",
-				"en": "URL"
+					"ar": " لون ايكونات الهيدر",
+					"en": "header icons color"
 				}
 			}
-			}
-		}
 		}
 	},
 	"colors": {
@@ -1341,25 +1193,24 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			}
 		}
 	},
-     "stars": {
-      "type": "fieldset",
-      "name": {
-        "ar": "اضافه صورة ايقون",
-        "en": "add image icon"
-      },
-      "expandable": true,
-      "settings": {
-  	  "icon": {
-		    "type": "image",
-            "label": {
-              "ar": "صورة الايقون تظهر في بعض الازرار",
-              "en": "Icon image on some buttons"
-            }
-         }
-	  }
-
-     },
-    "discount": {
+	"stars": {
+		"type": "fieldset",
+		"name": {
+			"ar": "اضافه صورة ايقون",
+			"en": "add image icon"
+		},
+		"expandable": true,
+		"settings": {
+		"icon": {
+				"type": "image",
+				"label": {
+				"ar": "صورة الايقون تظهر في بعض الازرار",
+				"en": "Icon image on some buttons"
+				}
+			}
+		}
+	},
+	"discount": {
 		"type": "fieldset",
 		"name": {
 		"ar": "نافذة الخصم المثبتة",
@@ -1522,81 +1373,81 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 			"en": "add logo or img on product"
 		},
 		"settings": {
-				"add_img_logo": {
-                    "type": "radios",
-                    "label": {
-                      "ar": "اضافه لوجو المتجر",
-                      "en": "Adding a logo "
-                    },
-                    "options": [
-                      {
-                        "value": "logo",
-                        "label": {
-                          "ar": "اضافه لوجو",
-                          "en": "Add logo"
-                        }
-                      },
-                      {
-                        "value": "photo",
-                        "label": {
-                          "ar": "اضافه صوره",
-                          "en": "Add photo"
-                        }
-                      },
-                      {
-                        "value": "anything",
-                        "label": {
-                          "ar": "الغاء التفعيل ",
-                          "en": "Not adding anything"
-                        }
-                      }
-                    ]
-                },
-                "product_img": {
-                    "type": "image",
-                    "label": {
-                        "ar": "اضف صوره علي المنتج",
-                        "en": "Add a picture to the card"
-                    }
-                },
-                "logo_position": {
-                    "type": "radios",
-                    "label": {
-                      "ar": "مكان الصوره او اللوجو",
-                      "en": "image or logo position"
-                    },
-                    "options": [
-                      {
-                        "value": "top_right",
-                        "label": {
-                          "ar": "اعلي يمين",
-                          "en": "top_right"
-                        }
-                      },
-                      {
-                        "value": "top_left",
-                        "label": {
-                          "ar": "اعلي يسار",
-                          "en": "top_left"
-                        }
-                      },
-                      {
-                        "value": "bottom_right",
-                        "label": {
-                          "ar": "اسفل يمين",
-                          "en": "bottom_right"
-                        }
-                      },
-                      {
-                        "value": "bottom_left",
-                        "label": {
-                          "ar": "اسفل يسار",
-                          "en": "bottom_left"
-                        }
-                      }
-                    ]
-                }        
-     }
+			"add_img_logo": {
+				"type": "radios",
+				"label": {
+				"ar": "اضافه لوجو المتجر",
+				"en": "Adding a logo "
+				},
+				"options": [
+				{
+					"value": "logo",
+					"label": {
+					"ar": "اضافه لوجو",
+					"en": "Add logo"
+					}
+				},
+				{
+					"value": "photo",
+					"label": {
+					"ar": "اضافه صوره",
+					"en": "Add photo"
+					}
+				},
+				{
+					"value": "anything",
+					"label": {
+					"ar": "الغاء التفعيل ",
+					"en": "Not adding anything"
+					}
+				}
+				]
+			},
+			"product_img": {
+				"type": "image",
+				"label": {
+					"ar": "اضف صوره علي المنتج",
+					"en": "Add a picture to the card"
+				}
+			},
+			"logo_position": {
+				"type": "radios",
+				"label": {
+				"ar": "مكان الصوره او اللوجو",
+				"en": "image or logo position"
+				},
+				"options": [
+				{
+					"value": "top_right",
+					"label": {
+					"ar": "اعلي يمين",
+					"en": "top_right"
+					}
+				},
+				{
+					"value": "top_left",
+					"label": {
+					"ar": "اعلي يسار",
+					"en": "top_left"
+					}
+				},
+				{
+					"value": "bottom_right",
+					"label": {
+					"ar": "اسفل يمين",
+					"en": "bottom_right"
+					}
+				},
+				{
+					"value": "bottom_left",
+					"label": {
+					"ar": "اسفل يسار",
+					"en": "bottom_left"
+					}
+				}
+				]
+			}        
+		}
 	},
 	"image_control": {
 		"name": {
@@ -1605,13 +1456,13 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 		},
 		"settings": {
 			"item": {
-          "type": "checkbox",
-          "option": {
-            "ar": "تفعيل",
-            "en": "Hide"
-          },
-          "noLabel": true
-        }
+		"type": "checkbox",
+		"option": {
+			"ar": "تفعيل",
+			"en": "Hide"
+		},
+		"noLabel": true
+		}
 		}
 	},
 	"android_store": {
@@ -1683,4 +1534,3 @@ window.loadToasterScriptIfNotLoaded = function (onCompleted) {
 	}
 }
 {% endschema %}
-
