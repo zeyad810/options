@@ -144,33 +144,41 @@ document.addEventListener('DOMContentLoaded', function () {
     var swiperElement = document.querySelector('.swiper-container.slider');
 
     if (swiperElement) {
-      var swiper = new Swiper('.swiper-container.category-slider', {
-        slidesPerView: 2,
-        spaceBetween: 10,
-        loop:true,
-        breakpoints: {
-            480: {
-                slidesPerView: 3,
-                spaceBetween: 25
+        var swiper = new Swiper('.swiper-container.category-slider', {
+            slidesPerView: 2,
+            spaceBetween: 10,
+            loop: true,
+            {% if settings.slider_autoplay == "true" %}
+            autoplay: {
+                delay: {{ settings.slider_autoplay_speed is defined and settings.slider_autoplay_speed ? settings.slider_autoplay_speed * 1000 : 3000 }},
+                disableOnInteraction: false
             },
-            762: {
-              slidesPerView: 4,
-              spaceBetween: 25
+            {% endif %}
+            breakpoints: {
+                480: {
+                    slidesPerView: 3,
+                    spaceBetween: 25
+                },
+                762: {
+                    slidesPerView: 4,
+                    spaceBetween: 25
+                },
+                991: {
+                    slidesPerView: 6,
+                    spaceBetween: 25
+                }
             },
-            991: {
-              slidesPerView: 6,
-              spaceBetween: 25
-            },
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-    
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
     }
 });
 </script>
+
+
+
 
 
 
@@ -218,6 +226,45 @@ document.addEventListener('DOMContentLoaded', function () {
             "info": {
                 "ar": "اختر نعم لعرض الأقسام كـ Slider",
                 "en": "Choose Yes to display categories as a slider"
+            }
+        },
+        "slider_autoplay": {
+            "type": "select",
+            "label": {
+                "ar": "هل تريد التحرك التلقائي للأسلايدر",
+                "en": "Do you want the slider to move automatically?"
+            },
+            "options": [
+                {
+                    "value": "true",
+                    "label": {
+                        "ar": "نعم",
+                        "en": "Yes"
+                    }
+                },
+                {
+                    "value": "false",
+                    "label": {
+                        "ar": "لا",
+                        "en": "No"
+                    }
+                }
+            ],
+            "default": "false",
+            "info": {
+                "ar": "اختر نعم للتحريك التلقائي ",
+                "en": "Select Yes for automatic movement."
+            }
+        },
+        "slider_autoplay_speed": {
+            "type": "number",
+            "label": {
+                "ar": "سرعة التحريك التلقائي (بـ ثانية)",
+                "en": "Autoplay Speed (in seconds)"
+            },
+            "info": {
+                "ar": "أدخل المدة بين كل سلايد والتاني ب ثانية",
+                "en": "Time between slides in seconds "
             }
         },
         "hide_arrows": {
