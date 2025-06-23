@@ -1172,7 +1172,7 @@ max-width:fit-content;
 						}
 				</style>
 				{% if product.related_products  %}
-				<div id="popup_container" style="display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 10; scrollbar-width: none;">
+				<div id="popup_container" style="display: none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); background: white; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 1000; scrollbar-width: none;">
 					<button id="close_popup">X</button>
 					<div id="popup_content">
 						{% include 'pop_single.twig' with {'related_products' : product.related_products } %}
