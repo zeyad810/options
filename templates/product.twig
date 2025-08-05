@@ -1205,39 +1205,62 @@ max-width:fit-content;
 var productImages = {{ product.selected_product.images | json_encode() | raw }};
 
 function productAddToCart() {
-if (!$('.add-to-cart-progress').hasClass('d-none')) 
-return;
+  if (!$('.add-to-cart-progress').hasClass('d-none')) return;
 
+  $('.add-to-cart-progress').removeClass('d-none');
 
+  const isRTL = document.dir === 'rtl';
+  const successMessage = isRTL ? 'تمت إضافة المنتج إلى السلة بنجاح' : 'Product added to cart successfully';
+  const errorMessage = isRTL ? 'حدث خطأ أثناء الإضافة' : 'An error occurred while adding the product';
 
-$('.add-to-cart-progress').removeClass('d-none');
+  zid.store.cart.addProduct({ formId: 'product-form' }).then(function (response) {
+    if (response.status === 'success') {
+      if (response.data) setCartTotalAndBadge(response.data.cart);
 
-zid.store.cart.addProduct({formId: 'product-form'}).then(function (response) {
-if (response.status === 'success') {
+      Swal.fire({
+        toast: true,
+        position: isRTL ? 'top-start' : 'top-end',
+        icon: 'success',
+        title: successMessage,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        customClass: {
+          popup: 'swal2-toast'
+        }
+      });
 
-if (response.data) 
-setCartTotalAndBadge(response.data.cart);
+      $('.added-notification').addClass("show");
+      setTimeout(function () {
+        $('.added-notification').removeClass("show");
+      }, 5000);
 
+      var image = $('#product-images-slick .slick-slide.slick-active img');
+      var cart = $('.a-shopping-cart');
+      if (image.length && cart.length) {
+        addToCartAnimation(cart, image);
+      }
 
+    } else {
+      Swal.fire({
+        toast: true,
+        position: isRTL ? 'top-start' : 'top-end',
+        icon: 'error',
+        title: response.data.message || errorMessage,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        customClass: {
+          popup: 'swal2-toast'
+        }
+      });
+    }
 
-$('.added-notification').addClass("show");
-setTimeout(function () {
-$('.added-notification').removeClass("show");
-}, 5000);
-
-var image = $('#product-images-slick .slick-slide.slick-active img');
-var cart = $('.a-shopping-cart');
-
-if (image.length && cart.length) {
-addToCartAnimation(cart, image);
+    $('.add-to-cart-progress').addClass('d-none');
+  });
 }
 
-} else {
-toastr.error(response.data.message, '{{ locals.sorry }}')
-}
-$('.add-to-cart-progress').addClass('d-none');
-})
-}
+
 
 function productOptionsChanged(selected_product) {
 if (selected_product) {
