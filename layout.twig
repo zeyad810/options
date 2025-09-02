@@ -122,6 +122,7 @@
 		{% endif %}
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	</head>
+	
 	<body class="{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}" data-template="{{ template }}" {% if template == 'category' and category is not empty %} data-category-id="{{ category.id }}" {% endif %}>
 		{% if  settings.load_loader == "true" and template == 'home' %}
 			<div class="overlay">
@@ -184,15 +185,15 @@
 			<!-- Home Link -->
 			<a href="/" class="flex flex-col items-center justify-center gap-1">
 				<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
-				<div class="relative shrink-0">
-					<!-- Home Icon -->
-					<svg width="25" height="25" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M0.5 9.93841C0.5 8.71422 1.06058 7.55744 2.02142 6.79888L7.52142 2.45677C8.97466 1.30948 11.0253 1.30948 12.4786 2.45677L17.9786 6.79888C18.9394 7.55744 19.5 8.71422 19.5 9.93841V16.5C19.5 18.7091 17.7091 20.5 15.5 20.5H14C13.4477 20.5 13 20.0523 13 19.5V16.5C13 15.3954 12.1046 14.5 11 14.5H9C7.89543 14.5 7 15.3954 7 16.5V19.5C7 20.0523 6.55228 20.5 6 20.5H4.5C2.29086 20.5 0.5 18.7091 0.5 16.5L0.5 9.93841Z" stroke="#818181" stroke-width="1.5"/>
-					</svg>
-				</div>
-				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
-					{{ locals.home_title }}
-				</div>
+					<div class="relative shrink-0">
+						<!-- Home Icon -->
+						<svg width="25" height="25" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0.5 9.93841C0.5 8.71422 1.06058 7.55744 2.02142 6.79888L7.52142 2.45677C8.97466 1.30948 11.0253 1.30948 12.4786 2.45677L17.9786 6.79888C18.9394 7.55744 19.5 8.71422 19.5 9.93841V16.5C19.5 18.7091 17.7091 20.5 15.5 20.5H14C13.4477 20.5 13 20.0523 13 19.5V16.5C13 15.3954 12.1046 14.5 11 14.5H9C7.89543 14.5 7 15.3954 7 16.5V19.5C7 20.0523 6.55228 20.5 6 20.5H4.5C2.29086 20.5 0.5 18.7091 0.5 16.5L0.5 9.93841Z" stroke="#818181" stroke-width="1.5"/>
+						</svg>
+					</div>
+					<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
+						{{ locals.home_title }}
+					</div>
 				</div>
 			</a>
 
@@ -226,9 +227,9 @@
 				<div class="relative shrink-0">
 					<!-- Cart Icon -->
 					<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M9.11072 7.33643H16.3107C19.7107 7.33643 20.0507 8.92642 20.2807 10.8664L21.1807 18.3664C21.4707 20.8264 20.7107 22.8364 17.2107 22.8364H8.22072C4.71072 22.8364 3.95072 20.8264 4.25072 18.3664L5.15073 10.8664C5.37073 8.92642 5.71072 7.33643 9.11072 7.33643Z" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M8.71069 8.83643V5.33643C8.71069 3.83643 9.71069 2.83643 11.2107 2.83643H14.2107C15.7107 2.83643 16.7107 3.83643 16.7107 5.33643V8.83643" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M21.1207 17.8662H8.71069" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M9.11072 7.33643H16.3107C19.7107 7.33643 20.0507 8.92642 20.2807 10.8664L21.1807 18.3664C21.4707 20.8264 20.7107 22.8364 17.2107 22.8364H8.22072C4.71072 22.8364 3.95072 20.8264 4.25072 18.3664L5.15073 10.8664C5.37073 8.92642 5.71072 7.33643 9.11072 7.33643Z" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M8.71069 8.83643V5.33643C8.71069 3.83643 9.71069 2.83643 11.2107 2.83643H14.2107C15.7107 2.83643 16.7107 3.83643 16.7107 5.33643V8.83643" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M21.1207 17.8662H8.71069" stroke="#818181" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
 				</div>
 				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
@@ -240,7 +241,7 @@
 		</div>
 		<div class="main flex-grow-1 app-content {% if template != 'home' %} p-header {% endif %}"
 			{% if settings.colors_background_image %}
-			style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');"
+				style="background-repeat: repeat; background-image: url('{{ settings.colors_background_image }}');"
 			{% endif %}
 		>
 			{% block main_content %}{% endblock %}
@@ -256,21 +257,19 @@
 		</div>
 		{{ zidapi_script|raw }}
 		<script>
-			window.appDirection = '{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}';
+			window.appDirection = "{% if session.lang.code == 'ar' %}rtl{% else %}ltr{% endif %}";
 			window.loadToasterScriptIfNotLoaded = function (onCompleted) {
-				const scriptAlreadyLoaded = Array.from(document.getElementsByTagName('script')).some(script =>
-				script.src === "{{ asset_url ~ 'toastr.min.js' }}"
-				);
+				const scriptAlreadyLoaded = Array.from(document.getElementsByTagName("script")).some((script) => script.src === "{{ asset_url ~ 'toastr.min.js' }}");
 				if (!scriptAlreadyLoaded) {
-				const script = document.createElement('script');
+				const script = document.createElement("script");
 				script.src = "{{ asset_url ~ 'toastr.min.js' }}";
 				script.onload = function () {
 					if (onCompleted) onCompleted();
 				};
 				document.head.appendChild(script);
-				const style = document.createElement('link');
-				style.rel = 'stylesheet';
-				style.type = 'text/css';
+				const style = document.createElement("link");
+				style.rel = "stylesheet";
+				style.type = "text/css";
 				style.href = "{{ asset_url ~ 'toastr.min.css' }}";
 				document.head.appendChild(style);
 				} else {
@@ -278,6 +277,7 @@
 				}
 			};
 		</script>
+
 		<style>
 			:root{
 				--title-bg: url({{settings.titlebg_image}});
@@ -290,14 +290,13 @@
 		<script src="{{ assetUrl('slide-menu.ie.js?v=1.06') }}"></script>
 		<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 		<script type="text/javascript" src="{{ assetUrl('main.js?v=1.159') }}"></script>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 		<link
-		rel="stylesheet"
-		href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 		/>				
 		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 		{% block footer_scripts %}{% endblock %}
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {

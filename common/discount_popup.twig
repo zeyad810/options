@@ -1,35 +1,35 @@
 {% if discount.discount_is_popup and template == 'home' %}
-<section class="discount_popup" >
-    <div class="img-containt">
-        <i class="fa-solid fa-xmark popup_close_icon"></i>
-        <div class="img-parent">
-            <img src="{{discount.discount_popup_img}}" alt="discount image">
-        </div>
-        <div class="containt">
-
-            <form action="{{discount.discount_action_url }}"  method="post"  class="popup-form">
-                <h2>{{ discount.discount_popup_title }}</h2>
-                <p>{{ discount.discount_popup_percentage }}</p> 
-                <p>{{ discount.discount_popup_subtitle }}</p>
-                {% if discount.discount_action_url | length > 0 %}
-                    <input type="email" id="email" name="email"   placeholder="{{ discount.discount_popup_placeholder }}" class="popup-email" required>
-                    <span id="emailError" class="error">Please enter a valid email address.</span>
-                    <button id="myFormSubmet" type="submit" class="popup-submet">{{ discount.discount_popup_btn_title }}</button>  
-                {% endif %}
-            </form>
-        </div>
-    </div>
-</section>
+	<section class="discount_popup">
+		<div class="img-containt">
+			<i class="fa-solid fa-xmark popup_close_icon"></i>
+			<div class="img-parent">
+				<img src="{{discount.discount_popup_img}}" alt="discount image">
+			</div>
+			<div class="containt">
+				<form action="{{discount.discount_action_url }}" method="post" class="popup-form">
+					<h2>{{ discount.discount_popup_title }}</h2>
+					<p>{{ discount.discount_popup_percentage }}</p>
+					<p>{{ discount.discount_popup_subtitle }}</p>
+					{% if discount.discount_action_url | length > 0 %}
+						<input type="email" id="email" name="email" placeholder="{{ discount.discount_popup_placeholder }}" class="popup-email" required>
+						<span id="emailError" class="error">Please enter a valid email address.</span>
+						<button id="myFormSubmet" type="submit" class="popup-submet">{{ discount.discount_popup_btn_title }}</button>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+	</section>
 {% endif %}
+
 <style>
-.discount_popup i {
+  .discount_popup i {
     position: absolute;
     top: 14px;
     right: 20px;
     cursor: pointer;
-}
+  }
 
-.discount_popup {
+  .discount_popup {
     width: 100%;
     height: 100vh;
     position: fixed;
@@ -43,21 +43,21 @@
     transition: all 0.5s ease-in-out;
     visibility: hidden;
     opacity: 0;
-}
+  }
 
-@supports not (backdrop-filter: blur(12px)) {
+  @supports not(backdrop-filter: blur(12px)) {
     .discount_popup {
-        background-color: rgba(255, 255, 255, 0.8); 
+      background-color: rgba(255, 255, 255, 0.8);
     }
-}
+  }
 
-.popup_discount_show {
+  .popup_discount_show {
     visibility: visible;
     opacity: 1 !important;
     z-index: 200000;
-}
+  }
 
-.discount_popup .img-containt {
+  .discount_popup .img-containt {
     display: flex;
     position: relative;
     padding: 0.625rem;
@@ -69,129 +69,118 @@
     max-width: 600px;
     height: fit-content;
     max-height: 100%;
-    background-color: #ffffff;
-}
-.discount_popup #emailError {
-display: none;
-color: tomato;
-}
+    background-color: #fff;
+  }
 
-.discount_popup .sicon-cancel {
+  .discount_popup #emailError {
+    display: none;
+    color: tomato;
+  }
+
+  .discount_popup .sicon-cancel {
     font-size: 1.875rem;
-    color: #AEAEAE;
+    color: #aeaeae;
     position: absolute;
     top: 0.25rem;
     right: 0.25rem;
     cursor: pointer;
-}
+  }
 
-.discount_popup .img-parent {
+  .discount_popup .img-parent {
     flex-basis: 100%;
     width: auto;
-}
+  }
 
-.discount_popup .img-parent img {
+  .discount_popup .img-parent img {
     flex-basis: 100%;
     width: 100%;
     height: 100%;
-}
+  }
 
-.discount_popup .containt {
+  .discount_popup .containt {
     margin: 16px;
     width: 80%;
-}
+  }
 
-.discount_popup form {
+  .discount_popup form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 6px;
-}
+  }
 
-.discount_popup h2 {
+  .discount_popup h2 {
     font-weight: 700;
     font-size: 2.25rem;
-}
+  }
 
-.discount_popup p {
+  .discount_popup p {
     font-size: 2.25rem;
     font-weight: 700;
     color: var(--primary-color);
-}
+  }
 
-.discount_popup p + p {
+  .discount_popup p + p {
     font-weight: 600;
     font-size: 1rem;
     color: #525252;
-}
+  }
 
-.discount_popup input {
+  .discount_popup input {
     width: 100%;
     padding: 10px;
-}
+  }
 
-.discount_popup button {
+  .discount_popup button {
     background: var(--primary-color);
-    color: white;
+    color: #fff;
     width: 100%;
     height: 50px;
     border-radius: 4px;
     font-size: 20px;
     margin-top: 10px;
-}
+  }
 
-/* تحسين للمظهر في الشاشات الصغيرة */
-@media (max-width: 480px) {
+  @media (max-width: 480px) {
     .discount_popup .img-containt {
-        flex-direction: column;
-        width: 75%;
+      flex-direction: column;
+      width: 75%;
     }
     .discount_popup .img-parent {
-        width: auto;
-        height: auto;
+      width: auto;
+      height: auto;
     }
-}
+  }
 
-@media (min-width: 481px) and (max-width: 768px) {
+  @media (min-width: 481px) and (max-width: 768px) {
     .discount_popup .img-containt {
-        flex-direction: column;
-        width: 55%;
+      flex-direction: column;
+      width: 55%;
     }
     .discount_popup .img-parent {
-        width: 15rem;
+      width: 15rem;
     }
-}
-
+  }
 </style>
 
 <script>
-const popup = document.querySelector('.discount_popup');
-const close_icon = document.querySelector('.popup_close_icon');
+  const popup = document.querySelector('.discount_popup');
+  const close_icon = document.querySelector('.popup_close_icon');
 
-window.addEventListener('load', function() {
-    // Wait for 2 seconds before displaying the popup
+  window.addEventListener('load', function () {
     setTimeout(() => {
-        popup.classList.add('popup_discount_show');
-    }, 2000); // 2000 milliseconds = 2 seconds
-});
+      popup.classList.add('popup_discount_show');
+    }, 2000);
+  });
 
-close_icon.addEventListener('click', function() {
+  close_icon.addEventListener('click', function () {
     popup.classList.remove('popup_discount_show');
-});
+  });
 
-
-{# form validation #}
-document.querySelector(".popup-form").addEventListener("submit", function(event) {
-    // Prevent form from submitting initially
+  document.querySelector(".popup-form").addEventListener("submit", function (event) {
     event.preventDefault();
-
-    // Validation flags
     let valid = true;
-
-    // Get form inputs
     const email = document.querySelector('.popup-email').value;
-
-    // Email validation
     const emailError = document.getElementById("emailError");
     if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       emailError.style.display = "block";
@@ -199,18 +188,8 @@ document.querySelector(".popup-form").addEventListener("submit", function(event)
     } else {
       emailError.style.display = "none";
     }
-
-    // If form is valid, submit it
     if (valid) {
       document.querySelector(".popup-form").submit();
     }
   });
-
-
-
 </script>
-
-
-
-
-
