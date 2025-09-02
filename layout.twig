@@ -45,8 +45,17 @@
 			body.loaded .img_loader {
 				display: none;
 			}
+			.sm-search-div {
+				display: none;
+			}
 			.sm-search-div.show {
 				display: block !important;
+				visibility: visible;
+    			transform: translateY(0%);
+    			-webkit-transform:translate3d(0,0,0);
+	   			width: 60% !important;
+				top: -20px !important;
+				left: 5% !important;
 			}
 			ul.main-nav {
 				justify-content: center !important;
@@ -103,13 +112,13 @@
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('jquery-ui.theme.min.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('slide-menu-style.css?v=1.16') }}"/>
-		<link rel="stylesheet" href="{{ assetUrl('main.css?v=1.228') }}"/>
+		<link rel="stylesheet" href="{{ assetUrl('main.css?v=1.239') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_cat.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_square_image.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_fixed_bannar.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_sliderbannar.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_features.css') }}"/>
-		<link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}"/>
+		<link rel="stylesheet" type="text/css" href="{{ assetUrl('custom.css') }}"/> 
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('product.css') }}"/>
 		<link rel="stylesheet" type="text/css" href="{{ assetUrl('g_commonQ.css') }}"/>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>

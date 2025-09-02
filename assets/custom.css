@@ -124,21 +124,9 @@
 
 
 .sm-search-div {
-    display: none;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    background-color: var(--header-primary-color, var(--primary-color));
-    transform: translateY(-100%);
-    transition: all .3s ease;
-    z-index: 1;
-}
-
-.sm-search-div.show {
-    display: block;
-    visibility: visible;
-    transform: translateY(0%);
-    -webkit-transform:translate3d(0,0,0);
+  position: absolute;
+  transition: all .3s ease;
+  z-index: 1;
 }
 
 .footer .apps-social-icons:nth-child(2) {

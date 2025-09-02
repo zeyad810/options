@@ -1,8 +1,7 @@
 <div class="search-header header-theme-bg-primary">
-	<div class="container ">
+	<div class="container">
 		<div style='margin: 20px 0px' class="d-flex align-items-center justify-content-between search-header-bar">
 			<div class="d-flex align-items-center bd-highlight header-logo" style="width: fit-content;">
-
 				<a href="javascript:void(0);" onclick="window.slidingMenu.open()" class="ic d-flex align-items-center justify-content-end menu icon-menu-top d-block d-lg-none" tabindex="1">
 					<i class="fa-sharp fa-solid fa-bars"></i>
 				</a>
@@ -27,13 +26,11 @@
 				</a>
 			</div>
 
-			<nav style="width: 100%;" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
-
-				<ul class="flex-wrap main-nav d-flex flex-grow-1 menu-header-theme-text-for-primary-bg">
-
+			<nav style="width: 100%; align-items: center; justify-content: center;" role="navigation" class="d-flex flex-grow-1 main-nav-wrapper">
+				<ul class="flex-wrap main-nav d-flex menu-header-theme-text-for-primary-bg">
 					{% for menu in main_navigation_menu.items %}
-						{% if menu.url    %}
-							<li class="top-level-link ">
+						{% if menu.url %}
+							<li class="top-level-link">
 								<a href="{{ menu.url }}" {% if menu.items | length > 0 %} class="mega-menu" {% endif %}>
 									<span>{{ menu.name }}</span>
 								</a>
@@ -66,10 +63,9 @@
 							</li>
 						{% endif %}
 					{% endfor %}
-
-
 				</ul>
 			</nav>
+			
 			<div class="bd-highlight d-flex align-items-center justify-content-end header-cart icons-header">
 				{% include 'header-account-lang-currency.twig' with { 'header_settings' : settings } %}
 				{% if not ('hide_search_bar' in header_settings.header_options) %}
@@ -128,7 +124,6 @@
 				</div>
 
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -147,6 +142,7 @@
 	}
 	.search-header .top-level-link a {
 		padding: 10px 13px !important;
+		font-weight: 600;
 	}
 	.search-header .account-area button {
 		padding-top: 1px;
@@ -170,8 +166,7 @@
 		cursor: pointer;
 	}
 	ul.main-nav > li {
-		color: {{header_icons_color}}
-		!important;
+		color: {{header_icons_color}} !important;
 	}
 	ul.main-nav > li:last-child {
 		display: inline-block !important;
