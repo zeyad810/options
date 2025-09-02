@@ -1,5 +1,4 @@
 <section section-id="{{ sectionId }}">
-
 	<swiper-container pagination="true">
 		{% for item in settings.slider %}
 			<swiper-slide>
@@ -23,263 +22,232 @@
 						</a>
 					</div>
 				</div>
-
 			</swiper-slide>
 		{% endfor %}
 	</swiper-container>
-	<!-- Add Pagination -->
-
 </section>
+
 <style>
-	.g_fixed_bannar
-	{
-		height: 85vh
-	}
-
-	.g_fixed_bannar h1
-	{
-		font-size: 36px;
-		line-height: 1.5;
-		font-weight: bold;
-	}
-	.g_fixed_bannar p
-	{
-		margin-block: 15px;
-		font-size: 20px;
-	}
-	.text-banner
-	{
-		width: 80%;
-	}
-	.g_fixed_bannar a button
-	{
-		max-width: 175px;
-		height: 50px;
-		font-size: 18px;
-	}
-
-	.img-bg
-	{
-		position: absolute;
-		top: 0;
-		left: 0;
-        width: 100%;
-	}
-	@media(max-width: 768px)
-	{
-		.g_fixed_bannar
-		{
-			height: 80vh
-		}
-		.g_fixed_bannar h1
-		{
-			margin-bottom: 38px;
-			font-size: 28px;
-			font-weight: 600;
-		}
-		.text-banner
-		{
-			width: 95%;
-		}
-	}
-
-	.baner_swiber.swiper-container
-	{
-		width: 100vw;
-		height: 100vh;
-	}
-
-
-	.baner_swiber .swiper-pagination
-	{
-		bottom: 20px;
-		display: flex;
-		justify-content: center;
-	}
-
-
-	.baner_swiber .swiper-pagination-bullet
-	{
-		width: 15px;
-		height: 15px;
-		margin: 0 5px;
-		border-radius: 10px;
-		background: #d68d9c;
-		opacity: 0.8;
-		transition: all 0.3s ease;
-	}
-	.g_fixed_bannar a:hover .show-stars:before,
-	.g_fixed_bannar a:hover .show-stars:after
-	{
-		opacity: 1 !important;
-	}
-
-	@media(max-width: 700px)
-	{
-		.baner_swiber.swiper-container
-		{
-			height: auto;
-		}
-
-		.animate__animated
-		{
-			font-size: 28px;
-			width: 80%;
-		}
-	}
+  .g_fixed_bannar {
+    height: 85vh;
+  }
+  .g_fixed_bannar h1 {
+    font-size: 36px;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+  .g_fixed_bannar p {
+    margin-block: 15px;
+    font-size: 20px;
+  }
+  .text-banner {
+    width: 80%;
+  }
+  .g_fixed_bannar a button {
+    max-width: 175px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .img-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    .g_fixed_bannar {
+      height: 80vh;
+    }
+    .g_fixed_bannar h1 {
+      margin-bottom: 38px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .text-banner {
+      width: 95%;
+    }
+  }
+  .baner_swiber.swiper-container {
+    width: 100vw;
+    height: 100vh;
+  }
+  .baner_swiber .swiper-pagination {
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .baner_swiber .swiper-pagination-bullet {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    border-radius: 10px;
+    background: #d68d9c;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+  .g_fixed_bannar a:hover .show-stars:before,
+  .g_fixed_bannar a:hover .show-stars:after {
+    opacity: 1 !important;
+  }
+  @media (max-width: 700px) {
+    .baner_swiber.swiper-container {
+      height: auto;
+    }
+    .animate__animated {
+      font-size: 28px;
+      width: 80%;
+    }
+  }
 </style>
- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
- <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        let swiperFixBaner = new Swiper('.baner_swiber', {
-        slidesPerView: 1,
-        pagination: {
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let swiperFixBaner = new Swiper('.baner_swiber', {
+      slidesPerView: 1,
+      pagination: {
         el: '.swiper-pagination',
         clickable: true
-        },
-        loop: true,
-        autoplay: {
+      },
+      loop: true,
+      autoplay: {
         delay: 5000,
-        disableOnInteraction: false,
-        },
-        observer: true,
-        observeParents: true,
+        disableOnInteraction: false
+      },
+      observer: true,
+      observeParents: true
     });
 
-  // تغيير الخلفية بناءً على حجم الشاشة
-        function updateBackgrounds() {
-        const slides = document.querySelectorAll('.swiper-slide');
-        const isMobile = window.innerWidth <= 576;
+    function updateBackgrounds() {
+      const slides = document.querySelectorAll('.swiper-slide');
+      const isMobile = window.innerWidth <= 576;
 
-        slides.forEach(slide => {
-        const backgroundUrl = isMobile ? '{{ settings.slider_bannar_bg_mobile }}' : '{{ settings.slider_bannar_bg }}';
+      slides.forEach(slide => {
+        const backgroundUrl = isMobile
+          ? '{{ settings.slider_bannar_bg_mobile }}'
+          : '{{ settings.slider_bannar_bg }}';
         slide.style.backgroundImage = `url('${backgroundUrl}')`;
         slide.style.backgroundSize = 'cover';
         slide.style.backgroundPosition = 'center';
-        });
+      });
     }
 
-  // تحديث الخلفيات عند تحميل الصفحة وتغيير حجم الشاشة
-  updateBackgrounds();
-  window.addEventListener('resize', updateBackgrounds);
-});
-
+    updateBackgrounds();
+    window.addEventListener('resize', updateBackgrounds);
+  });
 </script>
 
-
 {% schema %}
-
 {
-    "name": {
-        "ar": "بنر رئيسي",
-        "en": "Main banner"
-    },
-    "icon": "fal fa-user",
-    "display": true,
-    "settings": {
-        "slider":{
-            "type": "list",
-            "label": {
-                "ar": "اضف الصور",
-                "en": "ُenter Images"
+  "name": {
+    "ar": "بنر رئيسي",
+    "en": "Main banner"
+  },
+  "icon": "fal fa-user",
+  "display": true,
+  "settings": {
+    "slider": {
+      "type": "list",
+      "label": {
+        "ar": "اضف الصور",
+        "en": "ُenter Images"
+      },
+      "settings": {
+        "slider_bannar_title": {
+          "type": "text",
+          "label": {
+            "ar": "العنوان",
+            "en": "title"
+          }
+        },
+        "address_color": {
+          "type": "color",
+          "label": {
+            "ar": "لون العنوان",
+            "en": "text color"
+          }
+        },
+        "slider_bannar_des": {
+          "type": "text",
+          "label": {
+            "ar": "وصف للبنر",
+            "en": "Banner Description"
+          }
+        },
+        "descr_color": {
+          "type": "color",
+          "label": {
+            "ar": "لون الوصف",
+            "en": "text color"
+          }
+        },
+        "slider_bannar_bg": {
+          "type": "image",
+          "label": {
+            "ar": "خلفيه البنر",
+            "en": "Banner background"
+          }
+        },
+        "slider_bannar_bg_mobile": {
+          "type": "image",
+          "label": {
+            "ar": "خلفيه البنر ف الموبايل",
+            "en": "Banner background on mobile"
+          }
+        },
+        "slider_bannar_url": {
+          "type": "url",
+          "label": {
+            "ar": "رابط البنر",
+            "en": "Banner link"
+          }
+        },
+        "slider_bannar_btn_text": {
+          "type": "text",
+          "label": {
+            "ar": "عنوان الزر",
+            "en": "button title"
+          }
+        },
+        "slider_bannar_btn_text_color": {
+          "type": "color",
+          "label": {
+            "ar": "لون الزر",
+            "en": "text color"
+          }
+        },
+        "slider_text_place": {
+          "type": "select",
+          "label": {
+            "ar": "موضع النص",
+            "en": "text position"
+          },
+          "options": [
+            {
+              "value": "left",
+              "label": {
+                "ar": "اليسار",
+                "en": "left"
+              }
             },
-            "settings": {
-                "slider_bannar_title":{
-                    "type": "text",
-                    "label": {
-                        "ar": "العنوان",
-                        "en": "title"
-                    }
-                },
-                "address_color":{
-                    "type":"color",
-                    "label":{
-                        "ar":"لون العنوان",
-                        "en":"text color"
-                    }
-                },
-                "slider_bannar_des":{
-                    "type": "text",
-                    "label": {
-                        "ar": "وصف للبنر",
-                        "en": "Banner Description"
-                    }
-                },
-                "descr_color":{
-                    "type":"color",
-                    "label":{
-                        "ar":"لون الوصف",
-                        "en":"text color"
-                    }
-                },
-                "slider_bannar_bg":{
-                    "type": "image",
-                    "label": {
-                        "ar": "خلفيه البنر",
-                        "en": "Banner background"
-                    }
-                },
-                "slider_bannar_bg_mobile":{
-                    "type": "image",
-                    "label": {
-                        "ar": " خلفيه البنر ف الموبايل",
-                        "en": "Banner background on mobile"
-                    }
-                },
-                "slider_bannar_url":{
-                    "type": "url",
-                    "label": {
-                        "ar": "رابط البنر",
-                        "en": "Banner link"
-                    }
-                },
-                "slider_bannar_btn_text":{
-                    "type": "text",
-                    "label": {
-                        "ar": "عنوان الزر",
-                        "en": "button title"
-                    }
-                },
-                "slider_bannar_btn_text_color":{
-                    "type":"color",
-                    "label":{
-                        "ar":"لون الزر ",
-                        "en":"text color"
-                    }
-                },
-                "slider_text_place":{
-                    "type": "select",
-                    "label": {
-                        "ar": "موضع النص",
-                        "en": "text position"
-                    },
-                    "options": [
-                        {
-                            "value": "left",
-                            "label": {
-                            "ar": "اليسار",
-                            "en": "left"
-                            }
-                        },
-                        {
-                            "value": "right",
-                            "label": {
-                            "ar": "اليمين",
-                            "en": "right"
-                            }
-                        },
-                        {
-                            "value": "center",
-                            "label": {
-                            "ar": "المركز",
-                            "en": "center"
-                            }
-                        }
-                    ]
-                }
+            {
+              "value": "right",
+              "label": {
+                "ar": "اليمين",
+                "en": "right"
+              }
+            },
+            {
+              "value": "center",
+              "label": {
+                "ar": "المركز",
+                "en": "center"
+              }
             }
+          ]
         }
+      }
     }
+  }
 }
-
 {% endschema %}
