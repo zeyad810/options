@@ -1,11 +1,20 @@
 <section id="g_square_image_{{sectionId}}" class="container ads" style ="margin-bottom: 119px;" >
 	<div class="imgs">
 		{% for item in settings.images %}
-			{% if loop.index <= 3 %}
-				<div class="img top-images ">
-					<img loading="lazy" src="{{item.square_image}}" alt="" srcset="">
+				<div class="img G_square_img_card {{ loop.index == 4 ? 'f-img' }}">
+				{% if loop.index == 4 %}
+					<picture>
+					  <source srcset="{{ item.square_image }} 2x" media="(min-width: 768px)">
+					  <source srcset="{{ settings.last_image_mobile ? settings.last_image_mobile : item.square_image }} 1x" media="(max-width: 767px)">
+					  <img loading="lazy" src="{{ item.square_image }}" alt="" class="img-fluid" />
+					</picture>
+					{% else %}
+						
+					<img loading="lazy" src="{{item.square_image}}" alt="card img">
+				{% endif %}
+				
 					<div class="over">
-						<div class="text">
+						<div class="text {{loop.index == 4 ? 'd-flex justify-content-center align-items-center '}}">
 							<p style="color:{{item.address_color}}"> {{item.square_title}} </p>
 							{% if settings.button_title %}
 								<a href="{{item.square_url.url}}">
@@ -17,31 +26,7 @@
 						</div>
 					</div>
 				</div>
-			{% elseif loop.index == 4 %}
-				<div class="img f_img">
-					<div class="card h-100">
-					<picture>
-					  <source srcset="{{ item.square_image }} 2x" media="(min-width: 768px)">
-					  <source srcset="{{ settings.last_image_mobile ? settings.last_image_mobile : item.square_image }} 1x" media="(max-width: 767px)">
-					  <img loading="lazy" src="{{ item.square_image }}" alt="" class="img-fluid" />
-					</picture>
-						<div class="over">
-							<div class="p-2 bg-opacity-50 text">
-								<p class="mb-2 text-black">
-									{{ item.square_title}}
-								</p>
-								{% if settings.button_title %}
-									<a href="{{item.square_url.url}}">
-										<button type="button" class="btn-light btn-block">
-											{{settings.button_title}}
-										</button>
-									</a>
-								{% endif %}
-							</div>
-						</div>
-					</div>
-				</div>
-			{% endif %}
+			
 		{% endfor %}
 	</div>
 
@@ -50,10 +35,6 @@
 
 <style>
 
-	.ads .f_img{
-		max-height: 245px;
-		
-	}
 	.ads .f_img img{
 		width: 100%;
 	}
@@ -100,6 +81,35 @@
       }
 
 	}
+ 
+
+	.imgs .f-img{
+		grid-column:span 3 / span 3 !important;
+		max-height: 245px;
+		@media (max-width:768px) {
+				.text{
+					align-items:start !important;
+				}
+	}
+	}
+	.abs .imgs{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	@media (max-width:768px) {
+    	grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+		
+	}
+ }
+	 .imgs .G_square_img_card{
+		max-height:200px;
+	@media (max-width:768px) {
+		grid-column:span 3 / span 3 !important;
+	}
+	
+ }
+ .imgs .G_square_img_card img{
+		object-fit:cover;
+
+	}
 </style>
 
 
@@ -132,6 +142,7 @@
                 "ar": "الصور",
                 "en": "images"
             },
+			"maxItems": 7,
             "settings":{
                     "square_image": {
                         "type": "image",
