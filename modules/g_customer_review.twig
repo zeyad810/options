@@ -17,9 +17,11 @@
 			<div class="swiper-wrapper">
 				{% for item in settings.customer_reviews %}
 					<div class="swiper-slide relative rounded-lg content_tistimonial">
+          {% if item.customer_image %}
 						<div class="absolute top-0 overflow-hidden imag_raduse">
 							<img loading="lazy" src="{{item.customer_image}}" alt="{{item.customer_name}}">
 						</div>
+            {% endif %}
 						<div class="cover_content">
 							<div class="desc_contant">
 								{{item.customer_review}}
@@ -40,7 +42,6 @@
 	</div>
 </section>
 <style>
-  /* paganition bulltes */
   .balls{
     padding-top: 20px;
     display: flex;
@@ -82,7 +83,7 @@
         }
         .swiper-button-next:focus::after,
         .swiper-button-prev:focus::after {
-            color: #CE5A67 !important;
+            color:  var(--primary-color) !important;
         }
         .swiper-button-lock {        
             display: flex !important;
@@ -179,8 +180,8 @@
     slidesPerView: 1,
     spaceBetween: 5,
     navigation: {
-      nextEl: '.swiper-button-prev',
-      prevEl: '.swiper-button-next',
+      nextEl: '.slide-review  .swiper-button-prev',
+      prevEl: '.slide-review  .swiper-button-next',
     },
     pagination: {
       el: '.balls',
