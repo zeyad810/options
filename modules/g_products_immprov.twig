@@ -36,6 +36,9 @@
 	</div>
 </section>
 <style>
+.g-products  .swiper-button-next svg, .swiper-button-prev svg{
+	display: none;
+}
 	.all-product-container
 	{
 		display: grid;
@@ -81,7 +84,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 10px;
-		width: fit-content;
+		width:2% ;
 		top: 230px;
 	}
 	.product-slider .arrows .swiper-button-prev:hover,
@@ -105,34 +108,35 @@
 	}
 </style>
 {% if settings.is_slider %}
-	 <script>
-			    document.addEventListener('DOMContentLoaded', function () {
-			      let productSwiper = new Swiper('.product-slider .swiper-container', {
-			        slidesPerView: 2, 
-			        spaceBetween: 10,
-			        loop: false,
-			         navigation: {
-	                    nextEl: '.product-slider .swiper-button-prev',
-	                    prevEl: '.product-slider .swiper-button-next',
-	                },
-			        watchOverflow: true, 
-			        breakpoints: {
-			          576: {
-			            slidesPerView: 3, 
-	                    spaceBetween: 20,
-			          },
-			          768: {
-			            slidesPerView: 3, 
-	                    spaceBetween: 20,
-			          },
-			          992: {
-			            slidesPerView: 4,
-	                    spaceBetween: 30,
-			          }
-			        },
-			      });
-			    });
-			    </script>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let productSwiper = new Swiper('.product-slider .swiper-container', {
+    slidesPerView: 2,
+    spaceBetween: 10,
+    loop: false,
+    navigation: {
+      nextEl: '.product-slider .swiper-button-next',
+      prevEl: '.product-slider .swiper-button-prev',
+    },
+    watchOverflow: true,
+    breakpoints: {
+      576: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      },
+    },
+  });
+});
+</script>
+
 {% endif %}
 
 {% schema %}

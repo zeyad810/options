@@ -19,7 +19,7 @@
 							<span class="percent">{{item.bannar_percentage}}</h2>
 							<p style="color:{{item.bannar_color}}">{{item.bannar_desc}}</p>
 							<a style="margin:0 auto" href="{{item.bannar_url}}">
-								<button style="color:{{item.btn_text}}">
+								<button style="color:{{item.btn_text}}; background-color: {{ item.bac_btn }};">
 									{{locals.Discover_more}}</button>
 							</a>
 						</div>
@@ -84,7 +84,7 @@
 
 		.content .percent {
 			font-size: 48px;
-			color: #9A3B3B;
+			color: var(--primary-color);
 			font-weight: bold
 		}
 	</style>
@@ -105,8 +105,8 @@ dynamicBullets: true
 },
 
 navigation: {
-nextEl: '.swiper-button-next',
-prevEl: '.swiper-button-prev'
+nextEl: '.slider-bannars .swiper-button-next',
+prevEl: '.slider-bannars .swiper-button-prev'
 },
 
 scrollbar: {
@@ -218,6 +218,13 @@ el: '.swiper-scrollbar'
 	                    "label":{
 	                        "ar":"لون نص الزر",
 	                        "en":"Button text color"
+	                    }
+	                },
+					 "bac_btn":{
+	                    "type" : "color",
+	                    "label":{
+	                        "ar":"لون خلفية الزر",
+	                        "en":"Button Bac color"
 	                    }
 	                },
 	                "bannar_url": {
