@@ -207,16 +207,30 @@
 			</a>
 
 			<!-- Login Link -->
-			<a href="/auth/login" class="flex flex-col items-center justify-center gap-1">
+			<div  class="flex flex-col items-center justify-center gap-1">
 				<div class="top-0 left-0 flex flex-col items-center justify-center gap-1">
 				<div class="relative shrink-0">
-					<i class="auth-login fa-regular fa-circle-user"></i>
+					{% if customer %}
+						<button type="button" onclick="window.location.href='/account-profile'" class="btn account-btn" style="background-color: transparent;">
+							<svg width="26" height="26" viewbox="0 0 20 22" style="cursor: pointer; fill: transparent !important;" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</button>
+					{% else %}
+						<button type="button" onclick="window.location.href='/auth/login'" class="btn account-btn" style="background-color: transparent;">
+							<svg width="26" height="26" viewbox="0 0 20 22" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer; fill: transparent !important;">
+								<path d="M10.0007 11.0588C12.3018 11.0588 14.1673 9.13191 14.1673 6.75502C14.1673 4.37814 12.3018 2.45129 10.0007 2.45129C7.69946 2.45129 5.83398 4.37814 5.83398 6.75502C5.83398 9.13191 7.69946 11.0588 10.0007 11.0588Z" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M17.1585 19.6678C17.1585 16.3367 13.9501 13.6426 10.0001 13.6426C6.05013 13.6426 2.8418 16.3367 2.8418 19.6678" stroke="{{header_icons_color}}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</button>
+					{% endif %}
 				</div>
 				<div class="text-header-bottom text-[#818181] text-left text-sm leading-[14px] font-normal relative w-11">
 					{{ locals.account }}
 				</div>
 				</div>
-			</a>
+			</div>
 
 			<!-- Products Link -->
 			<a href="/products" class="flex flex-col items-center justify-center gap-1">
