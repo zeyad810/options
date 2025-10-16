@@ -882,31 +882,43 @@ max-width:fit-content;
 
 }
 </style>
-			<script>
-				var abas = document.getElementById("abas");
-				var conteudos = document.getElementById("conteudos");
+	<script>
+  const abas = document.getElementById("abas");
+  const conteudos = document.getElementById("conteudos");
 
-				/* Essa função retira a classe "selecionada" e esconde a DIV com o conteúdo visível */
-				function limparSelecao() {
-				abas.getElementsByClassName("selecionada")[0].classList.remove("selecionada");
-				conteudos.getElementsByClassName("visivel")[0].classList.remove("visivel");
-				}
+  if (abas && conteudos) {
 
-				/* Essa é executada quando alguma das abas é clicada */
-				abas.addEventListener("click", function (event) {
-				var abaClicada = event.target.id;
-				var itemSelecionado = abaClicada.substring(abaClicada.lastIndexOf("_"));
+    function limparSelecao() {
+      const abaSelecionada = abas.querySelector(".selecionada");
+      const conteudoVisivel = conteudos.querySelector(".visivel");
 
-				/* Chama função que tira a seleção do item atual */
-				limparSelecao();
+      if (abaSelecionada) {
+        abaSelecionada.classList.remove("selecionada");
+      }
 
-				/* Insere a classe "selecionada" na nova aba visível */
-				event.target.parentElement.classList.add("selecionada");
+      if (conteudoVisivel) {
+        conteudoVisivel.classList.remove("visivel");
+      }
+    }
 
-				/* Insere a classe "visivel" para o conteúdo da aba selecionada */
-				conteudos.querySelector("#conteudo" + itemSelecionado).classList.add("visivel");
-				});
-			</script>
+    abas.addEventListener("click", function (event) {
+      if (event.target.tagName !== "A") return;
+
+      const abaClicada = event.target.id;
+      const itemSelecionado = abaClicada.substring(abaClicada.lastIndexOf("_"));
+
+      limparSelecao();
+
+      event.target.parentElement.classList.add("selecionada");
+
+      const novoConteudo = conteudos.querySelector("#conteudo" + itemSelecionado);
+      if (novoConteudo) {
+        novoConteudo.classList.add("visivel");
+      }
+    });
+  }
+</script>
+
 
 
 			{% if (product.related_products | length) >  0 %}

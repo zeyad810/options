@@ -1,30 +1,38 @@
 <section section-id="{{ sectionId }}">
-	<swiper-container pagination="true">
-		{% for item in settings.slider %}
-			<swiper-slide>
-				<div class="g_fixed_bannar">
-					<picture>
-						<source srcset="{{ item.slider_bannar_bg_mobile }}" media="(max-width: 768px)"/>
-						<source srcset="{{ item.slider_bannar_bg }}" media="(min-width: 769px)"/>
-						<img src="{{ item.slider_bannar_bg }}" alt="Slider Image" class="img-bg h-100"/>
-					</picture>
-					<div style='text-align:{{ item.slider_text_place }}; margin-top:50px;' class="container relative txt text-banner">
-						<h1 class="animate__animated animate__fadeInUp custom-dlay-heading " style="color: {{ item.address_color ? item.address_color : '#000000' }}">
-							{{ item.slider_bannar_title }}
-						</h1>
-						<p class="animate__animated animate__fadeInUp custom-dlay-p d-none d-md-block" style="color: {{ item.descr_color ? item.descr_color : '#666666' }}">
-							{{ item.slider_bannar_des }}
-						</p>
-						<a href='{{item.slider_bannar_url}}'>
-							<button class="animate__animated animate__fadeInUp custom-dlay-a" style="color:{{item.slider_bannar_btn_text_color}}">
-								{{item.slider_bannar_btn_text}}
-							</button>
-						</a>
-					</div>
-				</div>
-			</swiper-slide>
-		{% endfor %}
-	</swiper-container>
+  <swiper-container class="baner_swiber" pagination="true">
+    {% for item in settings.slider %}
+      <swiper-slide>
+        {% set link = item.slider_bannar_url %}
+        {% set has_btn = item.slider_bannar_btn_text is not empty %}
+        {% if link and not has_btn %}<a href="{{ link }}">{% endif %}
+          <div class="g_fixed_bannar">
+            <picture>
+              <source srcset="{{ item.slider_bannar_bg_mobile }}" media="(max-width: 768px)"/>
+              <source srcset="{{ item.slider_bannar_bg }}" media="(min-width: 769px)"/>
+              <img src="{{ item.slider_bannar_bg }}" alt="Slider Image" class="img-bg h-100"/>
+            </picture>
+
+            <div style="text-align:{{ item.slider_text_place }}; margin-top:50px;" class="container relative txt text-banner">
+              <h1 class="animate__animated animate__fadeInUp custom-dlay-heading" style="color: {{ item.address_color ?: '#000' }}">
+                {{ item.slider_bannar_title }}
+              </h1>
+              <p class="animate__animated animate__fadeInUp custom-dlay-p d-none d-md-block" style="color: {{ item.descr_color ?: '#666' }}">
+                {{ item.slider_bannar_des }}
+              </p>
+
+              {% if has_btn and link %}
+                <a href="{{ link }}">
+                  <button class="animate__animated animate__fadeInUp custom-dlay-a" style="color:{{ item.slider_bannar_btn_text_color }}">
+                    {{ item.slider_bannar_btn_text }}
+                  </button>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% if link and not has_btn %}</a>{% endif %}
+      </swiper-slide>
+    {% endfor %}
+  </swiper-container>
 </section>
 
 <style>
@@ -81,7 +89,7 @@
     height: 15px;
     margin: 0 5px;
     border-radius: 10px;
-    background: #d68d9c;
+    background: var(--primary-color);
     opacity: 0.8;
     transition: all 0.3s ease;
   }
@@ -207,7 +215,11 @@
           "label": {
             "ar": "عنوان الزر",
             "en": "button title"
-          }
+          },
+          	"info": {
+							    "ar": "إذا لم تُدخل نصًا للزر، سيصبح الرابط على الصورة بالكامل.",
+                  "en": "If you leave this field empty, the link will be applied to the whole image."
+						}
         },
         "slider_bannar_btn_text_color": {
           "type": "color",
