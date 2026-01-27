@@ -181,14 +181,27 @@
 
     <!-- Thumbnail Swiper -->
     <div thumbsSlider="" class="swiper mySwiper">
-        <div class="swiper-wrapper allsmallimages ">
-            {% for key, image in product.selected_product.images %}
-                <div class="swiper-slide small_images">
-                    <img src="{{ image.image.medium }}" data-index="{{ key }}" loading="lazy" class="thumbimagee">
-                </div>
-            {% endfor %}
+        <div class="swiper-wrapper allsmallimages " id="product-thumbnails-container">
+            <!-- سيتم ملؤها بواسطة JavaScript -->
         </div>
     </div>
+    <script>
+        // ملء الصور المصغرة باستخدام JavaScript لتقليل عدد حلقات for
+        (function() {
+            var images = {{ product.selected_product.images | json_encode | raw }};
+            var container = document.getElementById('product-thumbnails-container');
+            if (container && images && images.length) {
+                for (var i = 0; i < images.length; i++) {
+                    var image = images[i];
+                    var slide = document.createElement('div');
+                    slide.className = 'swiper-slide small_images';
+                    var imgSrc = (image.image && image.image.medium) ? image.image.medium : (image.medium || '');
+                    slide.innerHTML = '<img src="' + imgSrc + '" data-index="' + i + '" loading="lazy" class="thumbimagee">';
+                    container.appendChild(slide);
+                }
+            }
+        })();
+    </script>
 	
 						</div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -648,21 +661,26 @@
 													<div class="row flex-column flex-lg-row align-items-start align-items-lg-center">
 
 
-														{% for key, attribute in variant.attributes %}
-															<div class="col m-col">
-																<span class="variant-name-sm d-inline-block d-lg-none">{{ product.options[key].name }}</span>
-																<span>{{ attribute.value }}</span>
-															</div>
-														{% endfor %}
+														{% if variant.attributes %}
+															{% for option in product.options %}
+																{% set optionIndex = loop.index0 %}
+																{% if variant.attributes[optionIndex] %}
+																	<div class="col m-col">
+																		<span class="variant-name-sm d-inline-block d-lg-none">{{ option.name }}</span>
+																		<span>{{ variant.attributes[optionIndex].value }}</span>
+																	</div>
+																{% endif %}
+															{% endfor %}
+														{% endif %}
 
 														<div class="col">
 															{% if variant.images | length > 0 %}
 																<div class="d-flex m-col">
-																	{% for key, image in variant.images %}
+																	{% for imgKey, image in variant.images %}
 																		<div class="variant-image-wrapper" data-var-id="{{ variant.id }}">
 																			<div class="box-1-1">
 																				<div class="content">
-																					<a data-index="{{ key }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;">
+																					<a data-index="{{ imgKey }}" data-link-var-id="{{ variant.id }}" class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;">
 																						<img src="{{ image.image.medium }}" data-image-url="{{ image.image.full_size }}" loading="lazy">
 																					</a>
 																				</div>
@@ -1628,6 +1646,305 @@ document.addEventListener('DOMContentLoaded', function () {
 			lastClickedOptionImageUrl = $(this).attr('data-image-url') || $(this).attr('data-image') || null;
 		});
 
+	// اختيار المتغير تلقائياً من URL parameters (من الفلتر)
+	function selectVariantFromFilter() {
+		try {
+			const urlParams = new URLSearchParams(window.location.search);
+			const variantFilter = urlParams.get('variant_filter');
+			const variantIdFromUrl = urlParams.get('variant_id');
+			
+			if (variantFilter !== '1') {
+				return;
+			}
+			
+			// إذا تم تمرير variant_id مباشرة، نستخدمه أولاً لأنه أدق وأسهل
+			if (variantIdFromUrl && productVariants && Array.isArray(productVariants)) {
+				const directVariant = productVariants.find(v => String(v.id) === String(variantIdFromUrl));
+				if (directVariant && !directVariant.unavailable) {
+					console.log('Selecting variant by ID from URL:', variantIdFromUrl);
+					
+					// تحديث الحقول الأساسية
+					$('#product-id').val(directVariant.id);
+					$('.send-notify-product-id').val(directVariant.id);
+					
+					// تحديث بيانات المنتج (سعر، وزن، SKU، إلخ)
+					if (typeof productOptionsChanged === 'function') {
+						productOptionsChanged(directVariant);
+					}
+					
+					// تحديث الصور والمعرض
+					if (typeof updateProductImages === 'function') {
+						updateProductImages(directVariant);
+					}
+					
+					return; // لا نحتاج لاستخدام منطق attributes في هذه الحالة
+				}
+			}
+			
+			// جمع المتغيرات من URL (fallback في حالة عدم وجود variant_id)
+			const variantFilters = {};
+			urlParams.forEach((value, key) => {
+				if (key.startsWith('variant_')) {
+					const optionIndex = key.replace('variant_', '');
+					variantFilters[optionIndex] = decodeURIComponent(value);
+				}
+			});
+			
+			if (Object.keys(variantFilters).length === 0) {
+				return;
+			}
+			
+			console.log('=== Variant Filter Selection ===');
+			console.log('Filters from URL:', variantFilters);
+			
+			// انتظار تحميل الـ DOM و productVariants
+			if (!$('.g-custom-size-box').length || !productVariants || !Array.isArray(productVariants)) {
+				console.log('Waiting for DOM/variants to load...');
+				setTimeout(selectVariantFromFilter, 500);
+				return;
+			}
+			
+			console.log('Product variants available:', productVariants.length);
+			console.log('First variant sample:', productVariants[0]);
+			
+			// البحث عن variant يطابق الفلاتر
+			let matchedVariant = null;
+			
+			for (let variant of productVariants) {
+				if (variant.unavailable) continue;
+				
+				let matches = true;
+				for (let optionIndex in variantFilters) {
+					const selectedValue = String(variantFilters[optionIndex]).trim();
+					let found = false;
+					
+					// البحث في attributes - استخدام key من loop (مثل في Twig: for key, attribute in variant.attributes)
+					if (variant.attributes) {
+						// إذا attributes object (key-value pairs) - هذا هو الشكل الصحيح في منصة زاد
+						if (typeof variant.attributes === 'object' && !Array.isArray(variant.attributes)) {
+							for (let key in variant.attributes) {
+								const attr = variant.attributes[key];
+								if (attr && attr.value) {
+									const attrValue = String(attr.value).trim();
+									if (parseInt(key) == parseInt(optionIndex) && attrValue === selectedValue) {
+										found = true;
+										break;
+									}
+								}
+							}
+						}
+						// إذا attributes array
+						else if (Array.isArray(variant.attributes)) {
+							for (let idx = 0; idx < variant.attributes.length; idx++) {
+								const attr = variant.attributes[idx];
+								let attrValue = '';
+								
+								if (attr && typeof attr === 'object') {
+									attrValue = String(attr.value || attr.name || '').trim();
+								} else if (attr) {
+									attrValue = String(attr).trim();
+								}
+								
+								if (attrValue && parseInt(idx) == parseInt(optionIndex) && attrValue === selectedValue) {
+									found = true;
+									break;
+								}
+							}
+						}
+					}
+					
+					if (!found) {
+						matches = false;
+						break;
+					}
+				}
+				
+				if (matches) {
+					matchedVariant = variant;
+					break;
+				}
+			}
+			
+			if (!matchedVariant) {
+				console.log('No matching variant found for filters:', variantFilters);
+				return;
+			}
+			
+			console.log('Found matching variant ID:', matchedVariant.id);
+			console.log('Variant attributes:', matchedVariant.attributes);
+			
+			// تحديث product-id مباشرة أولاً
+			$('#product-id').val(matchedVariant.id);
+			$('.send-notify-product-id').val(matchedVariant.id);
+			
+			// محاولة اختيار المتغير في الـ form - طريقة مبسطة
+			if (matchedVariant.attributes) {
+				// معالجة attributes كـ object (key-value) - هذا هو الشكل الصحيح
+				if (typeof matchedVariant.attributes === 'object' && !Array.isArray(matchedVariant.attributes)) {
+					for (let key in matchedVariant.attributes) {
+						const attr = matchedVariant.attributes[key];
+						const optionIndex = parseInt(key);
+						const value = String(attr.value || '').trim();
+						
+						if (!value) continue;
+						
+						console.log('=== Trying to select option', optionIndex, '=', value, '===');
+						
+						// البحث في كل العناصر داخل .g-custom-size-box
+						let selected = false;
+						
+						// طريقة 1: البحث عن input بالاسم والقيمة
+						$('.g-custom-size-box :input').each(function() {
+							if (selected) return false;
+							
+							const $el = $(this);
+							const name = $el.attr('name') || '';
+							const val = String($el.val() || '').trim();
+							
+							// البحث عن input يحتوي على option index في الاسم
+							if (name.includes('options[' + optionIndex + ']') || name.includes('options[' + optionIndex + ']')) {
+								if (val === value) {
+									console.log('Found input by name and value:', $el[0]);
+									if ($el.is(':radio') || $el.is(':checkbox')) {
+										$el.prop('checked', true);
+									} else {
+										$el.val(value);
+									}
+									$el.trigger('change');
+									selected = true;
+									return false;
+								}
+							}
+						});
+						
+						// طريقة 2: البحث عن label أو span أو div يحتوي على النص
+						if (!selected) {
+							$('.g-custom-size-box label, .g-custom-size-box span, .g-custom-size-box div, .g-custom-size-box button, .g-custom-size-box a').each(function() {
+								if (selected) return false;
+								
+								const $el = $(this);
+								const text = $el.text().trim();
+								
+								// التحقق من النص فقط
+								if (text === value && text.length > 0 && !$el.is('script') && !$el.is('style')) {
+									// التحقق إن العنصر مش child لعنصر آخر فيه نفس النص
+									const parentText = $el.parent().text().trim();
+									if (parentText !== text || $el.parent().is('.g-custom-size-box')) {
+										console.log('Found element by text:', $el[0], 'Text:', text);
+										
+										// محاولة النقر على العنصر
+										$el.trigger('click');
+										$el.addClass('active selected');
+										
+										// إزالة active من العناصر الأخرى في نفس المجموعة
+										$el.siblings().removeClass('active selected');
+										
+										// إذا كان فيه input مرتبط، نختاره
+										const associatedInput = $el.find('input').first();
+										if (associatedInput.length) {
+											if (associatedInput.is(':radio') || associatedInput.is(':checkbox')) {
+												associatedInput.prop('checked', true).trigger('change');
+											}
+										}
+										
+										selected = true;
+										return false;
+									}
+								}
+							});
+						}
+						
+						// طريقة 3: البحث عن input بالقيمة فقط (إذا لم نجد بالاسم)
+						if (!selected) {
+							$('.g-custom-size-box :input').each(function() {
+								if (selected) return false;
+								
+								const $el = $(this);
+								const val = String($el.val() || '').trim();
+								
+								if (val === value) {
+									console.log('Found input by value only:', $el[0]);
+									if ($el.is(':radio') || $el.is(':checkbox')) {
+										$el.prop('checked', true).trigger('change');
+									} else {
+										$el.val(value).trigger('change');
+									}
+									selected = true;
+									return false;
+								}
+							});
+						}
+						
+						if (!selected) {
+							console.log('Could not find element for option', optionIndex, '=', value);
+						}
+					}
+				}
+				
+				// استدعاء productOptionsChanged بعد تأخير
+				setTimeout(function() {
+					if (typeof productOptionsChanged === 'function') {
+						var currentVarId = $('#product-id').val();
+						var selVar = productVariants.find(function (v) { return String(v.id) === String(currentVarId); });
+						if (selVar) {
+							console.log('Calling productOptionsChanged with variant:', selVar.id);
+							productOptionsChanged(selVar);
+						}
+					}
+				}, 1200);
+				
+				// تحديث الصور
+				setTimeout(function() {
+					var currentVarId = $('#product-id').val();
+					var selVar = productVariants.find(function (v) { return String(v.id) === String(currentVarId); });
+					if (selVar && selVar.images && selVar.images.length) {
+						if (window.mainSwiper && window.thumbSwiper) {
+							productImages = selVar.images;
+							window.mainSwiper.removeAllSlides();
+							selVar.images.forEach(function (img) {
+								window.mainSwiper.appendSlide('<div class="swiper-slide">\n  <img src="' + img.image.full_size + '" class="carousel-img" alt="{{ product.name }}" loading="lazy">\n</div>');
+							});
+							window.mainSwiper.update();
+							
+							window.thumbSwiper.removeAllSlides();
+							selVar.images.forEach(function (img, idx) {
+								window.thumbSwiper.appendSlide('<div class="swiper-slide small_images">\n  <img src="' + img.image.medium + '" data-index="' + idx + '" loading="lazy" class="thumbimagee">\n</div>');
+							});
+							window.thumbSwiper.update();
+							window.mainSwiper.thumbs.swiper = window.thumbSwiper;
+							window.mainSwiper.update();
+						}
+					}
+				}, 1800);
+			}
+		} catch (error) {
+			console.error('Error selecting variant from filter:', error);
+		}
+	}
+	
+	// استدعاء الدالة بعد تحميل الصفحة
+	$(document).ready(function() {
+		console.log('=== Document Ready - Starting variant filter selection ===');
+		console.log('Current URL:', window.location.href);
+		console.log('URL Search:', window.location.search);
+		
+		// محاولات متعددة
+		setTimeout(function() {
+			console.log('Attempt 1 - 1000ms');
+			selectVariantFromFilter();
+		}, 1000);
+		
+		setTimeout(function() {
+			console.log('Attempt 2 - 2000ms');
+			selectVariantFromFilter();
+		}, 2000);
+		
+		setTimeout(function() {
+			console.log('Attempt 3 - 3500ms');
+			selectVariantFromFilter();
+		}, 3500);
+	});
+
 	$(document).on('change click', '.g-custom-size-box :input[name^="options"], .g-custom-size-box .btn, .g-custom-size-box [data-option-id]', function () {
 		setTimeout(function () {
 			var currentVarId = $('#product-id').val();
@@ -1670,7 +1987,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}, 0);
 	});
-});
 
 let btn_popup = document.getElementById('product-view-add-to-cart');
 let popupContainer = document.getElementById('popup_container');

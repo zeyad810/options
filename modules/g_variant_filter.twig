@@ -1,0 +1,1030 @@
+{# فلتر المتغيرات للمنتجات #}
+<style>
+    .variant-filter-section {
+        padding: 40px 0;
+    }
+    .variant-filter-container {
+        background: #fff;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .form-products-filter {
+        padding: 10px;
+    }
+    .variant-filter-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: var(--primary-color, #333);
+    }
+    .variant-option-group {
+        margin-bottom: 30px;
+    }
+    .variant-option-label {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 15px;
+        color: #333;
+        display: block;
+    }
+    .variant-values-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .variant-value-item {
+        padding: 10px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        color: #666;
+        position: relative;
+        user-select: none;
+    }
+    .variant-value-item:hover {
+        border-color: var(--primary-color, #CE5A67);
+        color: var(--primary-color, #CE5A67);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .variant-value-item.active {
+        background: var(--primary-color, #CE5A67);
+        border-color: var(--primary-color, #CE5A67);
+        color: #fff;
+    }
+    .variant-value-item.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .variant-filter-reset {
+        margin-top: 20px;
+        padding: 0px 20px;
+        background: #fff;
+        border: 1px solid rgb(177, 1, 1);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #666;
+        transition: all 0.3s ease;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .variant-filter-reset:hover {
+        background: #f5f5f5;
+        color: #333;
+    }
+    .variant-filter-results {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #666;
+    }
+    .variant-filter-products-container {
+        margin-top: 30px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .variant-filter-products-container .prod-col {
+        transition: transform 0.3s ease;
+    }
+    .variant-filter-products-container .prod-col:hover {
+        transform: translateY(-5px);
+    }
+    @media (max-width: 768px) {
+        .variant-filter-container {
+            padding: 20px;
+        }
+        .variant-filter-title {
+            font-size: 18px;
+        }
+        .variant-value-item {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+    }
+</style>
+
+{% set top_padding = 40 %}
+{% if settings.section_padding_top is defined and settings.section_padding_top %}
+    {% set top_padding = settings.section_padding_top %}
+{% endif %}
+
+{% set bottom_padding = 40 %}
+{% if settings.section_padding_bottom is defined and settings.section_padding_bottom %}
+    {% set bottom_padding = settings.section_padding_bottom %}
+{% endif %}
+
+<section id="variant_filter_{{ sectionId }}" class="variant-filter-section" style="padding: {{ top_padding }}px 0 {{ bottom_padding }}px 0;">
+    <div class="container">
+        {% if settings.section_title %}
+            <div style="margin-bottom: 30px;">
+                {% include 'title.twig' with { 'component_title': settings.section_title } %}
+            </div>
+        {% endif %}
+        
+        <div class="variant-filter-container">
+            {% if settings.filter_title %}
+                <h3 class="variant-filter-title">{{ settings.filter_title }}</h3>
+            {% endif %}
+            
+            <div id="variant-filter-options-{{ sectionId }}">
+                {# سيتم عرض الفلتر بواسطة JavaScript بعد تحميل البيانات من كل المنتجات #}
+                <div id="variant-filter-loading-{{ sectionId }}" style="text-align: center; padding: 20px; color: #999;">
+                    <span>جاري تحميل المتغيرات من كل المنتجات...</span>
+                </div>
+                <div id="variant-filter-content-{{ sectionId }}" style="display: none;">
+                    {# سيتم ملء المحتوى بواسطة JavaScript #}
+                </div>
+                <div id="variant-filter-no-variants-{{ sectionId }}" style="display: none; text-align: center; color: #999; padding: 20px;">
+                    <p>لا توجد منتجات تحتوي على متغيرات</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ sectionId }}';
+    const filterContainer = document.getElementById('variant-filter-options-' + sectionId);
+    
+    if (!filterContainer) return;
+    
+    let selectedFilters = {};
+    let variantItems = [];
+    let resetButton = null;
+    let resultsDiv = null;
+    let countSpan = null;
+    
+    // حفظ البيانات في window للوصول إليها من clearVariantFilters
+    if (!window.variantFiltersData) {
+        window.variantFiltersData = {};
+    }
+    
+    // جلب كل المنتجات من المتجر
+    let productsData = [];
+    let allProductsLoaded = false;
+    
+    // دالة لجلب كل المنتجات من المتجر
+    async function fetchAllProducts() {
+        const loadingDiv = document.getElementById('variant-filter-loading-' + sectionId);
+        if (loadingDiv) {
+            loadingDiv.innerHTML = '<span>جاري تحميل المنتجات من المتجر...</span>';
+        }
+        
+        try {
+            // التحقق من وجود zid.store API
+            if (typeof zid === 'undefined' || !zid.store || !zid.store.product || !zid.store.product.fetchAll) {
+                throw new Error('Zid Store API not available');
+            }
+            
+            let page = 1;
+            let hasMore = true;
+            const allProducts = [];
+            
+            // جلب كل المنتجات صفحة بصفحة
+            while (hasMore && page <= 50) { // حد أقصى 50 صفحة لتجنب اللانهاية
+                const response = await zid.store.product.fetchAll(null, { 
+                    per_page: 100, 
+                    page: page 
+                });
+                
+                if (response && response.status === 'success' && response.data && response.data.products) {
+                    const products = response.data.products.data || [];
+                    allProducts.push(...products);
+                    
+                    // التحقق من وجود صفحات أخرى
+                    const totalPages = response.data.products.last_page || 1;
+                    const currentPage = response.data.products.current_page || page;
+                    hasMore = currentPage < totalPages;
+                    page++;
+                    
+                    if (loadingDiv) {
+                        loadingDiv.innerHTML = `<span>جاري تحميل المنتجات... (${allProducts.length} منتج)</span>`;
+                    }
+                } else {
+                    hasMore = false;
+                }
+            }
+            
+            productsData = allProducts;
+            allProductsLoaded = true;
+            
+            console.log('Total products loaded:', productsData.length);
+            
+            // عرض الفلتر بعد تحميل كل المنتجات
+            renderFilterValues().then(() => {
+                updateResults();
+            });
+            
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            const loadingDiv = document.getElementById('variant-filter-loading-' + sectionId);
+            const noVariantsDiv = document.getElementById('variant-filter-no-variants-' + sectionId);
+            if (loadingDiv) loadingDiv.style.display = 'none';
+            if (noVariantsDiv) {
+                noVariantsDiv.innerHTML = '<p>حدث خطأ أثناء تحميل المنتجات. يرجى تحديث الصفحة.</p>';
+                noVariantsDiv.style.display = 'block';
+            }
+        }
+    }
+    
+    // بدء جلب المنتجات بعد تحميل الصفحة
+    if (typeof zid !== 'undefined' && zid.store && zid.store.product) {
+        fetchAllProducts();
+    } else {
+        // انتظار تحميل zid API
+        document.addEventListener('zidReady', fetchAllProducts);
+        // أو محاولة بعد تأخير قصير
+        setTimeout(() => {
+            if (typeof zid !== 'undefined' && zid.store && zid.store.product) {
+                fetchAllProducts();
+            }
+        }, 1000);
+    }
+    
+    // دالة لجلب بيانات منتج كاملة (بما فيها variants)
+    async function fetchProductFullData(productSlug) {
+        try {
+            // محاولة جلب البيانات من API
+            if (zid && zid.store && zid.store.product && zid.store.product.fetch) {
+                const response = await zid.store.product.fetch(productSlug);
+                if (response && response.status === 'success' && response.data && response.data.product) {
+                    return response.data.product;
+                }
+            }
+        } catch (error) {
+            console.warn('Failed to fetch product data for:', productSlug, error);
+        }
+        return null;
+    }
+    
+    // جمع القيم الفريدة لكل option من كل المنتجات
+    async function collectUniqueValues() {
+        const optionsMap = {};
+        let hasAnyVariants = false;
+        let productsWithVariants = 0;
+        let productsNeedingFetch = [];
+        
+        console.log('Starting to collect variants from', productsData.length, 'products');
+        
+        // أولاً: جمع البيانات المتاحة مباشرة
+        for (let product of productsData) {
+            if (product.variants && Array.isArray(product.variants) && product.variants.length > 0) {
+                productsWithVariants++;
+                hasAnyVariants = true;
+                processProductVariants(product, optionsMap);
+            } else if ((product.has_options || product.has_variants) && product.slug) {
+                // حفظ المنتجات اللي محتاجة fetch
+                productsNeedingFetch.push(product);
+            }
+        }
+        
+        // ثانياً: جلب البيانات الكاملة للمنتجات اللي محتاجة (بحد أقصى 20 منتج لتجنب البطء)
+        if (productsNeedingFetch.length > 0) {
+            const loadingDiv = document.getElementById('variant-filter-loading-' + sectionId);
+            const maxFetch = Math.min(20, productsNeedingFetch.length);
+            
+            for (let i = 0; i < maxFetch; i++) {
+                const product = productsNeedingFetch[i];
+                if (loadingDiv) {
+                    loadingDiv.innerHTML = `<span>جاري تحميل بيانات المنتجات... (${i + 1}/${maxFetch})</span>`;
+                }
+                
+                const fullProduct = await fetchProductFullData(product.slug);
+                if (fullProduct && fullProduct.variants && Array.isArray(fullProduct.variants) && fullProduct.variants.length > 0) {
+                    product.variants = fullProduct.variants;
+                    product.options = fullProduct.options;
+                    productsWithVariants++;
+                    hasAnyVariants = true;
+                    processProductVariants(product, optionsMap);
+                }
+                
+                // تأخير صغير لتجنب إرهاق الـ API
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+        
+        console.log('Products with variants:', productsWithVariants, 'out of', productsData.length);
+        console.log('Options found:', Object.keys(optionsMap).length);
+        console.log('Options Map:', optionsMap);
+        
+        return { optionsMap, hasAnyVariants };
+    }
+    
+    // دالة لمعالجة variants منتج واحد
+    function processProductVariants(product, optionsMap) {
+        const productVariants = product.variants;
+        const productOptions = product.options;
+        
+        if (!productVariants || !Array.isArray(productVariants)) return;
+        
+        productVariants.forEach(variant => {
+            if (variant.unavailable) return;
+            
+            // معالجة attributes بطرق مختلفة
+            let attributes = [];
+            if (variant.attributes && Array.isArray(variant.attributes)) {
+                attributes = variant.attributes;
+            } else if (variant.attributes && typeof variant.attributes === 'object') {
+                // إذا attributes object مش array
+                attributes = Object.values(variant.attributes);
+            }
+            
+            attributes.forEach((attr, idx) => {
+                let optionIndex, value;
+                
+                // محاولة استخراج option_index و value بطرق مختلفة
+                if (attr && typeof attr === 'object') {
+                    if (attr.option_index !== undefined) {
+                        optionIndex = attr.option_index;
+                        value = attr.value;
+                    } else if (attr.index !== undefined) {
+                        optionIndex = attr.index;
+                        value = attr.value || attr.name;
+                    } else {
+                        // استخدام index من loop
+                        optionIndex = idx;
+                        value = attr.value || attr.name;
+                    }
+                } else if (attr) {
+                    // إذا attr قيمة مباشرة
+                    optionIndex = idx;
+                    value = String(attr);
+                }
+                
+                if (optionIndex !== undefined && value) {
+                    if (!optionsMap[optionIndex]) {
+                        const optionName = (productOptions && productOptions[optionIndex]) 
+                            ? (typeof productOptions[optionIndex] === 'object' && productOptions[optionIndex].name)
+                                ? productOptions[optionIndex].name
+                                : (typeof productOptions[optionIndex] === 'string')
+                                    ? productOptions[optionIndex]
+                                    : 'Option ' + (parseInt(optionIndex) + 1)
+                            : 'Option ' + (parseInt(optionIndex) + 1);
+                        
+                        optionsMap[optionIndex] = {
+                            name: optionName,
+                            values: new Set()
+                        };
+                    }
+                    optionsMap[optionIndex].values.add(String(value));
+                }
+            });
+        });
+    }
+    
+    // عرض القيم في الفلتر
+    async function renderFilterValues() {
+        const loadingDiv = document.getElementById('variant-filter-loading-' + sectionId);
+        const contentDiv = document.getElementById('variant-filter-content-' + sectionId);
+        const noVariantsDiv = document.getElementById('variant-filter-no-variants-' + sectionId);
+        
+        if (loadingDiv) {
+            loadingDiv.innerHTML = '<span>جاري جمع المتغيرات من المنتجات...</span>';
+        }
+        
+        const { optionsMap, hasAnyVariants } = await collectUniqueValues();
+        
+        if (!hasAnyVariants || Object.keys(optionsMap).length === 0) {
+            if (loadingDiv) loadingDiv.style.display = 'none';
+            if (contentDiv) contentDiv.style.display = 'none';
+            if (noVariantsDiv) noVariantsDiv.style.display = 'block';
+            return;
+        }
+        
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        if (noVariantsDiv) noVariantsDiv.style.display = 'none';
+        if (contentDiv) contentDiv.style.display = 'block';
+        
+        // ترتيب options حسب index
+        const sortedOptions = Object.keys(optionsMap).sort((a, b) => parseInt(a) - parseInt(b));
+        
+        let html = '';
+        sortedOptions.forEach(optionIndex => {
+            const optionData = optionsMap[optionIndex];
+            const uniqueValues = Array.from(optionData.values);
+            
+            html += `
+                <div class="variant-option-group" data-option-index="${optionIndex}" data-option-name="${optionData.name}">
+                    <label class="variant-option-label">${optionData.name}</label>
+                    <div class="variant-values-container">
+            `;
+            
+            uniqueValues.forEach(value => {
+                html += `
+                    <div class="variant-value-item" 
+                         data-option-index="${optionIndex}"
+                         data-value="${value.replace(/"/g, '&quot;')}">
+                        ${value}
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `
+                        <div class="form-group mt-3 d-flex justify-content-end">
+                            <button type="button" class="btn round btn-white variant-filter-reset" id="variant-filter-reset-${sectionId}" onclick="clearVariantFilters('${sectionId}')">
+                                <span style="padding: 0px 20px">
+                                    {% if settings.reset_button_text is defined and settings.reset_button_text %}
+                                        {{ settings.reset_button_text }}
+                                    {% else %}
+                                        إعادة تعيين
+                                    {% endif %}
+                                </span>
+                            </button>
+                        </div>
+            
+            <div class="variant-filter-results d-none" id="variant-filter-results-${sectionId}">
+                <span id="variant-filter-count-${sectionId}">0</span>
+                {% if settings.results_text is defined and settings.results_text %}
+                    {{ settings.results_text }}
+                {% else %}
+                    منتج متطابق
+                {% endif %}
+            </div>
+        `;
+        
+        contentDiv.innerHTML = html;
+        
+        // إضافة event listeners للأزرار
+        const newItems = contentDiv.querySelectorAll('.variant-value-item');
+        newItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const optionIndex = this.dataset.optionIndex;
+                const value = this.dataset.value;
+                
+                // تبديل الاختيار
+                if (selectedFilters[optionIndex] === value) {
+                    delete selectedFilters[optionIndex];
+                } else {
+                    selectedFilters[optionIndex] = value;
+                }
+                
+                updateButtonsState();
+                updateResults();
+            });
+        });
+        
+        // إعادة ربط زر إعادة التعيين (سيتم استخدام clearVariantFilters function)
+        
+        // تحديث variantItems بعد العرض
+        variantItems = contentDiv.querySelectorAll('.variant-value-item');
+        
+        // تحديث references للعناصر الجديدة
+        resultsDiv = document.getElementById('variant-filter-results-' + sectionId);
+        countSpan = document.getElementById('variant-filter-count-' + sectionId);
+        
+        // حفظ البيانات في window للوصول إليها من clearVariantFilters
+        window.variantFiltersData[sectionId] = {
+            selectedFilters: selectedFilters,
+            updateButtonsState: updateButtonsState,
+            updateResults: updateResults,
+            sectionId: sectionId
+        };
+    }
+    
+    // دالة للتحقق من تطابق المنتج مع الفلاتر
+    function matchesFilters(product) {
+        // إذا لم يتم اختيار أي فلتر، نعرض كل المنتجات
+        if (Object.keys(selectedFilters).length === 0) {
+            return true;
+        }
+        
+        // إذا المنتج مافيهاش variants، مش هتكون متطابقة
+        if (!product.variants || !Array.isArray(product.variants) || product.variants.length === 0) {
+            return false;
+        }
+        
+        // التحقق من وجود variant يطابق الفلاتر المختارة
+        for (let variant of product.variants) {
+            if (variant.unavailable) continue;
+            
+            let matches = true;
+            
+            // التحقق من كل فلتر مختار
+            for (let optionIndex in selectedFilters) {
+                const selectedValue = String(selectedFilters[optionIndex]);
+                let found = false;
+                
+                // معالجة attributes بطرق مختلفة (نفس الطريقة في processProductVariants)
+                let attributes = [];
+                if (variant.attributes && Array.isArray(variant.attributes)) {
+                    attributes = variant.attributes;
+                } else if (variant.attributes && typeof variant.attributes === 'object') {
+                    attributes = Object.values(variant.attributes);
+                }
+                
+                // البحث في attributes
+                for (let idx = 0; idx < attributes.length; idx++) {
+                    const attr = attributes[idx];
+                    let attrOptionIndex, attrValue;
+                    
+                    // استخراج option_index و value بنفس الطريقة
+                    if (attr && typeof attr === 'object') {
+                        if (attr.option_index !== undefined) {
+                            attrOptionIndex = attr.option_index;
+                            attrValue = attr.value;
+                        } else if (attr.index !== undefined) {
+                            attrOptionIndex = attr.index;
+                            attrValue = attr.value || attr.name;
+                        } else {
+                            attrOptionIndex = idx;
+                            attrValue = attr.value || attr.name;
+                        }
+                    } else if (attr) {
+                        attrOptionIndex = idx;
+                        attrValue = String(attr);
+                    }
+                    
+                    // المقارنة
+                    if (attrOptionIndex !== undefined && attrValue) {
+                        const optionIndexNum = parseInt(optionIndex);
+                        const attrOptionIndexNum = parseInt(attrOptionIndex);
+                        
+                        if (optionIndexNum == attrOptionIndexNum && String(attrValue) === selectedValue) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (!found) {
+                    matches = false;
+                    break;
+                }
+            }
+            
+            if (matches) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    // دالة لتحديث حالة الأزرار
+    function updateButtonsState() {
+        // تحديث variantItems من contentDiv
+        const contentDiv = document.getElementById('variant-filter-content-' + sectionId);
+        if (contentDiv) {
+            variantItems = contentDiv.querySelectorAll('.variant-value-item');
+        }
+        
+        variantItems.forEach(item => {
+            const optionIndex = item.dataset.optionIndex;
+            const value = item.dataset.value;
+            
+            // إزالة حالة active من كل الأزرار في نفس المجموعة
+            if (selectedFilters[optionIndex] === value) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+    
+    // دالة لتحديث النتائج
+    function updateResults() {
+        if (!allProductsLoaded || productsData.length === 0) {
+            console.log('Products not loaded yet or empty');
+            return;
+        }
+        
+        console.log('Updating results with filters:', selectedFilters);
+        console.log('Total products to filter:', productsData.length);
+        
+        const matchingProducts = productsData.filter(product => {
+            const matches = matchesFilters(product);
+            if (matches) {
+                console.log('Product matches:', product.name, product.slug);
+            }
+            return matches;
+        });
+        
+        const count = matchingProducts.length;
+        
+        console.log('Matching products count:', count);
+        console.log('Matching products:', matchingProducts.map(p => p.name));
+        
+        if (countSpan) {
+            countSpan.textContent = count;
+        }
+        
+        if (resultsDiv) {
+            if (Object.keys(selectedFilters).length > 0) {
+                resultsDiv.classList.remove('d-none');
+            } else {
+                resultsDiv.classList.add('d-none');
+            }
+        }
+        
+        // إرسال حدث مخصص يمكن للصفحة الاستماع إليه
+        const event = new CustomEvent('variantFilterChanged', {
+            detail: {
+                selectedFilters: selectedFilters,
+                matchingProducts: matchingProducts,
+                count: count,
+                sectionId: sectionId
+            }
+        });
+        document.dispatchEvent(event);
+        
+        // فلترة المنتجات المعروضة في أي صفحة
+        filterProductsOnPage(matchingProducts);
+        
+        // عرض المنتجات المتطابقة في container منفصل إذا لزم الأمر
+        if (Object.keys(selectedFilters).length > 0) {
+            displayMatchingProducts(matchingProducts);
+        } else {
+            const resultsContainer = document.getElementById('variant-filter-products-' + sectionId);
+            if (resultsContainer) {
+                resultsContainer.style.display = 'none';
+            }
+        }
+        
+        // إضافة المتغيرات في روابط المنتجات الموجودة في الصفحة
+        addVariantParamsToProductLinks();
+    }
+    
+    // دالة لإضافة المتغيرات المختارة في روابط المنتجات الموجودة في الصفحة
+    function addVariantParamsToProductLinks() {
+        if (Object.keys(selectedFilters).length === 0) return;
+        
+        // البحث عن كل روابط المنتجات في الصفحة
+        const productLinks = document.querySelectorAll('a[href*="/products/"]:not(.variant-filter-product-link)');
+        
+        productLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href || href.includes('variant_filter=')) return; // إذا كان الرابط فيه variant_filter بالفعل، ما نضيفش
+            
+            try {
+                const url = new URL(href, window.location.origin);
+                
+                // إضافة المتغيرات
+                for (let optionIndex in selectedFilters) {
+                    url.searchParams.set('variant_' + optionIndex, selectedFilters[optionIndex]);
+                }
+                url.searchParams.set('variant_filter', '1');
+                
+                link.setAttribute('href', url.pathname + url.search);
+            } catch (e) {
+                // إذا URL parsing فشل، نستخدم طريقة بسيطة
+                const separator = href.includes('?') ? '&' : '?';
+                let params = '';
+                for (let optionIndex in selectedFilters) {
+                    params += (params ? '&' : '') + 'variant_' + optionIndex + '=' + encodeURIComponent(selectedFilters[optionIndex]);
+                }
+                params += (params ? '&' : '') + 'variant_filter=1';
+                link.setAttribute('href', href + separator + params);
+            }
+        });
+    }
+    
+    // دالة لفلترة المنتجات المعروضة في الصفحة
+    function filterProductsOnPage(matchingProducts) {
+        // البحث عن قائمة المنتجات في الصفحة
+        const productsList = document.querySelector('#products-list');
+        if (!productsList) {
+            // إذا مافيش قائمة موجودة، نعرض المنتجات المتطابقة في container جديد
+            displayMatchingProducts(matchingProducts);
+            return;
+        }
+        
+        const productCards = productsList.querySelectorAll('.prod-col');
+        const matchingProductSlugs = new Set(matchingProducts.map(p => p.slug));
+        const matchingProductIds = new Set(matchingProducts.map(p => String(p.id)));
+        let visibleCount = 0;
+        
+        productCards.forEach(card => {
+            let shouldShow = false;
+            
+            // محاولة المطابقة من خلال slug
+            const productLink = card.querySelector('a[href*="/products/"]');
+            if (productLink) {
+                const href = productLink.getAttribute('href');
+                const productSlug = href.split('/products/')[1]?.split('?')[0]?.split('#')[0];
+                if (productSlug && matchingProductSlugs.has(productSlug)) {
+                    shouldShow = true;
+                }
+            }
+            
+            // محاولة المطابقة من خلال data attributes
+            if (!shouldShow) {
+                const productId = card.getAttribute('data-product-id') || 
+                                 card.querySelector('[data-product-id]')?.getAttribute('data-product-id');
+                if (productId && matchingProductIds.has(String(productId))) {
+                    shouldShow = true;
+                }
+            }
+            
+            // محاولة المطابقة من خلال class أو id
+            if (!shouldShow) {
+                const cardId = card.id;
+                if (cardId) {
+                    const idMatch = matchingProductIds.has(cardId.replace('product-', '').replace('prod-', ''));
+                    if (idMatch) {
+                        shouldShow = true;
+                    }
+                }
+            }
+            
+            if (shouldShow) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // إذا مافيش منتجات ظاهرة، نعرض رسالة
+        if (visibleCount === 0 && Object.keys(selectedFilters).length > 0) {
+            showNoProductsMessage(productsList);
+        } else {
+            hideNoProductsMessage(productsList);
+        }
+    }
+    
+    // دالة لعرض المنتجات المتطابقة في container جديد
+    function displayMatchingProducts(matchingProducts) {
+        let resultsContainer = document.getElementById('variant-filter-products-' + sectionId);
+        
+        if (!resultsContainer) {
+            // إنشاء container جديد
+            const filterContainer = document.getElementById('variant_filter_' + sectionId);
+            if (!filterContainer) return;
+            
+            resultsContainer = document.createElement('div');
+            resultsContainer.id = 'variant-filter-products-' + sectionId;
+            resultsContainer.className = 'variant-filter-products-container';
+            resultsContainer.style.cssText = 'margin-top: 30px; padding: 20px;';
+            filterContainer.appendChild(resultsContainer);
+        }
+        
+        if (Object.keys(selectedFilters).length === 0) {
+            resultsContainer.innerHTML = '';
+            resultsContainer.style.display = 'none';
+            return;
+        }
+        
+        if (matchingProducts.length === 0) {
+            resultsContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #999;">
+                    <p style="font-size: 18px; margin-bottom: 10px;">لا توجد منتجات متطابقة</p>
+                    <p>جرب اختيار متغيرات أخرى</p>
+                </div>
+            `;
+            resultsContainer.style.display = 'block';
+            return;
+        }
+        
+        // عرض المنتجات المتطابقة
+        let productsHTML = `
+            <h4 style="margin-bottom: 20px; font-size: 20px; font-weight: 600;">المنتجات المتطابقة (${matchingProducts.length})</h4>
+            <div class="grid grid-cols-3 products-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+        `;
+        
+        matchingProducts.forEach(product => {
+            let productImage = '';
+            if (product.images && product.images[0]) {
+                if (product.images[0].image) {
+                    productImage = product.images[0].image.medium || product.images[0].image.small || '';
+                } else if (product.images[0].medium) {
+                    productImage = product.images[0].medium;
+                } else if (typeof product.images[0] === 'string') {
+                    productImage = product.images[0];
+                }
+            }
+            if (!productImage) {
+                productImage = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23ddd" width="200" height="200"/%3E%3C/svg%3E';
+            }
+            
+            const productPrice = product.formatted_sale_price || product.formatted_price || product.price || '';
+            let productUrl = product.html_url || (product.slug ? '/products/' + product.slug : '#');
+            
+            // محاولة تحديد الـ variant المطابق للفلاتر الحالية لهذا المنتج
+            let selectedVariantId = null;
+            if (product.variants && Array.isArray(product.variants) && Object.keys(selectedFilters).length > 0) {
+                for (let variant of product.variants) {
+                    if (variant.unavailable) continue;
+                    
+                    let variantMatches = true;
+                    
+                    // نفس منطق matchesFilters لكن على level الـ variant فقط
+                    for (let optionIndex in selectedFilters) {
+                        const selectedValue = String(selectedFilters[optionIndex]);
+                        let found = false;
+                        
+                        // تجهيز attributes في array
+                        let attributes = [];
+                        if (variant.attributes && Array.isArray(variant.attributes)) {
+                            attributes = variant.attributes;
+                        } else if (variant.attributes && typeof variant.attributes === 'object') {
+                            attributes = Object.values(variant.attributes);
+                        }
+                        
+                        for (let idx = 0; idx < attributes.length; idx++) {
+                            const attr = attributes[idx];
+                            let attrOptionIndex, attrValue;
+                            
+                            if (attr && typeof attr === 'object') {
+                                if (attr.option_index !== undefined) {
+                                    attrOptionIndex = attr.option_index;
+                                    attrValue = attr.value;
+                                } else if (attr.index !== undefined) {
+                                    attrOptionIndex = attr.index;
+                                    attrValue = attr.value || attr.name;
+                                } else {
+                                    attrOptionIndex = idx;
+                                    attrValue = attr.value || attr.name;
+                                }
+                            } else if (attr) {
+                                attrOptionIndex = idx;
+                                attrValue = String(attr);
+                            }
+                            
+                            if (attrOptionIndex !== undefined && attrValue) {
+                                if (parseInt(optionIndex) == parseInt(attrOptionIndex) && String(attrValue) === selectedValue) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (!found) {
+                            variantMatches = false;
+                            break;
+                        }
+                    }
+                    
+                    if (variantMatches) {
+                        selectedVariantId = variant.id;
+                        break;
+                    }
+                }
+            }
+            
+            // إضافة المتغيرات المختارة إلى URL
+            if (Object.keys(selectedFilters).length > 0) {
+                const urlParams = new URLSearchParams();
+                for (let optionIndex in selectedFilters) {
+                    urlParams.append('variant_' + optionIndex, encodeURIComponent(selectedFilters[optionIndex]));
+                }
+                // إذا تم العثور على variant مطابق، نمرر الـ id أيضاً ليكون أكثر دقة
+                if (selectedVariantId) {
+                    urlParams.append('variant_id', String(selectedVariantId));
+                }
+                // إضافة variant_filter=1 للإشارة إن الفلتر من component
+                urlParams.append('variant_filter', '1');
+                const separator = productUrl.includes('?') ? '&' : '?';
+                productUrl = productUrl + separator + urlParams.toString();
+            }
+            
+            productsHTML += `
+                <div class="prod-col prod-col-tb" style="display: flex; flex-direction: column;">
+                    <a href="${productUrl}" class="variant-filter-product-link" data-product-slug="${product.slug || ''}" style="text-decoration: none; color: inherit;">
+                        <div style="position: relative; overflow: hidden; border-radius: 8px; margin-bottom: 10px;">
+                            <img src="${productImage}" alt="${product.name}" style="width: 100%; height: auto; object-fit: cover;" loading="lazy">
+                        </div>
+                        <h5 style="font-size: 16px; font-weight: 500; margin-bottom: 8px; color: #333;">${product.name}</h5>
+                        <div style="font-size: 18px; font-weight: 600; color: var(--primary-color, #CE5A67);">${productPrice}</div>
+                    </a>
+                </div>
+            `;
+        });
+        
+        productsHTML += '</div>';
+        resultsContainer.innerHTML = productsHTML;
+        resultsContainer.style.display = 'block';
+    }
+    
+    // دالة لعرض رسالة عدم وجود منتجات
+    function showNoProductsMessage(productsList) {
+        let messageDiv = document.getElementById('variant-filter-no-products-message');
+        if (!messageDiv && productsList) {
+            messageDiv = document.createElement('div');
+            messageDiv.id = 'variant-filter-no-products-message';
+            messageDiv.style.cssText = 'text-align: center; padding: 40px; color: #999; grid-column: 1 / -1;';
+            messageDiv.innerHTML = `
+                <p style="font-size: 18px; margin-bottom: 10px;">لا توجد منتجات متطابقة</p>
+                <p>جرب اختيار متغيرات أخرى</p>
+            `;
+            productsList.appendChild(messageDiv);
+        }
+    }
+    
+    // دالة لإخفاء رسالة عدم وجود منتجات
+    function hideNoProductsMessage(productsList) {
+        const messageDiv = document.getElementById('variant-filter-no-products-message');
+        if (messageDiv) {
+            messageDiv.remove();
+        }
+    }
+    
+    // سيتم عرض القيم بعد تحميل المنتجات في fetchAllProducts
+});
+
+// دالة عامة لإعادة تعيين الفلتر (مشابهة لـ clearFilters في main.js)
+function clearVariantFilters(sectionId) {
+    if (!window.variantFiltersData || !window.variantFiltersData[sectionId]) {
+        console.warn('Variant filter data not found for section:', sectionId);
+        return;
+    }
+    
+    const filterData = window.variantFiltersData[sectionId];
+    
+    // إعادة تعيين الفلاتر المختارة
+    filterData.selectedFilters = {};
+    
+    // إزالة active class من كل الأزرار
+    const contentDiv = document.getElementById('variant-filter-content-' + sectionId);
+    if (contentDiv) {
+        const variantItems = contentDiv.querySelectorAll('.variant-value-item');
+        variantItems.forEach(item => {
+            item.classList.remove('active');
+        });
+    }
+    
+    // تحديث الحالة والنتائج
+    filterData.updateButtonsState();
+    filterData.updateResults();
+}
+</script>
+
+{% schema %}
+{
+    "name": {
+        "ar": "فلتر المتغيرات - جلامور",
+        "en": "Variant Filter - Glamour"
+    },
+    "icon": "fal fa-filter",
+    "display": true,
+    "settings": {
+        "section_title": {
+            "type": "text",
+            "label": {
+                "ar": "عنوان السكشن",
+                "en": "Section Title"
+            }
+        },
+        "filter_title": {
+            "type": "text",
+            "label": {
+                "ar": "عنوان الفلتر",
+                "en": "Filter Title"
+            },
+            "default": "فلتر المتغيرات"
+        },
+        "reset_button_text": {
+            "type": "text",
+            "label": {
+                "ar": "نص زر إعادة التعيين",
+                "en": "Reset Button Text"
+            },
+            "default": "إعادة تعيين الفلتر"
+        },
+        "results_text": {
+            "type": "text",
+            "label": {
+                "ar": "نص النتائج",
+                "en": "Results Text"
+            },
+            "default": "منتج متطابق"
+        },
+        "section_padding_top": {
+            "type": "number",
+            "label": {
+                "ar": "المسافة العلوية (بالبكسل)",
+                "en": "Top Padding (px)"
+            },
+            "default": 40
+        },
+        "section_padding_bottom": {
+            "type": "number",
+            "label": {
+                "ar": "المسافة السفلية (بالبكسل)",
+                "en": "Bottom Padding (px)"
+            },
+            "default": 40
+        }
+    }
+}
+{% endschema %}
+
