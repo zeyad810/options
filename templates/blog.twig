@@ -3,6 +3,16 @@
 {% block header %} {{ include('header.twig') }} {% endblock %}
 
 {% block main_content %}
+    {% if blog.handle is defined %}
+        {% set blog_handle = blog.handle %}
+    {% elseif blog.slug is defined %}
+        {% set blog_handle = blog.slug %}
+    {% else %}
+        {% set blog_handle = '' %}
+    {% endif %}
+    {% if blog.alias is defined and blog_handle == '' %}
+        {% set blog_handle = blog.alias %}
+    {% endif %}
     <section class="blog mt-5 mb-5 ">
         <div class="container">
 
@@ -12,13 +22,35 @@
                 </h1>
             </div>
             <div class="blog-text mt-3 mb-5">
-                {{ blog.content | raw }}
+                {% if blog_handle == 'options' or ('options' in blog_handle) %}
+                    <div class="custom-options-content">
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum alias obcaecati commodi eligendi voluptates, illo inventore assumenda voluptate sapiente quisquam! Quam dolorem id fuga saepe, nostrum ad distinctio fugit. Hic.
+                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis officia, accusantium rerum pariatur odio harum similique repellat. Placeat quas corrupti facere, iusto nobis totam dolorem distinctio accusamus harum optio officia.
+                    </div>
+                {% else %}
+                    {{ blog.content | raw }}
+                {% endif %}
             </div>
 
 
         </div>
     </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+   const searchParams = new URLSearchParams(window.location.search);
+   const optionParam = searchParams.get('option');
+   console.log('Option parameter from URL:', optionParam);
+});
+
+</script>
+
+
+
 {% endblock %}
+
+
+
+
 
 {% block footer %} {{ include('footer.twig') }} {% endblock %}

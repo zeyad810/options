@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!filterContainer) return;
     
     let selectedFilters = {};
+    let selectedOption = '';
     let variantItems = [];
     let resetButton = null;
     let resultsDiv = null;
@@ -461,7 +462,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 {% endif %}
             </div>
         `;
-        
+
+                html +=`
+                        <div>
+                        <a id="variant-filter-options-link-${sectionId}" href="{{store.url}}/blogs/options" style="font-size: 14px; color: var(--primary-color, #CE5A67); text-decoration: underline;">
+                            عرض كل المنتجات
+                        </a>
+                        </div>
+                    `
+
         contentDiv.innerHTML = html;
         
         // إضافة event listeners للأزرار
@@ -478,7 +487,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     selectedFilters[optionIndex] = value;
                 }
                 
+                selectedOption = getSelectedOptionValue();
                 updateButtonsState();
+                updateOptionsLink();
                 updateResults();
             });
         });
@@ -491,6 +502,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // تحديث references للعناصر الجديدة
         resultsDiv = document.getElementById('variant-filter-results-' + sectionId);
         countSpan = document.getElementById('variant-filter-count-' + sectionId);
+
+        // تحديث رابط الخيارات استناداً إلى الحالة الحالية
+        updateOptionsLink();
         
         // حفظ البيانات في window للوصول إليها من clearVariantFilters
         window.variantFiltersData[sectionId] = {
@@ -499,6 +513,34 @@ document.addEventListener('DOMContentLoaded', function() {
             updateResults: updateResults,
             sectionId: sectionId
         };
+    }
+
+    // تحديد قيمة الخيار المختارة الأولى (إن وجدت)
+    function getSelectedOptionValue() {
+        const optionKeys = Object.keys(selectedFilters);
+        if (!optionKeys.length) {
+            return '';
+        }
+        const firstKey = optionKeys[0];
+        return selectedFilters[firstKey] || '';
+    }
+
+    // تحديث رابط الذهاب لصفحة الخيارات بناءً على الاختيار الحالي
+    function updateOptionsLink() {
+        const linkEl = document.getElementById('variant-filter-options-link-' + sectionId);
+        if (!linkEl) return;
+
+        const optionValue = selectedOption || getSelectedOptionValue();
+        const baseUrl = '{{store.url}}/blogs/options';
+
+        if (optionValue) {
+            const encoded = encodeURIComponent(optionValue);
+            linkEl.href = `${baseUrl}?option=${encoded}`;
+            linkEl.style.display = '';
+        } else {
+            linkEl.href = baseUrl;
+            linkEl.style.display = 'none';
+        }
     }
     
     // دالة للتحقق من تطابق المنتج مع الفلاتر
@@ -603,6 +645,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // دالة لتحديث النتائج
     function updateResults() {
+        selectedOption = getSelectedOptionValue();
+        updateOptionsLink();
+
         if (!allProductsLoaded || productsData.length === 0) {
             console.log('Products not loaded yet or empty');
             return;
