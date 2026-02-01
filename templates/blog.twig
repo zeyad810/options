@@ -36,12 +36,82 @@
         </div>
     </section>
 
+<
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-   const searchParams = new URLSearchParams(window.location.search);
-   const optionParam = searchParams.get('option');
-   console.log('Option parameter from URL:', optionParam);
+document.addEventListener('DOMContentLoaded', async function () {
+  // ===== CONFIGURATION =====
+  const TARGET_OPTION_NAME = 'Color';   // Option name (e.g. Color / اللون)
+  const TARGET_OPTION_VALUE = 'Yellow'; // Option value (e.g. Yellow / اصفر)
+
+  // =========================
+  if (typeof zid === 'undefined' || !zid.store?.product?.fetchAll) {
+    console.error('Zid Store API is not available');
+    return;
+  }
+
+  // Fetch products from Zid (single page example)
+  async function getProducts(page = 1) {
+    const response = await zid.store.product.fetchAll(null, {
+      page,
+      per_page: 100
+    });
+
+    return response?.data?.products?.data || [];
+  }
+
+  const products = await getProducts(1);
+  console.log('All products:', products);
+
+  // =========================
+  // FILTER PRODUCTS BY OPTION
+  // =========================
+  const filteredProducts = products.filter(product => {
+    if (!product.variants || !product.options) return false;
+
+    // Find the index of the target option (e.g. Color)
+    const optionIndex = product.options.findIndex(option =>
+      typeof option === 'object'
+        ? option.name === TARGET_OPTION_NAME
+        : option === TARGET_OPTION_NAME
+    );
+
+    if (optionIndex === -1) return false;
+
+    // Check if ANY variant matches the option value
+    return product.variants.some(variant => {
+      if (!variant.attributes) return false;
+
+      const attributes = Array.isArray(variant.attributes)
+        ? variant.attributes
+        : Object.values(variant.attributes);
+
+      return attributes.some(attr =>
+        attr &&
+        Number(attr.option_index) === optionIndex &&
+        String(attr.value).toLowerCase() === TARGET_OPTION_VALUE.toLowerCase()
+      );
+    });
+  });
+
+  // =========================
+  // RESULT
+  // =========================
+  console.log(
+    `Products with ${TARGET_OPTION_NAME} = ${TARGET_OPTION_VALUE}:`,
+    filteredProducts
+  );
+
+  console.table(
+    filteredProducts.map(p => ({
+      id: p.id,
+      name: p.name,
+      slug: p.slug
+    }))
+  );
 });
+</script>
+
+
 
 </script>
 
